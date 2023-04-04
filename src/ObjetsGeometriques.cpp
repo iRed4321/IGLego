@@ -37,7 +37,8 @@ static void face(float tx,float ty, int n,int m) {
   glPopMatrix();
 }
 
-void mySolidCube(double ct,int n) {
+void mySolidCube(int n) {
+  double ct = 1;
   glPushMatrix();
   glPushMatrix();
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
@@ -71,7 +72,17 @@ void mySolidCube(double ct,int n) {
   glPopMatrix();
 }
 
-void mySolidCylindre(double hauteur,double rayon,int ns,int nl) {
+void mySolidRectangle(int length, int n) {
+  double ct = 1;
+  glPushMatrix();
+  glScalef((float) length,1.0F,1.0F);
+  mySolidCube(n);
+  glPopMatrix();
+}
+
+void mySolidCylindre(int ns,int nl) {
+  double hauteur = 1;
+  double rayon = 1;
   GLboolean nm = glIsEnabled(GL_NORMALIZE);
   if ( !nm )
     glEnable(GL_NORMALIZE);
@@ -98,8 +109,11 @@ void mySolidCylindre(double hauteur,double rayon,int ns,int nl) {
     glDisable(GL_NORMALIZE);
 }
 
-void mySolidCylindre(double hauteur,double rayon,int ns,int nl,int bases) {
-  mySolidCylindre(hauteur,rayon,ns,nl);
+void mySolidCylindre(int ns,int nl,int bases) {
+  double hauteur = 1;
+  double rayon = 1;
+  
+  mySolidCylindre(ns,nl);
   GLboolean nm = glIsEnabled(GL_NORMALIZE);
   if ( !nm )
     glEnable(GL_NORMALIZE);

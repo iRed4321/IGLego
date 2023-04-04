@@ -6,6 +6,7 @@
 #include <GL/glu.h>
 
 #include "ObjetsGeometriques.h"
+#include "LegoBricks.h"
 
 #define X 0
 #define Y 1
@@ -15,7 +16,7 @@ static int lighting = 0;
 static int lightsActivation[] = { 0,0,0,0,0,0,0,0 };
 static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
 
-static float cameraPos[] = {0.0F,0.0F,-5.0F};
+static float cameraPos[] = {0.0F,0.0F,-10.0F};
 
 static int mousePos [2] = { 0,0 };
 static int mouseDiff[2] = { 0,0 };
@@ -57,7 +58,8 @@ static void init(void) {
     glLightfv(lights[2], GL_DIFFUSE, red);
     //glLightfv(lights[3], GL_SPECULAR, cyan);
 
-    gluLookAt(cameraPos[X],cameraPos[Y],cameraPos[Z],0,0,0,0,1,0);
+    glFrustum(5,5,5,5,-100,100);
+    gluLookAt(cameraPos[X],cameraPos[Y],cameraPos[Z],3,0,0,0,1,0);
 }
 
 static void light(int i) {
@@ -82,7 +84,9 @@ static void scene(void) {
 	glPushMatrix();
   	//glRotatef(rz,0.0F,0.0F,1.0F);
 	//glColor3f(0.3F,0.7F,0.3F);
-	mySolidCube(sideLength,nbFacets);
+	//mySolidCube(sideLength,nbFacets);
+    //technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    classicBar(1.0,4,32,32);
 	glPopMatrix();
 	
 }

@@ -1,11 +1,3 @@
-/* Objets geometriques modelises par facettes   */
-/*  - Cube                                      */
-/*  - Cylindre                                  */
-/*                                              */
-/* Auteur: Nicolas JANEY                        */
-/* nicolas.janey@univ-fcomte.fr                 */
-/* Fevrier 2023                                 */
-
 #ifndef __OBJETS_GEOMETRIQUES__
 #define __OBJETS_GEOMETRIQUES__
 
@@ -16,6 +8,11 @@
 /*    en n x n facettes carrees elementaires    */
 void mySolidCube(double ct,int n);
 
+/* Modelisation geometrique d'un rectangle      */
+/* parallele a l'axe des x et des z :           */
+/*  - de longueur length                        */
+void mySolidRectangle(int length, int n);
+
 /* Modelisation geometrique d'un cylindre       */
 /* sans bases :                                 */
 /*  - de hauteur hauteur                        */
@@ -25,7 +22,7 @@ void mySolidCube(double ct,int n);
 /*  - avec ns facettes en decomposition         */
 /*    longitudinale                             */
 /*  - avec nl facettes en decomposition axiale  */
-void mySolidCylindre(double hauteur,double rayon,int ns,int nl);
+void mySolidCylindre(int ns,int nl);
 
 /* Modelisation geometrique d'un cylindre       */
 /* avec ou sans bases :                         */
@@ -37,6 +34,6 @@ void mySolidCylindre(double hauteur,double rayon,int ns,int nl);
 /*    longitudinale                             */
 /*  - avec nl facettes en decomposition axiale  */
 /*  - avec bases si bases != 0                  */
-void mySolidCylindre(double hauteur,double rayon,int ns,int nl,int bases);
+void mySolidCylindre(int ns,int nl,int bases);
 
 #endif
