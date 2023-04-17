@@ -8,7 +8,7 @@
 /*    en n x n facettes carrees elementaires    */
 void mySolidCube(double ct,int n);
 
-/* Modelisation geometrique d'un rectangle      */
+/* Modelisation geometrique d'un parallèlépipède rectangle      */
 /* parallele a l'axe des x et des z :           */
 /*  - de longueur length                        */
 void mySolidRectangle(int length, int n);
@@ -35,5 +35,13 @@ void mySolidCylindre(int ns,int nl);
 /*  - avec nl facettes en decomposition axiale  */
 /*  - avec bases si bases != 0                  */
 void mySolidCylindre(int ns,int nl,int bases);
+
+void mySolidCross();
+
+/* Modelisation geometrique d'un rectangle      */
+/* parallele aux axes des x et des z :           */
+/*  - de longueur 1                       */
+/*  - de hauteur 1                              */
+void mySolidFace();
 
 #endif

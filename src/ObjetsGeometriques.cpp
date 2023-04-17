@@ -146,3 +146,70 @@ void mySolidCylindre(int ns,int nl,int bases) {
   if ( !nm )
     glDisable(GL_NORMALIZE);
 }
+
+/* Modelisation geometrique d'un rectangle      */
+/* parallele aux axes des x et des z :           */
+/*  - de longueur 1                       */
+/*  - de hauteur 1                              */
+void mySolidFace(){
+  glBegin(GL_QUAD_STRIP);
+
+    glVertex3d(0.5F,0.5F,0);
+    glVertex3d(-0.5F,0.5F,0);
+    glVertex3d(-0.5F,-0.5F,0);
+    glVertex3d(0.5F,-0.5F,0);
+
+  glEnd();
+}
+
+void mySolidCross(){
+
+  float hauteur = 1.0F;
+  float largeurFace = 0.5F/3.0F;
+
+  glBegin(GL_QUAD_STRIP);
+
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-0.5F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-0.5F);
+
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-0.5F);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-0.5F);
+    
+    
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-largeurFace/2.0F);
+
+    glVertex3f(-0.5F,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(-0.5F,-hauteur/2.0F,-largeurFace/2.0F);
+
+    
+    glVertex3f(-0.5F,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(-0.5F,-hauteur/2.0F,largeurFace/2.0F);
+    
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,largeurFace/2.0F);
+
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,0.5F);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,0.5F);
+    
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,0.5F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,0.5F);
+
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,largeurFace/2.0F);
+
+    glVertex3f(0.5F,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(0.5F,-hauteur/2.0F,largeurFace/2.0F);
+
+    glVertex3f(0.5F,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(0.5F,-hauteur/2.0F,-largeurFace/2.0F);
+
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-largeurFace/2.0F);
+
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-0.5F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-0.5F);
+    
+  glEnd();
+
+}

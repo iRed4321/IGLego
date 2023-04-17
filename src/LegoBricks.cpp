@@ -39,21 +39,23 @@ la base du trou qui fait l'angle est en (0,0,0)
 
 void technicLever3x3m90deg__6271810(int ns, int nl){
 	
-	
 	glPushMatrix();
+	mySolidCross();
 	mySolidCylindre(ns,nl);
 	glTranslatef(1,0,0);
 	mySolidCylindre(ns,nl);
 	glTranslatef(1,0,0);
 	mySolidCylindre(ns,nl);
+	mySolidCross();
 	glPopMatrix();
 
 	glPushMatrix();
-	mySolidCylindre(ns,nl);
 	glTranslatef(0,0,1);
 	mySolidCylindre(ns,nl);
 	glTranslatef(0,0,1);
+	mySolidCross();
 	mySolidCylindre(ns,nl);
 	glPopMatrix();
+	
 	
 }
