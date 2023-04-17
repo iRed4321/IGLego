@@ -82,7 +82,7 @@ void mySolidRectangle(int length, int n) {
 
 void mySolidCylindre(int ns,int nl) {
   double hauteur = 1;
-  double rayon = 1;
+  double rayon = 0.5;
   GLboolean nm = glIsEnabled(GL_NORMALIZE);
   if ( !nm )
     glEnable(GL_NORMALIZE);

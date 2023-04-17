@@ -8,15 +8,32 @@
 #include "ObjetsGeometriques.h"
 #include "LegoBricks.h"
 
+//makes the use of 3D arrays clearer
 #define X 0
 #define Y 1
 #define Z 2
 
-static int lighting = 0;
-static int lightsActivation[] = { 0,0,0,0,0,0,0,0 };
+//makes the use of glFrustum parameters clearer
+#define LEFT 0
+#define RIGHT 1
+#define BOTTOM 2
+#define TOP 3 
+#define CMIN 4
+#define CMAX 5
+
+
+
+static int lighting = 1;
+static int lightsActivation[] = { 0,1,1,0,0,0,0,0 };
 static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
 
-static float cameraPos[] = {0.0F,0.0F,-10.0F};
+//parameters for gluLookAt
+static float cameraPos[] = {0.0F,0.0F,20.0F};
+static float cameraTarget[] = {0.0F,0.0F,0.0F};
+
+//parameters for the view of the camera
+static float frustumView[] = {10,10,10,10,-10,-30};
+
 
 static int mousePos [2] = { 0,0 };
 static int mouseDiff[2] = { 0,0 };
@@ -50,16 +67,22 @@ static void init(void) {
     glEnable(GL_CULL_FACE);
 
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-    //glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-    //glMaterialfv(GL_FRONT, GL_SHININESS, shinines);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, shinines);
 
 
     glLightfv(lights[1], GL_AMBIENT, midGrey);
     glLightfv(lights[2], GL_DIFFUSE, red);
-    //glLightfv(lights[3], GL_SPECULAR, cyan);
+    glLightfv(lights[3], GL_SPECULAR, cyan);
 
-    glFrustum(5,5,5,5,-100,100);
-    gluLookAt(cameraPos[X],cameraPos[Y],cameraPos[Z],3,0,0,0,1,0);
+    glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
+    cameraPos[X] = 0 ;
+    cameraPos[Y] = 0;
+    cameraPos[Z] = 20;
+    cameraTarget[X] = 0 ;
+    cameraTarget[Y] = 0 ;
+    cameraTarget[Z] = 0 ;
+    gluLookAt(cameraPos[X],cameraPos[Y],cameraPos[Z],cameraTarget[X],cameraTarget[Y],cameraTarget[Z],0,1,0);
 }
 
 static void light(int i) {
@@ -72,21 +95,22 @@ static void reshape(int wx, int wy) {
     glViewport(0, 0, wx, wy);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
+    //glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
 
 static void scene(void) {
 	double sideLength = 1.0;
-	int nbFacets = 10;
+	int nbFacets = 40;
 
 	glPushMatrix();
   	//glRotatef(rz,0.0F,0.0F,1.0F);
 	//glColor3f(0.3F,0.7F,0.3F);
 	//mySolidCube(sideLength,nbFacets);
-    //technicLever3x3m90deg__6271810(nbFacets,nbFacets);
-    classicBar(1.0,4,32,32);
+    technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    //classicBar(1.0,4,32,32);
 	glPopMatrix();
 	
 }
@@ -110,6 +134,7 @@ static void display(void) {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPolygonMode(GL_FRONT_AND_BACK, (printMode) ? GL_FILL : GL_LINE);
+    
     glPushMatrix();
     glRotatef(angle[X],1.0F,0.0F,0.0F);
   	glRotatef(angle[Y],0.0F,1.0F,0.0F);
@@ -200,7 +225,7 @@ int main(int argc,char **argv) {
   glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
   glutInitWindowSize(wSx,wSy);
   glutInitWindowPosition(50,50); 
-  glutCreateWindow("personal test"); 
+  glutCreateWindow("TESTING"); 
   init();
   glutIdleFunc(idle);
   glutMotionFunc(mouseMotion);

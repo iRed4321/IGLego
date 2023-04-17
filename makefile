@@ -12,7 +12,7 @@ all: igLego
 igLego : $(SRC_DIR)/*.cpp
 	$(COMPILER) $^ $(REQUIRED_LIBS) $(INC_FLAGS) -o build/runnable
 
-run: build/runnable
+run: build/runnable igLego
 	./build/runnable
 
 clean:

@@ -62,6 +62,7 @@ void pinLongWithoutFrictionRidgesLengthwise_6321305();
 void pinWithoutFrictionRidgesLengthwise_4211807();
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
 void pinWithFrictionRidgesLengthwise_4206482();
+void technicLever3x3m90deg__6271810(int ns, int nl);
 void tread_6271164();
 void treadWithCenterPinHole_6271163();
 void tire304x14OffsetTreadBandAroundCenterOfTread_4619323();
