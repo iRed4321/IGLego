@@ -202,3 +202,18 @@ void axle5WithStop_6159763(){
 	mySolidDisc(20);
 	glPopMatrix();
 }
+
+
+void axle8_370726(){
+	glPushMatrix();
+	glScalef(1,8,1);
+	mySolidCross();
+	glPopMatrix();
+}
+
+void axle12_370826(){
+	glPushMatrix();
+	glScalef(1,12,1);
+	mySolidCross();
+	glPopMatrix();
+}
