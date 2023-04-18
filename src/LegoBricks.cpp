@@ -36,9 +36,38 @@ pièce en forme de :
 
 la base du trou qui fait l'angle est en (0,0,0)
 */
-
 void technicLever3x3m90deg__6271810(int ns, int nl){
-	
+	glPushMatrix();
+
+	glScalef(1,0.5,1);
+
+	glPushMatrix();
+	glTranslatef(1,0,-0.5);
+	glScalef(2,1,1);
+	glRotatef(180,1,0,0);
+	mySolidFace();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(1.25,0,0.5);
+	glScalef(1.5,1,1);
+	mySolidFace();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	glTranslatef(1.25,0,-0.5);
+	glScalef(1.5,1,1);
+	mySolidFace();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	glTranslatef(1,0,0.5);
+	glScalef(2,1,1);
+	mySolidFace();
+	glPopMatrix();
+
 	glPushMatrix();
 	mySolidCross();
 	mySolidCylindre(ns,nl);
@@ -57,5 +86,10 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	mySolidCylindre(ns,nl);
 	glPopMatrix();
 	
+	glPopMatrix();
+	
+}
+
+void gear8ToothType2_6012451(){
 	
 }

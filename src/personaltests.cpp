@@ -77,7 +77,7 @@ static void init(void) {
 
     glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
     cameraPos[X] = 0 ;
-    cameraPos[Y] = 0;
+    cameraPos[Y] = 5;
     cameraPos[Z] = 20;
     cameraTarget[X] = 0 ;
     cameraTarget[Y] = 0 ;
@@ -96,6 +96,7 @@ static void reshape(int wx, int wy) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
+    //gluPerspective(60,(double)tx/(double)ty,6,16);
     //glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -109,6 +110,7 @@ static void scene(void) {
   	//glRotatef(rz,0.0F,0.0F,1.0F);
 	//glColor3f(0.3F,0.7F,0.3F);
 	//mySolidCube(sideLength,nbFacets);
+    glScalef(0.5F,0.5F,0.5F);
     technicLever3x3m90deg__6271810(nbFacets,nbFacets);
     //classicBar(1.0,4,32,32);
 	glPopMatrix();
