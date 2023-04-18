@@ -217,3 +217,17 @@ void axle12_370826(){
 	mySolidCross();
 	glPopMatrix();
 }
+
+void axleAndPinConnector1_6332573(){
+	glPushMatrix();
+	mySolidCylindre(40,40);
+	glTranslatef(1,0,0);
+	glRotatef(-90,0,0,1);
+	mySolidCross();
+	glTranslatef(0,-0.5,0.5);
+	glScalef(0.166667,1,1);
+	mySolidFace();
+	glTranslatef(0,0,-1);
+	mySolidFace();
+	glPopMatrix();
+}

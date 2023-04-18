@@ -35,9 +35,9 @@ void axle5WithStop_6159763();
 void axle8_370726();
 //done
 void axle12_370826();
-//not done (nathan)
+//done 
 void axleAndPinConnector1_6332573();
-//not done
+//not done (nathan)
 void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
 //not done
 void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();

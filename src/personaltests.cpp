@@ -136,6 +136,8 @@ static void scene(void) {
     gear8ToothType2_6012451(nbFacets,nbFacets);
     glTranslatef(2.2,0,0);
     axle5WithStop_6159763();
+    glTranslatef(-5,0,2);
+    axleAndPinConnector1_6332573();
     
     //classicBar(1.0,4,32,32);
 	glPopMatrix();
