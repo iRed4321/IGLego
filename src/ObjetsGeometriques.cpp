@@ -37,6 +37,18 @@ static void face(float tx,float ty, int n,int m) {
   glPopMatrix();
 }
 
+static void mySolidDisc(int ns){
+
+  glBegin(GL_POLYGON);
+  float angle = 0;
+  float increment = 2*M_PI/ns;
+  for(int i = 0; i<ns; ++i){
+    glVertex3f(cos(angle),0,sin(angle));
+    angle+=increment;
+  }
+  glEnd();
+}
+
 void mySolidCube(int n) {
   double ct = 1;
   glPushMatrix();

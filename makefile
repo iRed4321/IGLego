@@ -7,6 +7,8 @@ COMPILER := gcc
 INC_DIR := include
 INC_FLAGS := -I $(INC_DIR)
 
+
+
 all: igLego
 
 igLego : $(SRC_DIR)/*.cpp

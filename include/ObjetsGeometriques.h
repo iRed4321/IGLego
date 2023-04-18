@@ -6,7 +6,7 @@
 /*  - centre sur l'origine du repere            */
 /*  - avec chaque face facettisee               */
 /*    en n x n facettes carrees elementaires    */
-void mySolidCube(double ct,int n);
+void mySolidCube(int n);
 
 /* Modelisation geometrique d'un parallèlépipède rectangle      */
 /* parallele a l'axe des x et des z :           */
@@ -45,9 +45,13 @@ void mySolidCross();
 void mySolidGear(int nbTooth);
 
 /* Modelisation geometrique d'un rectangle      */
-/* parallele aux axes des x et des z :           */
-/*  - de longueur 1                       */
+/* parallele aux axes des x et des z :          */
+/*  - de longueur 1                       		*/
 /*  - de hauteur 1                              */
 void mySolidFace();
+
+//need to correct makefile so this works
+//void mySolidDisc(int ns);
+
 
 #endif

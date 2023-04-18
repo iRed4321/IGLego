@@ -16,14 +16,14 @@ void classicBar(float thickness, int rings, int ns, int nl);
 
 
 //done
-void gear8ToothType2_6012451();
-//not done (nathan)
-void liftarmThin1x2AxleHoles_4163533();
-//not done
-void plate4x8_4509897();
-//not done
+void gear8ToothType2_6012451(int ns, int nl);
+// done 
+void liftarmThin1x2AxleHoles_4163533(int ns, int nl);
+//kinda done (needs correction)
+void plate4x8_4509897(int ns, int nl);
+// done 
 void axle2Notched_4142865();
-//not done
+//not done (nathan)
 void axle3_4211815();
 //not done
 void axle4_370526();

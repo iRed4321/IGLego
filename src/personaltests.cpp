@@ -110,9 +110,21 @@ static void scene(void) {
   	//glRotatef(rz,0.0F,0.0F,1.0F);
 	//glColor3f(0.3F,0.7F,0.3F);
 	//mySolidCube(sideLength,nbFacets);
-    glScalef(0.5F,0.5F,0.5F);
-    //technicLever3x3m90deg__6271810(nbFacets,nbFacets);
-    gear8ToothType2_6012451();
+    glScalef(0.25F,0.25F,0.25F);
+    //
+    //liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
+    //plate4x8_4509897(nbFacets,nbFacets);
+    /*
+    
+    */
+    glTranslatef(-3.5,0,-3.5);
+    technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    glTranslatef(1,0,1);
+    axle2Notched_4142865();
+    glTranslatef(1.3,0,0);
+    axle3_4211815();
+    glTranslatef(2.2,0,0);
+    gear8ToothType2_6012451(nbFacets,nbFacets);
     //classicBar(1.0,4,32,32);
 	glPopMatrix();
 	
