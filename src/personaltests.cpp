@@ -138,6 +138,8 @@ static void scene(void) {
     axle5WithStop_6159763();
     glTranslatef(-5,0,2);
     axleAndPinConnector1_6332573();
+    glTranslatef(3,0,0);
+    axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
     
     //classicBar(1.0,4,32,32);
 	glPopMatrix();

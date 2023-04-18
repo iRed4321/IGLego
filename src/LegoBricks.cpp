@@ -231,3 +231,20 @@ void axleAndPinConnector1_6332573(){
 	mySolidFace();
 	glPopMatrix();
 }
+
+void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960(){
+	glPushMatrix();
+	mySolidCylindre(40,40);
+	mySolidCross();
+	glRotatef(90,1,0,0);
+	glTranslatef(1,0,0);
+	mySolidCylindre(40,40);
+	glTranslatef(1,0,0);
+	mySolidCylindre(40,40);
+	glTranslatef(-0.75,0,-0.5);
+	glScalef(1.5,1,1);
+	mySolidFace();
+	glTranslatef(0,0,1);
+	mySolidFace();
+	glPopMatrix();
+}
