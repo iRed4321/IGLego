@@ -232,14 +232,14 @@ void mySolidGear(int nbTooth){
   float x,z;
   glBegin(GL_QUAD_STRIP);
   for(int i = 0; i < nbTooth;++i){
-    x = cos(angle)*1.5;
-    z = sin(angle)*1.5;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
     glVertex3f(x,0.5,z);
     glVertex3f(x,-0.5,z);
 
     angle+=increment;
-    x = cos(angle)*1.5;
-    z = sin(angle)*1.5;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
     glVertex3f(x,0.5,z);
     glVertex3f(x,-0.5,z);
 
@@ -254,8 +254,8 @@ void mySolidGear(int nbTooth){
     glVertex3f(x,0.5,z);
     glVertex3f(x,-0.5,z);
   }
-  x = cos(angle)*1.5;
-  z = sin(angle)*1.5;
+  x = cos(angle)*1;
+  z = sin(angle)*1;
   glVertex3f(x,0.5,z);
   glVertex3f(x,-0.5,z);
   glEnd();
@@ -269,13 +269,13 @@ void mySolidGear(int nbTooth){
     z = sin(angle)*0.5;
     glVertex3f(x,0.5,z);
     
-    x = cos(angle)*1.5;
-    z = sin(angle)*1.5;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
     glVertex3f(x,0.5,z);
 
     angle+=increment;
-    x = cos(angle)*1.5;
-    z = sin(angle)*1.5;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
     glVertex3f(x,0.5,z);
 
     x = cos(angle)*0.5;
@@ -286,8 +286,8 @@ void mySolidGear(int nbTooth){
   }
   angle = 0;
   for(int i = 0; i < nbTooth;++i){
-    x = cos(angle)*1.5;
-    z = sin(angle)*1.5;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
     glVertex3f(x,-0.5,z);
     
     x = cos(angle)*0.5;
@@ -299,8 +299,8 @@ void mySolidGear(int nbTooth){
     z = sin(angle)*0.5;
     glVertex3f(x,-0.5,z);
 
-    x = cos(angle)*1.5;
-    z = sin(angle)*1.5;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
     glVertex3f(x,-0.5,z);
 
     angle+=increment;

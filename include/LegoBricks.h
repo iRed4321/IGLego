@@ -23,15 +23,15 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl);
 void plate4x8_4509897(int ns, int nl);
 // done 
 void axle2Notched_4142865();
-//not done (nathan)
+//done 
 void axle3_4211815();
-//not done
+// done
 void axle4_370526();
-//not done
+// done
 void axle4WithCenterStop_4666999();
-//not done
+//done 
 void axle5WithStop_6159763();
-//not done
+//not done (nathan)
 void axle8_370726();
 //not done
 void axle12_370826();

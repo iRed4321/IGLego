@@ -111,20 +111,32 @@ static void scene(void) {
 	//glColor3f(0.3F,0.7F,0.3F);
 	//mySolidCube(sideLength,nbFacets);
     glScalef(0.25F,0.25F,0.25F);
-    //
-    //liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
-    //plate4x8_4509897(nbFacets,nbFacets);
-    /*
     
-    */
-    glTranslatef(-3.5,0,-3.5);
+
+    //Si vous voilez voir un peu mieux, passez en fil de fer (barre espace) 
+    
+    glPushMatrix();
+    glTranslatef(0,-3,0);
+    plate4x8_4509897(nbFacets,nbFacets);
+    glPopMatrix();
+
+    glTranslatef(-4.5,0,-3.5);
     technicLever3x3m90deg__6271810(nbFacets,nbFacets);
-    glTranslatef(1,0,1);
+    glTranslatef(4, 0, 0);
+    liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
+    glTranslatef(2.2,0,0);
+    axle4_370526();
+    glTranslatef(1.2,0,0);
+    axle4WithCenterStop_4666999();
+    glTranslatef(-6,0,2);
     axle2Notched_4142865();
     glTranslatef(1.3,0,0);
     axle3_4211815();
     glTranslatef(2.2,0,0);
     gear8ToothType2_6012451(nbFacets,nbFacets);
+    glTranslatef(2.2,0,0);
+    axle5WithStop_6159763();
+    
     //classicBar(1.0,4,32,32);
 	glPopMatrix();
 	

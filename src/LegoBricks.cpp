@@ -117,7 +117,6 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 }
 
 //this function should be in the ObjetsGeometriques file but makefile needs to be corrected for this to work
-//et puis en plus ça marche pas...
 #include <math.h>
 
 #ifndef M_PI
@@ -129,13 +128,12 @@ static void mySolidDisc(int ns){
   float angle = 0;
   float increment = -2*M_PI/ns;
   for(int i = 0; i<ns; ++i){
-    glVertex3f(cos(angle),0,sin(angle));
+    glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
     angle+=increment;
   }
   glEnd();
 }
 
-//Nathan
 void plate4x8_4509897(int ns, int nl){
 
 	glPushMatrix();
@@ -152,8 +150,9 @@ void plate4x8_4509897(int ns, int nl){
 			glTranslatef(i,0,j);
 			glScalef(0.9,1,0.9);
 			mySolidCylindre(ns,nl);
-			//glTranslatef(0,0.5,0); //marche pas de rajouter les bases aux cylindres :'/
-			//mySolidDisc(ns);
+			glTranslatef(0,0.5,0); 
+			glRotatef(180,1,0,0);
+			mySolidDisc(ns);
 			glPopMatrix();
 		}
 	}
@@ -172,5 +171,34 @@ void axle3_4211815(){
 	glPushMatrix();
 	glScalef(1,3,1);
 	mySolidCross();
+	glPopMatrix();
+}
+
+void axle4_370526(){
+	glPushMatrix();
+	glScalef(1,4,1);
+	mySolidCross();
+	glPopMatrix();
+}
+
+void axle4WithCenterStop_4666999(){
+	glPushMatrix();
+	glScalef(1,4,1);
+	mySolidCross();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,-1,0);
+	mySolidCylindre(50,10);
+	glPopMatrix();
+}
+
+void axle5WithStop_6159763(){
+	glPushMatrix();
+	glScalef(1,5,1);
+	mySolidCross();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,-2.5,0);
+	mySolidDisc(20);
 	glPopMatrix();
 }
