@@ -64,7 +64,7 @@ static void init(void) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_NORMALIZE);
     glEnable(GL_AUTO_NORMAL);
-    glEnable(GL_CULL_FACE);
+    // glEnable(GL_CULL_FACE);
 
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
@@ -140,7 +140,8 @@ static void scene(void) {
     axleAndPinConnector1_6332573();
     glTranslatef(3,0,0);
     axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-    
+    glTranslatef(-4,2,0);
+    liftarmThick(5);
     //classicBar(1.0,4,32,32);
 	glPopMatrix();
 	
