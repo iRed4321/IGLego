@@ -26,7 +26,7 @@ void classicBar(float thickness, int rings, int ns, int nl){
     glPopMatrix();
 }
 
-//Nathan
+
 /*
 pièce en forme de :
 	
@@ -90,6 +90,11 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	
 }
 
+//Nathan
 void gear8ToothType2_6012451(){
-	
+	glPushMatrix();
+	mySolidCross();
+	glScalef(1,0.8,1);
+	mySolidGear(8);
+	glPopMatrix();
 }

@@ -36,7 +36,13 @@ void mySolidCylindre(int ns,int nl);
 /*  - avec bases si bases != 0                  */
 void mySolidCylindre(int ns,int nl,int bases);
 
+/* Modelisation d'une croix */
 void mySolidCross();
+
+/* Modelisation d'une roue crantée 				*/
+/* les dents commencent à une distance de 0.5 du centre */
+/* et terminent à une distance 1.5 du centre 	*/
+void mySolidGear(int nbTooth);
 
 /* Modelisation geometrique d'un rectangle      */
 /* parallele aux axes des x et des z :           */

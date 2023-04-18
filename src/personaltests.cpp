@@ -95,8 +95,8 @@ static void reshape(int wx, int wy) {
     glViewport(0, 0, wx, wy);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    //gluPerspective(10,(double)wx/(double)wy, 6, 16); // -> pas bien reglé
     glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
-    //gluPerspective(60,(double)tx/(double)ty,6,16);
     //glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -111,7 +111,8 @@ static void scene(void) {
 	//glColor3f(0.3F,0.7F,0.3F);
 	//mySolidCube(sideLength,nbFacets);
     glScalef(0.5F,0.5F,0.5F);
-    technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    //technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    gear8ToothType2_6012451();
     //classicBar(1.0,4,32,32);
 	glPopMatrix();
 	

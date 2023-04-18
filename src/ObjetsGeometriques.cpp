@@ -152,7 +152,7 @@ void mySolidCylindre(int ns,int nl,int bases) {
 /*  - de longueur 1                       */
 /*  - de hauteur 1                              */
 void mySolidFace(){
-  glBegin(GL_QUAD_STRIP);
+  glBegin(GL_QUADS);
 
     glVertex3d(0.5F,0.5F,0);
     glVertex3d(-0.5F,0.5F,0);
@@ -212,4 +212,86 @@ void mySolidCross(){
     
   glEnd();
 
+}
+
+void mySolidGear(int nbTooth){
+  float increment = -M_PI/(float)nbTooth;
+  float angle = 0.0F;
+  float x,z;
+  glBegin(GL_QUAD_STRIP);
+  for(int i = 0; i < nbTooth;++i){
+    x = cos(angle)*1.5;
+    z = sin(angle)*1.5;
+    glVertex3f(x,0.5,z);
+    glVertex3f(x,-0.5,z);
+
+    angle+=increment;
+    x = cos(angle)*1.5;
+    z = sin(angle)*1.5;
+    glVertex3f(x,0.5,z);
+    glVertex3f(x,-0.5,z);
+
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,0.5,z);
+    glVertex3f(x,-0.5,z);
+
+    angle+=increment;
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,0.5,z);
+    glVertex3f(x,-0.5,z);
+  }
+  x = cos(angle)*1.5;
+  z = sin(angle)*1.5;
+  glVertex3f(x,0.5,z);
+  glVertex3f(x,-0.5,z);
+  glEnd();
+
+  
+  
+  glBegin(GL_QUADS);
+  angle = 0;
+  for(int i = 0; i < nbTooth;++i){
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,0.5,z);
+    
+    x = cos(angle)*1.5;
+    z = sin(angle)*1.5;
+    glVertex3f(x,0.5,z);
+
+    angle+=increment;
+    x = cos(angle)*1.5;
+    z = sin(angle)*1.5;
+    glVertex3f(x,0.5,z);
+
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,0.5,z);
+
+    angle+=increment;
+  }
+  angle = 0;
+  for(int i = 0; i < nbTooth;++i){
+    x = cos(angle)*1.5;
+    z = sin(angle)*1.5;
+    glVertex3f(x,-0.5,z);
+    
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,-0.5,z);
+
+    angle+=increment;
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,-0.5,z);
+
+    x = cos(angle)*1.5;
+    z = sin(angle)*1.5;
+    glVertex3f(x,-0.5,z);
+
+    angle+=increment;
+  }
+  glEnd();
 }
