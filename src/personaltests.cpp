@@ -75,10 +75,17 @@ static void init(void) {
     glLightfv(lights[2], GL_DIFFUSE, red);
     glLightfv(lights[3], GL_SPECULAR, cyan);
 
+    frustumView[LEFT] = 10 ;
+    frustumView[RIGHT] = 10;
+    frustumView[BOTTOM] = 10;
+    frustumView[TOP] = 10;
+    frustumView[CMIN] = -5;
+    frustumView[CMAX] = -40;
+
     glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
     cameraPos[X] = 0 ;
-    cameraPos[Y] = 5;
-    cameraPos[Z] = 20;
+    cameraPos[Y] = 0;
+    cameraPos[Z] = 50;
     cameraTarget[X] = 0 ;
     cameraTarget[Y] = 0 ;
     cameraTarget[Z] = 0 ;
@@ -95,7 +102,7 @@ static void reshape(int wx, int wy) {
     glViewport(0, 0, wx, wy);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //gluPerspective(10,(double)wx/(double)wy, 6, 16); // -> pas bien reglé
+    //gluPerspective(10,(double)wx/(double)wy, 10, 100); // -> pas bien reglé
     glFrustum(frustumView[LEFT],frustumView[RIGHT],frustumView[BOTTOM],frustumView[TOP],frustumView[CMIN],frustumView[CMAX]);
     //glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
