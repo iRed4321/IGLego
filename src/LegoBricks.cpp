@@ -91,6 +91,10 @@ void drawCircle(float x, float y, float radius, float thickness)
 
 	for (int i = 0; i < numVerticesInner; i++)
 	{
+		//set the normal for the outer circle
+		glNormal3f(0,0,-1);
+
+		//link the outer circle to the inner circle
 		glVertex3f(verticiesOuter[i].x, verticiesOuter[i].y, 0);
 		glVertex3f(verticiesInner[i].x, verticiesInner[i].y, 0);
 	}
@@ -103,7 +107,7 @@ void drawCircle(float x, float y, float radius, float thickness)
 
 void cylinder(float borderSize){
 	glPushMatrix();
-	mySolidCylindreInverted(50, 50);
+	mySolidCylindre(50, 50);
 
 	glPushMatrix();
 	glTranslatef(0,0.5,0);
@@ -118,62 +122,18 @@ void cylinder(float borderSize){
 	glPopMatrix();
 
 	glScalef(1, 1, 1 - borderSize);
-	mySolidCylindre(50, 50);
+	mySolidCylindreInverted(50, 50);
 	glPopMatrix();
 }
 
 
 void cube(){
-	glPushMatrix();
-	glTranslatef(-0.5,-0.5,-0.5);
+    glPushMatrix();
 
-	glBegin(GL_QUADS);
+	glutSolidCube(1);
 
-	//front
-	glNormal3f(0,0,1);
-	glVertex3f(0,0,0);
-	glVertex3f(1,0,0);
-	glVertex3f(1,1,0);
-	glVertex3f(0,1,0);
-
-	//back
-	glNormal3f(0,0,-1);
-	glVertex3f(0,0,1);
-	glVertex3f(1,0,1);
-	glVertex3f(1,1,1);
-	glVertex3f(0,1,1);
-	
-	//left
-	glNormal3f(1,0,0);
-	glVertex3f(0,0,0);
-	glVertex3f(0,0,1);
-	glVertex3f(0,1,1);
-	glVertex3f(0,1,0);
-
-	//right
-	glNormal3f(-1,0,0);
-	glVertex3f(1,0,0);
-	glVertex3f(1,0,1);
-	glVertex3f(1,1,1);
-	glVertex3f(1,1,0);
-
-	//top
-	glNormal3f(0,-1,0);
-	glVertex3f(0,1,0);
-	glVertex3f(1,1,0);
-	glVertex3f(1,1,1);
-	glVertex3f(0,1,1);
-
-	//bottom
-	glNormal3f(0,1,0);
-	glVertex3f(0,0,0);
-	glVertex3f(1,0,0);
-	glVertex3f(1,0,1);
-	glVertex3f(0,0,1);
-
-	glEnd();
-
-	glPopMatrix();
+    glPopMatrix();
+    
 }
 
 /*
