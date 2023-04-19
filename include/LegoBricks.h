@@ -39,7 +39,7 @@ void axle12_370826();
 void axleAndPinConnector1_6332573();
 //done 
 void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-//not done (nathan)
+//done
 void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
 //not done (nathan)
 void axleAndPinConnectorPerpendicular_6261373();
