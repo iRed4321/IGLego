@@ -156,8 +156,9 @@ static void scene(void) {
     //classicBar(1.0,4,32,32);
     axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
     axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
-    */
     axleAndPinConnectorPerpendicular_6261373();
+    */
+    axleConnectorSmoothWithXHoleOrientation_4512360();
 	glPopMatrix();
 	
 }

@@ -52,6 +52,7 @@ void mySolidGear(int nbTooth);
 /*  - de hauteur 1                              */
 void mySolidFace();
 
+void thickCross();
 //need to correct makefile so this works
 //void mySolidDisc(int ns);
 

@@ -37,9 +37,9 @@ static void mySolidDisc(int ns){
 
   glBegin(GL_POLYGON);
   float angle = 0;
-  float increment = -2*M_PI/ns;
+  float increment = 2*M_PI/ns;
   for(int i = 0; i<ns; ++i){
-    glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
+    glVertex3f(cos(angle),0,sin(angle));
     angle+=increment;
   }
   glEnd();
@@ -333,7 +333,7 @@ void liftarmThick(int nBholes){
 }
 
 
-
+/*
 void plate4x8_4509897(int ns, int nl){
 
 	glPushMatrix();
@@ -361,6 +361,7 @@ void plate4x8_4509897(int ns, int nl){
 	glPopMatrix();
 }
 
+*/
 void axle2Notched_4142865(){
 	glPushMatrix();
 	glScalef(1,2,1);
@@ -394,6 +395,7 @@ void axle4WithCenterStop_4666999(){
 	glPopMatrix();
 }
 
+
 void axle5WithStop_6159763(){
 	glPushMatrix();
 	glScalef(1,5,1);
@@ -404,7 +406,6 @@ void axle5WithStop_6159763(){
 	mySolidDisc(20);
 	glPopMatrix();
 }
-
 
 void axle8_370726(){
 	glPushMatrix();
@@ -558,5 +559,12 @@ void axleAndPinConnectorPerpendicular_6261373(){
 			glScalef(0.55,0.1,1);
 			cube();
 		glPopMatrix();
+	glPopMatrix();
+}
+
+void axleConnectorSmoothWithXHoleOrientation_4512360(){
+	glPushMatrix();
+		glScalef(1,2,1);
+		thickCross();
 	glPopMatrix();
 }
