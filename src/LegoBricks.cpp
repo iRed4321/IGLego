@@ -437,20 +437,96 @@ void axleAndPinConnector1_6332573(){
 
 void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960(){
 	glPushMatrix();
-	//mySolidCylindre(40,40);
 	cylinder(0.2);
 	mySolidCross();
 	glRotatef(90,1,0,0);
 	glTranslatef(1,0,0);
-	//mySolidCylindre(40,40);
 	cylinder(0.2);
 	glTranslatef(1,0,0);
-	//mySolidCylindre(40,40);
 	cylinder(0.2);
 	glTranslatef(-0.75,0,-0.5);
 	glScalef(1.5,1,1);
 	mySolidFace();
 	glTranslatef(0,0,1);
 	mySolidFace();
+	glPopMatrix();
+}
+
+void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951(){
+	glPushMatrix();
+		cylinder(0.2);
+
+		glPushMatrix();
+			glTranslatef(0,0,0.449);
+			glPushMatrix();
+				glScalef(1.2,1,0.1);
+				cube();
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(0,-0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,-0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+		glPopMatrix();
+		
+
+		glPushMatrix();
+			glTranslatef(0,0,-0.449);
+			glPushMatrix();
+				glScalef(1.2,1,0.1);
+				cube();
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(0,-0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,-0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+		glPopMatrix();
+		
+
+		glPushMatrix();
+			glTranslatef(1,0,0);
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			mySolidCross();
+			glTranslatef(-2,0,0);
+			cylinder(0.2);
+			mySolidCross();
+		glPopMatrix();
+
 	glPopMatrix();
 }

@@ -121,7 +121,7 @@ static void scene(void) {
     
 
     //Si vous voilez voir un peu mieux, passez en fil de fer (barre espace) 
-    
+    /*
     glPushMatrix();
     
     glTranslatef(0,-3,0);
@@ -154,7 +154,8 @@ static void scene(void) {
     glTranslatef(-4,2,0);
     liftarmThick(5);
     //classicBar(1.0,4,32,32);
-    
+    */
+    axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     
 	glPopMatrix();
 	

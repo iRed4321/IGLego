@@ -37,19 +37,19 @@ void axle8_370726();
 void axle12_370826();
 //done 
 void axleAndPinConnector1_6332573();
-//done (nathan)
+//done 
 void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-//not done
+//not done (nathan)
 void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
-//not done
+//not done (nathan)
 void axleAndPinConnectorPerpendicular_6261373();
-//not done
+//not done (nathan)
 void axleConnectorSmoothWithXHoleOrientation_4512360();
-//not done
+//not done (nathan)
 void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
-//not done
+//not done (nathan)
 void axlePin3LWithFrictionRidgesLengthwise_6209519();
-//not done
+//not done (nathan)
 void axlePinWithFrictionRidgesLengthwise_4206482();
 //not done
 void bush_6275844();
