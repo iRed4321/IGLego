@@ -5,6 +5,12 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI 3.14159235
+#endif
+
 #include "LegoBricks.h"
 #include "ObjetsGeometriques.h"
 
@@ -26,97 +32,18 @@ void classicBar(float thickness, int rings, int ns, int nl){
     glPopMatrix();
 }
 
+//this function should be in the ObjetsGeometriques file but makefile needs to be corrected for this to work
+static void mySolidDisc(int ns){
 
-/*
-pièce en forme de :
-	
-	+
-	O
-	+ O +
-
-la base du trou qui fait l'angle est en (0,0,0)
-*/
-void technicLever3x3m90deg__6271810(int ns, int nl){
-	glPushMatrix();
-
-	glScalef(1,0.5,1);
-
-	glPushMatrix();
-	glTranslatef(1,0,-0.5);
-	glScalef(2,1,1);
-	glRotatef(180,1,0,0);
-	mySolidFace();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(1.25,0,0.5);
-	glScalef(1.5,1,1);
-	mySolidFace();
-	glPopMatrix();
-
-	glPushMatrix();
-	glRotatef(-90,0,1,0);
-	glTranslatef(1.25,0,-0.5);
-	glScalef(1.5,1,1);
-	mySolidFace();
-	glPopMatrix();
-
-	glPushMatrix();
-	glRotatef(-90,0,1,0);
-	glTranslatef(1,0,0.5);
-	glScalef(2,1,1);
-	mySolidFace();
-	glPopMatrix();
-
-	glPushMatrix();
-	mySolidCross();
-	mySolidCylindre(ns,nl);
-	glTranslatef(1,0,0);
-	mySolidCylindre(ns,nl);
-	glTranslatef(1,0,0);
-	mySolidCylindre(ns,nl);
-	mySolidCross();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0,0,1);
-	mySolidCylindre(ns,nl);
-	glTranslatef(0,0,1);
-	mySolidCross();
-	mySolidCylindre(ns,nl);
-	glPopMatrix();
-	
-	glPopMatrix();
-	
+  glBegin(GL_POLYGON);
+  float angle = 0;
+  float increment = -2*M_PI/ns;
+  for(int i = 0; i<ns; ++i){
+    glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
+    angle+=increment;
+  }
+  glEnd();
 }
-
-
-void gear8ToothType2_6012451(int ns, int nl){
-	glPushMatrix();
-	mySolidCross();
-	glScalef(1,0.8,1);
-	mySolidGear(8);
-	glPopMatrix();
-}
-
-
-void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
-	glPushMatrix();
-	glScalef(1,0.5,1);
-	mySolidCross();
-	mySolidCylindre(ns, nl);
-	glTranslatef(1,0,0);
-	mySolidCross();
-	mySolidCylindre(ns, nl);
-	glTranslatef(-0.5,0,0.5);
-	mySolidFace();
-	glTranslatef(0,0,-1);
-	glRotatef(180,1,0,0);
-	mySolidFace();
-	glPopMatrix();
-}
-
-#include <math.h>
 
 void drawCircle(float x, float y, float radius, float thickness)
 {
@@ -199,6 +126,7 @@ void cylinder(float borderSize){
 	glPopMatrix();
 }
 
+
 void cube(){
     glPushMatrix();
 
@@ -206,6 +134,108 @@ void cube(){
 
     glPopMatrix();
     
+}
+
+/*
+pièce en forme de :
+	
+	+
+	O
+	+ O +
+
+la base du trou qui fait l'angle est en (0,0,0)
+*/
+void technicLever3x3m90deg__6271810(int ns, int nl){
+	glPushMatrix();
+
+	glScalef(1,0.5,1);
+
+	glPushMatrix();
+	glTranslatef(1,0,-0.45);
+	glScalef(2,1,0.1);
+	cube();
+	//mySolidFace();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(1.25,0,0.5);
+	glScalef(1.5,1,0.1);
+	cube();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	glTranslatef(1.25,0,-0.45);
+	glScalef(1.5,1,0.1);
+	cube();
+	//glutSolidCube(1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	glTranslatef(1,0,0.45);
+	glScalef(2,1,0.1);
+	cube();
+	glPopMatrix();
+
+	glPushMatrix();
+	mySolidCross();
+	//mySolidCylindre(ns,nl);
+	cylinder(0.2);
+	glTranslatef(1,0,0);
+	//mySolidCylindre(ns,nl);
+	cylinder(0.2);
+	glTranslatef(1,0,0);
+	//mySolidCylindre(ns,nl);
+	cylinder(0.2);
+	mySolidCross();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0,0,1);
+	//mySolidCylindre(ns,nl);
+	cylinder(0.2);
+	glTranslatef(0,0,1);
+	mySolidCross();
+	//mySolidCylindre(ns,nl);
+	cylinder(0.2);
+	glPopMatrix();
+	
+	glPopMatrix();
+	
+}
+
+
+void gear8ToothType2_6012451(int ns, int nl){
+	glPushMatrix();
+	mySolidCross();
+	glScalef(1,0.8,1);
+	mySolidGear(8);
+	glPopMatrix();
+}
+
+
+void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
+	glPushMatrix();
+	glScalef(1,0.5,1);
+	mySolidCross();
+	//mySolidCylindre(ns, nl);
+	cylinder(0.2);
+	glTranslatef(1,0,0);
+	mySolidCross();
+	//mySolidCylindre(ns, nl);
+	cylinder(0.2);
+	glPushMatrix();
+	glTranslatef(-0.5,0,0.45);
+	glScalef(1,1,0.1);
+	cube();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-0.5,0,-0.45);
+	glScalef(1,1,0.1);
+	cube();
+	glPopMatrix();
+	glPopMatrix();
 }
 
 
@@ -262,23 +292,7 @@ void liftarmThick(int nBholes){
 	glPopMatrix();
 }
 
-//this function should be in the ObjetsGeometriques file but makefile needs to be corrected for this to work
-#include <math.h>
 
-#ifndef M_PI
-#define M_PI 3.14159235
-#endif
-static void mySolidDisc(int ns){
-
-  glBegin(GL_POLYGON);
-  float angle = 0;
-  float increment = -2*M_PI/ns;
-  for(int i = 0; i<ns; ++i){
-    glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
-    angle+=increment;
-  }
-  glEnd();
-}
 
 void plate4x8_4509897(int ns, int nl){
 
@@ -295,7 +309,8 @@ void plate4x8_4509897(int ns, int nl){
 			glPushMatrix();
 			glTranslatef(i,0,j);
 			glScalef(0.9,1,0.9);
-			mySolidCylindre(ns,nl);
+			//mySolidCylindre(ns,nl);
+			cylinder(0.2);
 			glTranslatef(0,0.5,0); 
 			glRotatef(180,1,0,0);
 			mySolidDisc(ns);
@@ -334,7 +349,8 @@ void axle4WithCenterStop_4666999(){
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0,-1,0);
-	mySolidCylindre(50,10);
+	//mySolidCylindre(50,10);
+	cylinder(1);
 	glPopMatrix();
 }
 
@@ -366,7 +382,8 @@ void axle12_370826(){
 
 void axleAndPinConnector1_6332573(){
 	glPushMatrix();
-	mySolidCylindre(40,40);
+	//mySolidCylindre(40,40);
+	cylinder(0.2);
 	glTranslatef(1,0,0);
 	glRotatef(-90,0,0,1);
 	mySolidCross();
@@ -380,17 +397,126 @@ void axleAndPinConnector1_6332573(){
 
 void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960(){
 	glPushMatrix();
-	mySolidCylindre(40,40);
+	cylinder(0.2);
 	mySolidCross();
 	glRotatef(90,1,0,0);
 	glTranslatef(1,0,0);
-	mySolidCylindre(40,40);
+	cylinder(0.2);
 	glTranslatef(1,0,0);
-	mySolidCylindre(40,40);
-	glTranslatef(-0.75,0,-0.5);
-	glScalef(1.5,1,1);
-	mySolidFace();
-	glTranslatef(0,0,1);
-	mySolidFace();
+	cylinder(0.2);
+	glTranslatef(-0.85,0,-0.45);
+	glPushMatrix();
+		glScalef(1.55,1,0.1);
+		cube();
+	glPopMatrix();
+	glTranslatef(0,0,0.9);
+	glPushMatrix();
+		glScalef(1.55,1,0.1);
+		cube();
+	glPopMatrix();
+	glPopMatrix();
+}
+
+void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951(){
+	glPushMatrix();
+		cylinder(0.2);
+
+		glPushMatrix();
+			glTranslatef(0,0,0.449);
+			glPushMatrix();
+				glScalef(1.2,1,0.1);
+				cube();
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(0,-0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,-0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+		glPopMatrix();
+		
+
+		glPushMatrix();
+			glTranslatef(0,0,-0.449);
+			glPushMatrix();
+				glScalef(1.2,1,0.1);
+				cube();
+			glPopMatrix();
+			
+			glPushMatrix();
+				glTranslatef(0,0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(0,-0.45,0);
+				glScalef(2,0.1,0.1);
+				cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,-0.35,0);
+				glScalef(1.40,0.1,0.1);
+				cube();
+			glPopMatrix();
+		glPopMatrix();
+		
+
+		glPushMatrix();
+			glTranslatef(1,0,0);
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			mySolidCross();
+			glTranslatef(-2,0,0);
+			cylinder(0.2);
+			mySolidCross();
+		glPopMatrix();
+
+	glPopMatrix();
+}
+
+void axleAndPinConnectorPerpendicular_6261373(){
+	glPushMatrix();
+		glPushMatrix();
+			cylinder(0.2);
+			mySolidCross();
+			glRotatef(90,1,0,0);
+			glTranslatef(1,0,0);
+			cylinder(0.2);
+		glPopMatrix();
+
+		glTranslatef(0.65,0,0);
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(0.55,0.1,1);
+			cube();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(0.55,0.1,1);
+			cube();
+		glPopMatrix();
 	glPopMatrix();
 }
