@@ -116,6 +116,192 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 	glPopMatrix();
 }
 
+#include <math.h>
+
+void drawCircle(float x, float y, float radius, float thickness)
+{
+    // Define the number of vertices for the outer and inner circles
+    int numVerticesOuter = 60;
+    int numVerticesInner = 60;
+
+    // Calculate the angle between each vertex
+    float angle = 2 * M_PI / numVerticesOuter;
+
+    // Calculate the radius for the inner circle
+    float innerRadius = radius - thickness;
+
+	struct Position{
+		float x;
+		float y;
+	};
+
+	// list of vertices
+	Position verticiesOuter [numVerticesOuter];
+	Position verticiesInner [numVerticesInner];
+
+    // outer circle
+    for (int i = 0; i < numVerticesOuter; i++)
+    {
+        float theta = i * angle;
+        float vx = x + radius * cos(theta);
+        float vy = y + radius * sin(theta);
+        verticiesOuter[i].x = vx;
+		verticiesOuter[i].y = vy;
+    }
+
+    // inner circle
+    for (int i = 0; i < numVerticesInner; i++)
+    {
+        float theta = i * angle;
+        float vx = x + innerRadius * cos(theta);
+        float vy = y + innerRadius * sin(theta);
+        verticiesInner[i].x = vx;
+		verticiesInner[i].y = vy;
+    }
+
+	// draw the border with triangles
+	glBegin(GL_TRIANGLE_STRIP);
+
+	for (int i = 0; i < numVerticesInner; i++)
+	{
+		glVertex3f(verticiesOuter[i].x, verticiesOuter[i].y, 0);
+		glVertex3f(verticiesInner[i].x, verticiesInner[i].y, 0);
+	}
+	glVertex2f(verticiesOuter[0].x, verticiesOuter[0].y);
+	glVertex2f(verticiesInner[0].x, verticiesInner[0].y);
+
+	glEnd();
+}
+
+
+void cylinder(float borderSize){
+	glPushMatrix();
+	mySolidCylindreInverted(50, 50);
+
+	glPushMatrix();
+	glTranslatef(0,0.5,0);
+	glRotatef(90,1,0,0);
+	drawCircle(0,0,0.5,borderSize/2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0,-0.5,0);
+	glRotatef(-90,1,0,0);
+	drawCircle(0,0,0.5,borderSize/2);
+	glPopMatrix();
+
+	glScalef(1, 1, 1 - borderSize);
+	mySolidCylindre(50, 50);
+	glPopMatrix();
+}
+
+void cube(){
+	glPushMatrix();
+	glTranslatef(-0.5,-0.5,-0.5);
+
+	glBegin(GL_QUADS);
+
+	//front
+	glNormal3f(0,0,1);
+	glVertex3f(0,0,0);
+	glVertex3f(1,0,0);
+	glVertex3f(1,1,0);
+	glVertex3f(0,1,0);
+
+	//back
+	glNormal3f(0,0,-1);
+	glVertex3f(0,0,1);
+	glVertex3f(1,0,1);
+	glVertex3f(1,1,1);
+	glVertex3f(0,1,1);
+	
+	//left
+	glNormal3f(1,0,0);
+	glVertex3f(0,0,0);
+	glVertex3f(0,0,1);
+	glVertex3f(0,1,1);
+	glVertex3f(0,1,0);
+
+	//right
+	glNormal3f(-1,0,0);
+	glVertex3f(1,0,0);
+	glVertex3f(1,0,1);
+	glVertex3f(1,1,1);
+	glVertex3f(1,1,0);
+
+	//top
+	glNormal3f(0,-1,0);
+	glVertex3f(0,1,0);
+	glVertex3f(1,1,0);
+	glVertex3f(1,1,1);
+	glVertex3f(0,1,1);
+
+	//bottom
+	glNormal3f(0,1,0);
+	glVertex3f(0,0,0);
+	glVertex3f(1,0,0);
+	glVertex3f(1,0,1);
+	glVertex3f(0,0,1);
+
+	glEnd();
+
+	glPopMatrix();
+}
+
+
+void liftarm1x2Thick_4177444(){
+	glPushMatrix();
+	cylinder(0.2);
+	glTranslatef(1,0,0);
+	cylinder(0.2);
+
+	glTranslatef(-0.5,0,0.45);
+
+	glPushMatrix();
+	glScalef(0.9,1,0.1);
+	cube();
+	glPopMatrix();
+
+
+	glTranslatef(0,0,-0.9);
+
+	glPushMatrix();
+	glScalef(0.9,1,0.1);
+	cube();
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void liftarmThick(int nBholes){
+	glPushMatrix();
+
+	for (int i = 0; i < nBholes; ++i)
+	{
+		cylinder(0.2);
+		if(i != 0){
+			glTranslatef(1,0,0);
+			glPushMatrix();
+			glTranslatef(-0.5,0,0.45);
+			glPushMatrix();
+			glScalef(0.9,1,0.1);
+			cube();
+			glPopMatrix();
+
+			glTranslatef(0,0,-0.9);
+
+			glPushMatrix();
+			glScalef(0.9,1,0.1);
+			cube();
+			glPopMatrix();
+			glPopMatrix();
+		}
+	}
+	cylinder(0.2);
+
+	glPopMatrix();
+}
+
 //this function should be in the ObjetsGeometriques file but makefile needs to be corrected for this to work
 #include <math.h>
 

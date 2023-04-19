@@ -13,7 +13,7 @@
 // 6177114 White
 
 void classicBar(float thickness, int rings, int ns, int nl);
-
+void liftarmThick(int nBholes);
 
 //done
 void gear8ToothType2_6012451(int ns, int nl);

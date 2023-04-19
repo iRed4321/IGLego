@@ -121,6 +121,35 @@ void mySolidCylindre(int ns,int nl) {
     glDisable(GL_NORMALIZE);
 }
 
+void mySolidCylindreInverted(int ns,int nl) {
+  double hauteur = 1;
+  double rayon = 0.5;
+  GLboolean nm = glIsEnabled(GL_NORMALIZE);
+  if ( !nm )
+    glEnable(GL_NORMALIZE);
+  float normale[4];
+  glGetFloatv(GL_CURRENT_NORMAL,normale);
+  glPushMatrix();
+  for ( int j = 0 ; j < nl ; j++ ) {
+    float hi =(float) (hauteur/2-j*hauteur/nl);
+    float hf =(float) (hi-hauteur/nl);
+    glBegin(GL_QUAD_STRIP);
+    for( int i = 0 ; i <= ns ; i++ ) {
+      float a =(float) ((2*M_PI*i)/ns);
+      float cs =(float) cos(a);
+      float sn =(float) -sin(a);
+      glNormal3f(-cs,0.0F,-sn);
+      float x =(float) (rayon*cs);
+      float z =(float) (rayon*sn);
+      glVertex3f(x,hi,z);
+      glVertex3f(x,hf,z); }
+    glEnd(); }
+  glPopMatrix();
+  glNormal3f(normale[0],normale[1],normale[2]);
+  if ( !nm )
+    glDisable(GL_NORMALIZE);
+}
+
 void mySolidCylindre(int ns,int nl,int bases) {
   double hauteur = 1;
   double rayon = 1;

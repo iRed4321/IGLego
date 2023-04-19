@@ -24,6 +24,8 @@ void mySolidRectangle(int length, int n);
 /*  - avec nl facettes en decomposition axiale  */
 void mySolidCylindre(int ns,int nl);
 
+void mySolidCylindreInverted(int ns,int nl);
+
 /* Modelisation geometrique d'un cylindre       */
 /* avec ou sans bases :                         */
 /*  - de hauteur hauteur                        */
