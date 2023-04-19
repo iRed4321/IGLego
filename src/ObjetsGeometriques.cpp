@@ -130,6 +130,8 @@ void mySolidCylindreInverted(int ns,int nl) {
   float normale[4];
   glGetFloatv(GL_CURRENT_NORMAL,normale);
   glPushMatrix();
+  //change culling roation 
+  glFrontFace(GL_CW);
   for ( int j = 0 ; j < nl ; j++ ) {
     float hi =(float) (hauteur/2-j*hauteur/nl);
     float hf =(float) (hi-hauteur/nl);
@@ -143,7 +145,10 @@ void mySolidCylindreInverted(int ns,int nl) {
       float z =(float) (rayon*sn);
       glVertex3f(x,hi,z);
       glVertex3f(x,hf,z); }
-    glEnd(); }
+    glEnd();
+  }
+  //reset culling roation
+  glFrontFace(GL_CCW);
   glPopMatrix();
   glNormal3f(normale[0],normale[1],normale[2]);
   if ( !nm )
