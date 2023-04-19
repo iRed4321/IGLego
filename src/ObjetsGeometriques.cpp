@@ -315,8 +315,10 @@ void mySolidGear(int nbTooth){
   float x,z;
   glBegin(GL_QUAD_STRIP);
   for(int i = 0; i < nbTooth;++i){
+    
     x = cos(angle)*1;
     z = sin(angle)*1;
+    glNormal3f(x,0,z);
     glVertex3f(x,0.5,z);
     glVertex3f(x,-0.5,z);
 

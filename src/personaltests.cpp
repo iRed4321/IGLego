@@ -72,7 +72,7 @@ static void init(void) {
 
 
     glLightfv(lights[1], GL_AMBIENT, midGrey);
-    glLightfv(lights[2], GL_DIFFUSE, red);
+    glLightfv(lights[2], GL_DIFFUSE, midGrey);
     glLightfv(lights[3], GL_SPECULAR, cyan);
 
     frustumView[LEFT] = 10 ;
@@ -117,19 +117,22 @@ static void scene(void) {
   	//glRotatef(rz,0.0F,0.0F,1.0F);
 	//glColor3f(0.3F,0.7F,0.3F);
 	//mySolidCube(sideLength,nbFacets);
-    glScalef(0.25F,0.25F,0.25F);
+    glScalef(0.20F,0.2F,0.2F);
     
 
     //Si vous voilez voir un peu mieux, passez en fil de fer (barre espace) 
     
     glPushMatrix();
+    
     glTranslatef(0,-3,0);
     plate4x8_4509897(nbFacets,nbFacets);
     glPopMatrix();
 
     glTranslatef(-4.5,0,-3.5);
+    
     technicLever3x3m90deg__6271810(nbFacets,nbFacets);
     glTranslatef(4, 0, 0);
+    
     liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
     glTranslatef(2.2,0,0);
     axle4_370526();
@@ -137,6 +140,7 @@ static void scene(void) {
     axle4WithCenterStop_4666999();
     glTranslatef(-6,0,2);
     axle2Notched_4142865();
+    
     glTranslatef(1.3,0,0);
     axle3_4211815();
     glTranslatef(2.2,0,0);
@@ -150,6 +154,8 @@ static void scene(void) {
     glTranslatef(-4,2,0);
     liftarmThick(5);
     //classicBar(1.0,4,32,32);
+    
+    
 	glPopMatrix();
 	
 }
