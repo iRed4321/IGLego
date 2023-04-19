@@ -537,6 +537,26 @@ void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951(){
 }
 
 void axleAndPinConnectorPerpendicular_6261373(){
-	
+	glPushMatrix();
+		glPushMatrix();
+			cylinder(0.2);
+			mySolidCross();
+			glRotatef(90,1,0,0);
+			glTranslatef(1,0,0);
+			cylinder(0.2);
+		glPopMatrix();
 
+		glTranslatef(0.65,0,0);
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(0.55,0.1,1);
+			cube();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(0.55,0.1,1);
+			cube();
+		glPopMatrix();
+	glPopMatrix();
 }

@@ -154,10 +154,10 @@ static void scene(void) {
     glTranslatef(-4,2,0);
     liftarmThick(5);
     //classicBar(1.0,4,32,32);
-    
+    axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
     axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     */
-    axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
+    axleAndPinConnectorPerpendicular_6261373();
 	glPopMatrix();
 	
 }
