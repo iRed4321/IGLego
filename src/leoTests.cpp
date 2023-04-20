@@ -59,7 +59,7 @@ static void scene(void) {
     glTranslatef(0,-3,0);
     plate4x8_4509897(nbFacets,nbFacets);
     glPopMatrix();
-    */
+    
     glTranslatef(-4.5,0,-3.5);
     technicLever3x3m90deg__6271810(nbFacets,nbFacets);
     glTranslatef(4, 0, 0);
@@ -83,6 +83,8 @@ static void scene(void) {
     glTranslatef(-4,2,0);
     liftarmThick(5);
     classicBar(1.0,4,32,32);
+    */
+    axleConnectorSmoothWithXHoleOrientation_4512360();
 	glPopMatrix();
 }
 
@@ -123,9 +125,9 @@ static void idle(void) {
 }
 
 static void idleAnim(void){
-  glRotatef(rotationX, 1, 0, 0);
-  glRotatef(rotationY, 0, 1, 0);
-  glRotatef(rotationZ, 0, 0, 1);
+  glRotatef(rotationX, 0.1, 0, 0);
+  glRotatef(rotationY, 0, 0.2, 0);
+  glRotatef(rotationZ, 0, 0, 0.3);
   glutPostRedisplay();
 }
 
