@@ -1,7 +1,7 @@
 #Compiling igLego
 
 # For Linux
-REQUIRED_LIBS := -lGL -lGLU -lglut -lm -lstdc++
+REQUIRED_LIBS := -lGL -lGLU -lglut -lm -lstdc++ -std=c++17
 SRC_DIR := src
 COMPILER := g++
 INC_DIR := include

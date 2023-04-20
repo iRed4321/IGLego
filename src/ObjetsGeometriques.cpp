@@ -315,22 +315,25 @@ void mySolidCross(int withbase){
       glVertex3f(-largeurFace/2,hauteur/2,maxDist);
       glVertex3f(largeurFace/2,hauteur/2,maxDist);
 
-      glVertex3f(-maxDist,hauteur/2,largeurFace/2);
-      glVertex3f(-maxDist,hauteur/2,-largeurFace/2);
+      glNormal3f(0,1,0);
       glVertex3f(maxDist,hauteur/2,-largeurFace/2);
+      glVertex3f(-maxDist,hauteur/2,-largeurFace/2);
+      glVertex3f(-maxDist,hauteur/2,largeurFace/2);
       glVertex3f(maxDist,hauteur/2,largeurFace/2);
       
 
       glNormal3f(0,-1,0);
       glVertex3f(largeurFace/2,-hauteur/2,-maxDist);
-      glVertex3f(-largeurFace/2,-hauteur/2,-maxDist);
-      glVertex3f(-largeurFace/2,-hauteur/2,maxDist);
       glVertex3f(largeurFace/2,-hauteur/2,maxDist);
+      glVertex3f(-largeurFace/2,-hauteur/2,maxDist);
+      glVertex3f(-largeurFace/2,-hauteur/2,-maxDist);
 
-      glVertex3f(-maxDist,-hauteur/2,largeurFace/2);
-      glVertex3f(-maxDist,-hauteur/2,-largeurFace/2);
+
       glVertex3f(maxDist,-hauteur/2,-largeurFace/2);
       glVertex3f(maxDist,-hauteur/2,largeurFace/2);
+      glVertex3f(-maxDist,-hauteur/2,largeurFace/2);
+      glVertex3f(-maxDist,-hauteur/2,-largeurFace/2);
+
     }
     
 
@@ -347,19 +350,14 @@ void thickCross(){
   float distMaxInterne = 0.5F;
   float distMaxExterne = 0.6F;
 
+  glFrontFace(GL_CW);
+  mySolidCross(); //problème de coloration de la partie intérieur de la cross
+  glFrontFace(GL_CCW);
+
   glBegin(GL_QUADS);
-
+    
     //vertical faces :
-
     //
-    glNormal3f(0,0,1);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-
     glNormal3f(0,0,-1);
 
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,-distMaxExterne);
@@ -369,14 +367,6 @@ void thickCross(){
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,-distMaxExterne);
 
     //
-    glNormal3f(1,0,0);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-
     glNormal3f(-1,0,0);
 
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,-distMaxExterne);
@@ -386,14 +376,6 @@ void thickCross(){
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,-largeurFaceExterne/2.0F);
 
     //
-    glNormal3f(0,0,1);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-
     glNormal3f(0,0,-1);
 
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,-largeurFaceExterne/2.0F);
@@ -404,14 +386,6 @@ void thickCross(){
 
     //
 
-    glNormal3f(1,0,0);
-
-    glVertex3f(-distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-
     glNormal3f(-1,0,0);
 
     glVertex3f(-distMaxExterne,hauteur/2.0F,-largeurFaceExterne/2.0F);
@@ -421,14 +395,6 @@ void thickCross(){
     glVertex3f(-distMaxExterne,hauteur/2.0F,largeurFaceExterne/2.0F);
 
     //
-    
-    glNormal3f(0,0,-1);
-
-    glVertex3f(-distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
 
     glNormal3f(0,0,1);
 
@@ -440,15 +406,6 @@ void thickCross(){
 
     //
 
-    glNormal3f(1,0,0);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    
-
     glNormal3f(-1,0,0);
 
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,largeurFaceExterne/2.0F);
@@ -458,14 +415,6 @@ void thickCross(){
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,distMaxExterne);
 
     //
-    glNormal3f(0,0,-1);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-
     glNormal3f(0,0,1);
 
     glVertex3f(-largeurFaceExterne/2.0F,hauteur/2.0F,distMaxExterne);
@@ -475,15 +424,6 @@ void thickCross(){
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,distMaxExterne);
 
     //
-
-    glNormal3f(-1,0,0);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-    
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-
     glNormal3f(1,0,0);
 
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,distMaxExterne);
@@ -493,15 +433,6 @@ void thickCross(){
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,largeurFaceExterne/2.0F);
 
     //
-    
-    glNormal3f(0,0,-1);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    glVertex3f(distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    
     glNormal3f(0,0,1);
 
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,largeurFaceExterne/2.0F);
@@ -511,14 +442,6 @@ void thickCross(){
     glVertex3f(distMaxExterne,hauteur/2.0F,largeurFaceExterne/2.0F);
 
     //
-    glNormal3f(-1,0,0);
-
-    glVertex3f(distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    glVertex3f(distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-
     glNormal3f(1,0,0);
 
     glVertex3f(distMaxExterne,hauteur/2.0F,largeurFaceExterne/2.0F);
@@ -528,15 +451,6 @@ void thickCross(){
     glVertex3f(distMaxExterne,hauteur/2.0F,-largeurFaceExterne/2.0F);
 
     //
-
-    glNormal3f(0,0,1);
-
-    glVertex3f(distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-
     glNormal3f(0,0,-1);
 
     glVertex3f(distMaxExterne,hauteur/2.0F,-largeurFaceExterne/2.0F);
@@ -546,15 +460,6 @@ void thickCross(){
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,-largeurFaceExterne/2.0F);
 
     //
-
-    glNormal3f(-1,0,0);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-
     glNormal3f(1,0,0);
 
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,-largeurFaceExterne/2.0F);
@@ -706,6 +611,7 @@ void thickCross(){
 
 
   glEnd();
+  
 }
 
 void mySolidGear(int nbTooth){
