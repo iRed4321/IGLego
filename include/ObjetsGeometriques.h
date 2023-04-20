@@ -79,10 +79,13 @@ enum Orientation{
 enum PartKind{
     Arm,
     ArmEnd,
-    ArmWithCross,
     ArmAngle,
     ArmTAngle,
-    Cross
+
+    Cross,
+    ArmWithCross,
+    ArmEndWithCross,
+    ArmAngleWithCross
 };
 
 struct LegoPart{

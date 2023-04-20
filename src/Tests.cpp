@@ -92,6 +92,11 @@ static void scene(void) {
     thickCross();
     //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
+    
+    // glPushMatrix();
+    // glTranslatef(0,-3,0);
+    // plate4x8_4509897(nbFacets,nbFacets);
+    // glPopMatrix();
     /*  
     glPushMatrix();
     glTranslatef(0,-3,0);
