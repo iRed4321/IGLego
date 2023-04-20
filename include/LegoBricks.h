@@ -93,7 +93,7 @@ void gearWormScrew_6185471();
         void liftarm1x115DoubleBentThick_6271156();
         //not done
         void liftarm2x4LShapeThick_6271825();
-        //not done
+        //done
         void liftarm3x3LShapeThin_6271810();
         //done
         void liftarm3x3TShapeThick_4552347();

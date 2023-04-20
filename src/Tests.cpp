@@ -118,8 +118,9 @@ static void scene(void) {
     // glTranslatef(-4,2,0);
     // liftarmThick(5);
     // axleConnectorSmoothWithXHoleOrientation_4512360();
+    // liftarm3x3LShapeThin_6271810();
 
-    liftarm3x3LShapeThin_6271810();
+    liftarm2x4LShapeThick_6271825();
 
 	glPopMatrix();
 }
