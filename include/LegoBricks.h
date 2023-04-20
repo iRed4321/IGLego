@@ -82,9 +82,6 @@ struct LiftArm{
     void draw();
 };
 
-
-
-void classicBar(float thickness, int rings, int ns, int nl);
 void liftarmThick(int nBholes);
 
 //done
@@ -173,6 +170,8 @@ void gearWormScrew_6185471();
 void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
 //not done
 void liftarm3X5PerpendicularHShapeThick_6055519();
+
+//---------Jocelyn----------
 //not done
 void pinConnectorPerpendicular3LWith4Pins_6282158();
 //not done
@@ -185,6 +184,8 @@ void pinWithoutFrictionRidgesLengthwise_4211807();
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
 //not done
 void pinWithFrictionRidgesLengthwise_4206482();
+//--------------------------
+
 // done
 void technicLever3x3m90deg__6271810(int ns, int nl);
 //not done

@@ -14,25 +14,6 @@
 #include "LegoBricks.h"
 #include "ObjetsGeometriques.h"
 
-//Jocelyn
-void classicBar(float thickness, int rings, int ns, int nl){
-    glPushMatrix();
-    glScalef(1, 1, thickness);
-    glTranslatef(0, 0, thickness/2);
-    glPushMatrix();
-    glTranslatef((float)rings/2, 0, 0);
-    mySolidRectangle(rings-1, ns);
-    glPopMatrix();
-    for(int i = 0; i < rings; i++){
-        glPushMatrix();
-        glTranslatef(rings+i, 0, 0);
-        mySolidCylindre(32,32);
-        glPopMatrix();
-    }
-    glPopMatrix();
-}
-
-
 void drawCircle(float x, float y, float radius, float thickness)
 {
     // Define the number of vertices for the outer and inner circles
