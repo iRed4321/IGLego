@@ -200,7 +200,6 @@ void plate4x8_4509897(int ns, int nl){
 	glPopMatrix();
 }
 
-*/
 void axle2Notched_4142865(){
 	glPushMatrix();
 	glScalef(1,2,1);
