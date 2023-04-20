@@ -1,6 +1,8 @@
 #ifndef __OBJETS_GEOMETRIQUES__
 #define __OBJETS_GEOMETRIQUES__
 
+#include <map>
+
 //need to correct makefile so this works
 void mySolidDisc(int ns);
 
@@ -57,5 +59,69 @@ void mySolidFace();
 
 void thickCross();
 
+enum Thickness{
+    THICK,
+    THIN
+};
+
+void cylinder(float radius);
+void cube();
+
+enum Orientation{
+    Top,
+    Bottom,
+    Right,
+    Left,
+    Front,
+    Back
+};
+
+enum PartKind{
+    Arm,
+    ArmEnd,
+    ArmWithCross,
+    ArmAngle,
+    ArmTAngle,
+    Cross
+};
+
+struct LegoPart{
+    Orientation orientation;
+    PartKind kind;
+    void draw();
+};
+
+struct Pos3d{
+    uint x;
+    uint y;
+    uint z;
+};
+
+struct Pos3dComparator{
+   bool operator() (const Pos3d& lhs, const Pos3d& rhs) const
+   {
+         if (lhs.x < rhs.x){
+              return true;
+         } else if (lhs.x == rhs.x){
+              if (lhs.y < rhs.y){
+                return true;
+              } else if (lhs.y == rhs.y){
+                return lhs.z < rhs.z;
+              }
+         }
+         return false;
+   }
+};
+
+typedef std::map<Pos3d,LegoPart, Pos3dComparator> Model;
+
+struct LiftArm{
+    Thickness thickness;
+    Model model;
+
+	LiftArm(Thickness thickness, Model model);
+	LiftArm(Thickness thickness, uint nbHoles);
+    void draw();
+};
 
 #endif

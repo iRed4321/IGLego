@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include <map>
 
 #include "ObjetsGeometriques.h"
 
@@ -18,75 +17,6 @@
 // 6271165 Gray
 // 6177114 White
 
-enum Thickness{
-    THICK,
-    THIN
-};
-
-void cylinder(float radius);
-void cube();
-
-enum Orientation{
-    Top,
-    Bottom,
-    Right,
-    Left,
-    Front,
-    Back
-};
-
-enum PartKind{
-    Arm,
-    ArmEnd,
-    ArmAngle,
-    ArmTAngle,
-    ArmWithCross,
-    Cross
-};
-
-struct LegoPart{
-    Orientation orientation;
-    PartKind kind;
-    void draw();
-};
-
-struct Pos3d{
-    uint x;
-    uint y;
-    uint z;
-};
-
-struct Pos3dComparator{
-   bool operator() (const Pos3d& lhs, const Pos3d& rhs) const
-   {
-         if (lhs.x < rhs.x){
-              return true;
-         } else if (lhs.x == rhs.x){
-              if (lhs.y < rhs.y){
-                return true;
-              } else if (lhs.y == rhs.y){
-                return lhs.z < rhs.z;
-              }
-         }
-         return false;
-   }
-};
-
-typedef std::map<Pos3d,LegoPart, Pos3dComparator> Model;
-
-
-struct LiftArm{
-    Thickness thickness;
-    Model model;
-
-	LiftArm(Thickness thickness, Model model);
-	LiftArm(Thickness thickness, uint nbHoles);
-    void draw();
-};
-
-
-
-void classicBar(float thickness, int rings, int ns, int nl);
 void liftarmThick(int nBholes);
 
 //done
@@ -175,6 +105,8 @@ void gearWormScrew_6185471();
 void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
 //not done
 void liftarm3X5PerpendicularHShapeThick_6055519();
+
+//---------Jocelyn----------
 //not done
 void pinConnectorPerpendicular3LWith4Pins_6282158();
 //not done
@@ -187,6 +119,8 @@ void pinWithoutFrictionRidgesLengthwise_4211807();
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
 //not done
 void pinWithFrictionRidgesLengthwise_4206482();
+//--------------------------
+
 // done
 void technicLever3x3m90deg__6271810(int ns, int nl);
 //not done
