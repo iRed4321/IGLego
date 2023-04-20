@@ -406,3 +406,18 @@ void axleConnectorSmoothWithXHoleOrientation_4512360(){
 		thickCross();
 	glPopMatrix();
 }
+
+//céla Jocelyn
+void pinConnectorPerpendicular3LWith4Pins_6282158(){
+	glPushMatrix();
+	cylinder(0.2);
+	glPushMatrix();
+	glTranslatef(2,0,0);
+	cylinder(0.2);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,0,2);
+	cylinder(0.2);
+	glPopMatrix();
+}
+//pala Jocelyn

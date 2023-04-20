@@ -84,8 +84,8 @@ static void scene(void) {
     liftarmThick(5);
     classicBar(1.0,4,32,32);
     axleConnectorSmoothWithXHoleOrientation_4512360();
-    */
-
+    
+   
   Model m = Model();
   m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
   m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
@@ -94,6 +94,8 @@ static void scene(void) {
   LiftArm arm = LiftArm(Thickness::THICK, m);
 
   arm.draw();
+  */
+  pinConnectorPerpendicular3LWith4Pins_6282158();
 	glPopMatrix();
 }
 
