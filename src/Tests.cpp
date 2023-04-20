@@ -90,7 +90,11 @@ static void scene(void) {
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     glScalef(1,1,1);
-    axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
+
+    // liftarm3X5PerpendicularHShapeThick_6055519();
+    liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+
+    // axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
     //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
     

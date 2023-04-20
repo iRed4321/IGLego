@@ -850,10 +850,12 @@ void LegoPart::draw(){
 	glPushMatrix();
 	switch (orientation){
 		case Top:
-			glRotatef(90,1,0,0);
+			glRotatef(90,0,0,1);
+      glRotatef(90,0,1,0);
 			break;
 		case Bottom:
-			glRotatef(-90,1,0,0);
+			glRotatef(-90,0,0,1);
+      glRotatef(90,0,1,0);
 			break;
 		case Right:
 			glRotatef(90,0,1,0);
@@ -869,11 +871,30 @@ void LegoPart::draw(){
 	}
 
 	switch (kind){
+
+    case ArmEmpty:
+    	glPushMatrix();
+				glTranslatef(0,0,0.45);
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glTranslatef(0,0,-0.9);
+
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+
     case ArmWithCross:
       glPushMatrix();
     		glScalef(0.8,1,0.8);
 			  thickCross();
       glPopMatrix();
+
 		case Arm:
 			cylinder(0.2);
 

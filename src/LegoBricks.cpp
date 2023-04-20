@@ -536,6 +536,55 @@ void liftarm1x115DoubleBentThick_6271156(){
 	glPopMatrix();
 }
 
+void liftarm3X5PerpendicularHShapeThick_6055519(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEnd};
+
+	m[Pos3d{1,0,1}] = LegoPart{Top, Arm};
+	m[Pos3d{1,0,2}] = LegoPart{Top, Arm};
+	m[Pos3d{1,0,3}] = LegoPart{Top, Arm};
+
+	m[Pos3d{0,0,4}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,4}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,4}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+}
+
+void liftarm3x5LShapeWithQuarterEllipseThin_6327162(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngleWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEndWithCross};
+
+	LiftArm arm = LiftArm(THIN, m);
+	arm.draw();
+
+	glTranslatef(4,0,0);
+	glRotatef(205, 0,0,1);
+	glScalef(1,0.5,1);
+
+	m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{1,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{2,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{3,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEmpty};
+
+	arm = LiftArm(THIN, m);
+	arm.draw();
+}
+
 //céla Jocelyn
 
 void cylinderBordersFace(){

@@ -91,9 +91,9 @@ void gearWormScrew_6185471();
         void liftarm3x3TShapeThick_4552347();
         //done
         void liftarm3x5LShapeThick_6173003();
-        //not done
+        //kinda done
         void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-        //not done
+        //done
         void liftarm3X5PerpendicularHShapeThick_6055519();
 // ----------------
 
