@@ -80,6 +80,8 @@ enum PartKind{
     Arm,
     ArmEnd,
     ArmWithCross,
+    ArmAngle,
+    ArmTAngle,
     Cross
 };
 

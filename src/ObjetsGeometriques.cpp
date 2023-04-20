@@ -962,8 +962,7 @@ void LegoPart::draw(){
 			cylinder(0.2);
 
 			glPushMatrix();
-				glTranslatef(0.25,0,0);
-				glTranslatef(0,0,0.45);
+				glTranslatef(0.25,0,0.45);
 				glPushMatrix();
 					glScalef(0.5,1,0.1);
 					cube();
@@ -975,6 +974,32 @@ void LegoPart::draw(){
 					glScalef(0.5,1,0.1);
 					cube();
 				glPopMatrix();
+			glPopMatrix();
+			break;
+
+    case ArmAngle:
+    	cylinder(0.2);
+
+			glPushMatrix();
+				glTranslatef(0.25,0,-0.45);
+        glScalef(0.5,1,0.1);
+        cube();
+			glPopMatrix();
+
+      glPushMatrix();
+        glRotatef(90,0,1,0);
+        glTranslatef(-0.25,0,-0.45);
+        glScalef(0.5,1,0.1);
+        cube();
+      glPopMatrix();
+			break;
+
+    case ArmTAngle:
+    	cylinder(0.2);
+			glPushMatrix();
+				glTranslatef(0,0,0.45);
+        glScalef(1,1,0.1);
+        cube();
 			glPopMatrix();
 			break;
 

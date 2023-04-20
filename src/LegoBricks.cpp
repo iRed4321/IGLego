@@ -426,6 +426,48 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 	
 }
 
+void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glTranslatef(0,0.5,0);
+		mySolidDisc(20);
+		glTranslatef(0,1,0);
+		glPushMatrix();
+			glScalef(0.8,2,0.8);
+			thickCross();
+		glPopMatrix();
+	glPopMatrix();
+
+	
+}
+
+void liftarm3x5LShapeThick_6173003(){
+
+	Model m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngle};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEnd};
+	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEnd};
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+}
+
+void liftarm3x3TShapeThick_4552347(){
+	Model m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Back, ArmTAngle};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEnd};
+	m[Pos3d{1,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{1,0,2}] = LegoPart{Right, ArmEnd};
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+}
 //céla Jocelyn
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();
