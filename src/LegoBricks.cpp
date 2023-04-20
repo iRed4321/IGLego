@@ -124,6 +124,136 @@ void cube(){
     
 }
 
+LiftArm::LiftArm(Thickness thickness, Model model){
+	this->thickness = thickness;
+	this->model = model;
+}
+
+LiftArm::LiftArm(Thickness thickness, uint nbHoles){
+	this->thickness = thickness;
+	this->model = Model();
+	for (uint i = 0; i < nbHoles; ++i){
+		if (i == 0){
+			model[Pos3d{i,0,0}] = LegoPart{Front, ArmEnd};
+		} else if (i == nbHoles - 1){
+			model[Pos3d{i,0,0}] = LegoPart{Back, ArmEnd};
+		} else {
+			model[Pos3d{i,0,0}] = LegoPart{Front, Arm};
+		}
+	}
+}
+
+void LiftArm::draw(){
+	glPushMatrix();
+
+	if (thickness == THIN){
+		glScalef(1,1,0.5);
+	}
+	glRotatef(90,1,0,0);
+
+	for (auto &[pos, part] : model){
+		glPushMatrix();
+		glTranslatef(pos.x, pos.y, pos.z);
+		part.draw();
+		glPopMatrix();
+	}
+
+	glPopMatrix();
+}
+
+void LegoPart::draw(){
+	glPushMatrix();
+	switch (orientation){
+		case Top:
+			glRotatef(90,1,0,0);
+			break;
+		case Bottom:
+			glRotatef(-90,1,0,0);
+			break;
+		case Right:
+			glRotatef(90,0,1,0);
+			break;
+		case Left:
+			glRotatef(-90,0,1,0);
+			break;
+		case Front:
+			break;
+		case Back:
+			glRotatef(180,0,1,0);
+			break;
+	}
+
+	switch (kind){
+		case Arm:
+			cylinder(0.2);
+
+			glPushMatrix();
+				glTranslatef(0,0,0.45);
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glTranslatef(0,0,-0.9);
+
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+
+		case ArmEnd:
+			cylinder(0.2);
+
+			glPushMatrix();
+				glTranslatef(0.25,0,0);
+				glTranslatef(0,0,0.45);
+				glPushMatrix();
+					glScalef(0.5,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glTranslatef(0,0,-0.9);
+
+				glPushMatrix();
+					glScalef(0.5,1,0.1);
+					cube();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+
+		case ArmWithCross:
+			cylinder(0.2);
+
+			glPushMatrix();
+				glTranslatef(0,0,0.45);
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glTranslatef(0,0,-0.9);
+
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+			glPopMatrix();
+			glScalef(0.8,1,0.8);
+			thickCross();
+			break;
+			
+		case Cross:
+			glScalef(0.85,1,0.85);
+			thickCross();
+			break;
+	}
+
+	glPopMatrix();
+}
+	
+
 /*
 pièce en forme de :
 	
