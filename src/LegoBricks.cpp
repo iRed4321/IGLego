@@ -341,10 +341,12 @@ void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951(){
 			glTranslatef(1,0,0);
 			glRotatef(90,1,0,0);
 			cylinder(0.2);
-			mySolidCross();
+			//mySolidCross();
+			thickCross();
 			glTranslatef(-2,0,0);
 			cylinder(0.2);
 			mySolidCross();
+			thickCross();
 		glPopMatrix();
 
 	glPopMatrix();
@@ -389,11 +391,14 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 			cylinder(0.2);
 		glPopMatrix();
 		glTranslatef(0,0.5,0);
-		mySolidDisc(20);
+		glPushMatrix();
+		glScalef(1,0.05,1);
+		cylinder(1);
+		glPopMatrix();
 		glTranslatef(0,1,0);
 		glPushMatrix();
 			glScalef(0.8,2,0.8);
-			thickCross();
+			mySolidCross(1);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -562,16 +567,139 @@ void liftarm1x115DoubleBentThick_6271156(){
 }
 
 //céla Jocelyn
+
+void cylinderBordersFace(){
+	glPushMatrix();
+		glTranslatef(0,0,0.449);
+		glPushMatrix();
+			glScalef(1.2,1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.35,0);
+			glScalef(1.40,0.1,0.1);
+			cube();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.35,0);
+			glScalef(1.40,0.1,0.1);
+			cube();
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void cylinderBordersSide(){
+	glPushMatrix();
+		glTranslatef(0,0,0.449);
+		glPushMatrix();
+			glScalef(1.4,1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.35,0);
+			glScalef(1.60,0.1,0.1);
+			cube();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(0,-0.35,0);
+			glScalef(1.60,0.1,0.1);
+			cube();
+		glPopMatrix();
+		
+	glPopMatrix();
+}
+
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();
-	cylinder(0.2);
+		glPushMatrix();
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			glPushMatrix();
+				glRotatef(90,1,0,0);
+				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+			glPushMatrix();
+				glRotatef(-90,0,0,1);
+				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-2,0,0);
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			glRotatef(90,1,0,0);
+			glTranslatef(0,1,0);
+			glScalef(0.8,1,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,2,0);
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			glPushMatrix();
+				glRotatef(-90,0,0,1);
+				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+
 	glPushMatrix();
-	glTranslatef(2,0,0);
-	cylinder(0.2);
+		glTranslatef(-1,0,0);
+		glPushMatrix();
+			cylinderBordersFace();
+			glTranslatef(0,0,-0.9);
+			cylinderBordersFace();
+		glPopMatrix();
+		glPushMatrix();
+			glRotatef(90,1,0,0);
+			cylinderBordersSide();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2.1,0.1,1);	
+			cube();
+		glPopMatrix();
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0,0,2);
-	cylinder(0.2);
+		glTranslatef(0,1,0);
+		glPushMatrix();
+		glRotatef(90,0,0,1);
+		cylinderBordersFace();
+		glPopMatrix();
+		glTranslatef(0,0,-0.9);
+		glPushMatrix();
+		glRotatef(90,0,0,1);
+		cylinderBordersFace();
+		glPopMatrix();
 	glPopMatrix();
 }
 //pala Jocelyn

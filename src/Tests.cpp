@@ -6,6 +6,7 @@
 #include <GL/glu.h>
 
 #include "LegoBricks.h"
+#include "ObjetsGeometriques.h"
 
 //makes the use of 3D arrays clearer
 #define X 0
@@ -84,51 +85,50 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
+    //glScalef(0.5F,0.5F,0.5F);
     glScalef(0.3F,0.3F,0.3F);
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
-
+    glScalef(1,1,1);
+    axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
+    //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
     
     // glPushMatrix();
     // glTranslatef(0,-3,0);
     // plate4x8_4509897(nbFacets,nbFacets);
     // glPopMatrix();
+    /*  
+    glPushMatrix();
+    glTranslatef(0,-3,0);
+    plate4x8_4509897(nbFacets,nbFacets);
+    glPopMatrix();
     
-    // glTranslatef(-4.5,0,-3.5);
-    // technicLever3x3m90deg__6271810(nbFacets,nbFacets);
-    // glTranslatef(4, 0, 0);
-    // liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
-    // glTranslatef(2.2,0,0);
-    // axle4_370526();
-    // glTranslatef(1.2,0,0);
-    // axle4WithCenterStop_4666999();
-    // glTranslatef(-6,0,2);
-    // axle2Notched_4142865();
-    // glTranslatef(1.3,0,0);
-    // axle3_4211815();
-    // glTranslatef(2.2,0,0);
-    // gear8ToothType2_6012451(nbFacets,nbFacets);
-    // glTranslatef(2.2,0,0);
-    // axle5WithStop_6159763();
-    // glTranslatef(-5,0,2);
-    // axleAndPinConnector1_6332573();
-    // glTranslatef(3,0,0);
-    // axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-    // glTranslatef(-4,2,0);
-    // liftarmThick(5);
-    // axleConnectorSmoothWithXHoleOrientation_4512360();
-    // liftarm2x4LShapeThick_6271825();
-    // liftarm3x3LShapeThin_6271810();
-    // liftarm1x13Thick_6261643();
-  // liftarm1x5Thick_4249021();
-  // liftarm1x4Thin_6364749();
-  // liftarm1x4Thin_6327548();
-  // liftarm1x3Thin_6331723();
-  // liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
-  // liftarm1x2Thick_4177444();
-  liftarm1x115DoubleBentThick_6271156();
-
+    glTranslatef(-4.5,0,-3.5);
+    technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    glTranslatef(4, 0, 0);
+    liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
+    glTranslatef(2.2,0,0);
+    axle4_370526();
+    glTranslatef(1.2,0,0);
+    axle4WithCenterStop_4666999();
+    glTranslatef(-6,0,2);
+    axle2Notched_4142865();
+    glTranslatef(1.3,0,0);
+    axle3_4211815();
+    glTranslatef(2.2,0,0);
+    gear8ToothType2_6012451(nbFacets,nbFacets);
+    glTranslatef(2.2,0,0);
+    axle5WithStop_6159763();
+    glTranslatef(-5,0,2);
+    axleAndPinConnector1_6332573();
+    glTranslatef(3,0,0);
+    axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
+    glTranslatef(-4,2,0);
+    liftarmThick(5);
+    
+    axleConnectorSmoothWithXHoleOrientation_4512360();
+    */
 	glPopMatrix();
 }
 
@@ -258,30 +258,34 @@ static void special(int specialKey,int x,int y) {
       glutPostRedisplay();
       break;
     case GLUT_KEY_F1:
-      light(1);
+      light(0);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F2:
-      light(2);
+      light(1);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F3:
-      light(3);
+      light(2);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F4:
-      light(4);
+      light(3);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F5:
-      light(5);
+      light(4);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F6:
-      light(6);
+      light(5);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F7:
+      light(6);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F8:
       light(7);
       glutPostRedisplay();
       break;

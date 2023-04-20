@@ -56,12 +56,6 @@ void axlePin3LWithFrictionRidgesLengthwise_6209519();
 //not done (nathan)
 void axlePinWithFrictionRidgesLengthwise_4206482();
 //not done
-void bush_6275844();
-//not done
-void bush1By2Smooth_6271165();
-//not done
-void drivingRingConnector_6276052();
-//not done
 void gear12ToothDoubleBevel_4177431();
 //not done
 void gearWormScrew_6185471();
@@ -107,7 +101,7 @@ void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
 void liftarm3X5PerpendicularHShapeThick_6055519();
 
 //---------Jocelyn----------
-//not done
+//not done (ongoing)
 void pinConnectorPerpendicular3LWith4Pins_6282158();
 //not done
 void pinLongWithFrictionRidgesLengthwise_6299413();
@@ -119,6 +113,12 @@ void pinWithoutFrictionRidgesLengthwise_4211807();
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
 //not done
 void pinWithFrictionRidgesLengthwise_4206482();
+//not done
+void bush_6275844();
+//not done
+void bush1By2Smooth_6271165();
+//not done
+void drivingRingConnector_6276052();
 //--------------------------
 
 // done
