@@ -17,7 +17,7 @@ void mySolidDisc(int ns){
   float angle = 0;
   float increment = 2*M_PI/ns;
   for(int i = 0; i<ns; ++i){
-    glVertex3f(cos(angle),0,sin(angle));
+    glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
     angle+=increment;
   }
   glEnd();
@@ -204,24 +204,25 @@ void mySolidFace(){
 }
 
 
-void mySolidCross(){
+void mySolidCross(int withbase=0){
 
   float hauteur = 1.0F;
   float largeurFace = 0.5F/3.0F;
+  float maxDist = 0.5;
 
   glBegin(GL_QUADS);
     glNormal3f(0,0,-1);
 
-    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-0.5F);
-    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-0.5F);
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-maxDist);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-maxDist);
 
-    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-0.5F);
-    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-0.5F);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-maxDist);
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-maxDist);
     
     glNormal3f(-1,0,0);
 
-    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-0.5F);
-    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-0.5F);
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-maxDist);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-maxDist);
 
     glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-largeurFace/2.0F);
     glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-largeurFace/2.0F);
@@ -231,21 +232,21 @@ void mySolidCross(){
     glVertex3f(-largeurFace/2.0F,hauteur/2.0F,-largeurFace/2.0F);
     glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,-largeurFace/2.0F);
 
-    glVertex3f(-0.5F,-hauteur/2.0F,-largeurFace/2.0F);
-    glVertex3f(-0.5F,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(-maxDist,-hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(-maxDist,hauteur/2.0F,-largeurFace/2.0F);
 
     glNormal3f(-1,0,0);
 
-    glVertex3f(-0.5F,hauteur/2.0F,-largeurFace/2.0F);
-    glVertex3f(-0.5F,-hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(-maxDist,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(-maxDist,-hauteur/2.0F,-largeurFace/2.0F);
 
-    glVertex3f(-0.5F,-hauteur/2.0F,largeurFace/2.0F);
-    glVertex3f(-0.5F,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(-maxDist,-hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(-maxDist,hauteur/2.0F,largeurFace/2.0F);
     
     glNormal3f(0,0,1);
 
-    glVertex3f(-0.5F,hauteur/2.0F,largeurFace/2.0F);
-    glVertex3f(-0.5F,-hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(-maxDist,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(-maxDist,-hauteur/2.0F,largeurFace/2.0F);
 
     glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,largeurFace/2.0F);
     glVertex3f(-largeurFace/2.0F,hauteur/2.0F,largeurFace/2.0F);
@@ -255,21 +256,21 @@ void mySolidCross(){
     glVertex3f(-largeurFace/2.0F,hauteur/2.0F,largeurFace/2.0F);
     glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,largeurFace/2.0F);
 
-    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,0.5F);
-    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,0.5F);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,maxDist);
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,maxDist);
     
     glNormal3f(0,0,1);
 
-    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,0.5F);
-    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,0.5F);
+    glVertex3f(-largeurFace/2.0F,hauteur/2.0F,maxDist);
+    glVertex3f(-largeurFace/2.0F,-hauteur/2.0F,maxDist);
 
-    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,0.5F);
-    glVertex3f(largeurFace/2.0F,hauteur/2.0F,0.5F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,maxDist);
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,maxDist);
 
     glNormal3f(1,0,0);
 
-    glVertex3f(largeurFace/2.0F,hauteur/2.0F,0.5F);
-    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,0.5F);
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,maxDist);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,maxDist);
     
     glVertex3f(largeurFace/2.0F,-hauteur/2.0F,largeurFace/2.0F);
     glVertex3f(largeurFace/2.0F,hauteur/2.0F,largeurFace/2.0F);
@@ -279,21 +280,21 @@ void mySolidCross(){
     glVertex3f(largeurFace/2.0F,hauteur/2.0F,largeurFace/2.0F);
     glVertex3f(largeurFace/2.0F,-hauteur/2.0F,largeurFace/2.0F);
 
-    glVertex3f(0.5F,-hauteur/2.0F,largeurFace/2.0F);
-    glVertex3f(0.5F,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(maxDist,-hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(maxDist,hauteur/2.0F,largeurFace/2.0F);
 
     glNormal3f(1,0,0);
 
-    glVertex3f(0.5F,hauteur/2.0F,largeurFace/2.0F);
-    glVertex3f(0.5F,-hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(maxDist,hauteur/2.0F,largeurFace/2.0F);
+    glVertex3f(maxDist,-hauteur/2.0F,largeurFace/2.0F);
 
-    glVertex3f(0.5F,-hauteur/2.0F,-largeurFace/2.0F);
-    glVertex3f(0.5F,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(maxDist,-hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(maxDist,hauteur/2.0F,-largeurFace/2.0F);
 
     glNormal3f(0,0,-1);
 
-    glVertex3f(0.5F,hauteur/2.0F,-largeurFace/2.0F);
-    glVertex3f(0.5F,-hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(maxDist,hauteur/2.0F,-largeurFace/2.0F);
+    glVertex3f(maxDist,-hauteur/2.0F,-largeurFace/2.0F);
 
     glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-largeurFace/2.0F);
     glVertex3f(largeurFace/2.0F,hauteur/2.0F,-largeurFace/2.0F);
@@ -303,9 +304,35 @@ void mySolidCross(){
     glVertex3f(largeurFace/2.0F,hauteur/2.0F,-largeurFace/2.0F);
     glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-largeurFace/2.0F);
 
-    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-0.5F);
-    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-0.5F);
+    glVertex3f(largeurFace/2.0F,-hauteur/2.0F,-maxDist);
+    glVertex3f(largeurFace/2.0F,hauteur/2.0F,-maxDist);
     
+    if (withbase){
+      glNormal3f(0,1,0);
+      glVertex3f(largeurFace/2,hauteur/2,-maxDist);
+      glVertex3f(-largeurFace/2,hauteur/2,-maxDist);
+      glVertex3f(-largeurFace/2,hauteur/2,maxDist);
+      glVertex3f(largeurFace/2,hauteur/2,maxDist);
+
+      glVertex3f(-maxDist,hauteur/2,largeurFace/2);
+      glVertex3f(-maxDist,hauteur/2,-largeurFace/2);
+      glVertex3f(maxDist,hauteur/2,-largeurFace/2);
+      glVertex3f(maxDist,hauteur/2,largeurFace/2);
+      
+
+      glNormal3f(0,-1,0);
+      glVertex3f(largeurFace/2,-hauteur/2,-maxDist);
+      glVertex3f(-largeurFace/2,-hauteur/2,-maxDist);
+      glVertex3f(-largeurFace/2,-hauteur/2,maxDist);
+      glVertex3f(largeurFace/2,-hauteur/2,maxDist);
+
+      glVertex3f(-maxDist,-hauteur/2,largeurFace/2);
+      glVertex3f(-maxDist,-hauteur/2,-largeurFace/2);
+      glVertex3f(maxDist,-hauteur/2,-largeurFace/2);
+      glVertex3f(maxDist,-hauteur/2,largeurFace/2);
+    }
+    
+
   glEnd();
 
 }

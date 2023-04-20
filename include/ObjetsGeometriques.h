@@ -42,7 +42,7 @@ void mySolidCylindreInverted(int ns,int nl);
 void mySolidCylindre(int ns,int nl,int bases);
 
 /* Modelisation d'une croix */
-void mySolidCross();
+void mySolidCross(int withbase=0);
 
 /* Modelisation d'une roue crantée 				*/
 /* les dents commencent à une distance de 0.5 du centre */
