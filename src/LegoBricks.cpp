@@ -450,16 +450,95 @@ void liftarm3x3TShapeThick_4552347(){
 	arm.draw();
 }
 //céla Jocelyn
+
+void cylinderBorders(){
+	glPushMatrix();
+		glTranslatef(0,0,0.449);
+		glPushMatrix();
+			glScalef(1.2,1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.35,0);
+			glScalef(1.40,0.1,0.1);
+			cube();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.35,0);
+			glScalef(1.40,0.1,0.1);
+			cube();
+		glPopMatrix();
+	glPopMatrix();
+}
+
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();
-	cylinder(0.2);
+		glPushMatrix();
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			glPushMatrix();
+				glRotatef(90,1,0,0);
+				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+			glPushMatrix();
+				glRotatef(-90,0,0,1);
+				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-2,0,0);
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			glRotatef(90,1,0,0);
+			glTranslatef(0,1,0);
+			glScalef(0.8,1,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,2,0);
+			glRotatef(90,1,0,0);
+			cylinder(0.2);
+			glPushMatrix();
+				glRotatef(-90,0,0,1);
+				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+
 	glPushMatrix();
-	glTranslatef(2,0,0);
-	cylinder(0.2);
+		glTranslatef(-1,0,0);
+		cylinderBorders();
+		glTranslatef(0,0,-0.9);
+		cylinderBorders();
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0,0,2);
-	cylinder(0.2);
+		glTranslatef(0,1,0);
+		glPushMatrix();
+		glRotatef(90,0,0,1);
+		cylinderBorders();
+		glPopMatrix();
+		glTranslatef(0,0,-0.9);
+		glPushMatrix();
+		glRotatef(90,0,0,1);
+		cylinderBorders();
+		glPopMatrix();
 	glPopMatrix();
 }
 //pala Jocelyn
