@@ -123,7 +123,10 @@ static void scene(void) {
     // liftarm1x13Thick_6261643();
   // liftarm1x5Thick_4249021();
   // liftarm1x4Thin_6364749();
-  liftarm1x4Thin_6327548();
+  // liftarm1x4Thin_6327548();
+  // liftarm1x3Thin_6331723();
+  // liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
+  liftarm1x2Thick_4177444();
 
 	glPopMatrix();
 }

@@ -117,31 +117,6 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 }
 
 
-void liftarm1x2Thick_4177444(){
-	glPushMatrix();
-	cylinder(0.2);
-	glTranslatef(1,0,0);
-	cylinder(0.2);
-
-	glTranslatef(-0.5,0,0.45);
-
-	glPushMatrix();
-	glScalef(0.9,1,0.1);
-	cube();
-	glPopMatrix();
-
-
-	glTranslatef(0,0,-0.9);
-
-	glPushMatrix();
-	glScalef(0.9,1,0.1);
-	cube();
-	glPopMatrix();
-
-	glPopMatrix();
-}
-
-
 void liftarmThick(int nBholes){
 	glPushMatrix();
 
@@ -512,6 +487,36 @@ void liftarm1x4Thin_6364749(){
 
 void liftarm1x4Thin_6327548(){
 	liftarm1x4Thin_6364749();
+}
+
+void liftarm1x3Thin_6331723(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	LiftArm arm = LiftArm(THIN, m);
+	arm.draw();
+}
+
+void liftarm1x2ThickWithPinHoleAndAxleHole_6344864(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+}
+
+void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
+	liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
+}
+
+void liftarm1x2Thick_4177444(){
+	LiftArm arm = LiftArm(THICK, 2);
+	arm.draw();
 }
 
 //céla Jocelyn
