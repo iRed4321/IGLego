@@ -38,6 +38,8 @@ enum Orientation{
 enum PartKind{
     Arm,
     ArmEnd,
+    ArmAngle,
+    ArmTAngle,
     ArmWithCross,
     Cross
 };

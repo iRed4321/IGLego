@@ -203,12 +203,46 @@ void LegoPart::draw(){
 			glPopMatrix();
 			break;
 
+		case ArmAngle:
+			cylinder(0.2);
+
+			glPushMatrix();
+
+				glPushMatrix();
+					glTranslatef(0.25,0,0.45);
+					glTranslatef(0,0,-0.9);
+					glScalef(0.5,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glPushMatrix();
+					glRotatef(90,0,1,0);
+					glTranslatef(-0.25,0,0.45);
+					glTranslatef(0,0,-0.9);
+					glScalef(0.5,1,0.1);
+					cube();
+				glPopMatrix();
+
+
+
+			glPopMatrix();
+			break;
+
+		case ArmTAngle:
+			cylinder(0.2);
+
+			glPushMatrix();
+				glTranslatef(0,0,0.45);
+				glScalef(1,1,0.1);
+				cube();
+			glPopMatrix();
+			break;
+
 		case ArmEnd:
 			cylinder(0.2);
 
 			glPushMatrix();
-				glTranslatef(0.25,0,0);
-				glTranslatef(0,0,0.45);
+				glTranslatef(0.25,0,0.45);
 				glPushMatrix();
 					glScalef(0.5,1,0.1);
 					cube();
@@ -645,4 +679,29 @@ void axleConnectorSmoothWithXHoleOrientation_4512360(){
 		glScalef(1,2,1);
 		thickCross();
 	glPopMatrix();
+}
+
+void liftarm3x5LShapeThick_6173003(){
+
+	Model m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngle};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEnd};
+	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEnd};
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+}
+
+void liftarm3x3TShapeThick_4552347(){
+	Model m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Back, ArmTAngle};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEnd};
+	m[Pos3d{1,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{1,0,2}] = LegoPart{Right, ArmEnd};
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
 }

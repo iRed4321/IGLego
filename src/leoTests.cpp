@@ -49,7 +49,7 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    glScalef(0.7F,0.7F,0.7F);
+    glScalef(0.5F,0.5F,0.5F);
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
 
@@ -84,16 +84,12 @@ static void scene(void) {
     liftarmThick(5);
     classicBar(1.0,4,32,32);
     axleConnectorSmoothWithXHoleOrientation_4512360();
+    liftarm3x5LShapeThick_6173003();
     */
 
-  Model m = Model();
-  m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
-  m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
-  m[Pos3d{2,0,0}] = LegoPart{Front, ArmWithCross};
-  m[Pos3d{3,0,0}] = LegoPart{Back, ArmEnd};
-  LiftArm arm = LiftArm(Thickness::THICK, m);
+   liftarm3x3TShapeThick_4552347();
 
-  arm.draw();
+
 	glPopMatrix();
 }
 
