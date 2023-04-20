@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include <vector>
+#include <map>
 
 #include "ObjetsGeometriques.h"
 
@@ -37,7 +37,9 @@ enum Orientation{
 
 enum PartKind{
     Arm,
-    ArmEnd
+    ArmEnd,
+    ArmWithCross,
+    Cross
 };
 
 struct LegoPart{
@@ -84,8 +86,8 @@ struct LegoPart{
                         cube();
                     glPopMatrix();
                 glPopMatrix();
-
                 break;
+
             case ArmEnd:
                 cylinder(0.2);
 
@@ -105,6 +107,31 @@ struct LegoPart{
                     glPopMatrix();
                 glPopMatrix();
                 break;
+
+            case ArmWithCross:
+                cylinder(0.2);
+
+                glPushMatrix();
+                    glTranslatef(0,0,0.45);
+                    glPushMatrix();
+                        glScalef(1,1,0.1);
+                        cube();
+                    glPopMatrix();
+
+                    glTranslatef(0,0,-0.9);
+
+                    glPushMatrix();
+                        glScalef(1,1,0.1);
+                        cube();
+                    glPopMatrix();
+                glPopMatrix();
+                glScalef(0.8,1,0.8);
+                thickCross();
+
+            case Cross:
+                glScalef(0.8,1,0.8);
+                thickCross();
+                break;
         }
 
         glPopMatrix();
@@ -112,8 +139,30 @@ struct LegoPart{
 
 };
 
+struct Pos3d{
+    uint x;
+    uint y;
+    uint z;
+};
 
-typedef std::vector<std::vector<LegoPart>> Model;
+struct Pos3dComparator{
+   bool operator() (const Pos3d& lhs, const Pos3d& rhs) const
+   {
+         if (lhs.x < rhs.x){
+              return true;
+         } else if (lhs.x == rhs.x){
+              if (lhs.y < rhs.y){
+                return true;
+              } else if (lhs.y == rhs.y){
+                return lhs.z < rhs.z;
+              }
+         }
+         return false;
+   }
+};
+
+typedef std::map<Pos3d,LegoPart, Pos3dComparator> Model;
+
 
 struct LiftArm{
     Thickness thickness;
@@ -124,42 +173,34 @@ struct LiftArm{
 		this->model = model;
 	}
 
-	LiftArm(Thickness thickness, int nbHoles){
+	LiftArm(Thickness thickness, uint nbHoles){
 		this->thickness = thickness;
         this->model = Model();
-        model.push_back(std::vector<LegoPart>());
-        for (int i = 0; i < nbHoles; ++i){
+        for (uint i = 0; i < nbHoles; ++i){
             if (i == 0){
-                model[0].push_back(LegoPart{Front, ArmEnd});
-                continue;
+                model[Pos3d{i,0,0}] = LegoPart{Front, ArmEnd};
             } else if (i == nbHoles - 1){
-                model[0].push_back(LegoPart{Back, ArmEnd});
-                continue;
+                model[Pos3d{i,0,0}] = LegoPart{Back, ArmEnd};
             } else {
-                model[0].push_back(LegoPart{Front, Arm});
+                model[Pos3d{i,0,0}] = LegoPart{Front, Arm};
             }
         }
 	}
 
     void draw(){
 
-        int lego_width = model[0].size();
-        int lego_height = model.size();
-
         glPushMatrix();
 
         if (thickness == THIN){
-            glScalef(1,1,0.1);
+            glScalef(1,1,0.5);
         }
+        glRotatef(90,1,0,0);
 
-        for(auto row : model){
+        for (auto &[pos, part] : model){
             glPushMatrix();
-            for(auto part : row){
-                part.draw();
-                glTranslatef(1,0,0);
-            }
+            glTranslatef(pos.x, pos.y, pos.z);
+            part.draw();
             glPopMatrix();
-            glTranslatef(0,1,0);
         }
 
         glPopMatrix();

@@ -49,7 +49,7 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    glScalef(0.5F,0.5F,0.5F);
+    glScalef(0.7F,0.7F,0.7F);
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
 
@@ -60,29 +60,40 @@ static void scene(void) {
     plate4x8_4509897(nbFacets,nbFacets);
     glPopMatrix();
     */
-    glTranslatef(-4.5,0,-3.5);
-    technicLever3x3m90deg__6271810(nbFacets,nbFacets);
-    glTranslatef(4, 0, 0);
-    liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
-    glTranslatef(2.2,0,0);
-    axle4_370526();
-    glTranslatef(1.2,0,0);
-    axle4WithCenterStop_4666999();
-    glTranslatef(-6,0,2);
-    axle2Notched_4142865();
-    glTranslatef(1.3,0,0);
-    axle3_4211815();
-    glTranslatef(2.2,0,0);
-    gear8ToothType2_6012451(nbFacets,nbFacets);
-    glTranslatef(2.2,0,0);
-    axle5WithStop_6159763();
-    glTranslatef(-5,0,2);
-    axleAndPinConnector1_6332573();
-    glTranslatef(3,0,0);
-    axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-    glTranslatef(-4,2,0);
-    liftarmThick(5);
-    classicBar(1.0,4,32,32);
+    // glTranslatef(-4.5,0,-3.5);
+    // technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    // glTranslatef(4, 0, 0);
+    // liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
+    // glTranslatef(2.2,0,0);
+    // axle4_370526();
+    // glTranslatef(1.2,0,0);
+    // axle4WithCenterStop_4666999();
+    // glTranslatef(-6,0,2);
+    // axle2Notched_4142865();
+    // glTranslatef(1.3,0,0);
+    // axle3_4211815();
+    // glTranslatef(2.2,0,0);
+    // gear8ToothType2_6012451(nbFacets,nbFacets);
+    // glTranslatef(2.2,0,0);
+    // axle5WithStop_6159763();
+    // glTranslatef(-5,0,2);
+    // axleAndPinConnector1_6332573();
+    // glTranslatef(3,0,0);
+    // axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
+    // glTranslatef(-4,2,0);
+
+
+    Model model = Model();
+
+    model[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+    model[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+    model[Pos3d{2,0,0}] = LegoPart{Front, ArmWithCross};
+    model[Pos3d{3,0,0}] = LegoPart{Back, ArmEnd};
+
+    LiftArm arm = LiftArm(Thickness::THICK, model);
+    arm.draw();
+
+    // classicBar(1.0,4,32,32);
 	glPopMatrix();
 }
 
