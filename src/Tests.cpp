@@ -118,9 +118,12 @@ static void scene(void) {
     // glTranslatef(-4,2,0);
     // liftarmThick(5);
     // axleConnectorSmoothWithXHoleOrientation_4512360();
+    // liftarm2x4LShapeThick_6271825();
     // liftarm3x3LShapeThin_6271810();
-
-    liftarm2x4LShapeThick_6271825();
+    // liftarm1x13Thick_6261643();
+  // liftarm1x5Thick_4249021();
+  // liftarm1x4Thin_6364749();
+  liftarm1x4Thin_6327548();
 
 	glPopMatrix();
 }

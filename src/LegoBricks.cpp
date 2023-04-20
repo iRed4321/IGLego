@@ -473,6 +473,47 @@ void liftarm2x4LShapeThick_6271825(){
 	arm.draw();
 }
 
+void liftarm1x13Thick_6261643(){
+	LiftArm arm = LiftArm(THICK, 13);
+	arm.draw();
+}
+
+void liftarm1x7Thick_4495935(){
+	LiftArm arm = LiftArm(THICK, 7);
+	arm.draw();
+}
+
+void liftarm1x6Thin_6345239(){
+	LiftArm arm = LiftArm(THIN, 6);
+	arm.draw();
+}
+
+void liftarm1x5Thick_4249021(){
+	LiftArm arm = LiftArm(THICK, 5);
+	arm.draw();
+}
+
+void liftarm1x5Thick_4142135(){
+	LiftArm arm = LiftArm(THICK, 5);
+	arm.draw();
+}
+
+void liftarm1x4Thin_6364749(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	LiftArm arm = LiftArm(THIN, m);
+	arm.draw();
+}
+
+void liftarm1x4Thin_6327548(){
+	liftarm1x4Thin_6364749();
+}
+
 //céla Jocelyn
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();
