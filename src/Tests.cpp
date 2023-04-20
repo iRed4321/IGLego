@@ -6,6 +6,7 @@
 #include <GL/glu.h>
 
 #include "LegoBricks.h"
+#include "ObjetsGeometriques.h"
 
 //makes the use of 3D arrays clearer
 #define X 0
@@ -86,10 +87,12 @@ static void scene(void) {
 	glPushMatrix();
     glScalef(0.5F,0.5F,0.5F);
 
-    glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,rouge);
 
+    thickCross();
+    //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
-    
+    /*  
     glPushMatrix();
     glTranslatef(0,-3,0);
     plate4x8_4509897(nbFacets,nbFacets);
@@ -119,6 +122,7 @@ static void scene(void) {
     liftarmThick(5);
     
     axleConnectorSmoothWithXHoleOrientation_4512360();
+    */
 	glPopMatrix();
 }
 
@@ -248,30 +252,34 @@ static void special(int specialKey,int x,int y) {
       glutPostRedisplay();
       break;
     case GLUT_KEY_F1:
-      light(1);
+      light(0);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F2:
-      light(2);
+      light(1);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F3:
-      light(3);
+      light(2);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F4:
-      light(4);
+      light(3);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F5:
-      light(5);
+      light(4);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F6:
-      light(6);
+      light(5);
       glutPostRedisplay();
       break;
     case GLUT_KEY_F7:
+      light(6);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F8:
       light(7);
       glutPostRedisplay();
       break;
