@@ -203,28 +203,28 @@ void plate4x8_4509897(int ns, int nl){
 void axle2Notched_4142865(){
 	glPushMatrix();
 	glScalef(1,2,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle3_4211815(){
 	glPushMatrix();
 	glScalef(1,3,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle4_370526(){
 	glPushMatrix();
 	glScalef(1,4,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle4WithCenterStop_4666999(){
 	glPushMatrix();
 	glScalef(1,4,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0,-1,0);
@@ -237,7 +237,7 @@ void axle4WithCenterStop_4666999(){
 void axle5WithStop_6159763(){
 	glPushMatrix();
 	glScalef(1,5,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(0,-2.5,0);
@@ -248,14 +248,14 @@ void axle5WithStop_6159763(){
 void axle8_370726(){
 	glPushMatrix();
 	glScalef(1,8,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle12_370826(){
 	glPushMatrix();
 	glScalef(1,12,1);
-	mySolidCross();
+	mySolidCross(1);
 	glPopMatrix();
 }
 
@@ -405,6 +405,24 @@ void axleConnectorSmoothWithXHoleOrientation_4512360(){
 		glScalef(1,2,1);
 		thickCross();
 	glPopMatrix();
+}
+
+void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glTranslatef(0,0.5,0);
+		mySolidDisc(20);
+		glTranslatef(0,1,0);
+		glPushMatrix();
+			glScalef(0.8,2,0.8);
+			thickCross();
+		glPopMatrix();
+	glPopMatrix();
+
+	
 }
 
 void liftarm3x5LShapeThick_6173003(){

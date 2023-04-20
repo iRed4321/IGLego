@@ -7,12 +7,42 @@
 
 #include "LegoBricks.h"
 
+//makes the use of 3D arrays clearer
+#define X 0
+#define Y 1
+#define Z 2
+
+//makes the use of glFrustum parameters clearer
+#define LEFT 0
+#define RIGHT 1
+#define BOTTOM 2
+#define TOP 3 
+#define CMIN 4
+#define CMAX 5
+
 /* Variables globales                           */
 
-static int wTx = 480;              // Resolution horizontale de la fenetre
-static int wTy = 480;              // Resolution verticale de la fenetre
-static int wPx = 50;               // Position horizontale de la fenetre
-static int wPy = 50;               // Position verticale de la fenetre
+static int lighting = 1;
+static int lightsActivation[] = { 1,0,0,0,0,0,0,0 };
+static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
+
+//parameters for gluLookAt
+static float cameraPos[] = {0.0F,0.0F,20.0F};
+static float cameraTarget[] = {0.0F,0.0F,0.0F};
+
+//parameters for the view of the camera
+static float frustumView[] = {10,10,10,10,-10,-30};
+
+
+static int mousePos [2] = { 0,0 };
+static int mouseDiff[2] = { 0,0 };
+static float angle[3] = {0,0,0};
+
+static int wTx = 1000;              // horizontal resolution of the window 
+static int wTy = 1000;              // vertical resolution of the window
+static int wPx = 50;               // horizontal position of the window 
+static int wPy = 50;              // vertical position of the window
+
 
 static float rotationX = 1;
 static float rotationY = 1;
@@ -42,6 +72,11 @@ static void init(void) {
   glEnable(GL_CULL_FACE);
 }
 
+
+static void light(int i) {
+    lightsActivation[i] = ~lightsActivation[i];
+}
+
 /* Scene dessinee                               */
 
 static void scene(void) {
@@ -54,41 +89,37 @@ static void scene(void) {
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
 
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
-    /*
-    glPushMatrix();
-    glTranslatef(0,-3,0);
-    plate4x8_4509897(nbFacets,nbFacets);
-    glPopMatrix();
     
-    glTranslatef(-4.5,0,-3.5);
-    technicLever3x3m90deg__6271810(nbFacets,nbFacets);
-    glTranslatef(4, 0, 0);
-    liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
-    glTranslatef(2.2,0,0);
-    axle4_370526();
-    glTranslatef(1.2,0,0);
-    axle4WithCenterStop_4666999();
-    glTranslatef(-6,0,2);
-    axle2Notched_4142865();
-    glTranslatef(1.3,0,0);
-    axle3_4211815();
-    glTranslatef(2.2,0,0);
-    gear8ToothType2_6012451(nbFacets,nbFacets);
-    glTranslatef(2.2,0,0);
-    axle5WithStop_6159763();
-    glTranslatef(-5,0,2);
-    axleAndPinConnector1_6332573();
-    glTranslatef(3,0,0);
-    axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-    glTranslatef(-4,2,0);
-    liftarmThick(5);
-    classicBar(1.0,4,32,32);
-    axleConnectorSmoothWithXHoleOrientation_4512360();
-  liftarm3x3LShapeThin_6271810();
-    liftarm3x5LShapeThick_6173003();
-    */
+    // glPushMatrix();
+    // glTranslatef(0,-3,0);
+    // plate4x8_4509897(nbFacets,nbFacets);
+    // glPopMatrix();
+    
+    // glTranslatef(-4.5,0,-3.5);
+    // technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    // glTranslatef(4, 0, 0);
+    // liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
+    // glTranslatef(2.2,0,0);
+    // axle4_370526();
+    // glTranslatef(1.2,0,0);
+    // axle4WithCenterStop_4666999();
+    // glTranslatef(-6,0,2);
+    // axle2Notched_4142865();
+    // glTranslatef(1.3,0,0);
+    // axle3_4211815();
+    // glTranslatef(2.2,0,0);
+    // gear8ToothType2_6012451(nbFacets,nbFacets);
+    // glTranslatef(2.2,0,0);
+    // axle5WithStop_6159763();
+    // glTranslatef(-5,0,2);
+    // axleAndPinConnector1_6332573();
+    // glTranslatef(3,0,0);
+    // axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
+    // glTranslatef(-4,2,0);
+    // liftarmThick(5);
+    // axleConnectorSmoothWithXHoleOrientation_4512360();
 
-   liftarm3x3TShapeThick_4552347();
+    liftarm3x3LShapeThin_6271810();
 
 	glPopMatrix();
 }
@@ -97,11 +128,32 @@ static void scene(void) {
 /* de la fenetre de dessin                      */
 
 static void display(void) {
+
+  //Enabling lights
+	if (lighting)
+      glEnable(GL_LIGHTING);
+  	else
+      glDisable(GL_LIGHTING);
+
+  //selecting lights to activate
+	for (int i = 0; i < 8; ++i) {
+    if (lightsActivation[i]) {
+    	glEnable(lights[i]);
+    }
+    else {
+    	glDisable(lights[i]);
+    }
+  }
+
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glPolygonMode(GL_FRONT_AND_BACK, currentView);
+  
   glPushMatrix();
+  glRotatef(angle[X],1.0F,0.0F,0.0F);
+  glRotatef(angle[Y],0.0F,1.0F,0.0F);
   scene();
   glPopMatrix();
+  
   glFlush();
   glutSwapBuffers();
   int error = glGetError();
@@ -127,12 +179,14 @@ static void reshape(int wx,int wy) {
 /* n'est en file d'attente                      */
 
 static void idle(void) {
+  if(mouseDiff[X]!=0 || mouseDiff[Y]!=0)
+  		glutPostRedisplay();
 }
 
 static void idleAnim(void){
-  glRotatef(rotationX, 0.1, 0, 0);
-  glRotatef(rotationY, 0, 0.2, 0);
-  glRotatef(rotationZ, 0, 0, 0.3);
+  glRotatef(rotationX, 1, 0, 0);
+  glRotatef(rotationY, 0, 1, 0);
+  glRotatef(rotationZ, 0, 0, 1);
   glutPostRedisplay();
 }
 
@@ -191,6 +245,38 @@ static void special(int specialKey,int x,int y) {
       facettes_y += 1;
       glutPostRedisplay();
       break;
+    case GLUT_KEY_F10:
+      lighting = ~lighting;
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F1:
+      light(1);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F2:
+      light(2);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F3:
+      light(3);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F4:
+      light(4);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F5:
+      light(5);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F6:
+      light(6);
+      glutPostRedisplay();
+      break;
+    case GLUT_KEY_F7:
+      light(7);
+      glutPostRedisplay();
+      break;
   }
 }
 
@@ -204,7 +290,13 @@ static void mouse(int button,int state,int x,int y) {
 /* de la souris sur la fenetre                  */
 /* avec un bouton presse                        */
 
-static void mouseMotion(int x,int y) {
+static void mouseMotion(int x, int y) {
+    mouseDiff[X] = -x + mousePos[X];
+    mouseDiff[Y] = y - mousePos[Y];
+    mousePos[X] = x;
+    mousePos[Y] = y;
+    angle[X] += mouseDiff[Y];
+    angle[Y] += mouseDiff[X];
 }
 
 /* Fonction executee lors du passage            */
@@ -230,7 +322,7 @@ int main(int argc,char **argv) {
   glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
   glutInitWindowSize(wTx,wTy);
   glutInitWindowPosition(wPx,wPy);
-  glutCreateWindow("TP4-n1");
+  glutCreateWindow("Test program");
   init();
   glutKeyboardFunc(keyboard);
   glutSpecialFunc(special);
