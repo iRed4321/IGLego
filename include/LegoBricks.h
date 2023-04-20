@@ -127,9 +127,10 @@ struct LegoPart{
                 glPopMatrix();
                 glScalef(0.8,1,0.8);
                 thickCross();
-
+                break;
+                
             case Cross:
-                glScalef(0.8,1,0.8);
+                glScalef(0.85,1,0.85);
                 thickCross();
                 break;
         }
