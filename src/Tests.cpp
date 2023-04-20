@@ -84,7 +84,7 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    glScalef(0.5F,0.5F,0.5F);
+    //glScalef(0.5F,0.5F,0.5F);
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
 
@@ -126,7 +126,8 @@ static void scene(void) {
   // liftarm1x4Thin_6327548();
   // liftarm1x3Thin_6331723();
   // liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
-  liftarm1x2Thick_4177444();
+  //liftarm1x2Thick_4177444();
+  pinConnectorPerpendicular3LWith4Pins_6282158();
 
 	glPopMatrix();
 }

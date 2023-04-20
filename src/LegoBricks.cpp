@@ -521,7 +521,7 @@ void liftarm1x2Thick_4177444(){
 
 //céla Jocelyn
 
-void cylinderBorders(){
+void cylinderBordersFace(){
 	glPushMatrix();
 		glTranslatef(0,0,0.449);
 		glPushMatrix();
@@ -549,6 +549,39 @@ void cylinderBorders(){
 			glScalef(1.40,0.1,0.1);
 			cube();
 		glPopMatrix();
+	glPopMatrix();
+}
+
+void cylinderBordersSide(){
+	glPushMatrix();
+		glTranslatef(0,0,0.449);
+		glPushMatrix();
+			glScalef(1.4,1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.35,0);
+			glScalef(1.60,0.1,0.1);
+			cube();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(0,-0.35,0);
+			glScalef(1.60,0.1,0.1);
+			cube();
+		glPopMatrix();
+		
 	glPopMatrix();
 }
 
@@ -594,20 +627,31 @@ void pinConnectorPerpendicular3LWith4Pins_6282158(){
 
 	glPushMatrix();
 		glTranslatef(-1,0,0);
-		cylinderBorders();
-		glTranslatef(0,0,-0.9);
-		cylinderBorders();
+		glPushMatrix();
+			cylinderBordersFace();
+			glTranslatef(0,0,-0.9);
+			cylinderBordersFace();
+		glPopMatrix();
+		glPushMatrix();
+			glRotatef(90,1,0,0);
+			cylinderBordersSide();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2.1,0.1,1);	
+			cube();
+		glPopMatrix();
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(0,1,0);
 		glPushMatrix();
 		glRotatef(90,0,0,1);
-		cylinderBorders();
+		cylinderBordersFace();
 		glPopMatrix();
 		glTranslatef(0,0,-0.9);
 		glPushMatrix();
 		glRotatef(90,0,0,1);
-		cylinderBorders();
+		cylinderBordersFace();
 		glPopMatrix();
 	glPopMatrix();
 }
