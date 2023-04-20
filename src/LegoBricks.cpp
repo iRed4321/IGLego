@@ -263,6 +263,7 @@ void liftarm1x2Thick_4177444(){
 	glPopMatrix();
 }
 
+
 void liftarmThick(int nBholes){
 	glPushMatrix();
 
@@ -274,14 +275,14 @@ void liftarmThick(int nBholes){
 			glPushMatrix();
 			glTranslatef(-0.5,0,0.45);
 			glPushMatrix();
-			glScalef(0.9,1,0.1);
+			glScalef(1,1,0.1);
 			cube();
 			glPopMatrix();
 
 			glTranslatef(0,0,-0.9);
 
 			glPushMatrix();
-			glScalef(0.9,1,0.1);
+			glScalef(1,1,0.1);
 			cube();
 			glPopMatrix();
 			glPopMatrix();
@@ -293,7 +294,7 @@ void liftarmThick(int nBholes){
 }
 
 
-/*
+
 void plate4x8_4509897(int ns, int nl){
 
 	glPushMatrix();
@@ -321,7 +322,6 @@ void plate4x8_4509897(int ns, int nl){
 	glPopMatrix();
 }
 
-*/
 void axle2Notched_4142865(){
 	glPushMatrix();
 	glScalef(1,2,1);
