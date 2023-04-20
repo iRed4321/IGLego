@@ -315,22 +315,25 @@ void mySolidCross(int withbase){
       glVertex3f(-largeurFace/2,hauteur/2,maxDist);
       glVertex3f(largeurFace/2,hauteur/2,maxDist);
 
-      glVertex3f(-maxDist,hauteur/2,largeurFace/2);
-      glVertex3f(-maxDist,hauteur/2,-largeurFace/2);
+      glNormal3f(0,1,0);
       glVertex3f(maxDist,hauteur/2,-largeurFace/2);
+      glVertex3f(-maxDist,hauteur/2,-largeurFace/2);
+      glVertex3f(-maxDist,hauteur/2,largeurFace/2);
       glVertex3f(maxDist,hauteur/2,largeurFace/2);
       
 
       glNormal3f(0,-1,0);
       glVertex3f(largeurFace/2,-hauteur/2,-maxDist);
-      glVertex3f(-largeurFace/2,-hauteur/2,-maxDist);
-      glVertex3f(-largeurFace/2,-hauteur/2,maxDist);
       glVertex3f(largeurFace/2,-hauteur/2,maxDist);
+      glVertex3f(-largeurFace/2,-hauteur/2,maxDist);
+      glVertex3f(-largeurFace/2,-hauteur/2,-maxDist);
 
-      glVertex3f(-maxDist,-hauteur/2,largeurFace/2);
-      glVertex3f(-maxDist,-hauteur/2,-largeurFace/2);
+
       glVertex3f(maxDist,-hauteur/2,-largeurFace/2);
       glVertex3f(maxDist,-hauteur/2,largeurFace/2);
+      glVertex3f(-maxDist,-hauteur/2,largeurFace/2);
+      glVertex3f(-maxDist,-hauteur/2,-largeurFace/2);
+
     }
     
 

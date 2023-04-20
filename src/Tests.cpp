@@ -85,11 +85,10 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    glScalef(0.5F,0.5F,0.5F);
-
-    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,rouge);
-
-    thickCross();
+    
+    glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
+    glScalef(1,1,1);
+    axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
     //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
     

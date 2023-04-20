@@ -391,11 +391,14 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 			cylinder(0.2);
 		glPopMatrix();
 		glTranslatef(0,0.5,0);
-		mySolidDisc(20);
+		glPushMatrix();
+		glScalef(1,0.05,1);
+		cylinder(1);
+		glPopMatrix();
 		glTranslatef(0,1,0);
 		glPushMatrix();
 			glScalef(0.8,2,0.8);
-			thickCross();
+			mySolidCross(1);
 		glPopMatrix();
 	glPopMatrix();
 
