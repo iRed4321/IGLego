@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -54,13 +53,13 @@ static void scene(void) {
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
 
-    //Si vous voilez voir un peu mieux, passez en fil de fer (barre espace) 
-    
+    //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
+    /*
     glPushMatrix();
     glTranslatef(0,-3,0);
     plate4x8_4509897(nbFacets,nbFacets);
     glPopMatrix();
-
+    */
     glTranslatef(-4.5,0,-3.5);
     technicLever3x3m90deg__6271810(nbFacets,nbFacets);
     glTranslatef(4, 0, 0);
