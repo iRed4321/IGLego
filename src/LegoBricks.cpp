@@ -117,36 +117,6 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 }
 
 
-void liftarmThick(int nBholes){
-	glPushMatrix();
-
-	for (int i = 0; i < nBholes; ++i)
-	{
-		cylinder(0.2);
-		if(i != 0){
-			glTranslatef(1,0,0);
-			glPushMatrix();
-			glTranslatef(-0.5,0,0.45);
-			glPushMatrix();
-			glScalef(1,1,0.1);
-			cube();
-			glPopMatrix();
-
-			glTranslatef(0,0,-0.9);
-
-			glPushMatrix();
-			glScalef(1,1,0.1);
-			cube();
-			glPopMatrix();
-			glPopMatrix();
-		}
-	}
-	cylinder(0.2);
-
-	glPopMatrix();
-}
-
-
 
 void plate4x8_4509897(int ns, int nl){
 

@@ -17,8 +17,6 @@
 // 6271165 Gray
 // 6177114 White
 
-void liftarmThick(int nBholes);
-
 //done
 void gear8ToothType2_6012451(int ns, int nl);
 // done 

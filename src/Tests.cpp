@@ -125,7 +125,6 @@ static void scene(void) {
     glTranslatef(3,0,0);
     axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
     glTranslatef(-4,2,0);
-    liftarmThick(5);
     
     axleConnectorSmoothWithXHoleOrientation_4512360();
     */
