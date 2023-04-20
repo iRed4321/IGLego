@@ -84,11 +84,11 @@ static void scene(void) {
     liftarmThick(5);
     classicBar(1.0,4,32,32);
     axleConnectorSmoothWithXHoleOrientation_4512360();
-   liftarm3x3TShapeThick_4552347();
-    */
+  liftarm3x3LShapeThin_6271810();
     liftarm3x5LShapeThick_6173003();
+    */
 
-
+   liftarm3x3TShapeThick_4552347();
 
 	glPopMatrix();
 }
