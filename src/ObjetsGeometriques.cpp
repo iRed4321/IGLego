@@ -205,7 +205,7 @@ void mySolidFace(){
 }
 
 
-void mySolidCross(int withbase=0){
+void mySolidCross(int withbase){
 
   float hauteur = 1.0F;
   float largeurFace = 0.5F/3.0F;
