@@ -3,7 +3,7 @@
 # For Linux
 REQUIRED_LIBS := -lGL -lGLU -lglut -lm -lstdc++
 SRC_DIR := src
-COMPILER := gcc
+COMPILER := g++
 INC_DIR := include
 INC_FLAGS := -I $(INC_DIR)
 

@@ -1,6 +1,9 @@
 #ifndef __LEGO_BRICKS__
 #define __LEGO_BRICKS__
 
+#include <string>
+#include <iostream>
+
 #include "ObjetsGeometriques.h"
 
 // Unused
@@ -14,7 +17,6 @@
 // 6271165 Gray
 // 6177114 White
 
-void classicBar(float thickness, int rings, int ns, int nl);
 void liftarmThick(int nBholes);
 
 //done
@@ -64,41 +66,47 @@ void gear12ToothDoubleBevel_4177431();
 //not done
 void gearWormScrew_6185471();
 //not done
-void liftarm1x2Thick_4177444();
-//not done
-void liftarm1x2ThickWithPinHoleAndAxleHole_6265135();
-//not done
-void liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
-//not done
-void liftarm1x3Thin_6331723();
-//not done
-void liftarm1x4Thin_6327548();
-//not done
-void liftarm1x4Thin_6364749();
-//not done
-void liftarm1x5Thick_4142135();
-//not done
-void liftarm1x5Thick_4249021();
-//not done
-void liftarm1x6Thin_6345239();
-//not done
-void liftarm1x7Thick_4495935();
-//not done
-void liftarm1x13Thick_6261643();
-//not done
-void liftarm1x115DoubleBentThick_6271156();
-//not done
-void liftarm2x4LShapeThick_6271825();
-//not done
-void liftarm3x3LShapeThin_6271810();
-//not done
-void liftarm3x3TShapeThick_4552347();
-//not done
-void liftarm3x5LShapeThick_6173003();
+
+// leo : 
+        void liftarm1x2Thick_4177444();
+        //not done
+        void liftarm1x2ThickWithPinHoleAndAxleHole_6265135();
+        //not done
+        void liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
+        //not done
+        void liftarm1x3Thin_6331723();
+        //not done
+        void liftarm1x4Thin_6327548();
+        //not done
+        void liftarm1x4Thin_6364749();
+        //not done
+        void liftarm1x5Thick_4142135();
+        //not done
+        void liftarm1x5Thick_4249021();
+        //not done
+        void liftarm1x6Thin_6345239();
+        //not done
+        void liftarm1x7Thick_4495935();
+        //not done
+        void liftarm1x13Thick_6261643();
+        //not done
+        void liftarm1x115DoubleBentThick_6271156();
+        //not done
+        void liftarm2x4LShapeThick_6271825();
+        //not done
+        void liftarm3x3LShapeThin_6271810();
+        //not done
+        void liftarm3x3TShapeThick_4552347();
+        //not done
+        void liftarm3x5LShapeThick_6173003();
+// ----------------
+
 //not done
 void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
 //not done
 void liftarm3X5PerpendicularHShapeThick_6055519();
+
+//---------Jocelyn----------
 //not done
 void pinConnectorPerpendicular3LWith4Pins_6282158();
 //not done
@@ -111,6 +119,8 @@ void pinWithoutFrictionRidgesLengthwise_4211807();
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
 //not done
 void pinWithFrictionRidgesLengthwise_4206482();
+//--------------------------
+
 // done
 void technicLever3x3m90deg__6271810(int ns, int nl);
 //not done

@@ -4,6 +4,8 @@
         "array": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "*.old": "cpp"
+        "*.old": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
     }
 }

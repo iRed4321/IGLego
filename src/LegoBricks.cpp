@@ -14,116 +14,6 @@
 #include "LegoBricks.h"
 #include "ObjetsGeometriques.h"
 
-//Jocelyn
-void classicBar(float thickness, int rings, int ns, int nl){
-    glPushMatrix();
-    glScalef(1, 1, thickness);
-    glTranslatef(0, 0, thickness/2);
-    glPushMatrix();
-    glTranslatef((float)rings/2, 0, 0);
-    mySolidRectangle(rings-1, ns);
-    glPopMatrix();
-    for(int i = 0; i < rings; i++){
-        glPushMatrix();
-        glTranslatef(rings+i, 0, 0);
-        mySolidCylindre(32,32);
-        glPopMatrix();
-    }
-    glPopMatrix();
-}
-
-
-void drawCircle(float x, float y, float radius, float thickness)
-{
-    // Define the number of vertices for the outer and inner circles
-    int numVerticesOuter = 60;
-    int numVerticesInner = 60;
-
-    // Calculate the angle between each vertex
-    float angle = 2 * M_PI / numVerticesOuter;
-
-    // Calculate the radius for the inner circle
-    float innerRadius = radius - thickness;
-
-	struct Position{
-		float x;
-		float y;
-	};
-
-	// list of vertices
-	Position verticiesOuter [numVerticesOuter];
-	Position verticiesInner [numVerticesInner];
-
-    // outer circle
-    for (int i = 0; i < numVerticesOuter; i++)
-    {
-        float theta = i * angle;
-        float vx = x + radius * cos(theta);
-        float vy = y + radius * sin(theta);
-        verticiesOuter[i].x = vx;
-		verticiesOuter[i].y = vy;
-    }
-
-    // inner circle
-    for (int i = 0; i < numVerticesInner; i++)
-    {
-        float theta = i * angle;
-        float vx = x + innerRadius * cos(theta);
-        float vy = y + innerRadius * sin(theta);
-        verticiesInner[i].x = vx;
-		verticiesInner[i].y = vy;
-    }
-
-	// draw the border with triangles
-	glBegin(GL_TRIANGLE_STRIP);
-
-	for (int i = 0; i < numVerticesInner; i++)
-	{
-		//set the normal for the outer circle
-		glNormal3f(0,0,-1);
-
-		//link the outer circle to the inner circle
-		glVertex3f(verticiesOuter[i].x, verticiesOuter[i].y, 0);
-		glVertex3f(verticiesInner[i].x, verticiesInner[i].y, 0);
-	}
-	glVertex2f(verticiesOuter[0].x, verticiesOuter[0].y);
-	glVertex2f(verticiesInner[0].x, verticiesInner[0].y);
-
-	glEnd();
-}
-
-
-void cylinder(float borderSize){
-	glPushMatrix();
-	mySolidCylindre(50, 50);
-
-	glPushMatrix();
-	glTranslatef(0,0.5,0);
-	glRotatef(90,1,0,0);
-	drawCircle(0,0,0.5,borderSize/2);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0,-0.5,0);
-	glRotatef(-90,1,0,0);
-	drawCircle(0,0,0.5,borderSize/2);
-	glPopMatrix();
-
-	glScalef(1, 1, 1 - borderSize);
-	mySolidCylindreInverted(50, 50);
-	glPopMatrix();
-}
-
-
-void cube(){
-    glPushMatrix();
-
-	glutSolidCube(1);
-
-    glPopMatrix();
-    
-}
-
 /*
 pièce en forme de :
 	
@@ -251,6 +141,7 @@ void liftarm1x2Thick_4177444(){
 	glPopMatrix();
 }
 
+
 void liftarmThick(int nBholes){
 	glPushMatrix();
 
@@ -262,14 +153,14 @@ void liftarmThick(int nBholes){
 			glPushMatrix();
 			glTranslatef(-0.5,0,0.45);
 			glPushMatrix();
-			glScalef(0.9,1,0.1);
+			glScalef(1,1,0.1);
 			cube();
 			glPopMatrix();
 
 			glTranslatef(0,0,-0.9);
 
 			glPushMatrix();
-			glScalef(0.9,1,0.1);
+			glScalef(1,1,0.1);
 			cube();
 			glPopMatrix();
 			glPopMatrix();
@@ -309,7 +200,7 @@ void plate4x8_4509897(int ns, int nl){
 	glPopMatrix();
 }
 
-
+*/
 void axle2Notched_4142865(){
 	glPushMatrix();
 	glScalef(1,2,1);
@@ -534,3 +425,18 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 
 	
 }
+
+//céla Jocelyn
+void pinConnectorPerpendicular3LWith4Pins_6282158(){
+	glPushMatrix();
+	cylinder(0.2);
+	glPushMatrix();
+	glTranslatef(2,0,0);
+	cylinder(0.2);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0,0,2);
+	cylinder(0.2);
+	glPopMatrix();
+}
+//pala Jocelyn
