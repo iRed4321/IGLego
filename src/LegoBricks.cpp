@@ -519,6 +519,48 @@ void liftarm1x2Thick_4177444(){
 	arm.draw();
 }
 
+void liftarm1x115DoubleBentThick_6271156(){
+	glPushMatrix();
+
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{5,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{6,0,0}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+
+	glTranslatef(6,0,0);
+	glRotatef(45,0,0,1);
+
+	m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, ArmHalfCylinder};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmHalfCylinder};
+	m[Pos3d{3,0,0}] = LegoPart{Back, ArmEnd};
+
+	arm = LiftArm(THICK, m);
+	arm.draw();
+
+	glTranslatef(3,0,0);
+	glRotatef(45,0,0,1);
+
+	m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	arm = LiftArm(THICK, m);
+	arm.draw();
+
+	glPopMatrix();
+}
+
 //céla Jocelyn
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();

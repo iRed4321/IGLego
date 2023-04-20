@@ -69,7 +69,7 @@ static void init(void) {
   glDepthFunc(GL_LESS);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_AUTO_NORMAL);
-  glEnable(GL_CULL_FACE);
+  // glEnable(GL_CULL_FACE);
 }
 
 
@@ -84,7 +84,7 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    glScalef(0.5F,0.5F,0.5F);
+    glScalef(0.3F,0.3F,0.3F);
 
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
 
@@ -126,7 +126,8 @@ static void scene(void) {
   // liftarm1x4Thin_6327548();
   // liftarm1x3Thin_6331723();
   // liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
-  liftarm1x2Thick_4177444();
+  // liftarm1x2Thick_4177444();
+  liftarm1x115DoubleBentThick_6271156();
 
 	glPopMatrix();
 }

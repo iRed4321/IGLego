@@ -30,6 +30,7 @@ void mySolidRectangle(int length, int n);
 void mySolidCylindre(int ns,int nl);
 
 void mySolidCylindreInverted(int ns,int nl);
+void mySolidCylindreInverted(int ns,int nl, float revolution);
 
 /* Modelisation geometrique d'un cylindre       */
 /* avec ou sans bases :                         */
@@ -42,6 +43,7 @@ void mySolidCylindreInverted(int ns,int nl);
 /*  - avec nl facettes en decomposition axiale  */
 /*  - avec bases si bases != 0                  */
 void mySolidCylindre(int ns,int nl,int bases);
+void mySolidCylindre(int ns,int nl, float revolution);
 
 /* Modelisation d'une croix */
 void mySolidCross(int withbase=0);
@@ -65,6 +67,8 @@ enum Thickness{
 };
 
 void cylinder(float radius);
+void cylinder(float radius, float revolution);
+
 void cube();
 
 enum Orientation{
@@ -85,7 +89,8 @@ enum PartKind{
     Cross,
     ArmWithCross,
     ArmEndWithCross,
-    ArmAngleWithCross
+    ArmAngleWithCross,
+    ArmHalfCylinder
 };
 
 struct LegoPart{
