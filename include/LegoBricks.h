@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
+#include "ObjetsGeometriques.h"
+
 // Unused
 // 6279875 Black
 // 6299413 Blue
@@ -174,7 +176,7 @@ void liftarmThick(int nBholes);
 void gear8ToothType2_6012451(int ns, int nl);
 // done 
 void liftarmThin1x2AxleHoles_4163533(int ns, int nl);
-//kinda done (needs correction)
+//kinda done 
 void plate4x8_4509897(int ns, int nl);
 // done 
 void axle2Notched_4142865();

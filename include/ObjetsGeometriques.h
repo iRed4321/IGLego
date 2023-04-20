@@ -1,6 +1,9 @@
 #ifndef __OBJETS_GEOMETRIQUES__
 #define __OBJETS_GEOMETRIQUES__
 
+//need to correct makefile so this works
+void mySolidDisc(int ns);
+
 /* Modelisation geometrique d'un cube :         */
 /*  - de côte ct                                */
 /*  - centre sur l'origine du repere            */
@@ -53,8 +56,6 @@ void mySolidGear(int nbTooth);
 void mySolidFace();
 
 void thickCross();
-//need to correct makefile so this works
-//void mySolidDisc(int ns);
 
 
 #endif

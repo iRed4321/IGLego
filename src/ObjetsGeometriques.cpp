@@ -1,11 +1,3 @@
-/* Objets geometriques modelises par facettes   */
-/*  - Cube                                      */
-/*  - Cylindre                                  */
-/*                                              */
-/* Auteur: Nicolas JANEY                        */
-/* nicolas.janey@univ-fcomte.fr                 */
-/* Fevrier 2023                                 */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -17,6 +9,19 @@
 #ifndef M_PI
 #define M_PI 3.14159
 #endif
+
+
+void mySolidDisc(int ns){
+
+  glBegin(GL_POLYGON);
+  float angle = 0;
+  float increment = 2*M_PI/ns;
+  for(int i = 0; i<ns; ++i){
+    glVertex3f(cos(angle),0,sin(angle));
+    angle+=increment;
+  }
+  glEnd();
+}
 
 static void face(float tx,float ty, int n,int m) {
   float dy = ty/m;

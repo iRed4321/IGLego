@@ -32,18 +32,6 @@ void classicBar(float thickness, int rings, int ns, int nl){
     glPopMatrix();
 }
 
-//this function should be in the ObjetsGeometriques file but makefile needs to be corrected for this to work
-static void mySolidDisc(int ns){
-
-  glBegin(GL_POLYGON);
-  float angle = 0;
-  float increment = 2*M_PI/ns;
-  for(int i = 0; i<ns; ++i){
-    glVertex3f(cos(angle),0,sin(angle));
-    angle+=increment;
-  }
-  glEnd();
-}
 
 void drawCircle(float x, float y, float radius, float thickness)
 {
