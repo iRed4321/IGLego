@@ -939,6 +939,11 @@ void LegoPart::draw(){
 	}
 
 	switch (kind){
+    case ArmWithCross:
+      glPushMatrix();
+    		glScalef(0.8,1,0.8);
+			  thickCross();
+      glPopMatrix();
 		case Arm:
 			cylinder(0.2);
 
@@ -958,6 +963,11 @@ void LegoPart::draw(){
 			glPopMatrix();
 			break;
 
+    case ArmEndWithCross:
+      glPushMatrix();
+    		glScalef(0.8,1,0.8);
+			  thickCross();
+      glPopMatrix();
 		case ArmEnd:
 			cylinder(0.2);
 
@@ -977,6 +987,11 @@ void LegoPart::draw(){
 			glPopMatrix();
 			break;
 
+    case ArmAngleWithCross:
+      glPushMatrix();
+    		glScalef(0.8,1,0.8);
+			  thickCross();
+      glPopMatrix();
     case ArmAngle:
     	cylinder(0.2);
 
@@ -1001,27 +1016,6 @@ void LegoPart::draw(){
         glScalef(1,1,0.1);
         cube();
 			glPopMatrix();
-			break;
-
-		case ArmWithCross:
-			cylinder(0.2);
-
-			glPushMatrix();
-				glTranslatef(0,0,0.45);
-				glPushMatrix();
-					glScalef(1,1,0.1);
-					cube();
-				glPopMatrix();
-
-				glTranslatef(0,0,-0.9);
-
-				glPushMatrix();
-					glScalef(1,1,0.1);
-					cube();
-				glPopMatrix();
-			glPopMatrix();
-			glScalef(0.8,1,0.8);
-			thickCross();
 			break;
 			
 		case Cross:

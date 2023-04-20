@@ -65,39 +65,39 @@ void drivingRingConnector_6276052();
 void gear12ToothDoubleBevel_4177431();
 //not done
 void gearWormScrew_6185471();
-//not done
 
 // leo : 
+        //done
         void liftarm1x2Thick_4177444();
-        //not done
+        //done
         void liftarm1x2ThickWithPinHoleAndAxleHole_6265135();
-        //not done
+        //done
         void liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
-        //not done
+        //done
         void liftarm1x3Thin_6331723();
-        //not done
+        //done
         void liftarm1x4Thin_6327548();
-        //not done
+        //done
         void liftarm1x4Thin_6364749();
-        //not done
+        //done
         void liftarm1x5Thick_4142135();
-        //not done
+        //done
         void liftarm1x5Thick_4249021();
-        //not done
+        //done
         void liftarm1x6Thin_6345239();
-        //not done
+        //done
         void liftarm1x7Thick_4495935();
-        //not done
+        //done
         void liftarm1x13Thick_6261643();
         //not done
         void liftarm1x115DoubleBentThick_6271156();
-        //not done
+        //done
         void liftarm2x4LShapeThick_6271825();
-        //not done
+        //done
         void liftarm3x3LShapeThin_6271810();
-        //not done
+        //done
         void liftarm3x3TShapeThick_4552347();
-        //not done
+        //done
         void liftarm3x5LShapeThick_6173003();
 // ----------------
 
