@@ -13,18 +13,6 @@
 #define M_PI 3.14159
 #endif
 
-#ifndef X
-#define X 0
-#endif
-
-#ifndef Y
-#define Y 1
-#endif
-
-#ifndef Z
-#define Z 2
-#endif
-
 void mySolidDisc(int ns){
 
   glNormal3f(0,-1,0);
@@ -38,6 +26,7 @@ void mySolidDisc(int ns){
   glEnd();
 }
 
+/*
 static void face(float tx,float ty, int n,int m) {
   float dy = ty/m;
   float dx = tx/n;
@@ -56,6 +45,7 @@ static void face(float tx,float ty, int n,int m) {
     glEnd(); }
   glPopMatrix();
 }
+*/
 
 static void face2(float tx,float ty, int n,int m){
   float dy = ty/m;

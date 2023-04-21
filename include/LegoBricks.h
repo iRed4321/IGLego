@@ -53,10 +53,9 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
 void axlePin3LWithFrictionRidgesLengthwise_6209519();
 //done
 void axlePinWithFrictionRidgesLengthwise_4206482();
-
-//not done Nathan
+//done
 void gear12ToothDoubleBevel_4177431();
-//not done Nathan
+//done
 void gearWormScrew_6185471();
 
 // leo : 

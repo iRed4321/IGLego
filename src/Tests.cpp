@@ -88,7 +88,7 @@ static void scene(void) {
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     glScalef(.7,.7,.7);
 
-    gearWormScrew_6185471();
+    //gearWormScrew_6185471();
 
     // glPushMatrix();
     //   glTranslatef(1,1.5,0);
