@@ -51,11 +51,12 @@ void axleConnectorSmoothWithXHoleOrientation_4512360();
 void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
 //done
 void axlePin3LWithFrictionRidgesLengthwise_6209519();
-//not done (nathan)
+//done
 void axlePinWithFrictionRidgesLengthwise_4206482();
-//not done
+
+//not done Nathan
 void gear12ToothDoubleBevel_4177431();
-//not done
+//not done Nathan
 void gearWormScrew_6185471();
 
 // leo : 
