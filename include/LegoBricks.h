@@ -47,9 +47,9 @@ void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
 void axleAndPinConnectorPerpendicular_6261373();
 //done
 void axleConnectorSmoothWithXHoleOrientation_4512360();
-//not done (nathan)
+//done
 void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
-//not done (nathan)
+//done
 void axlePin3LWithFrictionRidgesLengthwise_6209519();
 //not done (nathan)
 void axlePinWithFrictionRidgesLengthwise_4206482();

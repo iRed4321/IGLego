@@ -355,6 +355,7 @@ void axleConnectorSmoothWithXHoleOrientation_4512360(){
 }
 
 void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
+	//changer la couleur (noir)
 	glPushMatrix();
 		glPushMatrix();
 			glScalef(0.8,1,0.8);
@@ -362,7 +363,7 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 		glPopMatrix();
 		glTranslatef(0,0.5,0);
 		glPushMatrix();
-		glScalef(1,0.05,1);
+		glScalef(1,0.1,1);
 		cylinder(1);
 		glPopMatrix();
 		glTranslatef(0,1,0);
@@ -371,8 +372,6 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 			mySolidCross(1);
 		glPopMatrix();
 	glPopMatrix();
-
-	
 }
 
 void liftarm3x5LShapeThick_6173003(){
@@ -722,3 +721,44 @@ void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPopMatrix();
 }
 //pala Jocelyn
+
+
+void axlePin3LWithFrictionRidgesLengthwise_6209519(){
+	//changer la couleur (rouge)
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			mySolidCross(1);
+		glPopMatrix();
+		glTranslatef(0,0.5,0);
+		glPushMatrix();
+		glScalef(1,0.1,1);
+		cylinder(1);
+		glPopMatrix();
+		glTranslatef(0,1,0);
+		glPushMatrix();
+			glScalef(0.8,2,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void axlePinWithFrictionRidgesLengthwise_4206482(){
+	//changer la couleur (bleu foncé)
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			mySolidCross(1);
+		glPopMatrix();
+		glTranslatef(0,0.5,0);
+		glPushMatrix();
+		glScalef(1,0.1,1);
+		cylinder(1);
+		glPopMatrix();
+		glTranslatef(0,0.5,0);
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}
