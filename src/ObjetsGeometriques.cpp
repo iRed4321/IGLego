@@ -89,6 +89,10 @@ void mySolidRectangle(int length, int n) {
 }
 
 void mySolidCylindre(int ns,int nl) {
+  mySolidCylindre(ns,nl,360.0f);
+}
+
+void mySolidCylindre(int ns,int nl, float revolution) {
   double hauteur = 1;
   double rayon = 0.5;
   GLboolean nm = glIsEnabled(GL_NORMALIZE);
@@ -101,7 +105,7 @@ void mySolidCylindre(int ns,int nl) {
     float hi =(float) (hauteur/2-j*hauteur/nl);
     float hf =(float) (hi-hauteur/nl);
     glBegin(GL_QUAD_STRIP);
-    for( int i = 0 ; i <= ns ; i++ ) {
+    for( int i = 0 ; i <= ns / (360.0f / revolution); i++ ) {
       float a =(float) ((2*M_PI*i)/ns);
       float cs =(float) cos(a);
       float sn =(float) -sin(a);
@@ -118,6 +122,10 @@ void mySolidCylindre(int ns,int nl) {
 }
 
 void mySolidCylindreInverted(int ns,int nl) {
+  mySolidCylindreInverted(ns,nl,360.0f);
+}
+
+void mySolidCylindreInverted(int ns,int nl, float revolution) {
   double hauteur = 1;
   double rayon = 0.5;
   GLboolean nm = glIsEnabled(GL_NORMALIZE);
@@ -132,7 +140,7 @@ void mySolidCylindreInverted(int ns,int nl) {
     float hi =(float) (hauteur/2-j*hauteur/nl);
     float hf =(float) (hi-hauteur/nl);
     glBegin(GL_QUAD_STRIP);
-    for( int i = 0 ; i <= ns ; i++ ) {
+    for( int i = 0 ; i <= ns / (360.0f / revolution); i++ ) {
       float a =(float) ((2*M_PI*i)/ns);
       float cs =(float) cos(a);
       float sn =(float) -sin(a);
@@ -815,7 +823,7 @@ void mySolidGear(int nbTooth){
   glEnd();
 }
 
-void drawCircle(float x, float y, float radius, float thickness){
+void drawCircle(float radius, float thickness, float revolution){
     // Define the number of vertices for the outer and inner circles
     int numVerticesOuter = 60;
     int numVerticesInner = 60;
@@ -839,26 +847,27 @@ void drawCircle(float x, float y, float radius, float thickness){
     for (int i = 0; i < numVerticesOuter; i++)
     {
         float theta = i * angle;
-        float vx = x + radius * cos(theta);
-        float vy = y + radius * sin(theta);
+        float vx = radius * cos(theta);
+        float vy = radius * sin(theta);
         verticiesOuter[i].x = vx;
-		verticiesOuter[i].y = vy;
+		    verticiesOuter[i].y = vy;
     }
 
     // inner circle
     for (int i = 0; i < numVerticesInner; i++)
     {
         float theta = i * angle;
-        float vx = x + innerRadius * cos(theta);
-        float vy = y + innerRadius * sin(theta);
+        float vx = innerRadius * cos(theta);
+        float vy = innerRadius * sin(theta);
         verticiesInner[i].x = vx;
-		verticiesInner[i].y = vy;
+		    verticiesInner[i].y = vy;
     }
 
 	// draw the border with triangles
 	glBegin(GL_TRIANGLE_STRIP);
 
-	for (int i = 0; i < numVerticesInner; i++)
+  int i = 0;
+	for (i; i < numVerticesInner / (360 / revolution); i++)
 	{
 		//set the normal for the outer circle
 		glNormal3f(0,0,-1);
@@ -867,32 +876,47 @@ void drawCircle(float x, float y, float radius, float thickness){
 		glVertex3f(verticiesOuter[i].x, verticiesOuter[i].y, 0);
 		glVertex3f(verticiesInner[i].x, verticiesInner[i].y, 0);
 	}
-	glVertex2f(verticiesOuter[0].x, verticiesOuter[0].y);
-	glVertex2f(verticiesInner[0].x, verticiesInner[0].y);
+  if (i == numVerticesInner){
+    glVertex2f(verticiesOuter[0].x, verticiesOuter[0].y);
+    glVertex2f(verticiesInner[0].x, verticiesInner[0].y);
+  }
 
 	glEnd();
 }
 
 
+
+void cylinder(float borderSize, float revolution){
+	glPushMatrix();
+	mySolidCylindre(50, 50, revolution);
+
+
+  glPushMatrix();
+
+    glRotatef(revolution,0,1,0);
+
+    glPushMatrix();
+    glTranslatef(0,0.5,0);
+    glRotatef(90,1,0,0);
+    drawCircle(0.5,borderSize/2, revolution);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0,-0.5,0);
+    glRotatef(-90,1,0,0);
+    glRotatef(360 - revolution,0,0,1);
+    drawCircle(0.5,borderSize/2, revolution);
+    glPopMatrix();
+
+  glPopMatrix();
+
+	glScalef(1 - borderSize, 1, 1 - borderSize);
+	mySolidCylindreInverted(50, 50, revolution);
+	glPopMatrix();
+}
+
 void cylinder(float borderSize){
-	glPushMatrix();
-	mySolidCylindre(50, 50);
-
-	glPushMatrix();
-	glTranslatef(0,0.5,0);
-	glRotatef(90,1,0,0);
-	drawCircle(0,0,0.5,borderSize/2);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0,-0.5,0);
-	glRotatef(-90,1,0,0);
-	drawCircle(0,0,0.5,borderSize/2);
-	glPopMatrix();
-
-	glScalef(1, 1, 1 - borderSize);
-	mySolidCylindreInverted(50, 50);
-	glPopMatrix();
+  cylinder(borderSize, 360);
 }
 
 
@@ -943,10 +967,12 @@ void LegoPart::draw(){
 	glPushMatrix();
 	switch (orientation){
 		case Top:
-			glRotatef(90,1,0,0);
+			glRotatef(90,0,0,1);
+      glRotatef(90,0,1,0);
 			break;
 		case Bottom:
-			glRotatef(-90,1,0,0);
+			glRotatef(-90,0,0,1);
+      glRotatef(90,0,1,0);
 			break;
 		case Right:
 			glRotatef(90,0,1,0);
@@ -962,11 +988,30 @@ void LegoPart::draw(){
 	}
 
 	switch (kind){
+
+    case ArmEmpty:
+    	glPushMatrix();
+				glTranslatef(0,0,0.45);
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glTranslatef(0,0,-0.9);
+
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+
     case ArmWithCross:
       glPushMatrix();
     		glScalef(0.8,1,0.8);
 			  thickCross();
       glPopMatrix();
+
 		case Arm:
 			cylinder(0.2);
 
@@ -1044,6 +1089,28 @@ void LegoPart::draw(){
 		case Cross:
 			glScalef(0.85,1,0.85);
 			thickCross();
+			break;
+
+    case ArmHalfCylinder:
+      glPushMatrix();
+      glRotatef(90,0,1,0);
+    	cylinder(0.2, 180);
+      glPopMatrix();
+
+			glPushMatrix();
+				glTranslatef(0,0,0.45);
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+
+				glTranslatef(0,0,-0.9);
+
+				glPushMatrix();
+					glScalef(1,1,0.1);
+					cube();
+				glPopMatrix();
+			glPopMatrix();
 			break;
 	}
 

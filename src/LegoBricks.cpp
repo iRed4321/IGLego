@@ -117,36 +117,6 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 }
 
 
-void liftarmThick(int nBholes){
-	glPushMatrix();
-
-	for (int i = 0; i < nBholes; ++i)
-	{
-		cylinder(0.2);
-		if(i != 0){
-			glTranslatef(1,0,0);
-			glPushMatrix();
-			glTranslatef(-0.5,0,0.45);
-			glPushMatrix();
-			glScalef(1,1,0.1);
-			cube();
-			glPopMatrix();
-
-			glTranslatef(0,0,-0.9);
-
-			glPushMatrix();
-			glScalef(1,1,0.1);
-			cube();
-			glPopMatrix();
-			glPopMatrix();
-		}
-	}
-	cylinder(0.2);
-
-	glPopMatrix();
-}
-
-
 
 void plate4x8_4509897(int ns, int nl){
 
@@ -524,9 +494,100 @@ void liftarm1x2Thick_4177444(){
 	arm.draw();
 }
 
+void liftarm1x115DoubleBentThick_6271156(){
+	glPushMatrix();
+
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{5,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{6,0,0}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+
+	glTranslatef(6,0,0);
+	glRotatef(45,0,0,1);
+
+	m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, ArmHalfCylinder};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmHalfCylinder};
+	m[Pos3d{3,0,0}] = LegoPart{Back, ArmEnd};
+
+	arm = LiftArm(THICK, m);
+	arm.draw();
+
+	glTranslatef(3,0,0);
+	glRotatef(45,0,0,1);
+
+	m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	arm = LiftArm(THICK, m);
+	arm.draw();
+
+	glPopMatrix();
+}
+
+void liftarm3X5PerpendicularHShapeThick_6055519(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEnd};
+
+	m[Pos3d{1,0,1}] = LegoPart{Top, Arm};
+	m[Pos3d{1,0,2}] = LegoPart{Top, Arm};
+	m[Pos3d{1,0,3}] = LegoPart{Top, Arm};
+
+	m[Pos3d{0,0,4}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,4}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,4}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+	arm.draw();
+}
+
+void liftarm3x5LShapeWithQuarterEllipseThin_6327162(){
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngleWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEndWithCross};
+
+	LiftArm arm = LiftArm(THIN, m);
+	arm.draw();
+
+	glTranslatef(4,0,0);
+	glRotatef(205, 0,0,1);
+	glScalef(1,0.5,1);
+
+	m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{1,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{2,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{3,0,0}] = LegoPart{Front, ArmEmpty};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEmpty};
+
+	arm = LiftArm(THIN, m);
+	arm.draw();
+}
+
 //céla Jocelyn
 
-void cylinderBorders(){
+void cylinderBordersFace(){
 	glPushMatrix();
 		glTranslatef(0,0,0.449);
 		glPushMatrix();
@@ -554,6 +615,39 @@ void cylinderBorders(){
 			glScalef(1.40,0.1,0.1);
 			cube();
 		glPopMatrix();
+	glPopMatrix();
+}
+
+void cylinderBordersSide(){
+	glPushMatrix();
+		glTranslatef(0,0,0.449);
+		glPushMatrix();
+			glScalef(1.4,1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.35,0);
+			glScalef(1.60,0.1,0.1);
+			cube();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(2,0.1,0.1);
+			cube();
+		glPopMatrix();
+		
+		glPushMatrix();
+			glTranslatef(0,-0.35,0);
+			glScalef(1.60,0.1,0.1);
+			cube();
+		glPopMatrix();
+		
 	glPopMatrix();
 }
 
@@ -599,20 +693,31 @@ void pinConnectorPerpendicular3LWith4Pins_6282158(){
 
 	glPushMatrix();
 		glTranslatef(-1,0,0);
-		cylinderBorders();
-		glTranslatef(0,0,-0.9);
-		cylinderBorders();
+		glPushMatrix();
+			cylinderBordersFace();
+			glTranslatef(0,0,-0.9);
+			cylinderBordersFace();
+		glPopMatrix();
+		glPushMatrix();
+			glRotatef(90,1,0,0);
+			cylinderBordersSide();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(2.1,0.1,1);	
+			cube();
+		glPopMatrix();
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(0,1,0);
 		glPushMatrix();
 		glRotatef(90,0,0,1);
-		cylinderBorders();
+		cylinderBordersFace();
 		glPopMatrix();
 		glTranslatef(0,0,-0.9);
 		glPushMatrix();
 		glRotatef(90,0,0,1);
-		cylinderBorders();
+		cylinderBordersFace();
 		glPopMatrix();
 	glPopMatrix();
 }

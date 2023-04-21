@@ -70,7 +70,7 @@ static void init(void) {
   glDepthFunc(GL_LESS);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_AUTO_NORMAL);
-  glEnable(GL_CULL_FACE);
+  // glEnable(GL_CULL_FACE);
 }
 
 
@@ -85,11 +85,18 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    
+    //glScalef(0.5F,0.5F,0.5F);
+    glScalef(0.3F,0.3F,0.3F);
+
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     glScalef(1,1,1);
     //axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
     thickCross();
+
+    // liftarm3X5PerpendicularHShapeThick_6055519();
+    liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+
+    // axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
     //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
     
@@ -124,7 +131,6 @@ static void scene(void) {
     glTranslatef(3,0,0);
     axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
     glTranslatef(-4,2,0);
-    liftarmThick(5);
     
     axleConnectorSmoothWithXHoleOrientation_4512360();
     */
