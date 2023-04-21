@@ -50,7 +50,7 @@ void mySolidCross(int withbase=0);
 
 /* Modelisation d'une roue crantée 				*/
 /* les dents commencent à une distance de 0.5 du centre */
-/* et terminent à une distance 1.5 du centre 	*/
+/* et terminent à une distance 1 du centre 	    */
 void mySolidGear(int nbTooth);
 
 /* Modelisation geometrique d'un rectangle      */
@@ -59,7 +59,13 @@ void mySolidGear(int nbTooth);
 /*  - de hauteur 1                              */
 void mySolidFace();
 
+/* Modelisation d'une croix avec une épaisseur  */
+/* croix intérieur de diamètre 1                */
 void thickCross();
+
+/* Modelisation d'un cylindre de diamètre 1     */
+/* avec des bitoniaux qui dépassent de chaque coté */
+void thickSpiral3d(int nbSpires);
 
 enum Thickness{
     THICK,

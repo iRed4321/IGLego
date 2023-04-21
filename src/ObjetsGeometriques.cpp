@@ -7,9 +7,22 @@
 #include <GL/glu.h>
 
 #include "ObjetsGeometriques.h"
+#include "coords.h"
 
 #ifndef M_PI
 #define M_PI 3.14159
+#endif
+
+#ifndef X
+#define X 0
+#endif
+
+#ifndef Y
+#define Y 1
+#endif
+
+#ifndef Z
+#define Z 2
 #endif
 
 void mySolidDisc(int ns){
@@ -106,7 +119,6 @@ void mySolidCube(int n) {
 }
 
 void mySolidRectangle(int length, int n) {
-  double ct = 1;
   glPushMatrix();
   glScalef((float) length,1.0F,1.0F);
   mySolidCube(n);
@@ -390,12 +402,6 @@ void thickCross(){
   float normale[4];
   glGetFloatv(GL_CURRENT_NORMAL,normale);
   glPushMatrix();
-
-  /*
-  glFrontFace(GL_CW);
-  mySolidCross(); //problème de coloration de la partie intérieur de la cross
-  glFrontFace(GL_CCW);
-  */
   
   glBegin(GL_QUADS);
     
@@ -912,7 +918,7 @@ void drawCircle(float radius, float thickness, float revolution){
 	glBegin(GL_TRIANGLE_STRIP);
 
   int i = 0;
-	for (i; i < numVerticesInner / (360 / revolution); i++)
+	for (; i < numVerticesInner / (360 / revolution); i++)
 	{
 		//set the normal for the outer circle
 		glNormal3f(0,0,-1);
@@ -1160,4 +1166,70 @@ void LegoPart::draw(){
 	}
 
 	glPopMatrix();
+}
+
+void thickSpiral3d(int nbSpires){
+  GLboolean nm = glIsEnabled(GL_NORMALIZE);
+
+  if ( !nm )
+    glEnable(GL_NORMALIZE);
+  float normale[4];
+  glGetFloatv(GL_CURRENT_NORMAL,normale);
+
+  float thickness = 0.05;
+  int ptsPerSpire = 50;
+  int nbPts = nbSpires*ptsPerSpire;
+  float incr = 2*M_PI/ptsPerSpire;
+  float dy = 1.0F/nbPts;
+  
+  float angle = 0;
+  float y = 0;
+  float nextAngle = incr;
+
+  Pos3D pos(cos(angle)*0.5,0,sin(angle)*0.5);
+  Pos3D nextPos(cos(nextAngle),dy,sin(nextAngle));
+    
+    glBegin(GL_TRIANGLES);
+
+      glVertex3f(pos.x,pos.y,pos.z);
+      glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+      glVertex3f(cos(nextAngle)*0.5,nextPos.y+thickness,sin(nextAngle)*0.5);
+
+      glVertex3f(pos.x,pos.y,pos.z);
+      glVertex3f(cos(nextAngle)*0.5,nextPos.y-thickness,sin(nextAngle)*0.5);
+      glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    for(int i = 0; i < nbPts-2; ++i){
+      pos.x = nextPos.x;
+      pos.y = nextPos.y;
+      pos.z = nextPos.z;
+      angle = nextAngle;
+      nextAngle+=incr;
+      y+=dy;
+      nextPos.x= cos(nextAngle);
+      nextPos.y= y;
+      nextPos.z= sin(nextAngle);
+
+      glVertex3f(pos.x,pos.y,pos.z);
+      glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+      glVertex3f(nextPos.x*0.5,nextPos.y+thickness,nextPos.z*0.5);
+      glVertex3f(pos.x*0.5,pos.y+thickness,pos.z*0.5);
+
+      
+      
+      glVertex3f(pos.x,pos.y,pos.z);
+      glVertex3f(pos.x*0.5,pos.y+thickness,pos.z*0.5);
+      glVertex3f(nextPos.x*0.5,nextPos.y+thickness,nextPos.z*0.5);
+      glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+
+    }
+    glEnd();
+
+  
+  glPopMatrix();
+  glNormal3f(normale[0],normale[1],normale[2]);
+  if ( !nm )
+    glDisable(GL_NORMALIZE);
 }
