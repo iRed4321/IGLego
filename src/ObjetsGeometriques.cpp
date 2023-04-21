@@ -1170,37 +1170,48 @@ void LegoPart::draw(){
 
 void thickSpiral3d(int nbSpires){
   GLboolean nm = glIsEnabled(GL_NORMALIZE);
-
   if ( !nm )
     glEnable(GL_NORMALIZE);
   float normale[4];
   glGetFloatv(GL_CURRENT_NORMAL,normale);
 
-  float thickness = 0.05;
+
+  float thickness = 1.0/(3*nbSpires);
   int ptsPerSpire = 50;
   int nbPts = nbSpires*ptsPerSpire;
   float incr = 2*M_PI/ptsPerSpire;
   float dy = 1.0F/nbPts;
   
   float angle = 0;
-  float y = 0;
+  float y = -0.5;
   float nextAngle = incr;
 
-  Pos3D pos(cos(angle)*0.5,0,sin(angle)*0.5);
-  Pos3D nextPos(cos(nextAngle),dy,sin(nextAngle));
-    
-    glBegin(GL_TRIANGLES);
+  Pos3D pos(cos(angle)*0.5,y,sin(angle)*0.5);
+  Pos3D nextPos(cos(nextAngle),y+dy,sin(nextAngle));
 
-      glVertex3f(pos.x,pos.y,pos.z);
-      glVertex3f(nextPos.x,nextPos.y,nextPos.z);
-      glVertex3f(cos(nextAngle)*0.5,nextPos.y+thickness,sin(nextAngle)*0.5);
-
-      glVertex3f(pos.x,pos.y,pos.z);
-      glVertex3f(cos(nextAngle)*0.5,nextPos.y-thickness,sin(nextAngle)*0.5);
-      glVertex3f(nextPos.x,nextPos.y,nextPos.z);
-    glEnd();
+  glBegin(GL_TRIANGLES);
     
-    glBegin(GL_QUADS);
+    Dir3D commonVec0(pos.x,pos.y,pos.z,nextPos.x,nextPos.y,nextPos.z);
+      
+    Dir3D upperVec0(pos.x,pos.y,pos.z,nextPos.x*0.5,pos.y+thickness,nextPos.z*0.5);
+    Dir3D upperNormal0 = upperVec0^commonVec0;
+    glNormal3f(upperNormal0.x,upperNormal0.y,upperNormal0.z);
+
+    glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+    glVertex3f(pos.x,pos.y,pos.z);
+    glVertex3f(nextPos.x*0.5,nextPos.y+thickness,nextPos.z*0.5);
+    
+    Dir3D downerVec0(pos.x,pos.y,pos.z,nextPos.x*0.5,pos.y-thickness,nextPos.z*0.5);
+    Dir3D downerNormal0 = commonVec0^downerVec0;
+    glNormal3f(downerNormal0.x,downerNormal0.y,downerNormal0.z);
+
+    glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+    glVertex3f(nextPos.x*0.5,nextPos.y-thickness,nextPos.z*0.5);
+    glVertex3f(pos.x,pos.y,pos.z);
+    
+  glEnd();
+
+  glBegin(GL_QUADS);
     for(int i = 0; i < nbPts-2; ++i){
       pos.x = nextPos.x;
       pos.y = nextPos.y;
@@ -1211,25 +1222,60 @@ void thickSpiral3d(int nbSpires){
       nextPos.x= cos(nextAngle);
       nextPos.y= y;
       nextPos.z= sin(nextAngle);
-
+      
+      Dir3D commonVec(pos.x,pos.y,pos.z,nextPos.x,nextPos.y,nextPos.z);
+      
+      Dir3D upperVec(pos.x,pos.y,pos.z,pos.x*0.5,pos.y+thickness,pos.z*0.5);
+      Dir3D upperNormal = upperVec^commonVec;
+      glNormal3f(upperNormal.x,upperNormal.y,upperNormal.z);
       glVertex3f(pos.x,pos.y,pos.z);
       glVertex3f(nextPos.x,nextPos.y,nextPos.z);
       glVertex3f(nextPos.x*0.5,nextPos.y+thickness,nextPos.z*0.5);
       glVertex3f(pos.x*0.5,pos.y+thickness,pos.z*0.5);
-
       
-      
+      Dir3D downerVec(pos.x,pos.y,pos.z,pos.x*0.5,pos.y-thickness,pos.z*0.5);
+      Dir3D downerNormal = commonVec^downerVec;
+      glNormal3f(downerNormal.x,downerNormal.y,downerNormal.z);
       glVertex3f(pos.x,pos.y,pos.z);
-      glVertex3f(pos.x*0.5,pos.y+thickness,pos.z*0.5);
-      glVertex3f(nextPos.x*0.5,nextPos.y+thickness,nextPos.z*0.5);
+      glVertex3f(pos.x*0.5,pos.y-thickness,pos.z*0.5);
+      glVertex3f(nextPos.x*0.5,nextPos.y-thickness,nextPos.z*0.5);
       glVertex3f(nextPos.x,nextPos.y,nextPos.z);
-
+      
     }
-    glEnd();
-
+  glEnd();
   
-  glPopMatrix();
+  pos.x = nextPos.x;
+  pos.y = nextPos.y;
+  pos.z = nextPos.z;
+  angle = nextAngle;
+  nextAngle+=incr;
+  nextPos.x= cos(nextAngle)*0.5;
+  nextPos.y= y;
+  nextPos.z= sin(nextAngle*0.5);    
+
+  glBegin(GL_TRIANGLES);
+    
+    Dir3D commonVec1(pos.x,pos.y,pos.z,nextPos.x,nextPos.y,nextPos.z);
+      
+    Dir3D upperVec1(pos.x,pos.y,pos.z,pos.x*0.5,pos.y+thickness,pos.z*0.5);
+    Dir3D upperNormal1 = upperVec1^commonVec1;
+    glNormal3f(upperNormal1.x,upperNormal1.y,upperNormal1.z);
+
+    glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+    glVertex3f(pos.x,pos.y,pos.z);
+    glVertex3f(pos.x*0.5,pos.y+thickness,pos.z*0.5);
+
+    Dir3D downerVec1(pos.x,pos.y,pos.z,pos.x*0.5,pos.y-thickness,pos.z*0.5);
+    Dir3D downerNormal1 = commonVec1^downerVec1;
+    glNormal3f(downerNormal1.x,downerNormal1.y,downerNormal1.z);
+
+    glVertex3f(nextPos.x,nextPos.y,nextPos.z);
+    glVertex3f(pos.x*0.5,pos.y-thickness,pos.z*0.5);
+    glVertex3f(pos.x,pos.y,pos.z);
+  glEnd();
+  
   glNormal3f(normale[0],normale[1],normale[2]);
   if ( !nm )
     glDisable(GL_NORMALIZE);
+  
 }

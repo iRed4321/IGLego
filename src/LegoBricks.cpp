@@ -857,3 +857,16 @@ void gear12ToothDoubleBevel_4177431(){
 	glPopMatrix();
 
 }
+
+void gearWormScrew_6185471(){
+	glPushMatrix();
+		glScalef(1,2,1);
+		cylinder(0.2);
+		glPushMatrix();
+			glScalef(1,0.9,1);
+			thickSpiral3d(5);
+		glPopMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
+}
