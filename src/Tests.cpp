@@ -88,7 +88,8 @@ static void scene(void) {
     
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     glScalef(1,1,1);
-    axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
+    //axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
+    thickCross();
     //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
     //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
     
