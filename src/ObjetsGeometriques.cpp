@@ -960,9 +960,10 @@ void cylinder(float borderSize, float revolution){
     glPopMatrix();
 
   glPopMatrix();
-
-	glScalef(1 - borderSize, 1, 1 - borderSize);
-	mySolidCylindreInverted(50, 50, revolution);
+  if(borderSize > 0 && borderSize < 1){
+    glScalef(1 - borderSize, 1, 1 - borderSize);
+	  mySolidCylindreInverted(50, 50, revolution);
+  }
 	glPopMatrix();
 }
 

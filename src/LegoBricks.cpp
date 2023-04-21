@@ -726,38 +726,123 @@ void pinConnectorPerpendicular3LWith4Pins_6282158(){
 				cylinder(0.2);
 			glPopMatrix();
 		glPopMatrix();
-	glPopMatrix();
 
-	glPushMatrix();
-		glTranslatef(-1,0,0);
 		glPushMatrix();
-			cylinderBordersFace();
+			glTranslatef(-1,0,0);
+			glPushMatrix();
+				cylinderBordersFace();
+				glTranslatef(0,0,-0.9);
+				cylinderBordersFace();
+			glPopMatrix();
+			glPushMatrix();
+				glRotatef(90,1,0,0);
+				cylinderBordersSide();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,0.45,0);
+				glScalef(2.1,0.1,1);	
+				cube();
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,1,0);
+			glPushMatrix();
+				glRotatef(90,0,0,1);
+				cylinderBordersFace();
+			glPopMatrix();
+			glPushMatrix();
+				glRotatef(90,0,1,0);
+				glRotatef(90,0,0,1);
+				cylinderBordersSide();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-0.45,0,0);
+				glRotatef(90,0,0,1);
+				glScalef(2.1,0.1,1);	
+				cube();
+			glPopMatrix();
 			glTranslatef(0,0,-0.9);
-			cylinderBordersFace();
-		glPopMatrix();
-		glPushMatrix();
-			glRotatef(90,1,0,0);
-			cylinderBordersSide();
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0,0.45,0);
-			glScalef(2.1,0.1,1);	
-			cube();
-		glPopMatrix();
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(0,1,0);
-		glPushMatrix();
-		glRotatef(90,0,0,1);
-		cylinderBordersFace();
-		glPopMatrix();
-		glTranslatef(0,0,-0.9);
-		glPushMatrix();
-		glRotatef(90,0,0,1);
-		cylinderBordersFace();
+			glPushMatrix();
+				glRotatef(90,0,0,1);
+				cylinderBordersFace();
+			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
 }
+
+void pinLongWithFrictionRidgesLengthwise_6299413(){
+	//blue
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,2,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.3,0);
+			glScalef(1,0.1,1);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}	
+
+void pinLongWithoutFrictionRidgesLengthwise_6321305(){
+	//yellow
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,2,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.3,0);
+			glScalef(1,0.1,1);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void pinWithoutFrictionRidgesLengthwise_4211807(){
+	//gray
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1.5,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glScalef(1,0.1,1);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void pinWithFrictionRidgesLengthwise_4206482(){
+	//blue
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(1,0.1,1);
+			cylinder(1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.35,0);
+			glScalef(0.8,0.8,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.375,0);
+			glScalef(0.8,0.75,0.8);
+			mySolidCross(1);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void bush_6275844(){
+	//gray
+}
+
+void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
+	//black
+	//la jumelle de sous marin
+}
+
 //pala Jocelyn
 
 
