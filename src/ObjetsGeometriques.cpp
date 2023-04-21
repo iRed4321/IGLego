@@ -14,9 +14,10 @@
 
 void mySolidDisc(int ns){
 
+  glNormal3f(0,-1,0);
   glBegin(GL_POLYGON);
   float angle = 0;
-  float increment = 2*M_PI/ns;
+  float increment = -2*M_PI/ns;
   for(int i = 0; i<ns; ++i){
     glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
     angle+=increment;
@@ -43,6 +44,30 @@ static void face(float tx,float ty, int n,int m) {
   glPopMatrix();
 }
 
+static void face2(float tx,float ty, int n,int m){
+  float dy = ty/m;
+  float dx = tx/n;
+  glPushMatrix();
+  glNormal3f(0.0F,0.0F,1.0F);
+  glTranslatef(-tx/2.0F,-ty/2.0F,0.0F);
+  glBegin(GL_QUADS);
+  float x = 0.0F;
+  float y = 0.0F;
+  for ( int i = 0 ; i < m ; i++) {
+    x=0.0F;
+    for ( int j = 0 ; j < n ; j++ ) {
+      glVertex3f(x,y,0);
+      glVertex3f(x+dx,y,0);
+      glVertex3f(x+dx,y+dy,0);
+      glVertex3f(x,y+dy,0);
+      x+=dx;
+    }
+    y+=dy;
+  }
+  glEnd();
+  glPopMatrix();
+}
+
 
 
 void mySolidCube(int n) {
@@ -50,32 +75,32 @@ void mySolidCube(int n) {
   glPushMatrix();
   glPushMatrix();
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face((float) ct,(float) ct,n,n);
+  face2((float) ct,(float) ct,n,n);
   glPopMatrix();
   glPushMatrix();
   glRotatef(90.0F,0.0F,1.0F,0.0f);
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face((float) ct,(float) ct,n,n);
+  face2((float) ct,(float) ct,n,n);
   glPopMatrix();
   glPushMatrix();
   glRotatef(180.0F,0.0F,1.0F,0.0f);
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face((float) ct,(float) ct,n,n);
+  face2((float) ct,(float) ct,n,n);
   glPopMatrix();
   glPushMatrix();
   glRotatef(270.0F,0.0F,1.0F,0.0f);
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face((float) ct,(float) ct,n,n);
+  face2((float) ct,(float) ct,n,n);
   glPopMatrix();
   glPushMatrix();
   glRotatef(90.0F,1.0F,0.0F,0.0f);
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face((float) ct,(float) ct,n,n);
+  face2((float) ct,(float) ct,n,n);
   glPopMatrix();
   glPushMatrix();
   glRotatef(-90.0F,1.0F,0.0F,0.0f);
   glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face((float) ct,(float) ct,n,n);
+  face2((float) ct,(float) ct,n,n);
   glPopMatrix();
   glPopMatrix();
 }
@@ -740,82 +765,102 @@ void thickCross(){
 }
 
 void mySolidGear(int nbTooth){
+  cylinder(0.2);
   float increment = -M_PI/(float)nbTooth;
+  float partialIncr = increment/3;
   float angle = 0.0F;
   float x,z;
-  glBegin(GL_QUAD_STRIP);
+  glBegin(GL_QUADS);
   for(int i = 0; i < nbTooth;++i){
     
     x = cos(angle)*1;
     z = sin(angle)*1;
-    glNormal3f(x,0,z);
+    glNormal3f(cos(angle+partialIncr/2),0,sin(angle+partialIncr/2));
+    glVertex3f(x,0.5,z);
+    glVertex3f(x,-0.5,z);
+    angle+=partialIncr;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
+    glVertex3f(x,-0.5,z);
+    glVertex3f(x,0.5,z);
+
+    glNormal3f(-cos(angle+M_PI/2-partialIncr/2),0,-sin(angle+M_PI/2-partialIncr/2));
+    glVertex3f(x,-0.5,z);
+    glVertex3f(x,0.5,z);
+    angle+=partialIncr;
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
     glVertex3f(x,0.5,z);
     glVertex3f(x,-0.5,z);
 
+    glNormal3f(cos(angle+partialIncr/2),0,sin(angle+partialIncr/2));
+    glVertex3f(x,0.5,z);
+    glVertex3f(x,-0.5,z);
     angle+=increment;
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
+    glVertex3f(x,-0.5,z);
+    glVertex3f(x,0.5,z);
+
+    glNormal3f(-cos(angle-M_PI/2+partialIncr/2),0,-sin(angle-M_PI/2+partialIncr/2));
+    glVertex3f(x,-0.5,z);
+    glVertex3f(x,0.5,z);
+    angle+=partialIncr;
     x = cos(angle)*1;
     z = sin(angle)*1;
     glVertex3f(x,0.5,z);
     glVertex3f(x,-0.5,z);
-
-    x = cos(angle)*0.5;
-    z = sin(angle)*0.5;
-    glVertex3f(x,0.5,z);
-    glVertex3f(x,-0.5,z);
-
-    angle+=increment;
-    x = cos(angle)*0.5;
-    z = sin(angle)*0.5;
-    glVertex3f(x,0.5,z);
-    glVertex3f(x,-0.5,z);
   }
-  x = cos(angle)*1;
-  z = sin(angle)*1;
-  glVertex3f(x,0.5,z);
-  glVertex3f(x,-0.5,z);
+  
   glEnd();
 
   
   
   glBegin(GL_QUADS);
-  angle = 0;
+  angle = -partialIncr;
   for(int i = 0; i < nbTooth;++i){
+    glNormal3f(0,1,0);
     x = cos(angle)*0.5;
     z = sin(angle)*0.5;
     glVertex3f(x,0.5,z);
-    
+
+    angle+=partialIncr;
     x = cos(angle)*1;
     z = sin(angle)*1;
     glVertex3f(x,0.5,z);
 
-    angle+=increment;
+    angle+=partialIncr;
     x = cos(angle)*1;
     z = sin(angle)*1;
     glVertex3f(x,0.5,z);
 
+    angle+=partialIncr;
     x = cos(angle)*0.5;
     z = sin(angle)*0.5;
     glVertex3f(x,0.5,z);
 
     angle+=increment;
   }
-  angle = 0;
+  angle=-partialIncr;
   for(int i = 0; i < nbTooth;++i){
-    x = cos(angle)*1;
-    z = sin(angle)*1;
-    glVertex3f(x,-0.5,z);
-    
+    glNormal3f(0,-1,0);
     x = cos(angle)*0.5;
     z = sin(angle)*0.5;
     glVertex3f(x,-0.5,z);
 
-    angle+=increment;
-    x = cos(angle)*0.5;
-    z = sin(angle)*0.5;
-    glVertex3f(x,-0.5,z);
-
+    angle+=partialIncr;
     x = cos(angle)*1;
     z = sin(angle)*1;
+    glVertex3f(x,-0.5,z);
+
+    angle+=partialIncr;
+    x = cos(angle)*1;
+    z = sin(angle)*1;
+    glVertex3f(x,-0.5,z);
+
+    angle+=partialIncr;
+    x = cos(angle)*0.5;
+    z = sin(angle)*0.5;
     glVertex3f(x,-0.5,z);
 
     angle+=increment;
@@ -922,7 +967,7 @@ void cylinder(float borderSize){
 
 void cube(){
   glPushMatrix();
-	glutSolidCube(1);
+	mySolidCube(5);
   glPopMatrix();  
 }
 

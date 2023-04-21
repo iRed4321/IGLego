@@ -18,7 +18,7 @@
 // 6177114 White
 
 //done
-void gear8ToothType2_6012451(int ns, int nl);
+void gear8ToothType2_6012451();
 // done 
 void liftarmThin1x2AxleHoles_4163533(int ns, int nl);
 //kinda done 

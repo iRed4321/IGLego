@@ -57,7 +57,10 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	glPopMatrix();
 
 	glPushMatrix();
-	mySolidCross();
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
 	//mySolidCylindre(ns,nl);
 	cylinder(0.2);
 	glTranslatef(1,0,0);
@@ -66,7 +69,10 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	glTranslatef(1,0,0);
 	//mySolidCylindre(ns,nl);
 	cylinder(0.2);
-	mySolidCross();
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -74,7 +80,10 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	//mySolidCylindre(ns,nl);
 	cylinder(0.2);
 	glTranslatef(0,0,1);
-	mySolidCross();
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
 	//mySolidCylindre(ns,nl);
 	cylinder(0.2);
 	glPopMatrix();
@@ -84,11 +93,15 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 }
 
 
-void gear8ToothType2_6012451(int ns, int nl){
+void gear8ToothType2_6012451(){
 	glPushMatrix();
-	mySolidCross();
-	glScalef(1,0.8,1);
-	mySolidGear(8);
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
+	
+	glPushMatrix();
+		glScalef(1,0.8,1);
+		mySolidGear(8);
 	glPopMatrix();
 }
 
@@ -96,11 +109,17 @@ void gear8ToothType2_6012451(int ns, int nl){
 void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 	glPushMatrix();
 	glScalef(1,0.5,1);
-	mySolidCross();
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
 	//mySolidCylindre(ns, nl);
 	cylinder(0.2);
 	glTranslatef(1,0,0);
-	mySolidCross();
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
 	//mySolidCylindre(ns, nl);
 	cylinder(0.2);
 	glPushMatrix();
@@ -133,7 +152,6 @@ void plate4x8_4509897(int ns, int nl){
 			glPushMatrix();
 			glTranslatef(i,0,j);
 			glScalef(0.9,1,0.9);
-			//mySolidCylindre(ns,nl);
 			cylinder(0.2);
 			glTranslatef(0,0.5,0); 
 			glRotatef(180,1,0,0);
@@ -147,82 +165,92 @@ void plate4x8_4509897(int ns, int nl){
 
 void axle2Notched_4142865(){
 	glPushMatrix();
-	glScalef(1,2,1);
+	glScalef(0.8,2,0.8);
 	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle3_4211815(){
 	glPushMatrix();
-	glScalef(1,3,1);
+	glScalef(0.8,3,0.8);
 	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle4_370526(){
 	glPushMatrix();
-	glScalef(1,4,1);
+	glScalef(0.8,4,0.8);
 	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle4WithCenterStop_4666999(){
 	glPushMatrix();
-	glScalef(1,4,1);
-	mySolidCross(1);
+		glScalef(0.8,4,0.8);
+		mySolidCross(1);
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0,-1,0);
-	//mySolidCylindre(50,10);
-	cylinder(1);
+		glTranslatef(0,-1,0);
+		//mySolidCylindre(50,10);
+		cylinder(1);
 	glPopMatrix();
 }
 
 
 void axle5WithStop_6159763(){
 	glPushMatrix();
-	glScalef(1,5,1);
-	mySolidCross(1);
+		glScalef(0.8,5,0.8);
+		mySolidCross(1);
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0,-2.5,0);
-	mySolidDisc(20);
+		glTranslatef(0,-2.5,0);
+		mySolidDisc(20);
 	glPopMatrix();
 }
 
 void axle8_370726(){
 	glPushMatrix();
-	glScalef(1,8,1);
-	mySolidCross(1);
+		glScalef(0.8,8,0.8);
+		mySolidCross(1);
 	glPopMatrix();
 }
 
 void axle12_370826(){
 	glPushMatrix();
-	glScalef(1,12,1);
+	glScalef(0.8,12,0.8);
 	mySolidCross(1);
 	glPopMatrix();
 }
 
 void axleAndPinConnector1_6332573(){
 	glPushMatrix();
-	//mySolidCylindre(40,40);
-	cylinder(0.2);
-	glTranslatef(1,0,0);
-	glRotatef(-90,0,0,1);
-	mySolidCross();
-	glTranslatef(0,-0.5,0.5);
-	glScalef(0.166667,1,1);
-	mySolidFace();
-	glTranslatef(0,0,-1);
-	mySolidFace();
+		cylinder(0.2);
+		glTranslatef(1,0,0);
+		glRotatef(-90,0,0,1);
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			thickCross();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.5,0.45);
+			glScalef(0.25,1,0.05);
+			cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.5,-0.45);
+			glScalef(0.25,1,0.05);
+			cube();
+		glPopMatrix();
 	glPopMatrix();
 }
 
 void axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960(){
 	glPushMatrix();
 	cylinder(0.2);
-	mySolidCross();
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
 	glRotatef(90,1,0,0);
 	glTranslatef(1,0,0);
 	cylinder(0.2);
@@ -311,12 +339,16 @@ void axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951(){
 			glTranslatef(1,0,0);
 			glRotatef(90,1,0,0);
 			cylinder(0.2);
-			//mySolidCross();
-			thickCross();
+			glPushMatrix();
+				glScalef(0.8,1,0.8);
+				thickCross();
+			glPopMatrix();
 			glTranslatef(-2,0,0);
 			cylinder(0.2);
-			mySolidCross();
-			thickCross();
+			glPushMatrix();
+				glScalef(0.8,1,0.8);
+				thickCross();
+			glPopMatrix();
 		glPopMatrix();
 
 	glPopMatrix();
@@ -326,7 +358,10 @@ void axleAndPinConnectorPerpendicular_6261373(){
 	glPushMatrix();
 		glPushMatrix();
 			cylinder(0.2);
-			mySolidCross();
+			glPushMatrix();
+				glScalef(0.8,1,0.8);
+				thickCross();
+			glPopMatrix();
 			glRotatef(90,1,0,0);
 			glTranslatef(1,0,0);
 			cylinder(0.2);
@@ -350,7 +385,10 @@ void axleAndPinConnectorPerpendicular_6261373(){
 void axleConnectorSmoothWithXHoleOrientation_4512360(){
 	glPushMatrix();
 		glScalef(1,2,1);
-		thickCross();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			thickCross();
+		glPopMatrix();
 	glPopMatrix();
 }
 
@@ -761,4 +799,61 @@ void axlePinWithFrictionRidgesLengthwise_4206482(){
 			cylinder(0.2);
 		glPopMatrix();
 	glPopMatrix();
+}
+
+void gear12ToothDoubleBevel_4177431(){
+	glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+	glPopMatrix();
+	
+	glPushMatrix();
+		glScalef(1,0.8,1);
+		mySolidGear(12);
+	glPopMatrix();
+
+	//top Bevel
+	glPushMatrix();
+		glTranslatef(0,0.425,0);
+		// glRotatef(4,0,1,0);
+		glScalef(0.95,0.05,0.95);
+		mySolidGear(12);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,0.45,0);
+		// glRotatef(4,0,1,0);
+		glScalef(0.93,0.05,0.93);
+		mySolidGear(12);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,0.475,0);
+		// glRotatef(4,0,1,0);
+		glScalef(0.9,0.05,0.9);
+		mySolidGear(12);
+	glPopMatrix();
+
+	//bottom bevel
+	glPushMatrix();
+		glTranslatef(0,-0.425,0);
+		// glRotatef(4,0,1,0);
+		glScalef(0.95,0.05,0.95);
+		mySolidGear(12);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,-0.45,0);
+		// glRotatef(4,0,1,0);
+		glScalef(0.93,0.05,0.93);
+		mySolidGear(12);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0,-0.475,0);
+		// glRotatef(4,0,1,0);
+		glScalef(0.9,0.05,0.9);
+		mySolidGear(12);
+	glPopMatrix();
+
 }

@@ -85,28 +85,14 @@ static void scene(void) {
 	int nbFacets = 40;
 
 	glPushMatrix();
-    //glScalef(0.5F,0.5F,0.5F);
-    glScalef(0.3F,0.3F,0.3F);
-
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
-    glScalef(1,1,1);
-    //axlePin3LWithFrictionRidgesLengthwise_6209519();
-    axlePinWithFrictionRidgesLengthwise_4206482();
-    //axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
-    //thickCross();
+    glScalef(.7,.7,.7);
 
-    // liftarm3X5PerpendicularHShapeThick_6055519();
-    //liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+    glPushMatrix();
+      glTranslatef(1,1.5,0);
+      gear12ToothDoubleBevel_4177431();
+    glPopMatrix();
 
-    // axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
-    //axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
-    //Si vous voulez voir un peu mieux, passez en fil de fer (barre espace) 
-    
-    // glPushMatrix();
-    // glTranslatef(0,-3,0);
-    // plate4x8_4509897(nbFacets,nbFacets);
-    // glPopMatrix();
-    /*  
     glPushMatrix();
     glTranslatef(0,-3,0);
     plate4x8_4509897(nbFacets,nbFacets);
@@ -125,7 +111,7 @@ static void scene(void) {
     glTranslatef(1.3,0,0);
     axle3_4211815();
     glTranslatef(2.2,0,0);
-    gear8ToothType2_6012451(nbFacets,nbFacets);
+    gear8ToothType2_6012451();
     glTranslatef(2.2,0,0);
     axle5WithStop_6159763();
     glTranslatef(-5,0,2);
@@ -133,9 +119,16 @@ static void scene(void) {
     glTranslatef(3,0,0);
     axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
     glTranslatef(-4,2,0);
+    axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
     
-    axleConnectorSmoothWithXHoleOrientation_4512360();
-    */
+    // axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
+    // axlePin3LWithFrictionRidgesLengthwise_6209519();
+    // axlePinWithFrictionRidgesLengthwise_4206482();
+    // axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
+    // liftarm3X5PerpendicularHShapeThick_6055519();
+    // liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+    // axleConnectorSmoothWithXHoleOrientation_4512360();
+    
 	glPopMatrix();
 }
 
