@@ -28,11 +28,11 @@ static int lightsActivation[] = { 1,0,0,0,0,0,0,0 };
 static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
 
 //parameters for gluLookAt
-static float cameraPos[] = {0.0F,0.0F,20.0F};
-static float cameraTarget[] = {0.0F,0.0F,0.0F};
+// static float cameraPos[] = {0.0F,0.0F,20.0F};
+// static float cameraTarget[] = {0.0F,0.0F,0.0F};
 
 //parameters for the view of the camera
-static float frustumView[] = {10,10,10,10,-10,-30};
+// static float frustumView[] = {10,10,10,10,-10,-30};
 
 
 static int mousePos [2] = { 0,0 };
@@ -52,8 +52,8 @@ static float rotationZ = 1;
 static GLenum currentView = GL_FILL;
 
 static float rouge[4] = { 1.0F,0.0F,0.0F,0.5F };
-static float vert[4] = { 0.0F,1.0F,0.0F,0.5F };
-static float bleu[4] = { 0.0F,0.0F,1.0F,0.5F };
+//static float vert[4] = { 0.0F,1.0F,0.0F,0.5F };
+//static float bleu[4] = { 0.0F,0.0F,1.0F,0.5F };
 
 static bool animation = false;
 
@@ -81,8 +81,6 @@ static void light(int i) {
 /* Scene dessinee                               */
 
 static void scene(void) {
-	double sideLength = 1.0;
-	int nbFacets = 40;
 
 	glPushMatrix();
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
@@ -317,9 +315,11 @@ static void mouseMotion(int x, int y) {
 /* Fonction executee lors du passage            */
 /* de la souris sur la fenetre                  */
 /* sans bouton presse                           */
-
+/*
 static void passiveMouseMotion(int x,int y) {
+
 }
+*/
 
 /* Fonction ex�cut�e automatiquement            */
 /* lors de l'ex�cution de la fonction exit()    */

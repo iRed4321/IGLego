@@ -8,9 +8,12 @@ INC_DIR := include
 INC_FLAGS := -I $(INC_DIR)
 OTHER_FLAGS := -std=c++17 -Wall -O2
 
-OBJS_FILES := build/objetsGeom.o build/bricks.o build/Tests.o build/coords.o
+OBJS_FILES := build/objetsGeom.o build/Legobricks.o build/Tests.o build/coords.o build/legoBrick.o
 
 all: project
+
+build/legoBrick.o : $(SRC_DIR)/LegoBrick.cpp $(INC_DIR)/LegoBrick.h
+	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
 build/coords.o : $(SRC_DIR)/coords.cpp $(INC_DIR)/coords.h 
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
@@ -18,7 +21,7 @@ build/coords.o : $(SRC_DIR)/coords.cpp $(INC_DIR)/coords.h
 build/objetsGeom.o : $(SRC_DIR)/ObjetsGeometriques.cpp $(INC_DIR)/ObjetsGeometriques.h 
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
-build/bricks.o : $(SRC_DIR)/LegoBricks.cpp $(INC_DIR)/LegoBricks.h $(INC_DIR)/ObjetsGeometriques.h
+build/Legobricks.o : $(SRC_DIR)/LegoBricks.cpp $(INC_DIR)/LegoBricks.h $(INC_DIR)/ObjetsGeometriques.h
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
 build/Tests.o : $(SRC_DIR)/Tests.cpp $(INC_DIR)/LegoBricks.h
