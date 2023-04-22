@@ -20,9 +20,9 @@
 //done
 void gear8ToothType2_6012451();
 // done 
-void liftarmThin1x2AxleHoles_4163533(int ns, int nl);
+void liftarmThin1x2AxleHoles_4163533();
 //kinda done 
-void plate4x8_4509897(int ns, int nl);
+void plate4x8_4509897();
 // done 
 void axle2Notched_4142865();
 //done 
@@ -120,7 +120,7 @@ void drivingRingConnector_6276052();
 //--------------------------
 
 // done
-void technicLever3x3m90deg__6271810(int ns, int nl);
+void technicLever3x3m90deg__6271810();
 //not done
 void tread_6271164();
 //not done

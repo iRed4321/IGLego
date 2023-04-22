@@ -12,7 +12,7 @@ OBJS_FILES := build/objetsGeom.o build/Legobricks.o build/Tests.o build/coords.o
 
 all: project
 
-build/legoBrick.o : $(SRC_DIR)/LegoBrick.cpp $(INC_DIR)/LegoBrick.h
+build/legoBrick.o : $(SRC_DIR)/LegoBrick.cpp $(INC_DIR)/LegoBrick.h $(INC_DIR)/LegoBricks.h
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
 build/coords.o : $(SRC_DIR)/coords.cpp $(INC_DIR)/coords.h 

@@ -23,7 +23,7 @@ pièce en forme de :
 
 la base du trou qui fait l'angle est en (0,0,0)
 */
-void technicLever3x3m90deg__6271810(int ns, int nl){
+void technicLever3x3m90deg__6271810(){
 	glPushMatrix();
 
 	glScalef(1,0.5,1);
@@ -32,7 +32,7 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	glTranslatef(1,0,-0.45);
 	glScalef(2,1,0.1);
 	cube();
-	//mySolidFace();
+	
 	glPopMatrix();
 
 	glPushMatrix();
@@ -46,7 +46,7 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 	glTranslatef(1.25,0,-0.45);
 	glScalef(1.5,1,0.1);
 	cube();
-	//glutSolidCube(1);
+	
 	glPopMatrix();
 
 	glPushMatrix();
@@ -61,13 +61,13 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 		glScalef(0.8,1,0.8);
 		thickCross();
 	glPopMatrix();
-	//mySolidCylindre(ns,nl);
+	
 	cylinder(0.2);
 	glTranslatef(1,0,0);
-	//mySolidCylindre(ns,nl);
+	
 	cylinder(0.2);
 	glTranslatef(1,0,0);
-	//mySolidCylindre(ns,nl);
+	
 	cylinder(0.2);
 	glPushMatrix();
 		glScalef(0.8,1,0.8);
@@ -77,14 +77,14 @@ void technicLever3x3m90deg__6271810(int ns, int nl){
 
 	glPushMatrix();
 	glTranslatef(0,0,1);
-	//mySolidCylindre(ns,nl);
+	
 	cylinder(0.2);
 	glTranslatef(0,0,1);
 	glPushMatrix();
 		glScalef(0.8,1,0.8);
 		thickCross();
 	glPopMatrix();
-	//mySolidCylindre(ns,nl);
+	
 	cylinder(0.2);
 	glPopMatrix();
 	
@@ -106,21 +106,21 @@ void gear8ToothType2_6012451(){
 }
 
 
-void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
+void liftarmThin1x2AxleHoles_4163533(){
 	glPushMatrix();
 	glScalef(1,0.5,1);
 	glPushMatrix();
 		glScalef(0.8,1,0.8);
 		thickCross();
 	glPopMatrix();
-	//mySolidCylindre(ns, nl);
+	
 	cylinder(0.2);
 	glTranslatef(1,0,0);
 	glPushMatrix();
 		glScalef(0.8,1,0.8);
 		thickCross();
 	glPopMatrix();
-	//mySolidCylindre(ns, nl);
+	
 	cylinder(0.2);
 	glPushMatrix();
 	glTranslatef(-0.5,0,0.45);
@@ -137,11 +137,11 @@ void liftarmThin1x2AxleHoles_4163533(int ns, int nl){
 
 
 
-void plate4x8_4509897(int ns, int nl){
+void plate4x8_4509897(){
 
 	glPushMatrix();
 	glScalef(4,0.5,8);
-	mySolidCube(ns);
+	cube();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -155,7 +155,7 @@ void plate4x8_4509897(int ns, int nl){
 			cylinder(0.2);
 			glTranslatef(0,0.5,0); 
 			glRotatef(180,1,0,0);
-			mySolidDisc(ns);
+			mySolidDisc(40);
 			glPopMatrix();
 		}
 	}

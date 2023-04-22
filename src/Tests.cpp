@@ -6,6 +6,7 @@
 #include <GL/glu.h>
 
 #include "LegoBricks.h"
+#include "LegoBrick.h"
 #include "ObjetsGeometriques.h"
 
 //makes the use of 3D arrays clearer
@@ -84,7 +85,9 @@ static void scene(void) {
 
 	glPushMatrix();
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
-    pinWithFrictionRidgesLengthwise_4206482();
+    
+    construction();
+    //pinWithFrictionRidgesLengthwise_4206482();
     //glScalef(.7,.7,.7);
 
     //gearWormScrew_6185471();
@@ -96,13 +99,13 @@ static void scene(void) {
 
     // glPushMatrix();
     // glTranslatef(0,-3,0);
-    // plate4x8_4509897(nbFacets,nbFacets);
+    // plate4x8_4509897();
     // glPopMatrix();
     
     // glTranslatef(-4.5,0,-3.5);
-    // technicLever3x3m90deg__6271810(nbFacets,nbFacets);
+    // technicLever3x3m90deg__6271810();
     // glTranslatef(4, 0, 0);
-    // liftarmThin1x2AxleHoles_4163533(nbFacets,nbFacets);
+    // liftarmThin1x2AxleHoles_4163533();
     // glTranslatef(2.2,0,0);
     // axle4_370526();
     // glTranslatef(1.2,0,0);
