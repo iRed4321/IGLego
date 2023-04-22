@@ -2,6 +2,7 @@ class CH3D{
 	public:
 		float x,y,z;
 		float w;
+		void update(float x,float y,float z);
 	protected:
 		CH3D(void);
 		CH3D(float x,float y,float z,float w);

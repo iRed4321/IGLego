@@ -11,6 +11,8 @@ CH3D::CH3D(const CH3D &ch):x(ch.x),y(ch.y),z(ch.z),w(ch.w){};
 
 CH3D::~CH3D(void){}
 
+void CH3D::update(float x,float y,float z){ this->x = x;this->y = y;this->z = z;}
+
 
 
 //implementation of a child class : Pos3D

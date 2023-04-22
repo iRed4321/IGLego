@@ -26,6 +26,8 @@ public:
 	
 	virtual bool checkConnexion(Connector other);
 	
+	void showonscreen();
+
 	Pos3D pos;
 	Dir3D dir;
 	ConnType type;

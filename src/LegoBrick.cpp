@@ -1,8 +1,28 @@
 #include <vector>
 #include <iostream>
 
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI 3.14159235
+#endif
+
 #include "LegoBrick.h"
 #include "LegoBricks.h"
+
+
+float compute_angle( Dir3D vector1, Dir3D vector2) {
+    float angle;
+    float dot_product = vector1*vector2;
+    float magnitude1 = sqrt(vector1*vector1);
+    float magnitude2 = sqrt(vector2*vector2);
+    angle = acos(dot_product / (magnitude1 * magnitude2));
+    return angle;
+}
 
 void funcToTest(){
     std::cout<<"Hello World ! \n";
@@ -21,6 +41,25 @@ Connector::Connector(const Connector& other) {
     inUse = other.inUse;
 }
 
+bool Connector::checkConnexion(Connector other){
+    std::cout<<"Cannot check connexion with unspecified Connector\n";
+    return false;
+}
+
+void Connector::showonscreen(){
+    glPushMatrix();
+        Dir3D current(0,1,0);
+        glTranslatef(pos.x,pos.y,pos.z);
+
+        Dir3D axis = current^this->dir;
+        float angle = compute_angle(current,this->dir)*180/M_PI;
+        glRotatef(angle,axis.x,axis.y,axis.z);
+        
+        glScalef(0.5,1.3,0.5);
+        cylinder(0.2);
+    glPopMatrix();
+}
+
 ConnectorOut::ConnectorOut(
 		Pos3D pos,
 		Dir3D dir,
@@ -32,11 +71,6 @@ ConnectorIn::ConnectorIn(
 		Dir3D dir,
 		ConnType type
 	) : Connector(pos, dir, type) {}
-
-bool Connector::checkConnexion(Connector other){
-    std::cout<<"Cannot check connexion with unspecified Connector\n";
-    return false;
-}
 
 bool ConnectorIn::checkConnexion(ConnectorIn other){
     std::cout<<"cannot connect (Connectors in/in)\n";
@@ -128,10 +162,64 @@ void Brick::display(){
 	brickFunc();
 }
 
-void construction(){
+Brick brick6330960(){
     Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960);
-    br.display();
+    
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CIRCLE;
+    pos.update(1,0,0);
+    dir.update(0,0,1);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    type = CIRCLE;
+    pos.update(2,0,0);
+    dir.update(0,0,1);
+    
+    ConnectorIn thirdConn(pos,dir,type);
+    br.addConnector(thirdConn);
+
+    return br;
 }
+
+Brick brick4163533(){
+    Brick br(liftarmThin1x2AxleHoles_4163533);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(1,0,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    return br;
+}
+
+void construction(){
+    Brick brick1 = brick6330960();
+    Brick brick2 = brick4163533();
+    brick1[0].showonscreen();
+    brick1.display();
+
+    glTranslatef(-1,-1,-1);
+    brick2[0].showonscreen();
+    brick2.display();
+}
+
 /*
 int main() {
     Brick brick(funcToTest);

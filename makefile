@@ -30,8 +30,11 @@ build/Tests.o : $(SRC_DIR)/Tests.cpp $(INC_DIR)/LegoBricks.h
 project : $(OBJS_FILES)
 	$(COMPILER) $^ -o build/runnable $(REQUIRED_LIBS) $(INC_FLAGS) $(OTHER_FLAGS)
 
-run : project
+run :
 	build/runnable
+
+check-run :
+	valgrind build/runnable
 
 clean:
 	rm build/*
