@@ -13,8 +13,7 @@
 
 #include "LegoBrick.h"
 #include "LegoBricks.h"
-
-
+#include "ObjetsGeometriques.h"
 
 //************************************************************************************
 //----------------------------------Defining the classes to work with-----------------
@@ -216,6 +215,59 @@ void Brick::display(){
     }
 }
 
+void Brick::setConnectorsList(LiftArm &arm){
+    connectorList.clear();
+    nextId = 0;
+    for(auto [pos, part] : arm.model){
+        nextId++;
+        Pos3D pos1 = Pos3D(pos.x,pos.y,pos.z);
+
+        Dir3D dir = Dir3D(0,0,0);
+
+        switch (part.orientation){
+            case Front:
+                dir = Dir3D(0,0,1);
+                break;
+
+            default:
+                break;
+        }
+
+        switch (part.kind){
+            case ArmEnd:
+            case Arm:{
+                ConnectorIn conn1(pos1,dir,CIRCLE);
+                connectorList.push_back(conn1);
+                break;
+            }
+
+            default:
+                nextId--;
+                break;
+        }
+    }
+}
+
+// Brick brick4163533(){
+//     Brick br(liftarmThin1x2AxleHoles_4163533);
+
+//     ConnType type = CROSS;
+//     Pos3D pos(0,0,0);
+//     Dir3D dir(0,1,0);
+    
+//     ConnectorIn firstConn(pos,dir,type);
+//     br.addConnector(firstConn);
+
+//     type = CROSS;
+//     pos.update(1,0,0);
+//     dir.update(0,1,0);
+    
+//     ConnectorIn secondConn(pos,dir,type);
+//     br.addConnector(secondConn);
+
+//     return br;
+// }
+
 void Brick::printCharacteristics(){
     std::cout<<"--------Connectors--------"<<std::endl;
     for (size_t i = 0; i<nextId;++i){
@@ -254,11 +306,11 @@ Brick brick6012451(){
     return br;
 }
 
-Brick brick4163533(){
-    Brick br(liftarmThin1x2AxleHoles_4163533);
+// Brick brick4163533(){
+//     Brick br(liftarmThin1x2AxleHoles_4163533);
 
-    return br;
-}
+//     return br;
+// }
 
 Brick brick6330960(){
     Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960);
@@ -375,19 +427,42 @@ Brick brick6159763(){
     return br;
 }
 
+Brick brick4177444(){
+    Brick br(liftarm1x2Thick_4177444);
+    LiftArm arm = liftArm4177444();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6344864(){
+    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864);
+    LiftArm arm = liftArm6344864();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6331723(){
+    Brick br(liftarm1x3Thin_6331723);
+    LiftArm arm = liftArm6331723();
+    br.setConnectorsList(arm);
+    return br;
+}
+
 //********************************************************************************
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
 void construction(){
-    Brick brick1 = brick6330960();
+    Brick brick1 = brick4177444();
+
+    // Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
-    Brick brick3 = brick4163533();
-    Brick brick4 = brick6159763();
+    // Brick brick3 = brick4163533();
+    // Brick brick4 = brick6159763();
     
-    brick1.connect(0,0,brick2,0);
-    brick2.connect(1,1,brick3,90);
-    brick3.connect(0,1,brick4,0);
+    // brick1.connect(0,0,brick2,0);
+    // brick2.connect(1,1,brick3,90);
+    // brick3.connect(0,1,brick4,0);
 
     brick1.display();
 }

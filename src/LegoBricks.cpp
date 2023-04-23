@@ -412,8 +412,13 @@ void axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119(){
 	glPopMatrix();
 }
 
-void liftarm3x5LShapeThick_6173003(){
 
+void liftarm3x5LShapeThick_6173003(){
+	LiftArm arm = liftArm6173003();
+	arm.draw();
+}
+
+LiftArm liftArm6173003() {
 	Model m = Model();
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngle};
 	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
@@ -422,70 +427,110 @@ void liftarm3x5LShapeThick_6173003(){
 	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEnd};
 	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
 	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEnd};
-	LiftArm arm = LiftArm(THICK, m);
-	arm.draw();
+	return LiftArm(THICK, m);
 }
 
 void liftarm3x3TShapeThick_4552347(){
+	LiftArm arm = liftArm4552347();
+	arm.draw();
+}
+
+LiftArm liftArm4552347() {
 	Model m = Model();
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
 	m[Pos3d{1,0,0}] = LegoPart{Back, ArmTAngle};
 	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEnd};
 	m[Pos3d{1,0,1}] = LegoPart{Left, Arm};
 	m[Pos3d{1,0,2}] = LegoPart{Right, ArmEnd};
-	LiftArm arm = LiftArm(THICK, m);
-	arm.draw();
+	return LiftArm(THICK, m);
 }
 
 void liftarm3x3LShapeThin_6271810(){
+	LiftArm arm = liftArm6271810();
+	arm.draw();
+}
+
+LiftArm liftArm6271810() {
 	Model m = Model();
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngleWithCross};
 	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
 	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEndWithCross};
 	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
 	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEndWithCross};
-	LiftArm arm = LiftArm(THIN, m);
-	arm.draw();
+	return LiftArm(THIN, m);
 }
 
 void liftarm2x4LShapeThick_6271825(){
+	LiftArm arm = liftArm6271825();
+	arm.draw();
+}
+
+LiftArm liftArm6271825() {
 	Model m = Model();
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
 	m[Pos3d{1,0,0}] = LegoPart{Back, Arm};
 	m[Pos3d{2,0,0}] = LegoPart{Back, Arm};
 	m[Pos3d{3,0,0}] = LegoPart{Left, ArmAngle};
 	m[Pos3d{3,0,1}] = LegoPart{Right, ArmEnd};
-
-	LiftArm arm = LiftArm(THICK, m);
-	arm.draw();
+	return LiftArm(THICK, m);
 }
 
 void liftarm1x13Thick_6261643(){
-	LiftArm arm = LiftArm(THICK, 13);
+	LiftArm arm = liftArm6261643();
 	arm.draw();
+}
+
+LiftArm liftArm6261643() {
+	LiftArm arm = LiftArm(THICK, 13);
+	return arm;
 }
 
 void liftarm1x7Thick_4495935(){
-	LiftArm arm = LiftArm(THICK, 7);
+	LiftArm arm = liftArm4495935();
 	arm.draw();
+}
+
+LiftArm liftArm4495935() {
+	LiftArm arm = LiftArm(THICK, 7);
+	return arm;
 }
 
 void liftarm1x6Thin_6345239(){
-	LiftArm arm = LiftArm(THIN, 6);
+	LiftArm arm = liftArm6345239();
 	arm.draw();
+}
+
+LiftArm liftArm6345239() {
+	LiftArm arm = LiftArm(THIN, 6);
+	return arm;
 }
 
 void liftarm1x5Thick_4249021(){
-	LiftArm arm = LiftArm(THICK, 5);
+	LiftArm arm = liftArm4249021();
 	arm.draw();
+}
+
+LiftArm liftArm4249021() {
+	LiftArm arm = LiftArm(THICK, 5);
+	return arm;
 }
 
 void liftarm1x5Thick_4142135(){
-	LiftArm arm = LiftArm(THICK, 5);
+	LiftArm arm = liftArm4142135();
 	arm.draw();
 }
 
+LiftArm liftArm4142135() {
+	LiftArm arm = LiftArm(THICK, 5);
+	return arm;
+}
+
 void liftarm1x4Thin_6364749(){
+	LiftArm arm = liftArm6364749();
+	arm.draw();
+}
+
+LiftArm liftArm6364749() {
 	Model m = Model();
 
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
@@ -494,14 +539,24 @@ void liftarm1x4Thin_6364749(){
 	m[Pos3d{3,0,0}] = LegoPart{Back, ArmEndWithCross};
 
 	LiftArm arm = LiftArm(THIN, m);
-	arm.draw();
+	return arm;
 }
 
 void liftarm1x4Thin_6327548(){
-	liftarm1x4Thin_6364749();
+	LiftArm arm = liftArm6327548();
+	arm.draw();
+}
+
+LiftArm liftArm6327548() {
+	return liftArm6364749();
 }
 
 void liftarm1x3Thin_6331723(){
+	LiftArm arm = liftArm6331723();
+	arm.draw();
+}
+
+LiftArm liftArm6331723() {
 	Model m = Model();
 
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
@@ -509,26 +564,41 @@ void liftarm1x3Thin_6331723(){
 	m[Pos3d{2,0,0}] = LegoPart{Back, ArmEndWithCross};
 
 	LiftArm arm = LiftArm(THIN, m);
-	arm.draw();
+	return arm;
 }
 
 void liftarm1x2ThickWithPinHoleAndAxleHole_6344864(){
+	LiftArm arm = liftArm6344864();
+	arm.draw();
+}
+
+LiftArm liftArm6344864(){
 	Model m = Model();
 
 	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
 	m[Pos3d{1,0,0}] = LegoPart{Back, ArmEnd};
 
 	LiftArm arm = LiftArm(THICK, m);
-	arm.draw();
+	return arm;
 }
 
 void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
-	liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
+	LiftArm arm = liftarm6265135();
+	arm.draw();
+}
+
+LiftArm liftarm6265135(){
+	return liftArm6344864();
 }
 
 void liftarm1x2Thick_4177444(){
-	LiftArm arm = LiftArm(THICK, 2);
+	LiftArm arm = liftArm4177444();
 	arm.draw();
+}
+
+LiftArm liftArm4177444(){
+	LiftArm arm = LiftArm(THICK, 2);
+	return arm;
 }
 
 void liftarm1x115DoubleBentThick_6271156(){
