@@ -31,14 +31,16 @@ void funcToTest(){
 Connector::Connector(
 		Pos3D pos,
 		Dir3D dir,
-		ConnType type
-	) : pos(pos), dir(dir),type(type) {}
+		ConnType type,
+        bool input
+	) : pos(pos), dir(dir),type(type),inUse(false), input(input) {}
 
 Connector::Connector(const Connector& other) {
     pos = other.pos;
     dir = other.dir;
     type = other.type;
     inUse = other.inUse;
+    input = other.input;
 }
 
 bool Connector::checkConnexion(Connector other){
@@ -64,13 +66,17 @@ ConnectorOut::ConnectorOut(
 		Pos3D pos,
 		Dir3D dir,
 		ConnType type
-	) : Connector(pos, dir, type) {}
+	) : Connector(pos, dir, type, false) {}
+
+ConnectorOut::ConnectorOut(const Connector& other) : Connector(other) {}
 
 ConnectorIn::ConnectorIn(
 		Pos3D pos,
 		Dir3D dir,
 		ConnType type
-	) : Connector(pos, dir, type) {}
+	) : Connector(pos, dir, type, true) {}
+
+ConnectorIn::ConnectorIn(const Connector& other) : Connector(other) {}
 
 bool ConnectorIn::checkConnexion(ConnectorIn other){
     std::cout<<"cannot connect (Connectors in/in)\n";
@@ -103,7 +109,7 @@ bool ConnectorOut::checkConnexion(ConnectorIn other){
         std::cout<<"cannot connect (Circles don't fit in crosses)\n";
         return false;
     }
-    return false;
+    return true;
 }
 
 Brick::Brick(void (*brickFunc)()) : brickFunc(brickFunc){
@@ -121,45 +127,72 @@ Connector& Brick::operator[](std::size_t index) {
 
 
 
-void Brick::connect(struct Connexion conn){
-    Connector* myPin =&(this->operator[](conn.myPin));
-    Connector* otherPin = &(conn.br[conn.otherPin]);
+void Brick::connect(struct Link lk){
+    Connector myConn = this->operator[](lk.myPin);
+    Connector otherConn = lk.br[lk.otherPin];
     bool res;
     
-    ConnectorIn* conn1 = dynamic_cast<ConnectorIn*>(myPin);
-    
-    if (conn1) {
-        ConnectorIn* conn2 = dynamic_cast<ConnectorIn*>(otherPin);
-        if (conn2) {
-            res = conn1->checkConnexion(*conn2);
+    if (myConn.input) {
+        ConnectorIn conn1(myConn);
+        if (otherConn.input) {
+            ConnectorIn conn2(otherConn);
+            res = conn1.checkConnexion(conn2);
         } else {
-            ConnectorOut* conn2bis = dynamic_cast<ConnectorOut*>(otherPin);
-            res = conn1->checkConnexion(*conn2bis);
+            ConnectorOut conn2(otherConn);
+            res = conn1.checkConnexion(conn2);
+        }
+    } else {
+        ConnectorOut conn1(myConn);
+        if (otherConn.input) {
+            ConnectorIn conn2(otherConn);
+            res = conn1.checkConnexion(conn2);
+        } else {
+            ConnectorOut conn2(otherConn);
+            res = conn1.checkConnexion(conn2);
         }
     }
-    else {
-        ConnectorOut* conn1bis = dynamic_cast<ConnectorOut*>(myPin);
-
-        ConnectorIn* conn2 = dynamic_cast<ConnectorIn*>(otherPin);
-        if (conn2) {
-            res = conn1bis->checkConnexion(*conn2);
-        } else {
-            ConnectorOut* conn2bis = dynamic_cast<ConnectorOut*>(otherPin);
-            res = conn1bis->checkConnexion(*conn2bis);
-        }
-    }
-
     if(!res)
         return;
     
-    this->operator[](conn.myPin).inUse = true;
-    conn.br[conn.otherPin].inUse = true;
-    this->connexionList.push_back(conn);
+    this->operator[](lk.myPin).inUse = true;
+    lk.br[lk.otherPin].inUse = true;
+    this->printCharacteristics();
+    lk.br.printCharacteristics();
+
+    this->connexionList.push_back(lk);
     std::cout<<"Connected !\n";
+}
+
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
+    struct Link lk = {myPin,otherPin,br,angle};
+    this->connect(lk);
 }
 
 void Brick::display(){
 	brickFunc();
+}
+
+void Brick::printCharacteristics(){
+    std::cout<<"--------Connectors--------"<<std::endl;
+    for (size_t i = 0; i<nextId;++i){
+        std::cout<<"connector n°" <<i <<" :" <<std::endl;
+        Connector c = this->operator[](i);
+        std::cout<<"\tx : "<<c.pos.x<<std::endl;
+        std::cout<<"\ty : "<<c.pos.y<<std::endl;
+        std::cout<<"\tz : "<<c.pos.z<<std::endl;
+        std::cout<<"\txdir : "<<c.dir.x<<std::endl;
+        std::cout<<"\tydir : "<<c.dir.y<<std::endl;
+        std::cout<<"\tzdir : "<<c.dir.z<<std::endl;
+        std::cout<<"\t";
+        c.type == CROSS ? std::cout<<"cross\n" : std::cout<<"circle\n";
+        std::cout<<"\t";
+        c.input ? std::cout<<"input connector\n" : std::cout<<"output connector\n";
+        std::cout<<"\t";
+        c.inUse ? std::cout<<"in use\n" : std::cout<<"not in use\n";
+        std::cout<<"\n";
+    }
+    std::cout<<"--------Connexions--------"<<std::endl;
+    std::cout<<"number of connexions : "<<connexionList.size()<<std::endl;
 }
 
 Brick brick6330960(){
@@ -209,29 +242,67 @@ Brick brick4163533(){
     return br;
 }
 
+Brick brick4666999(){
+    Brick br(axle4WithCenterStop_4666999);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-1.5,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorOut firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    type = CROSS;
+    pos.update(0,1.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut thirdConn(pos,dir,type);
+    br.addConnector(thirdConn);
+
+    return br;
+}
+
 void construction(){
     Brick brick1 = brick6330960();
-    Brick brick2 = brick4163533();
-    brick1[0].showonscreen();
-    brick1.display();
+    Brick brick2 = brick4666999();
+    Brick brick3 = brick4163533();
+    
+    //brick1.display();
+    struct Link lk = {0,0,brick2,0};
+    // brick1.connect(0,0,brick2,0);
+    brick1.connect(lk);
 
-    glTranslatef(-1,-1,-1);
-    brick2[0].showonscreen();
-    brick2.display();
 }
 
-/*
+
 int main() {
-    Brick brick(funcToTest);
-
+    Brick brick1 = brick6330960();
+    Brick brick2 = brick4666999();
+    Brick brick3 = brick4163533();
     
-    Pos3D pos(0,0,0);
-    Dir3D dir(1,0,0);
-    ConnectorIn conn(pos, dir, CROSS);
+    //brick1.display();
+    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
+    brick2.printCharacteristics();
+    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
 
-    brick.addConnector(conn);
+    brick1.connect(0,0,brick2,0);
 
-    brick.display();
+    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
+    brick2.printCharacteristics();
+    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
+
+    brick2.connect(1,0,brick3,0);
+
+    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
+    brick2.printCharacteristics();
+    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
+
     return 0;
 }
-*/

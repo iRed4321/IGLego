@@ -88,7 +88,7 @@ static void scene(void) {
     
     construction();
     //pinWithFrictionRidgesLengthwise_4206482();
-    //glScalef(.7,.7,.7);
+    //glScalef(.5,.5,.5);
 
     //gearWormScrew_6185471();
 

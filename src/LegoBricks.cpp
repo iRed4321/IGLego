@@ -190,7 +190,7 @@ void axle4WithCenterStop_4666999(){
 		mySolidCross(1);
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0,-1,0);
+		glTranslatef(0,-.5,0);
 		//mySolidCylindre(50,10);
 		cylinder(1);
 	glPopMatrix();

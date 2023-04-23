@@ -9,7 +9,7 @@ enum ConnType{
 };
 
 class Brick;
-struct Connexion;
+struct Link;
 class Connector;
 class ConnectorIn;
 class ConnectorOut;
@@ -20,7 +20,8 @@ public:
     Connector(
 		Pos3D pos,
 		Dir3D dir,
-		ConnType type
+		ConnType type,
+		bool input
 	);
 	Connector(const Connector& other);
 	
@@ -32,6 +33,7 @@ public:
 	Dir3D dir;
 	ConnType type;
 	bool inUse;
+	bool input;
 };
 
 class ConnectorIn : public Connector {
@@ -41,6 +43,8 @@ public:
 		Dir3D dir,
 		ConnType type
 	);
+	ConnectorIn(const Connector& other);
+
 	bool checkConnexion(ConnectorIn conn);
 	bool checkConnexion(ConnectorOut conn);
 };
@@ -52,6 +56,8 @@ public:
 		Dir3D dir,
 		ConnType type
 	);
+	ConnectorOut(const Connector& other);
+
 	bool checkConnexion(ConnectorIn conn);
 	bool checkConnexion(ConnectorOut conn);
 };
@@ -59,23 +65,24 @@ public:
 class Brick {
 public:
 	Brick(void (*brickFunc)());
-
     std::size_t addConnector(Connector& conn);
 	Connector& operator[](std::size_t index);
-	void connect(struct Connexion conn);
+	void connect(struct Link conn);
+	void connect(int myPin, int otherPin, Brick& otherBrick,float angle);
 	void display();
+	void printCharacteristics();
 
 private:
 	void (*brickFunc)();
 	std::size_t nextId;
     std::vector<Connector> connectorList;
-	std::vector<struct Connexion> connexionList;
+	std::vector<struct Link> connexionList;
 };
 
-struct Connexion{
+struct Link{
 	int myPin;
 	int otherPin;
-	Brick br;
+	Brick& br;
 	float angle;
 };
 

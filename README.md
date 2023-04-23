@@ -2,7 +2,7 @@
 author : Nathan Gallone
 date : 
 
-description :
+description : Program that displays a Lego Technic construct
 
 
 ## To compile
