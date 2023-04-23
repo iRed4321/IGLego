@@ -15,6 +15,11 @@
 #include "LegoBricks.h"
 
 
+
+//************************************************************************************
+//----------------------------------Defining the classes to work with-----------------
+//************************************************************************************
+
 float compute_angle( Dir3D vector1, Dir3D vector2) {
     float angle;
     float dot_product = vector1*vector2;
@@ -171,7 +176,7 @@ void Brick::connect(struct Link lk){
     lk.br[lk.otherPin].inUse = true;
 
     this->connexionList.push_back(lk);
-    std::cout<<"Connected !\n";
+    //std::cout<<"Connected !\n";
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
@@ -232,6 +237,27 @@ void Brick::printCharacteristics(){
     }
     std::cout<<"--------Connexions--------"<<std::endl;
     std::cout<<"number of connexions : "<<connexionList.size()<<std::endl;
+}
+
+//**********************************************************************************
+//________________________________________Wrapping the lego pieces__________________
+//**********************************************************************************
+
+Brick brick6012451(){
+    Brick br(gear8ToothType2_6012451);
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+    return br;
+}
+
+Brick brick4163533(){
+    Brick br(liftarmThin1x2AxleHoles_4163533);
+
+    return br;
 }
 
 Brick brick6330960(){
@@ -349,6 +375,10 @@ Brick brick6159763(){
     return br;
 }
 
+//********************************************************************************
+// -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
+//********************************************************************************
+
 void construction(){
     Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
@@ -363,6 +393,12 @@ void construction(){
 }
 
 /*
+
+//main program that allows testing without using the whole opengl thing
+// compile and run with 
+// $make test-other
+
+
 int main() {
     Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
