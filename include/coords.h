@@ -17,6 +17,9 @@ class Pos3D:public CH3D{
 		Pos3D(float x, float y, float z);
 		Pos3D(const Pos3D &p);
 		~Pos3D();
+
+		Pos3D operator+(const Pos3D);
+		Pos3D operator-(const Pos3D);
 			
 };
 

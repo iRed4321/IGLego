@@ -28,7 +28,8 @@ public:
 	virtual bool checkConnexion(Connector other);
 	
 	void showonscreen();
-
+	void printCharacteristics();
+	
 	Pos3D pos;
 	Dir3D dir;
 	ConnType type;
@@ -82,7 +83,7 @@ private:
 struct Link{
 	int myPin;
 	int otherPin;
-	Brick& br;
+	Brick &br;
 	float angle;
 };
 

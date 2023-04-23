@@ -112,6 +112,19 @@ bool ConnectorOut::checkConnexion(ConnectorIn other){
     return true;
 }
 
+void Connector::printCharacteristics(){
+    std::cout<<"x : "<<this->pos.x<<std::endl;
+    std::cout<<"y : "<<this->pos.y<<std::endl;
+    std::cout<<"z : "<<this->pos.z<<std::endl;
+    std::cout<<"xdir : "<<this->dir.x<<std::endl;
+    std::cout<<"ydir : "<<this->dir.y<<std::endl;
+    std::cout<<"zdir : "<<this->dir.z<<std::endl;
+    this->type == CROSS ? std::cout<<"cross\n" : std::cout<<"circle\n";
+    this->input ? std::cout<<"input connector\n" : std::cout<<"output connector\n";
+    this->inUse ? std::cout<<"in use\n" : std::cout<<"not in use\n";
+    std::cout<<"\n";
+}
+
 Brick::Brick(void (*brickFunc)()) : brickFunc(brickFunc){
     nextId = 0;
 }
@@ -128,8 +141,8 @@ Connector& Brick::operator[](std::size_t index) {
 
 
 void Brick::connect(struct Link lk){
-    Connector myConn = this->operator[](lk.myPin);
-    Connector otherConn = lk.br[lk.otherPin];
+    Connector myConn(this->operator[](lk.myPin));
+    Connector otherConn(lk.br[lk.otherPin]);
     bool res;
     
     if (myConn.input) {
@@ -156,8 +169,6 @@ void Brick::connect(struct Link lk){
     
     this->operator[](lk.myPin).inUse = true;
     lk.br[lk.otherPin].inUse = true;
-    this->printCharacteristics();
-    lk.br.printCharacteristics();
 
     this->connexionList.push_back(lk);
     std::cout<<"Connected !\n";
@@ -165,11 +176,39 @@ void Brick::connect(struct Link lk){
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
     struct Link lk = {myPin,otherPin,br,angle};
+    
     this->connect(lk);
 }
 
 void Brick::display(){
 	brickFunc();
+    size_t nblinks = connexionList.size();
+
+    Pos3D zero(0,0,0);
+    
+    for(size_t i = 0; i<nblinks; ++i){
+        Link lk = connexionList[i];
+        Connector myConn(this->operator[](lk.myPin));
+        Connector otherConn(lk.br[lk.otherPin]);
+        
+        glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
+
+        Dir3D dir(0,1,0);
+        Dir3D axis = dir^myConn.dir;
+        float angle = compute_angle(dir,myConn.dir)*180/M_PI;
+        glRotatef(angle,axis.x,axis.y,axis.z);
+
+        glRotatef(lk.angle,0,1,0);
+
+        axis = dir^otherConn.dir;
+        angle = compute_angle(dir,otherConn.dir)*180/M_PI;
+        glRotatef(-angle,axis.x,axis.y,axis.z);
+        
+        Pos3D nextPos = zero - otherConn.pos;
+        glTranslatef(nextPos.x,nextPos.y,nextPos.z);
+
+        lk.br.display();
+    }
 }
 
 void Brick::printCharacteristics(){
@@ -269,19 +308,61 @@ Brick brick4666999(){
     return br;
 }
 
+Brick brick6159763(){
+    Brick br(axle5WithStop_6159763);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-2,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorOut firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(0,-1,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    type = CROSS;
+    pos.update(0,0,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut thirdConn(pos,dir,type);
+    br.addConnector(thirdConn);
+
+    type = CROSS;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut fourthConn(pos,dir,type);
+    br.addConnector(fourthConn);
+
+    type = CROSS;
+    pos.update(0,2,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut fifthConn(pos,dir,type);
+    br.addConnector(fifthConn);
+
+    return br;
+}
+
 void construction(){
     Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
     Brick brick3 = brick4163533();
+    Brick brick4 = brick6159763();
     
-    //brick1.display();
-    struct Link lk = {0,0,brick2,0};
-    // brick1.connect(0,0,brick2,0);
-    brick1.connect(lk);
+    brick1.connect(0,0,brick2,0);
+    brick2.connect(1,1,brick3,90);
+    brick3.connect(0,1,brick4,0);
 
+    brick1.display();
 }
 
-
+/*
 int main() {
     Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
@@ -306,3 +387,4 @@ int main() {
 
     return 0;
 }
+*/

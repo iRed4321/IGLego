@@ -191,7 +191,7 @@ void axle4WithCenterStop_4666999(){
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(0,-.5,0);
-		//mySolidCylindre(50,10);
+		glScalef(1,0.98,1);
 		cylinder(1);
 	glPopMatrix();
 }
