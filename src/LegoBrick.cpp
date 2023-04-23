@@ -453,16 +453,16 @@ Brick brick6331723(){
 //********************************************************************************
 
 void construction(){
-    Brick brick1 = brick4177444();
+    // Brick brick1 = brick4177444();
 
-    // Brick brick1 = brick6330960();
+    Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
-    // Brick brick3 = brick4163533();
-    // Brick brick4 = brick6159763();
+    Brick brick3 = brick4163533();
+    Brick brick4 = brick6159763();
     
-    // brick1.connect(0,0,brick2,0);
-    // brick2.connect(1,1,brick3,90);
-    // brick3.connect(0,1,brick4,0);
+    brick1.connect(0,0,brick2,0);
+    brick2.connect(1,1,brick3,90);
+    brick3.connect(0,1,brick4,0);
 
     brick1.display();
 }

@@ -582,14 +582,14 @@ LiftArm liftArm6344864(){
 	return arm;
 }
 
-void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
-	LiftArm arm = liftarm6265135();
-	arm.draw();
-}
+// void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
+// 	LiftArm arm = liftarm6265135();
+// 	arm.draw();
+// }
 
-LiftArm liftarm6265135(){
-	return liftArm6344864();
-}
+// LiftArm liftarm6265135(){
+// 	return liftArm6344864();
+// }
 
 void liftarm1x2Thick_4177444(){
 	LiftArm arm = liftArm4177444();
