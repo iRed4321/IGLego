@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "coords.h"
+#include "ObjetsGeometriques.h"
 
 enum ConnType{
 	CIRCLE,CROSS
@@ -72,6 +73,8 @@ public:
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle);
 	void display();
 	void printCharacteristics();
+	void setConnectorsList(LiftArm& arm);
+	std::vector<Connector> getConnectorList();
 
 private:
 	void (*brickFunc)();

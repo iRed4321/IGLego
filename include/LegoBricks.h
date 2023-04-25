@@ -61,40 +61,75 @@ void gearWormScrew_6185471();
 // leo : 
         //done
         void liftarm1x2Thick_4177444();
+        LiftArm liftArm4177444();
+
         //done
         void liftarm1x2ThickWithPinHoleAndAxleHole_6265135();
+        // LiftArm liftArm6265135();
+
         //done
         void liftarm1x2ThickWithPinHoleAndAxleHole_6344864();
+        LiftArm liftArm6344864();
+
         //done
         void liftarm1x3Thin_6331723();
+        LiftArm liftArm6331723();
+
         //done
         void liftarm1x4Thin_6327548();
+        LiftArm liftArm6327548();
+
         //done
         void liftarm1x4Thin_6364749();
+        LiftArm liftArm6364749();
+
         //done
         void liftarm1x5Thick_4142135();
+        LiftArm liftArm4142135();
+
         //done
         void liftarm1x5Thick_4249021();
+        LiftArm liftArm4249021();
+
         //done
         void liftarm1x6Thin_6345239();
+        LiftArm liftArm6345239();
+
         //done
         void liftarm1x7Thick_4495935();
+        LiftArm liftArm4495935();
+
         //done
         void liftarm1x13Thick_6261643();
+        LiftArm liftArm6261643();
+
         //done
         void liftarm1x115DoubleBentThick_6271156();
+        // LiftArm liftArm6271156();
+
         //done
         void liftarm2x4LShapeThick_6271825();
+        LiftArm liftArm6271825();
+
         //done
         void liftarm3x3LShapeThin_6271810();
+        LiftArm liftArm6271810();
+
         //done
         void liftarm3x3TShapeThick_4552347();
+        LiftArm liftArm4552347();
+
         //done
         void liftarm3x5LShapeThick_6173003();
+        LiftArm liftArm6173003();
+
         //kinda done
         void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+        // LiftArm liftArm6327162();
+
         //done
         void liftarm3X5PerpendicularHShapeThick_6055519();
+        // LiftArm liftArm6055519();
 // ----------------
 
 
