@@ -80,7 +80,7 @@ public:
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, Shift shift);
 	void display();
 	void printCharacteristics();
-	void setConnectorsList(LiftArm& arm);
+	void addConnectorsList(LiftArm& arm);
 	std::vector<Connector> getConnectorList();
 
 private:

@@ -62,7 +62,12 @@ void Connector::showonscreen(){
         glRotatef(angle,axis.x,axis.y,axis.z);
         
         glScalef(0.5,1.3,0.5);
-        cylinder(0.2);
+
+        if (this->type == CROSS)
+            mySolidCross(0.2);
+        else if (this->type == CIRCLE)
+            cylinder(0.2);
+
     glPopMatrix();
 }
 
@@ -229,8 +234,7 @@ void Brick::display(){
     }
 }
 
-void Brick::setConnectorsList(LiftArm &arm){
-    connectorList.clear();
+void Brick::addConnectorsList(LiftArm &arm){
     nextId = 0;
     for(auto [pos, part] : arm.model){
         nextId++;
@@ -462,91 +466,124 @@ Brick brick6159763(){
 Brick brick4177444(){
     Brick br(liftarm1x2Thick_4177444);
     LiftArm arm = liftArm4177444();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6344864(){
     Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864);
     LiftArm arm = liftArm6344864();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6331723(){
     Brick br(liftarm1x3Thin_6331723);
     LiftArm arm = liftArm6331723();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6327548(){
     Brick br(liftarm1x4Thin_6327548);
     LiftArm arm = liftArm6327548();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6364749(){
     Brick br(liftarm1x4Thin_6364749);
     LiftArm arm = liftArm6364749();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4142135(){
     Brick br(liftarm1x5Thick_4142135);
     LiftArm arm = liftArm4142135();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4249021(){
     Brick br(liftarm1x5Thick_4249021);
     LiftArm arm = liftArm4249021();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6345239(){
     Brick br(liftarm1x6Thin_6345239);
     LiftArm arm = liftArm6345239();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4495935(){
     Brick br(liftarm1x7Thick_4495935);
     LiftArm arm = liftArm4495935();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6261643(){
     Brick br(liftarm1x13Thick_6261643);
     LiftArm arm = liftArm6261643();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6271825(){
     Brick br(liftarm2x4LShapeThick_6271825);
     LiftArm arm = liftArm6271825();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6271810(){
     Brick br(liftarm3x3LShapeThin_6271810);
     LiftArm arm = liftArm6271810();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4552347(){
     Brick br(liftarm3x3TShapeThick_4552347);
     LiftArm arm = liftArm4552347();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6173003(){
+    Brick br(liftarm3x5LShapeThick_6173003);
+    LiftArm arm = liftArm6173003();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6271156(){
+    Brick br(liftarm1x115DoubleBentThick_6271156);
+
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{5,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{6,0,0}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+    br.addConnectorsList(arm);
+
+    ConnectorIn conn = ConnectorIn(Pos3D(8.12,2.12,0), Dir3D(0,0,1), CIRCLE);
+    br.addConnector(conn);
+    conn = ConnectorIn(Pos3D(8.12,3.12,0), Dir3D(0,0,1), CIRCLE);
+    br.addConnector(conn);
+    conn = ConnectorIn(Pos3D(8.12,4.12,0), Dir3D(0,0,1), CROSS);
+    br.addConnector(conn);
+
     return br;
 }
 
@@ -555,6 +592,7 @@ Brick brick4552347(){
 //********************************************************************************
 
 void construction(){
+
     Brick brick1 = brick6271810();
 
     // Brick brick1 = brick6330960();
@@ -562,7 +600,7 @@ void construction(){
     // Brick brick3 = brick4163533();
     // Brick brick4 = brick6159763();
     
-    brick1.connect(0,0,brick2,0, Shift::HalfRight);
+    brick1.connect(0,0,brick2,0, HalfRight);
     // brick2.connect(1,1,brick3,90);
     // brick3.connect(0,1,brick4,0);
 
