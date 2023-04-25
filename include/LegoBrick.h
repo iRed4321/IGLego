@@ -74,6 +74,7 @@ public:
 	void display();
 	void printCharacteristics();
 	void setConnectorsList(LiftArm& arm);
+	std::vector<Connector> getConnectorList();
 
 private:
 	void (*brickFunc)();

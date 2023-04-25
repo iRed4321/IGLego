@@ -133,6 +133,10 @@ Brick::Brick(void (*brickFunc)()) : brickFunc(brickFunc){
     nextId = 0;
 }
 
+std::vector<Connector> Brick::getConnectorList(){
+    return this->connectorList;
+}
+
 std::size_t Brick::addConnector(Connector& conn) {
     connectorList.push_back(conn);
     return nextId++;
@@ -229,12 +233,18 @@ void Brick::setConnectorsList(LiftArm &arm){
                 dir = Dir3D(0,0,1);
                 break;
 
+            case Back:
+                dir = Dir3D(0,0,-1);
+                break;
+
             default:
                 break;
         }
 
         switch (part.kind){
             case ArmEnd:
+            case ArmWithCross:
+            case ArmEndWithCross:
             case Arm:{
                 ConnectorIn conn1(pos1,dir,CIRCLE);
                 connectorList.push_back(conn1);
@@ -242,6 +252,7 @@ void Brick::setConnectorsList(LiftArm &arm){
             }
 
             default:
+                std::cout<<"error : part not found\n";
                 nextId--;
                 break;
         }
@@ -448,21 +459,60 @@ Brick brick6331723(){
     return br;
 }
 
+Brick brick6327548(){
+    Brick br(liftarm1x4Thin_6327548);
+    LiftArm arm = liftArm6327548();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6364749(){
+    Brick br(liftarm1x4Thin_6364749);
+    LiftArm arm = liftArm6364749();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick4142135(){
+    Brick br(liftarm1x5Thick_4142135);
+    LiftArm arm = liftArm4142135();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick4249021(){
+    Brick br(liftarm1x5Thick_4249021);
+    LiftArm arm = liftArm4249021();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6345239(){
+    Brick br(liftarm1x6Thin_6345239);
+    LiftArm arm = liftArm6345239();
+    br.setConnectorsList(arm);
+    return br;
+}
+
 //********************************************************************************
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
 void construction(){
-    // Brick brick1 = brick4177444();
+    Brick brick1 = brick6345239();
 
-    Brick brick1 = brick6330960();
-    Brick brick2 = brick4666999();
-    Brick brick3 = brick4163533();
-    Brick brick4 = brick6159763();
+    // Brick brick1 = brick6330960();
+    // Brick brick2 = brick4666999();
+    // Brick brick3 = brick4163533();
+    // Brick brick4 = brick6159763();
     
-    brick1.connect(0,0,brick2,0);
-    brick2.connect(1,1,brick3,90);
-    brick3.connect(0,1,brick4,0);
+    // brick1.connect(0,0,brick2,0);
+    // brick2.connect(1,1,brick3,90);
+    // brick3.connect(0,1,brick4,0);
+
+    for (size_t i = 0; i < brick1.getConnectorList().size(); i++) {
+        brick1[i].showonscreen();
+    }
 
     brick1.display();
 }
