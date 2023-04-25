@@ -906,6 +906,9 @@ void pinWithFrictionRidgesLengthwise_4206482(){
 
 void bush_6275844(){
 	//gray
+	glPushMatrix();
+		innerCross();
+	glPopMatrix();
 }
 
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){

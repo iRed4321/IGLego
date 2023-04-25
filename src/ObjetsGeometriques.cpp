@@ -376,6 +376,124 @@ void mySolidCross(int withbase){
 
 }
 
+void innerCross(){
+  float hauteur = 1.0F;
+  float largeurFaceInterne = 0.5F/3.0F;
+  float distMaxInterne = 0.5F;
+
+  GLboolean nm = glIsEnabled(GL_NORMALIZE);
+  if ( !nm )
+    glEnable(GL_NORMALIZE);
+  float normale[4];
+  glGetFloatv(GL_CURRENT_NORMAL,normale);
+  glPushMatrix();
+
+  // Vertical faces (internal ones) :
+  glBegin(GL_QUADS);
+    //
+    glNormal3f(0,0,1);
+
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
+    
+
+    //
+    glNormal3f(1,0,0);
+
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
+
+    //
+    glNormal3f(0,0,1);
+
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(-distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(-distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+
+    //
+
+    glNormal3f(1,0,0);
+
+    glVertex3f(-distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(-distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(-distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(-distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+
+    //
+
+    glNormal3f(0,0,-1);
+
+    glVertex3f(-distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(-distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
+
+    //
+
+    glNormal3f(1,0,0);
+
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
+
+    //
+    glNormal3f(0,0,-1);
+
+    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
+    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
+
+    //
+    glNormal3f(-1,0,0);
+
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
+
+    //
+    glNormal3f(0,0,-1);
+
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
+
+    //
+    glNormal3f(-1,0,0);
+
+    glVertex3f(distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
+    glVertex3f(distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
+
+    //
+    glNormal3f(0,0,1);
+
+    glVertex3f(distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+
+    //
+    glNormal3f(-1,0,0);
+
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
+    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
+    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+  glEnd();
+  
+  glPopMatrix();
+}
+
 
 void thickCross(){
 
@@ -508,114 +626,14 @@ void thickCross(){
     glVertex3f(largeurFaceExterne/2.0F,-hauteur/2.0F,-distMaxExterne);
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,-distMaxExterne);
     
-
+  glEnd();
     // Vertical faces (internal ones) :
     
-    //
-    glNormal3f(0,0,1);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-    
-
-    //
-    glNormal3f(1,0,0);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-
-    //
-    glNormal3f(0,0,1);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    //
-
-    glNormal3f(1,0,0);
-
-    glVertex3f(-distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    //
-
-    glNormal3f(0,0,-1);
-
-    glVertex3f(-distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    //
-
-    glNormal3f(1,0,0);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    //
-    glNormal3f(0,0,-1);
-
-    glVertex3f(-largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-    glVertex3f(-largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-
-    //
-    glNormal3f(-1,0,0);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,distMaxInterne);
-
-    //
-    glNormal3f(0,0,-1);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    //
-    glNormal3f(-1,0,0);
-
-    glVertex3f(distMaxInterne,hauteur/2.0F,largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,-hauteur/2.0F,largeurFaceInterne/2.0F);
-
-    //
-    glNormal3f(0,0,1);
-
-    glVertex3f(distMaxInterne,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(distMaxInterne,-hauteur/2.0F,-largeurFaceInterne/2.0F);
-
-    //
-    glNormal3f(-1,0,0);
-
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-largeurFaceInterne/2.0F);
-    glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
-    glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+    innerCross();
 
     //horizontal faces (base)
     
     //face du bas (désolé j'ai mis les normales à l'envers parce que j'ai tourné dans le sens indirect pour mes facettes)
-    
-    glEnd();
 
     glFrontFace(GL_CW);
 
