@@ -257,6 +257,41 @@ Brick brick6012451(){
 Brick brick4163533(){
     Brick br(liftarmThin1x2AxleHoles_4163533);
 
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(1,0,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    return br;
+}
+
+
+Brick brick(){
+    Brick br(liftarmThin1x2AxleHoles_4163533);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(1,0,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
     return br;
 }
 
@@ -287,25 +322,45 @@ Brick brick6330960(){
     return br;
 }
 
-Brick brick4163533(){
-    Brick br(liftarmThin1x2AxleHoles_4163533);
-
-    ConnType type = CROSS;
+Brick brick4509897(){
+    Brick br(plate4x8_4509897);
+    
+    ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
     
     ConnectorIn firstConn(pos,dir,type);
     br.addConnector(firstConn);
 
-    type = CROSS;
+    type = CIRCLE;
     pos.update(1,0,0);
-    dir.update(0,1,0);
+    dir.update(0,0,1);
     
     ConnectorIn secondConn(pos,dir,type);
     br.addConnector(secondConn);
 
+    type = CIRCLE;
+    pos.update(2,0,0);
+    dir.update(0,0,1);
+    
+    ConnectorIn thirdConn(pos,dir,type);
+    br.addConnector(thirdConn);
     return br;
 }
+
+Brick brick4142865(){Brick br(funcToTest); return br;}
+Brick brick4211815(){Brick br(funcToTest); return br;}
+Brick brick370526(){Brick br(funcToTest); return br;}
+Brick brick370726(){Brick br(funcToTest); return br;}
+Brick brick370826(){Brick br(funcToTest); return br;}
+Brick brick6332573(){Brick br(funcToTest); return br;}
+Brick brick6261373(){Brick br(funcToTest); return br;}
+Brick brick4512360(){Brick br(funcToTest); return br;}
+Brick brick6089119(){Brick br(funcToTest); return br;}
+Brick brick6209519(){Brick br(funcToTest); return br;}
+Brick brick4206482(){Brick br(funcToTest); return br;}
+Brick brick4177431(){Brick br(funcToTest); return br;}
+
 
 Brick brick4666999(){
     Brick br(axle4WithCenterStop_4666999);
@@ -336,7 +391,7 @@ Brick brick4666999(){
 
 Brick brick6159763(){
     Brick br(axle5WithStop_6159763);
-
+    //Brick br(funcToTest);
     ConnType type = CROSS;
     Pos3D pos(0,-2,0);
     Dir3D dir(0,1,0);
@@ -380,16 +435,7 @@ Brick brick6159763(){
 //********************************************************************************
 
 void construction(){
-    Brick brick1 = brick6330960();
-    Brick brick2 = brick4666999();
-    Brick brick3 = brick4163533();
-    Brick brick4 = brick6159763();
     
-    brick1.connect(0,0,brick2,0);
-    brick2.connect(1,1,brick3,90);
-    brick3.connect(0,1,brick4,0);
-
-    brick1.display();
 }
 
 /*
