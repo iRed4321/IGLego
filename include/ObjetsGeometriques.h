@@ -45,6 +45,9 @@ void mySolidCylindreInverted(int ns,int nl, float revolution);
 void mySolidCylindre(int ns,int nl,int bases);
 void mySolidCylindre(int ns,int nl, float revolution);
 
+/* Face interne d'une croix */
+void innerCross();
+
 /* Modelisation d'une croix */
 void mySolidCross(int withbase=0);
 
