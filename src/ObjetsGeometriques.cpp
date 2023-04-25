@@ -389,7 +389,7 @@ void innerCross(){
   glPushMatrix();
 
   // Vertical faces (internal ones) :
-    
+  glBegin(GL_QUADS);
     //
     glNormal3f(0,0,1);
 
@@ -489,6 +489,8 @@ void innerCross(){
     glVertex3f(largeurFaceInterne/2.0F,hauteur/2.0F,-distMaxInterne);
     glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-distMaxInterne);
     glVertex3f(largeurFaceInterne/2.0F,-hauteur/2.0F,-largeurFaceInterne/2.0F);
+  glEnd();
+  
   glPopMatrix();
 }
 
@@ -624,7 +626,7 @@ void thickCross(){
     glVertex3f(largeurFaceExterne/2.0F,-hauteur/2.0F,-distMaxExterne);
     glVertex3f(largeurFaceExterne/2.0F,hauteur/2.0F,-distMaxExterne);
     
-
+  glEnd();
     // Vertical faces (internal ones) :
     
     innerCross();
@@ -632,8 +634,6 @@ void thickCross(){
     //horizontal faces (base)
     
     //face du bas (désolé j'ai mis les normales à l'envers parce que j'ai tourné dans le sens indirect pour mes facettes)
-    
-    glEnd();
 
     glFrontFace(GL_CW);
 
