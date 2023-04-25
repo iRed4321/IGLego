@@ -85,10 +85,11 @@ static void scene(void) {
 
 	glPushMatrix();
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
+
+    glScalef(.5,.5,.5);
     
     construction();
     //pinWithFrictionRidgesLengthwise_4206482();
-    //glScalef(.5,.5,.5);
 
     //gearWormScrew_6185471();
 

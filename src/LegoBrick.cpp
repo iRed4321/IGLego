@@ -183,8 +183,12 @@ void Brick::connect(struct Link lk){
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
-    struct Link lk = {myPin,otherPin,br,angle};
-    
+    struct Link lk = {myPin,otherPin,br,angle,Shift::FullSize};
+    this->connect(lk);
+}
+
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle, Shift shift){
+    struct Link lk = {myPin,otherPin,br,angle,shift};
     this->connect(lk);
 }
 
@@ -215,6 +219,12 @@ void Brick::display(){
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
+        if (lk.shift == Shift::HalfLeft) {
+            glTranslatef(0,-0.25,0);
+        } else if (lk.shift == Shift::HalfRight) {
+            glTranslatef(0,0.25,0);
+        }
+
         lk.br.display();
     }
 }
@@ -224,16 +234,19 @@ void Brick::setConnectorsList(LiftArm &arm){
     nextId = 0;
     for(auto [pos, part] : arm.model){
         nextId++;
-        Pos3D pos1 = Pos3D(pos.x,pos.y,pos.z);
+        Pos3D pos1 = Pos3D(pos.x,pos.z,pos.y);
 
-        Dir3D dir = Dir3D(0,0,0);
+        Dir3D dir = Dir3D(0,0,1);
 
         switch (part.orientation){
+
             case Front:
+            case Right:
                 dir = Dir3D(0,0,1);
                 break;
 
             case Back:
+            case Left:
                 dir = Dir3D(0,0,-1);
                 break;
 
@@ -242,9 +255,17 @@ void Brick::setConnectorsList(LiftArm &arm){
         }
 
         switch (part.kind){
-            case ArmEnd:
             case ArmWithCross:
+            case ArmAngleWithCross:
             case ArmEndWithCross:
+            {
+                ConnectorIn conn1(pos1,dir,CROSS);
+                connectorList.push_back(conn1);
+                break;
+            }
+
+            case ArmEnd:
+            case ArmAngle:
             case Arm:{
                 ConnectorIn conn1(pos1,dir,CIRCLE);
                 connectorList.push_back(conn1);
@@ -494,25 +515,60 @@ Brick brick6345239(){
     return br;
 }
 
+Brick brick4495935(){
+    Brick br(liftarm1x7Thick_4495935);
+    LiftArm arm = liftArm4495935();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6261643(){
+    Brick br(liftarm1x13Thick_6261643);
+    LiftArm arm = liftArm6261643();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6271825(){
+    Brick br(liftarm2x4LShapeThick_6271825);
+    LiftArm arm = liftArm6271825();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick6271810(){
+    Brick br(liftarm3x3LShapeThin_6271810);
+    LiftArm arm = liftArm6271810();
+    br.setConnectorsList(arm);
+    return br;
+}
+
+Brick brick4552347(){
+    Brick br(liftarm3x3TShapeThick_4552347);
+    LiftArm arm = liftArm4552347();
+    br.setConnectorsList(arm);
+    return br;
+}
+
 //********************************************************************************
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
 void construction(){
-    Brick brick1 = brick6345239();
+    Brick brick1 = brick6271810();
 
     // Brick brick1 = brick6330960();
-    // Brick brick2 = brick4666999();
+    Brick brick2 = brick4666999();
     // Brick brick3 = brick4163533();
     // Brick brick4 = brick6159763();
     
-    // brick1.connect(0,0,brick2,0);
+    brick1.connect(0,0,brick2,0, Shift::HalfRight);
     // brick2.connect(1,1,brick3,90);
     // brick3.connect(0,1,brick4,0);
 
-    for (size_t i = 0; i < brick1.getConnectorList().size(); i++) {
-        brick1[i].showonscreen();
-    }
+    // for (size_t i = 0; i < brick1.getConnectorList().size(); i++) {
+    //     brick1[i].showonscreen();
+    // }
 
     brick1.display();
 }
