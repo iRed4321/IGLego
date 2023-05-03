@@ -710,49 +710,49 @@ Brick brick6345239(){
 }
 
 Brick brick4495935(){
-    Brick br(liftarm1x7Thick_4495935);
+    Brick br(liftarm1x7Thick_4495935, noir);
     LiftArm arm = liftArm4495935();
     br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6261643(){
-    Brick br(liftarm1x13Thick_6261643);
+    Brick br(liftarm1x13Thick_6261643, bleuclair);
     LiftArm arm = liftArm6261643();
     br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6271825(){
-    Brick br(liftarm2x4LShapeThick_6271825);
+    Brick br(liftarm2x4LShapeThick_6271825, noir);
     LiftArm arm = liftArm6271825();
     br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6271810(){
-    Brick br(liftarm3x3LShapeThin_6271810);
+    Brick br(liftarm3x3LShapeThin_6271810, noir);
     LiftArm arm = liftArm6271810();
     br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4552347(){
-    Brick br(liftarm3x3TShapeThick_4552347);
+    Brick br(liftarm3x3TShapeThick_4552347, noir);
     LiftArm arm = liftArm4552347();
     br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6173003(){
-    Brick br(liftarm3x5LShapeThick_6173003);
+    Brick br(liftarm3x5LShapeThick_6173003,bleuclair);
     LiftArm arm = liftArm6173003();
     br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6271156(){
-    Brick br(liftarm1x115DoubleBentThick_6271156);
+    Brick br(liftarm1x115DoubleBentThick_6271156,gris);
 
 	Model m = Model();
 
