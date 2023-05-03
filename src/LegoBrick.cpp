@@ -153,6 +153,10 @@ Brick::Brick(void (*brickFunc)(), float* color) : color(color),brickFunc(brickFu
     nextId = 0;
 }
 
+Brick::Brick(void (*brickFunc)()) : color(vert),brickFunc(brickFunc){
+    nextId = 0;
+}
+
 std::vector<Connector> Brick::getConnectorList(){
     return this->connectorList;
 }

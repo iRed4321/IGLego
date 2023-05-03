@@ -72,7 +72,8 @@ public:
 
 class Brick {
 public:
-	Brick(void (*brickFunc)(),float color[4]);
+	Brick(void (*brickFunc)(),float* color);
+	Brick(void (*brickFunc)());
     std::size_t addConnector(Connector& conn);
 	Connector& operator[](std::size_t index);
 	void connect(struct Link conn);
