@@ -66,7 +66,7 @@ public:
 
 class Brick {
 public:
-	Brick(void (*brickFunc)());
+	Brick(void (*brickFunc)(),float color[4]);
     std::size_t addConnector(Connector& conn);
 	Connector& operator[](std::size_t index);
 	void connect(struct Link conn);
@@ -77,6 +77,7 @@ public:
 	std::vector<Connector> getConnectorList();
 
 private:
+	float *color; //float color[4];
 	void (*brickFunc)();
 	std::size_t nextId;
     std::vector<Connector> connectorList;
@@ -93,24 +94,25 @@ struct Link{
 
 // Nathan s'occupe de ces pièces
 Brick brick6012451(); //ok
-Brick brick4163533();
-Brick brick4509897();
-Brick brick4142865();
-Brick brick4211815();
-Brick brick370526();
-Brick brick4666999();
-Brick brick6159763();
-Brick brick370726();
-Brick brick370826();
-Brick brick6332573();
-Brick brick6330960();
-Brick brick6276951();
-Brick brick6261373();
-Brick brick4512360();
-Brick brick6089119();
-Brick brick6209519();
-Brick brick4206482();
-Brick brick4177431();
+Brick brick4163533(); //ok
+Brick brick4509897(); //ok
+Brick brick4142865(); //ok
+Brick brick4211815(); //ok
+Brick brick370526(); //ok
+Brick brick4666999(); //ok
+Brick brick6159763(); //ok
+Brick brick370726(); //ok
+Brick brick370826(); //ok
+Brick brick6332573(); //ok
+Brick brick6330960(); //ok
+Brick brick6276951(); //ok
+Brick brick6261373(); //ok
+Brick brick4512360(); //ok
+Brick brick6089119(); //ok
+Brick brick6209519(); //ok
+Brick brick4206482(); //ok
+Brick brick4177431(); //ok
+Brick brick6299413(); //ok
 
 // Quelqu'un d'autre s'occupe de celles ci
 Brick brick6185471();
@@ -133,7 +135,7 @@ Brick brick6173003();
 Brick brick6327162();
 Brick brick6055519();
 Brick brick6282158();
-Brick brick6299413();
+
 Brick brick6321305();
 Brick brick4211807();
 Brick brick6282140();
@@ -147,6 +149,6 @@ Brick brick6271163();
 Brick brick4619323();
 
 //builds the construction at the current position on the scene
-void construction();
+void construction(float angle);
 
 #endif

@@ -53,8 +53,6 @@ static float rotationZ = 1;
 static GLenum currentView = GL_FILL;
 
 static float rouge[4] = { 1.0F,0.0F,0.0F,0.5F };
-//static float vert[4] = { 0.0F,1.0F,0.0F,0.5F };
-//static float bleu[4] = { 0.0F,0.0F,1.0F,0.5F };
 
 static bool animation = false;
 
@@ -84,11 +82,17 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
+
+    glScalef(.5,.5,.5);
+
+    //default color
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     
-    construction();
+
+    //liftarmThin1x2AxleHoles_4163533();
+    construction(facettes_x);
     //pinWithFrictionRidgesLengthwise_4206482();
-    //glScalef(.5,.5,.5);
+    
 
     //gearWormScrew_6185471();
 

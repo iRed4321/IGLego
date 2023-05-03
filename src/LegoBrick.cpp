@@ -15,9 +15,19 @@
 #include "LegoBricks.h"
 #include "ObjetsGeometriques.h"
 
-//************************************************************************************
-//----------------------------------Defining the classes to work with-----------------
-//************************************************************************************
+//different colors of the bricks
+static float rouge[4] = { 1.0F,0.0F,0.0F,0.5F };
+static float vert[4] = { 0.0F,1.0F,0.0F,0.5F };
+static float bleu[4] = { 0.0F,0.0F,1.0F,0.5F };
+static float blanc[4] = { 0.9F,0.9F,0.9F,0.5F };
+static float beige[4] = { 0.4F,3.0F,3.0F,0.5F };
+static float noir[4] = { 0.1F,0.1F,0.1F,0.5F };
+static float gris[4] = { 0.5F,0.5F,0.5F,0.5F };
+static float bleuclair[4] = { 3.0F,3.0F,1.0F,0.5F };
+static float bleufonce[4] = { 0.0F,0.0F,5.0F,0.5F };
+
+
+//useful functions
 
 float compute_angle( Dir3D vector1, Dir3D vector2) {
     float angle;
@@ -31,6 +41,11 @@ float compute_angle( Dir3D vector1, Dir3D vector2) {
 void funcToTest(){
     std::cout<<"Hello World ! \n";
 }
+
+//************************************************************************************
+//----------------------------------Defining the classes to work with-----------------
+//************************************************************************************
+
 
 Connector::Connector(
 		Pos3D pos,
@@ -129,7 +144,7 @@ void Connector::printCharacteristics(){
     std::cout<<"\n";
 }
 
-Brick::Brick(void (*brickFunc)()) : brickFunc(brickFunc){
+Brick::Brick(void (*brickFunc)(), float* color) : color(color),brickFunc(brickFunc){
     nextId = 0;
 }
 
@@ -189,6 +204,8 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
 }
 
 void Brick::display(){
+
+    glMaterialfv(GL_FRONT,GL_DIFFUSE,this->color);
 	brickFunc();
     size_t nblinks = connexionList.size();
 
@@ -259,26 +276,6 @@ void Brick::setConnectorsList(LiftArm &arm){
     }
 }
 
-// Brick brick4163533(){
-//     Brick br(liftarmThin1x2AxleHoles_4163533);
-
-//     ConnType type = CROSS;
-//     Pos3D pos(0,0,0);
-//     Dir3D dir(0,1,0);
-    
-//     ConnectorIn firstConn(pos,dir,type);
-//     br.addConnector(firstConn);
-
-//     type = CROSS;
-//     pos.update(1,0,0);
-//     dir.update(0,1,0);
-    
-//     ConnectorIn secondConn(pos,dir,type);
-//     br.addConnector(secondConn);
-
-//     return br;
-// }
-
 void Brick::printCharacteristics(){
     std::cout<<"--------Connectors--------"<<std::endl;
     for (size_t i = 0; i<nextId;++i){
@@ -307,7 +304,7 @@ void Brick::printCharacteristics(){
 //**********************************************************************************
 
 Brick brick6012451(){
-    Brick br(gear8ToothType2_6012451);
+    Brick br(gear8ToothType2_6012451, noir);
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
@@ -318,7 +315,7 @@ Brick brick6012451(){
 }
 
 Brick brick4163533(){
-    Brick br(liftarmThin1x2AxleHoles_4163533);
+    Brick br(liftarmThin1x2AxleHoles_4163533,blanc);
 
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -337,29 +334,8 @@ Brick brick4163533(){
     return br;
 }
 
-
-Brick brick(){
-    Brick br(liftarmThin1x2AxleHoles_4163533);
-
-    ConnType type = CROSS;
-    Pos3D pos(0,0,0);
-    Dir3D dir(0,1,0);
-    
-    ConnectorIn firstConn(pos,dir,type);
-    br.addConnector(firstConn);
-
-    type = CROSS;
-    pos.update(1,0,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn secondConn(pos,dir,type);
-    br.addConnector(secondConn);
-
-//     return br;
-// }
-
 Brick brick6330960(){
-    Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960);
+    Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960,blanc);
     
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -386,47 +362,313 @@ Brick brick6330960(){
 }
 
 Brick brick4509897(){
-    Brick br(plate4x8_4509897);
+    Brick br(plate4x8_4509897,beige);
     
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
     
-    ConnectorIn firstConn(pos,dir,type);
-    br.addConnector(firstConn);
+
+    for(int i = 0; i<4; ++i){
+		for(int j = 0;j<8; ++j ){
+            pos.update(i-1.5,0,j-3.5);
+            ConnectorIn newConn(pos,dir,type);
+            br.addConnector(newConn);
+		}
+	}
+
+    return br;
+}
+
+Brick brick4142865(){
+    Brick br(axle2Notched_4142865,rouge); 
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-0.5,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CROSS;
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);    
+
+    return br;
+}
+
+
+Brick brick4211815(){
+    Brick br(axle3_4211815, gris);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-1,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CROSS;
+    pos.update(0,0,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CROSS;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+
+    return br;
+}
+Brick brick370526(){
+    Brick br(axle4_370526,noir); 
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-1.5,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CROSS;
+    pos.update(0,-0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CROSS;
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+    type = CROSS;
+    pos.update(0,1.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn conn4(pos,dir,type);
+    br.addConnector(conn4);
+
+
+    return br;
+}
+
+Brick brick370726(){
+    Brick br(axle8_370726,noir); 
+    
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    for(size_t i = 0; i<8; ++i){
+        pos.update(0,-3.5+i,0);
+        ConnectorOut conn(pos,dir,type);
+        br.addConnector(conn); 
+    }
+    
+    return br;
+}
+
+Brick brick370826(){
+    Brick br(axle12_370826,noir); 
+    
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    for(size_t i = 0; i<12; ++i){
+        pos.update(0,-5.5+i,0);
+        ConnectorOut conn(pos,dir,type);
+        br.addConnector(conn); 
+    }
+    
+    return br;
+}
+
+Brick brick6332573(){
+    Brick br(axleAndPinConnector1_6332573,blanc);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CIRCLE;
+    pos.update(1,0,0);
+    dir.update(1,0,0);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2); 
+    return br;
+}
+
+Brick brick6276951(){
+    Brick br(axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951,noir);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CROSS;
+    pos.update(1,0,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CROSS;
+    pos.update(-1,0,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+    return br;
+}
+
+Brick brick6261373(){
+    Brick br(axleAndPinConnectorPerpendicular_6261373,rouge); 
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
 
     type = CIRCLE;
     pos.update(1,0,0);
     dir.update(0,0,1);
-    
-    ConnectorIn secondConn(pos,dir,type);
-    br.addConnector(secondConn);
 
-    type = CIRCLE;
-    pos.update(2,0,0);
-    dir.update(0,0,1);
-    
-    ConnectorIn thirdConn(pos,dir,type);
-    br.addConnector(thirdConn);
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+
     return br;
 }
 
-Brick brick4142865(){Brick br(funcToTest); return br;}
-Brick brick4211815(){Brick br(funcToTest); return br;}
-Brick brick370526(){Brick br(funcToTest); return br;}
-Brick brick370726(){Brick br(funcToTest); return br;}
-Brick brick370826(){Brick br(funcToTest); return br;}
-Brick brick6332573(){Brick br(funcToTest); return br;}
-Brick brick6261373(){Brick br(funcToTest); return br;}
-Brick brick4512360(){Brick br(funcToTest); return br;}
-Brick brick6089119(){Brick br(funcToTest); return br;}
-Brick brick6209519(){Brick br(funcToTest); return br;}
-Brick brick4206482(){Brick br(funcToTest); return br;}
-Brick brick4177431(){Brick br(funcToTest); return br;}
+Brick brick4512360(){
+    Brick br(axleConnectorSmoothWithXHoleOrientation_4512360,gris);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-0.5,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CROSS;
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+    
+    return br;
+}
+
+Brick brick6089119(){
+    Brick br(axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119,noir); 
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CROSS;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CROSS;
+    pos.update(0,2,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+    return br;
+}
+
+Brick brick6209519(){
+    Brick br(axlePin3LWithFrictionRidgesLengthwise_6209519,rouge); 
+    
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CIRCLE;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CIRCLE;
+    pos.update(0,2,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn3(pos,dir,type);
+    br.addConnector(conn3);
+    
+    return br;
+}
+
+Brick brick4206482(){
+    Brick br(axlePinWithFrictionRidgesLengthwise_4206482,bleufonce); 
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CIRCLE;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    return br;
+}
+Brick brick4177431(){
+    Brick br(gear12ToothDoubleBevel_4177431,noir); 
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+    return br;
+}
 
 
 Brick brick4666999(){
-    Brick br(axle4WithCenterStop_4666999);
+    Brick br(axle4WithCenterStop_4666999, beige);
 
     ConnType type = CROSS;
     Pos3D pos(0,-1.5,0);
@@ -453,8 +695,8 @@ Brick brick4666999(){
 }
 
 Brick brick6159763(){
-    Brick br(axle5WithStop_6159763);
-    //Brick br(funcToTest);
+    Brick br(axle5WithStop_6159763, noir);
+    
     ConnType type = CROSS;
     Pos3D pos(0,-2,0);
     Dir3D dir(0,1,0);
@@ -493,57 +735,84 @@ Brick brick6159763(){
     return br;
 }
 
+Brick brick6299413(){
+    Brick br(pinLongWithFrictionRidgesLengthwise_6299413,bleufonce);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,-1,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CIRCLE;
+    pos.update(0,0,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CIRCLE;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+    return br;
+}
+
 Brick brick4177444(){
-    Brick br(liftarm1x2Thick_4177444);
+    Brick br(liftarm1x2Thick_4177444, noir);
     LiftArm arm = liftArm4177444();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick6344864(){
-    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864);
+    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864, gris);
     LiftArm arm = liftArm6344864();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick6331723(){
-    Brick br(liftarm1x3Thin_6331723);
+    Brick br(liftarm1x3Thin_6331723, noir);
     LiftArm arm = liftArm6331723();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick6327548(){
-    Brick br(liftarm1x4Thin_6327548);
+    Brick br(liftarm1x4Thin_6327548, noir);
     LiftArm arm = liftArm6327548();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick6364749(){
-    Brick br(liftarm1x4Thin_6364749);
+    Brick br(liftarm1x4Thin_6364749, bleuclair);
     LiftArm arm = liftArm6364749();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick4142135(){
-    Brick br(liftarm1x5Thick_4142135);
+    Brick br(liftarm1x5Thick_4142135,noir);
     LiftArm arm = liftArm4142135();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick4249021(){
-    Brick br(liftarm1x5Thick_4249021);
+    Brick br(liftarm1x5Thick_4249021, blanc);
     LiftArm arm = liftArm4249021();
     br.setConnectorsList(arm);
     return br;
 }
 
 Brick brick6345239(){
-    Brick br(liftarm1x6Thin_6345239);
+    Brick br(liftarm1x6Thin_6345239, blanc);
     LiftArm arm = liftArm6345239();
     br.setConnectorsList(arm);
     return br;
@@ -553,27 +822,40 @@ Brick brick6345239(){
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
-void construction(){
-    Brick brick1 = brick6345239();
-
-    // Brick brick1 = brick6330960();
-    // Brick brick2 = brick4666999();
-    // Brick brick3 = brick4163533();
-    // Brick brick4 = brick6159763();
+void construction(float angle){
+    /*
+    Brick brick1 = brick6330960();
+    Brick brick2 = brick4666999();
+    Brick brick3 = brick4163533();
+    Brick brick4 = brick6159763();
     
-    // brick1.connect(0,0,brick2,0);
-    // brick2.connect(1,1,brick3,90);
-    // brick3.connect(0,1,brick4,0);
-
-    for (size_t i = 0; i < brick1.getConnectorList().size(); i++) {
+    brick1.connect(0,0,brick2,0);
+    brick2.connect(1,1,brick3,90);
+    brick3.connect(0,1,brick4,0);
+    */
+    /*
+    for(size_t i = 0; i< brick1.getConnectorList().size(); ++i){
         brick1[i].showonscreen();
     }
+    */
 
-    brick1.display();
+    //NOTATION brick<numeroEtape>_<indexEtape>
+
+    Brick brick1_0 = brick4249021();
+    Brick brick1_1 = brick6299413();
+    Brick brick1_2 = brick6299413();
+
+    brick1_0.connect(1,0,brick1_1,0);
+    brick1_0.connect(3,0,brick1_2,0);
+    
+    
+    brick1_0.display();
 }
 
 /*
-
+for (size_t i = 0; i < brick1.getConnectorList().size(); i++) {
+        brick1[i].showonscreen();
+    }
 //main program that allows testing without using the whole opengl thing
 // compile and run with 
 // $make test-other

@@ -1,5 +1,5 @@
 # Project igLego
-author : Jocelyn Bournier, Nathan Gallone, Léo Parent
+authors : Jocelyn Bournier, Nathan Gallone, Léo Parent
 
 description : Program that displays a Lego Technic construct
 
