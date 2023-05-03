@@ -9,6 +9,12 @@ enum ConnType{
 	CIRCLE,CROSS
 };
 
+enum Shift{
+	FullSize,
+	HalfLeft,
+	HalfRight
+};
+
 class Brick;
 struct Link;
 class Connector;
@@ -71,9 +77,10 @@ public:
 	Connector& operator[](std::size_t index);
 	void connect(struct Link conn);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle);
+	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, Shift shift);
 	void display();
 	void printCharacteristics();
-	void setConnectorsList(LiftArm& arm);
+	void addConnectorsList(LiftArm& arm);
 	std::vector<Connector> getConnectorList();
 
 private:
@@ -84,11 +91,14 @@ private:
 	std::vector<struct Link> connexionList;
 };
 
+
+
 struct Link{
 	int myPin;
 	int otherPin;
 	Brick &br;
 	float angle;
+	Shift shift;
 };
 
 

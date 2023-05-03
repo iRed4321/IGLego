@@ -77,7 +77,12 @@ void Connector::showonscreen(){
         glRotatef(angle,axis.x,axis.y,axis.z);
         
         glScalef(0.5,1.3,0.5);
-        cylinder(0.2);
+
+        if (this->type == CROSS)
+            mySolidCross(0.2);
+        else if (this->type == CIRCLE)
+            cylinder(0.2);
+
     glPopMatrix();
 }
 
@@ -198,8 +203,12 @@ void Brick::connect(struct Link lk){
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
-    struct Link lk = {myPin,otherPin,br,angle};
-    
+    struct Link lk = {myPin,otherPin,br,angle,Shift::FullSize};
+    this->connect(lk);
+}
+
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle, Shift shift){
+    struct Link lk = {myPin,otherPin,br,angle,shift};
     this->connect(lk);
 }
 
@@ -232,25 +241,33 @@ void Brick::display(){
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
+        if (lk.shift == Shift::HalfLeft) {
+            glTranslatef(0,-0.25,0);
+        } else if (lk.shift == Shift::HalfRight) {
+            glTranslatef(0,0.25,0);
+        }
+
         lk.br.display();
     }
 }
 
-void Brick::setConnectorsList(LiftArm &arm){
-    connectorList.clear();
+void Brick::addConnectorsList(LiftArm &arm){
     nextId = 0;
     for(auto [pos, part] : arm.model){
         nextId++;
-        Pos3D pos1 = Pos3D(pos.x,pos.y,pos.z);
+        Pos3D pos1 = Pos3D(pos.x,pos.z,pos.y);
 
-        Dir3D dir = Dir3D(0,0,0);
+        Dir3D dir = Dir3D(0,0,1);
 
         switch (part.orientation){
+
             case Front:
+            case Right:
                 dir = Dir3D(0,0,1);
                 break;
 
             case Back:
+            case Left:
                 dir = Dir3D(0,0,-1);
                 break;
 
@@ -259,9 +276,17 @@ void Brick::setConnectorsList(LiftArm &arm){
         }
 
         switch (part.kind){
-            case ArmEnd:
             case ArmWithCross:
+            case ArmAngleWithCross:
             case ArmEndWithCross:
+            {
+                ConnectorIn conn1(pos1,dir,CROSS);
+                connectorList.push_back(conn1);
+                break;
+            }
+
+            case ArmEnd:
+            case ArmAngle:
             case Arm:{
                 ConnectorIn conn1(pos1,dir,CIRCLE);
                 connectorList.push_back(conn1);
@@ -368,142 +393,8 @@ Brick brick4509897(){
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
     
-
-    for(int i = 0; i<4; ++i){
-		for(int j = 0;j<8; ++j ){
-            pos.update(i-1.5,0,j-3.5);
-            ConnectorIn newConn(pos,dir,type);
-            br.addConnector(newConn);
-		}
-	}
-
-    return br;
-}
-
-Brick brick4142865(){
-    Brick br(axle2Notched_4142865,rouge); 
-
-    ConnType type = CROSS;
-    Pos3D pos(0,-0.5,0);
-    Dir3D dir(0,1,0);
-
-    ConnectorOut conn1(pos,dir,type);
-    br.addConnector(conn1); 
-
-    type = CROSS;
-    pos.update(0,0.5,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn conn2(pos,dir,type);
-    br.addConnector(conn2);    
-
-    return br;
-}
-
-
-Brick brick4211815(){
-    Brick br(axle3_4211815, gris);
-
-    ConnType type = CROSS;
-    Pos3D pos(0,-1,0);
-    Dir3D dir(0,1,0);
-
-    ConnectorOut conn1(pos,dir,type);
-    br.addConnector(conn1); 
-
-    type = CROSS;
-    pos.update(0,0,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn conn2(pos,dir,type);
-    br.addConnector(conn2);
-
-    type = CROSS;
-    pos.update(0,1,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn conn3(pos,dir,type);
-    br.addConnector(conn3);
-
-
-    return br;
-}
-Brick brick370526(){
-    Brick br(axle4_370526,noir); 
-
-    ConnType type = CROSS;
-    Pos3D pos(0,-1.5,0);
-    Dir3D dir(0,1,0);
-
-    ConnectorOut conn1(pos,dir,type);
-    br.addConnector(conn1); 
-
-    type = CROSS;
-    pos.update(0,-0.5,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn conn2(pos,dir,type);
-    br.addConnector(conn2);
-
-    type = CROSS;
-    pos.update(0,0.5,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn conn3(pos,dir,type);
-    br.addConnector(conn3);
-
-    type = CROSS;
-    pos.update(0,1.5,0);
-    dir.update(0,1,0);
-    
-    ConnectorIn conn4(pos,dir,type);
-    br.addConnector(conn4);
-
-
-    return br;
-}
-
-Brick brick370726(){
-    Brick br(axle8_370726,noir); 
-    
-    ConnType type = CROSS;
-    Pos3D pos(0,0,0);
-    Dir3D dir(0,1,0);
-
-    for(size_t i = 0; i<8; ++i){
-        pos.update(0,-3.5+i,0);
-        ConnectorOut conn(pos,dir,type);
-        br.addConnector(conn); 
-    }
-    
-    return br;
-}
-
-Brick brick370826(){
-    Brick br(axle12_370826,noir); 
-    
-    ConnType type = CROSS;
-    Pos3D pos(0,0,0);
-    Dir3D dir(0,1,0);
-
-    for(size_t i = 0; i<12; ++i){
-        pos.update(0,-5.5+i,0);
-        ConnectorOut conn(pos,dir,type);
-        br.addConnector(conn); 
-    }
-    
-    return br;
-}
-
-Brick brick6332573(){
-    Brick br(axleAndPinConnector1_6332573,blanc);
-
-    ConnType type = CIRCLE;
-    Pos3D pos(0,0,0);
-    Dir3D dir(0,1,0);
-
-    ConnectorIn conn1(pos,dir,type);
-    br.addConnector(conn1); 
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
 
     type = CIRCLE;
     pos.update(1,0,0);
@@ -765,56 +656,124 @@ Brick brick6299413(){
 Brick brick4177444(){
     Brick br(liftarm1x2Thick_4177444, noir);
     LiftArm arm = liftArm4177444();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6344864(){
     Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864, gris);
     LiftArm arm = liftArm6344864();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6331723(){
     Brick br(liftarm1x3Thin_6331723, noir);
     LiftArm arm = liftArm6331723();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6327548(){
     Brick br(liftarm1x4Thin_6327548, noir);
     LiftArm arm = liftArm6327548();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6364749(){
     Brick br(liftarm1x4Thin_6364749, bleuclair);
     LiftArm arm = liftArm6364749();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4142135(){
     Brick br(liftarm1x5Thick_4142135,noir);
     LiftArm arm = liftArm4142135();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick4249021(){
     Brick br(liftarm1x5Thick_4249021, blanc);
     LiftArm arm = liftArm4249021();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
     return br;
 }
 
 Brick brick6345239(){
     Brick br(liftarm1x6Thin_6345239, blanc);
     LiftArm arm = liftArm6345239();
-    br.setConnectorsList(arm);
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick4495935(){
+    Brick br(liftarm1x7Thick_4495935);
+    LiftArm arm = liftArm4495935();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6261643(){
+    Brick br(liftarm1x13Thick_6261643);
+    LiftArm arm = liftArm6261643();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6271825(){
+    Brick br(liftarm2x4LShapeThick_6271825);
+    LiftArm arm = liftArm6271825();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6271810(){
+    Brick br(liftarm3x3LShapeThin_6271810);
+    LiftArm arm = liftArm6271810();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick4552347(){
+    Brick br(liftarm3x3TShapeThick_4552347);
+    LiftArm arm = liftArm4552347();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6173003(){
+    Brick br(liftarm3x5LShapeThick_6173003);
+    LiftArm arm = liftArm6173003();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6271156(){
+    Brick br(liftarm1x115DoubleBentThick_6271156);
+
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{5,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{6,0,0}] = LegoPart{Back, ArmEnd};
+
+	LiftArm arm = LiftArm(THICK, m);
+    br.addConnectorsList(arm);
+
+    ConnectorIn conn = ConnectorIn(Pos3D(8.12,2.12,0), Dir3D(0,0,1), CIRCLE);
+    br.addConnector(conn);
+    conn = ConnectorIn(Pos3D(8.12,3.12,0), Dir3D(0,0,1), CIRCLE);
+    br.addConnector(conn);
+    conn = ConnectorIn(Pos3D(8.12,4.12,0), Dir3D(0,0,1), CROSS);
+    br.addConnector(conn);
+
     return br;
 }
 

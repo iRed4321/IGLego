@@ -1011,7 +1011,7 @@ void LiftArm::draw(){
 	if (thickness == THIN){
 		glScalef(1,1,0.5);
 	}
-	glRotatef(90,1,0,0);
+	glRotatef(90,-1,0,0);
 
 	for (auto &[pos, part] : model){
 		glPushMatrix();
