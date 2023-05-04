@@ -12,8 +12,6 @@
 #endif
 
 #include "LegoBrick.h"
-#include "LegoBricks.h"
-#include "ObjetsGeometriques.h"
 
 //different colors of the bricks
 static float rouge[4] = { 1.0F,0.0F,0.0F,0.5F };
@@ -206,13 +204,23 @@ void Brick::connect(struct Link lk){
     //std::cout<<"Connected !\n";
 }
 
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide){
+    struct Link lk = {myPin,otherPin,br,angle,otherSide,Shift::FullSize};
+    this->connect(lk);
+}
+
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle,bool otherSide, Shift shift){
+    struct Link lk = {myPin,otherPin,br,angle,otherSide,shift};
+    this->connect(lk);
+}
+
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
-    struct Link lk = {myPin,otherPin,br,angle,Shift::FullSize};
+    struct Link lk = {myPin,otherPin,br,angle,false,Shift::FullSize};
     this->connect(lk);
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, Shift shift){
-    struct Link lk = {myPin,otherPin,br,angle,shift};
+    struct Link lk = {myPin,otherPin,br,angle,false,shift};
     this->connect(lk);
 }
 
@@ -225,30 +233,40 @@ void Brick::display(){
     Pos3D zero(0,0,0);
     
     for(size_t i = 0; i<nblinks; ++i){
+
         Link lk = connexionList[i];
         Connector myConn(this->operator[](lk.myPin));
         Connector otherConn(lk.br[lk.otherPin]);
         
         glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
 
-        Dir3D dir(0,1,0);
-        Dir3D axis = dir^myConn.dir;
-        float angle = compute_angle(dir,myConn.dir)*180/M_PI;
+        Dir3D vertic(0,1,0);
+        Dir3D axis = vertic^myConn.dir;
+        float angle = compute_angle(vertic,myConn.dir)*180/M_PI;
         glRotatef(angle,axis.x,axis.y,axis.z);
+        
 
         glRotatef(lk.angle,0,1,0);
 
-        axis = dir^otherConn.dir;
-        angle = compute_angle(dir,otherConn.dir)*180/M_PI;
+        axis = vertic^otherConn.dir;
+        angle = compute_angle(vertic,otherConn.dir)*180/M_PI;
         glRotatef(-angle,axis.x,axis.y,axis.z);
         
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
+        Dir3D shift;
+
+        shift.x = myConn.dir.x == 0 ? 0 : 0.25;
+        shift.y = myConn.dir.y == 0 ? 0 : 0.25;
+        shift.z = myConn.dir.z == 0 ? 0 : 0.25;
+
+        printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
+
         if (lk.shift == Shift::HalfLeft) {
-            glTranslatef(0,-0.25,0);
+            glTranslatef(-shift.x,-shift.y,-shift.z);
         } else if (lk.shift == Shift::HalfRight) {
-            glTranslatef(0,0.25,0);
+            glTranslatef(shift.x,shift.y,shift.z);
         }
 
         lk.br.display();
@@ -780,72 +798,3 @@ Brick brick6271156(){
 
     return br;
 }
-
-//********************************************************************************
-// -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
-//********************************************************************************
-
-void construction(float angle){
-    /*
-    Brick brick1 = brick6330960();
-    Brick brick2 = brick4666999();
-    Brick brick3 = brick4163533();
-    Brick brick4 = brick6159763();
-    
-    brick1.connect(0,0,brick2,0);
-    brick2.connect(1,1,brick3,90);
-    brick3.connect(0,1,brick4,0);
-    */
-    /*
-    for(size_t i = 0; i< brick1.getConnectorList().size(); ++i){
-        brick1[i].showonscreen();
-    }
-    */
-
-    //NOTATION brick<numeroEtape>_<indexEtape>
-
-    Brick brick1_0 = brick4249021();
-    Brick brick1_1 = brick6299413();
-    Brick brick1_2 = brick6299413();
-
-    brick1_0.connect(1,0,brick1_1,0);
-    brick1_0.connect(3,0,brick1_2,0);
-    
-    
-    brick1_0.display();
-}
-
-/*
-for (size_t i = 0; i < brick1.getConnectorList().size(); i++) {
-        brick1[i].showonscreen();
-}
-//main program that allows testing without using the whole opengl thing
-// compile and run with 
-// $make test-other
-
-
-int main() {
-    Brick brick1 = brick6330960();
-    Brick brick2 = brick4666999();
-    Brick brick3 = brick4163533();
-    
-    //brick1.display();
-    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
-    brick2.printCharacteristics();
-    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
-
-    brick1.connect(0,0,brick2,0);
-
-    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
-    brick2.printCharacteristics();
-    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
-
-    brick2.connect(1,0,brick3,0);
-
-    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
-    brick2.printCharacteristics();
-    std::cout<<"-_-_-_-_-_-_-_-_-_-_-_-"<<std::endl;
-
-    return 0;
-}
-*/
