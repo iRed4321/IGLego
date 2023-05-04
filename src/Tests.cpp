@@ -82,9 +82,6 @@ static void scene(void) {
 	glPushMatrix();
 
     glScalef(.5,.5,.5);
-
-    //default color
-    glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     
     construction(facettes_x);
     
