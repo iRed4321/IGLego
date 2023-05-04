@@ -43,8 +43,10 @@ void construction(float angle){
 
     brick1_0.connect(1,0,brick1_1,0,true);
     brick1_0.connect(3,0,brick1_2,0,true);
-    brick1_0.connect(2,0,brick1_3,0);
     
+    Brick brick2_0 = brick6055519();
+
+    brick1_1.connect(1,0,brick2_0,0);
     
     brick1_0.display();
 }

@@ -813,3 +813,72 @@ Brick brick6271156(){
 
     return br;
 }
+
+Brick brick6055519(){
+    Brick br(liftarm3X5PerpendicularHShapeThick_6055519,gris);
+    
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,0,1);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1);
+
+    type = CIRCLE;
+    pos.update(1,0,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+     type = CIRCLE;
+    pos.update(2,0,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+     type = CIRCLE;
+    pos.update(1,1,0);
+    dir.update(1,0,0);
+
+    ConnectorIn conn4(pos,dir,type);
+    br.addConnector(conn4);
+
+    type = CIRCLE;
+    pos.update(1,2,0);
+    dir.update(1,0,0);
+
+    ConnectorIn conn5(pos,dir,type);
+    br.addConnector(conn5);
+
+    type = CIRCLE;
+    pos.update(1,3,0);
+    dir.update(1,0,0);
+
+    ConnectorIn conn6(pos,dir,type);
+    br.addConnector(conn6);
+
+    type = CIRCLE;
+    pos.update(0,4,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn7(pos,dir,type);
+    br.addConnector(conn7);
+
+    type = CIRCLE;
+    pos.update(1,4,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn8(pos,dir,type);
+    br.addConnector(conn8);
+
+    type = CIRCLE;
+    pos.update(2,4,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn9(pos,dir,type);
+    br.addConnector(conn9);
+    
+    return br;
+}
