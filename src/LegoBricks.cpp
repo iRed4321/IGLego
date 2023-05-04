@@ -844,11 +844,11 @@ void pinLongWithFrictionRidgesLengthwise_6299413(){
 	//blue
 	glPushMatrix();
 		glPushMatrix();
-			glScalef(0.8,2,0.8);
+			glScalef(0.8,3,0.8);
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0,0.3,0);
+			glTranslatef(0,0.95,0);
 			glScalef(1,0.1,1);
 			cylinder(0.2);
 		glPopMatrix();
@@ -859,11 +859,11 @@ void pinLongWithoutFrictionRidgesLengthwise_6321305(){
 	//yellow
 	glPushMatrix();
 		glPushMatrix();
-			glScalef(0.8,2,0.8);
+			glScalef(0.8,3,0.8);
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0,0.3,0);
+			glTranslatef(0,0.95,0);
 			glScalef(1,0.1,1);
 			cylinder(0.2);
 		glPopMatrix();
@@ -874,7 +874,7 @@ void pinWithoutFrictionRidgesLengthwise_4211807(){
 	//gray
 	glPushMatrix();
 		glPushMatrix();
-			glScalef(0.8,1.5,0.8);
+			glScalef(0.8,2,0.8);
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
@@ -907,13 +907,35 @@ void pinWithFrictionRidgesLengthwise_4206482(){
 void bush_6275844(){
 	//gray
 	glPushMatrix();
-		innerCross();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			thickCross();
+		glPopMatrix();
+		glPushMatrix();
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(1.2,0.1,1.2);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(1.2,0.1,1.2);
+			cylinder(0.2);
+		glPopMatrix();
 	glPopMatrix();
 }
 
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
 	//black
-	//la jumelle de sous marin
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			cylinder(0.2);
+		glPopMatrix();
+		
+	glPopMatrix();
 }
 
 //pala Jocelyn
