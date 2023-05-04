@@ -4,6 +4,7 @@
 #include <vector>
 #include "coords.h"
 #include "ObjetsGeometriques.h"
+#include "LegoBricks.h"
 
 enum ConnType{
 	CIRCLE,CROSS
@@ -77,6 +78,8 @@ public:
     std::size_t addConnector(Connector& conn);
 	Connector& operator[](std::size_t index);
 	void connect(struct Link conn);
+	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide);
+	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide, Shift shift);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, Shift shift);
 	void display();
@@ -99,6 +102,7 @@ struct Link{
 	int otherPin;
 	Brick &br;
 	float angle;
+	bool otherSide;
 	Shift shift;
 };
 
@@ -158,8 +162,5 @@ Brick brick6271810();
 Brick brick6271164();
 Brick brick6271163();
 Brick brick4619323();
-
-//builds the construction at the current position on the scene
-void construction(float angle);
 
 #endif

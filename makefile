@@ -8,9 +8,12 @@ INC_DIR := include
 INC_FLAGS := -I $(INC_DIR)
 OTHER_FLAGS := -std=c++17 -Wall -O2
 
-OBJS_FILES := build/objetsgeometriques.o build/legobricks.o build/tests.o build/coords.o build/legobrick.o
+OBJS_FILES := build/objetsgeometriques.o build/legobricks.o build/tests.o build/coords.o build/legobrick.o build/construction.o
 
 all: project
+
+build/construction.o : $(SRC_DIR)/construction.cpp $(INC_DIR)/construction.h
+	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
 build/legobrick.o : $(SRC_DIR)/LegoBrick.cpp $(INC_DIR)/LegoBrick.h $(INC_DIR)/LegoBricks.h
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
