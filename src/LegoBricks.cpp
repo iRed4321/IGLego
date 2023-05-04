@@ -807,7 +807,7 @@ void pinLongWithFrictionRidgesLengthwise_6299413(){
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0,0.45,0);
-			glScalef(1,0.1,1);
+			glScalef(0.95,0.15,0.95);
 			cylinder(0.2);
 		glPopMatrix();
 	glPopMatrix();
@@ -822,7 +822,7 @@ void pinLongWithoutFrictionRidgesLengthwise_6321305(){
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0,0.45,0);
-			glScalef(1,0.1,1);
+			glScalef(0.95,0.15,0.95);
 			cylinder(0.2);
 		glPopMatrix();
 	glPopMatrix();
@@ -836,7 +836,7 @@ void pinWithoutFrictionRidgesLengthwise_4211807(){
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
-			glScalef(1,0.1,1);
+			glScalef(0.95,0.15,0.95);
 			cylinder(0.2);
 		glPopMatrix();
 	glPopMatrix();
