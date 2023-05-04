@@ -26,95 +26,6 @@ void mySolidDisc(int ns){
   glEnd();
 }
 
-/*
-static void face(float tx,float ty, int n,int m) {
-  float dy = ty/m;
-  float dx = tx/n;
-  glPushMatrix();
-  glNormal3f(0.0F,0.0F,1.0F);
-  glTranslatef(-tx/2.0F,-ty/2.0F,0.0F);
-  for ( int l = 0 ; l < m ; l++) {
-    float yf = l * dy;
-    float yi = yf + dy;
-    float x = 0.0F;
-    glBegin(GL_QUAD_STRIP);
-    for ( int c = 0 ; c <= n ; c++ ) {
-      glVertex2f(x,yi);
-      glVertex2f(x,yf);
-      x += dx; }
-    glEnd(); }
-  glPopMatrix();
-}
-*/
-
-static void face2(float tx,float ty, int n,int m){
-  float dy = ty/m;
-  float dx = tx/n;
-  glPushMatrix();
-  glNormal3f(0.0F,0.0F,1.0F);
-  glTranslatef(-tx/2.0F,-ty/2.0F,0.0F);
-  glBegin(GL_QUADS);
-  float x = 0.0F;
-  float y = 0.0F;
-  for ( int i = 0 ; i < m ; i++) {
-    x=0.0F;
-    for ( int j = 0 ; j < n ; j++ ) {
-      glVertex3f(x,y,0);
-      glVertex3f(x+dx,y,0);
-      glVertex3f(x+dx,y+dy,0);
-      glVertex3f(x,y+dy,0);
-      x+=dx;
-    }
-    y+=dy;
-  }
-  glEnd();
-  glPopMatrix();
-}
-
-
-
-void mySolidCube(int n) {
-  double ct = 1;
-  glPushMatrix();
-  glPushMatrix();
-  glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face2((float) ct,(float) ct,n,n);
-  glPopMatrix();
-  glPushMatrix();
-  glRotatef(90.0F,0.0F,1.0F,0.0f);
-  glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face2((float) ct,(float) ct,n,n);
-  glPopMatrix();
-  glPushMatrix();
-  glRotatef(180.0F,0.0F,1.0F,0.0f);
-  glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face2((float) ct,(float) ct,n,n);
-  glPopMatrix();
-  glPushMatrix();
-  glRotatef(270.0F,0.0F,1.0F,0.0f);
-  glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face2((float) ct,(float) ct,n,n);
-  glPopMatrix();
-  glPushMatrix();
-  glRotatef(90.0F,1.0F,0.0F,0.0f);
-  glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face2((float) ct,(float) ct,n,n);
-  glPopMatrix();
-  glPushMatrix();
-  glRotatef(-90.0F,1.0F,0.0F,0.0f);
-  glTranslatef(0.0F,0.0F,(GLfloat) ct/2.0F);
-  face2((float) ct,(float) ct,n,n);
-  glPopMatrix();
-  glPopMatrix();
-}
-
-void mySolidRectangle(int length, int n) {
-  glPushMatrix();
-  glScalef((float) length,1.0F,1.0F);
-  mySolidCube(n);
-  glPopMatrix();
-}
-
 void mySolidCylindre(int ns,int nl) {
   mySolidCylindre(ns,nl,360.0f);
 }
@@ -981,9 +892,7 @@ void cylinder(float borderSize){
 
 
 void cube(){
-  glPushMatrix();
-	mySolidCube(5);
-  glPopMatrix();  
+	glutSolidCube(1);
 }
 
 LiftArm::LiftArm(Thickness thickness, Model model){
