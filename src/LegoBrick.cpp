@@ -255,13 +255,16 @@ void Brick::display(){
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
+        printf("myConn.dir : %f %f %f\n",myConn.dir.x,myConn.dir.y,myConn.dir.z);
+        printf("otherConn.dir : %f %f %f\n",otherConn.dir.x,otherConn.dir.y,otherConn.dir.z);
+
+
         Dir3D shift;
 
-        shift.x = myConn.dir.x == 0 ? 0 : 0.25;
-        shift.y = myConn.dir.y == 0 ? 0 : 0.25;
-        shift.z = myConn.dir.z == 0 ? 0 : 0.25;
+        shift.x = otherConn.dir.x == 0 ? 0 : 0.25;
+        shift.y = otherConn.dir.y == 0 ? 0 : 0.25;
+        shift.z = otherConn.dir.z == 0 ? 0 : 0.25;
 
-        printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
 
         if (lk.shift == Shift::HalfLeft) {
             glTranslatef(-shift.x,-shift.y,-shift.z);
