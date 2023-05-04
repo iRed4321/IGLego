@@ -800,3 +800,16 @@ Brick brick6271156(){
 
     return br;
 }
+
+Brick brick6299413(){
+    Brick br(pinLongWithFrictionRidgesLengthwise_6299413, bleu);
+    ConnType type = CIRCLE;
+    Pos3D pos = Pos3D(0,0,0);
+    Dir3D dir = Dir3D(0,0,1);
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1);
+}
+
+Brick brick6282158(){
+    Brick br(pinConnectorPerpendicular3LWith4Pins_6282158,gris);
+}
