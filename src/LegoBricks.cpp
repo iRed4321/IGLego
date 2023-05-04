@@ -692,8 +692,6 @@ void liftarm3x5LShapeWithQuarterEllipseThin_6327162(){
 	arm.draw();
 }
 
-//céla Jocelyn
-
 void cylinderBordersFace(){
 	glPushMatrix();
 		glTranslatef(0,0,0.449);
@@ -758,83 +756,46 @@ void cylinderBordersSide(){
 	glPopMatrix();
 }
 
+/*TODO Faire le reste, le po fonctionnel*/
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();
 		glPushMatrix();
-			glRotatef(90,1,0,0);
-			cylinder(0.2);
-			glPushMatrix();
-				glRotatef(90,1,0,0);
-				glTranslatef(0,1,0);
-				glScalef(0.8,1,0.8);
-				cylinder(0.2);
-			glPopMatrix();
-			glPushMatrix();
-				glRotatef(-90,0,0,1);
-				glTranslatef(0,1,0);
-				glScalef(0.8,1,0.8);
-				cylinder(0.2);
-			glPopMatrix();
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(-2,0,0);
-			glRotatef(90,1,0,0);
-			cylinder(0.2);
-			glRotatef(90,1,0,0);
-			glTranslatef(0,1,0);
 			glScalef(0.8,1,0.8);
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0,2,0);
 			glRotatef(90,1,0,0);
-			cylinder(0.2);
+			glTranslatef(-1.0,0,0);
 			glPushMatrix();
-				glRotatef(-90,0,0,1);
-				glTranslatef(0,1,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+			glTranslatef(2.0,0,0);
+			glPushMatrix();
 				glScalef(0.8,1,0.8);
 				cylinder(0.2);
 			glPopMatrix();
 		glPopMatrix();
-
 		glPushMatrix();
-			glTranslatef(-1,0,0);
+			glTranslatef(1.0,1.0,0);
 			glPushMatrix();
-				cylinderBordersFace();
-				glTranslatef(0,0,-0.9);
-				cylinderBordersFace();
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
 			glPopMatrix();
 			glPushMatrix();
-				glRotatef(90,1,0,0);
-				cylinderBordersSide();
+				glTranslatef(0,-2.0,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
+			glPopMatrix();
+			glTranslatef(-2.0,0,0);
+			glPushMatrix();
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
 			glPopMatrix();
 			glPushMatrix();
-				glTranslatef(0,0.45,0);
-				glScalef(2.1,0.1,1);	
-				cube();
-			glPopMatrix();
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0,1,0);
-			glPushMatrix();
-				glRotatef(90,0,0,1);
-				cylinderBordersFace();
-			glPopMatrix();
-			glPushMatrix();
-				glRotatef(90,0,1,0);
-				glRotatef(90,0,0,1);
-				cylinderBordersSide();
-			glPopMatrix();
-			glPushMatrix();
-				glTranslatef(-0.45,0,0);
-				glRotatef(90,0,0,1);
-				glScalef(2.1,0.1,1);	
-				cube();
-			glPopMatrix();
-			glTranslatef(0,0,-0.9);
-			glPushMatrix();
-				glRotatef(90,0,0,1);
-				cylinderBordersFace();
+				glTranslatef(0,-2.0,0);
+				glScalef(0.8,1,0.8);
+				cylinder(0.2);
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
