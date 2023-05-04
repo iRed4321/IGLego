@@ -136,21 +136,21 @@ void gearWormScrew_6185471();
 //---------Jocelyn----------
 //kind of done (ongoing)
 void pinConnectorPerpendicular3LWith4Pins_6282158();
-//done ?
+//done
 void pinLongWithFrictionRidgesLengthwise_6299413();
-//done ?
+//done
 void pinLongWithoutFrictionRidgesLengthwise_6321305();
-//done ?
+//done
 void pinWithoutFrictionRidgesLengthwise_4211807();
-//not done
-void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
-//done ?
+//done
 void pinWithFrictionRidgesLengthwise_4206482();
-//not done
+//done
+void pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
+//done
 void bush_6275844();
-//not done
+//done
 void bush1By2Smooth_6271165();
-//not done
+//done
 void drivingRingConnector_6276052();
 //--------------------------
 

@@ -865,29 +865,6 @@ void pinWithFrictionRidgesLengthwise_4206482(){
 	glPopMatrix();
 }
 
-void bush_6275844(){
-	//gray
-	glPushMatrix();
-		glPushMatrix();
-			glScalef(0.8,1,0.8);
-			thickCross();
-		glPopMatrix();
-		glPushMatrix();
-			cylinder(0.2);
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0,0.45,0);
-			glScalef(1.2,0.1,1.2);
-			cylinder(0.2);
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0,-0.45,0);
-			glScalef(1.2,0.1,1.2);
-			cylinder(0.2);
-		glPopMatrix();
-	glPopMatrix();
-}
-
 void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
 	//black
 	glPushMatrix();
@@ -912,6 +889,63 @@ void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
 			glPopMatrix();
 		glPopMatrix();
 		
+	glPopMatrix();
+}
+
+void bush_6275844(){
+	//gray
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,1,0.8);
+			thickCross();
+		glPopMatrix();
+		glPushMatrix();
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.45,0);
+			glScalef(1.2,0.1,1.2);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.45,0);
+			glScalef(1.2,0.1,1.2);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void bush1By2Smooth_6271165(){
+	//gray
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(0.8,0.5,0.8);
+			thickCross();
+		glPopMatrix();
+		glPushMatrix();
+		glScalef(1,0.5,1);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.225,0);
+			glScalef(1.2,0.1,1.2);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.225,0);
+			glScalef(1.2,0.1,1.2);
+			cylinder(0.2);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void drivingRingConnector_6276052(){
+	//white
+	glPushMatrix();
+		glScalef(1.0,2.0,1.0);
+		cylinder(0.2);
+		glScalef(0.8,1.0,0.8);
+		thickCross();
 	glPopMatrix();
 }
 
