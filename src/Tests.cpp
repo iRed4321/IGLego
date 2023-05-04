@@ -5,9 +5,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "LegoBricks.h"
-#include "LegoBrick.h"
-#include "ObjetsGeometriques.h"
+#include "construction.h"
 
 //makes the use of 3D arrays clearer
 #define X 0
@@ -88,54 +86,7 @@ static void scene(void) {
     //default color
     glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
     
-
-    //liftarmThin1x2AxleHoles_4163533();
     construction(facettes_x);
-    //pinWithFrictionRidgesLengthwise_4206482();
-    
-
-    //gearWormScrew_6185471();
-
-    // glPushMatrix();
-    //   glTranslatef(1,1.5,0);
-    //   gear12ToothDoubleBevel_4177431();
-    // glPopMatrix();
-
-    // glPushMatrix();
-    // glTranslatef(0,-3,0);
-    // plate4x8_4509897();
-    // glPopMatrix();
-    
-    // glTranslatef(-4.5,0,-3.5);
-    // technicLever3x3m90deg__6271810();
-    // glTranslatef(4, 0, 0);
-    // liftarmThin1x2AxleHoles_4163533();
-    // glTranslatef(2.2,0,0);
-    // axle4_370526();
-    // glTranslatef(1.2,0,0);
-    // axle4WithCenterStop_4666999();
-    // glTranslatef(-6,0,2);
-    // axle2Notched_4142865();
-    // glTranslatef(1.3,0,0);
-    // axle3_4211815();
-    // glTranslatef(2.2,0,0);
-    // gear8ToothType2_6012451();
-    // glTranslatef(2.2,0,0);
-    // axle5WithStop_6159763();
-    // glTranslatef(-5,0,2);
-    // axleAndPinConnector1_6332573();
-    // glTranslatef(3,0,0);
-    // axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960();
-    // glTranslatef(-4,2,0);
-    // axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
-    
-    // axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951();
-    // axlePin3LWithFrictionRidgesLengthwise_6209519();
-    // axlePinWithFrictionRidgesLengthwise_4206482();
-    // axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119();
-    // liftarm3X5PerpendicularHShapeThick_6055519();
-    // liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-    // axleConnectorSmoothWithXHoleOrientation_4512360();
     
 	glPopMatrix();
 }

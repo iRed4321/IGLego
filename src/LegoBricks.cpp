@@ -14,15 +14,7 @@
 #include "LegoBricks.h"
 #include "ObjetsGeometriques.h"
 
-/*
-pièce en forme de :
-	
-	+
-	O
-	+ O +
 
-la base du trou qui fait l'angle est en (0,0,0)
-*/
 void technicLever3x3m90deg__6271810(){
 	glPushMatrix();
 
