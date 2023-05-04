@@ -286,7 +286,6 @@ void Brick::display(){
         lk.br.getCurrentMatrix();
         lk.br.display();
 
-        glPopMatrix();
     }
 }
 
