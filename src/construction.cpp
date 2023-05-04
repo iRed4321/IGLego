@@ -37,23 +37,15 @@ void construction(float angle){
     //NOTATION brick<numeroEtape>_<indexEtape>
 
     Brick brick1_0 = brick4249021();
-<<<<<<< HEAD
     Brick brick1_1 = brick6321305();
     Brick brick1_3 = brick6282140();
     Brick brick1_4 = brick4211807();
+    Brick brick1_3 = brick6299413();
 
     brick1_0.connect(3,0,brick1_3,0);
     brick1_0.connect(1,0,brick1_4,0);
-    brick1_0.connect(4,2,brick1_1,0);
-=======
-    Brick brick1_1 = brick6299413();
-    Brick brick1_2 = brick6299413();
-    Brick brick1_3 = brick6299413();
-
-    brick1_0.connect(1,0,brick1_1,0,true);
-    brick1_0.connect(3,0,brick1_2,0,true);
+    brick1_0.connect(4,2,brick1_1,0,true);
     brick1_0.connect(2,0,brick1_3,0);
->>>>>>> ea3e5e859628b08fd776ac0582364306a713b65d
     
     
     brick1_0.display();
