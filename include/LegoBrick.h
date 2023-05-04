@@ -1,7 +1,9 @@
 #ifndef BRICK_H
 #define BRICK_H
 
+#include <GL/gl.h>
 #include <vector>
+
 #include "coords.h"
 #include "ObjetsGeometriques.h"
 #include "LegoBricks.h"
@@ -76,6 +78,8 @@ public:
 	Brick(void (*brickFunc)(),float* color);
 	Brick(void (*brickFunc)());
     std::size_t addConnector(Connector& conn);
+	void getCurrentMatrix();
+	void setCurrentMatrix();
 	Connector& operator[](std::size_t index);
 	void connect(struct Link conn);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide);
@@ -90,6 +94,7 @@ public:
 private:
 	float *color; //float color[4];
 	void (*brickFunc)();
+	GLfloat currentMatrix[16];
 	std::size_t nextId;
     std::vector<Connector> connectorList;
 	std::vector<struct Link> connexionList;

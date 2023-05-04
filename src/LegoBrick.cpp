@@ -155,6 +155,15 @@ Brick::Brick(void (*brickFunc)()) : color(vert),brickFunc(brickFunc){
     nextId = 0;
 }
 
+void Brick::getCurrentMatrix(){
+    glGetFloatv(GL_MODELVIEW_MATRIX, this->currentMatrix); // retrieve the current modelview matrix and save it to currentMatrix
+}
+
+void Brick::setCurrentMatrix(){
+    glLoadIdentity();
+    glMultMatrixf(this->currentMatrix);
+}
+
 std::vector<Connector> Brick::getConnectorList(){
     return this->connectorList;
 }
@@ -167,8 +176,6 @@ std::size_t Brick::addConnector(Connector& conn) {
 Connector& Brick::operator[](std::size_t index) {
     return connectorList[index];
 }
-
-
 
 void Brick::connect(struct Link lk){
     Connector myConn(this->operator[](lk.myPin));
@@ -230,11 +237,11 @@ void Brick::display(){
 	brickFunc();
     size_t nblinks = connexionList.size();
 
+    getCurrentMatrix();
     Pos3D zero(0,0,0);
-    
-    for(size_t i = 0; i<nblinks; ++i){
-        glPushMatrix();
 
+    for(size_t i = 0; i<nblinks; ++i){
+        setCurrentMatrix();
         Link lk = connexionList[i];
         Connector myConn(this->operator[](lk.myPin));
         Connector otherConn(lk.br[lk.otherPin]);
@@ -248,6 +255,9 @@ void Brick::display(){
         
 
         glRotatef(lk.angle,0,1,0);
+        if(lk.otherSide){
+            glRotatef(180,1,0,0);
+        }
 
         axis = vertic^otherConn.dir;
         angle = compute_angle(vertic,otherConn.dir)*180/M_PI;
@@ -256,20 +266,24 @@ void Brick::display(){
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
+        printf("myConn.dir : %f %f %f\n",myConn.dir.x,myConn.dir.y,myConn.dir.z);
+        printf("otherConn.dir : %f %f %f\n",otherConn.dir.x,otherConn.dir.y,otherConn.dir.z);
+
+
         Dir3D shift;
 
-        shift.x = myConn.dir.x == 0 ? 0 : 0.25;
-        shift.y = myConn.dir.y == 0 ? 0 : 0.25;
-        shift.z = myConn.dir.z == 0 ? 0 : 0.25;
+        shift.x = otherConn.dir.x == 0 ? 0 : 0.25;
+        shift.y = otherConn.dir.y == 0 ? 0 : 0.25;
+        shift.z = otherConn.dir.z == 0 ? 0 : 0.25;
 
-        printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
+        //printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
 
         if (lk.shift == Shift::HalfLeft) {
             glTranslatef(-shift.x,-shift.y,-shift.z);
         } else if (lk.shift == Shift::HalfRight) {
             glTranslatef(shift.x,shift.y,shift.z);
         }
-
+        lk.br.getCurrentMatrix();
         lk.br.display();
 
         glPopMatrix();
