@@ -151,10 +151,6 @@ Brick brick6327162();
 Brick brick6055519();
 Brick brick6282158();
 
-Brick brick6321305();
-Brick brick4211807();
-Brick brick6282140();
-Brick brick4206482();
 Brick brick6275844();
 Brick brick6271165();
 Brick brick6276052();
@@ -162,5 +158,10 @@ Brick brick6271810();
 Brick brick6271164();
 Brick brick6271163();
 Brick brick4619323();
+
+//jooooooooolasticocotierdemoitié
+Brick brick6282140();
+Brick brick4211807();
+Brick brick6321305();
 
 #endif
