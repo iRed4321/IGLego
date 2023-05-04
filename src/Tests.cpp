@@ -50,7 +50,13 @@ static float rotationZ = 1;
 
 static GLenum currentView = GL_FILL;
 
-static float rouge[4] = { 1.0F,0.0F,0.0F,0.5F };
+static const float noir[] = { 0.0F,0.0F,0.0F,1.0F };
+static const float blanc[] = { 1.0F,1.0F,1.0F,1.0F };
+static const float gris[] = { 0.7F,0.7F,0.7F,1.0F };
+static const float jaune[] = { 1.0F,1.0F,0.0F,1.0F };
+// static const float rouge[] = { 1.0F,0.0F,0.0F,1.0F };
+static const float vert[] = { 0.0F,1.0F,0.0F,1.0F };
+static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
 static bool animation = false;
 
@@ -62,12 +68,22 @@ static int facettes_y = 1;
 /* du programme                                 */
 
 static void init(void) {
-  glEnable(GL_LIGHTING);
+  const GLfloat shininess[] = { 5.0 };
+  glMaterialfv(GL_FRONT,GL_AMBIENT,noir);
+  glMaterialfv(GL_FRONT,GL_DIFFUSE,blanc);
+  glMaterialfv(GL_FRONT,GL_SPECULAR,gris);
+  glMaterialfv(GL_FRONT,GL_SHININESS,shininess);
+  glLightfv(GL_LIGHT0,GL_DIFFUSE,blanc);
+  glLightfv(GL_LIGHT1,GL_DIFFUSE,jaune);
+  glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
   glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHT1);
+  glEnable(GL_LIGHT2);
   glDepthFunc(GL_LESS);
   glEnable(GL_DEPTH_TEST);
+  glEnable(GL_NORMALIZE);
   glEnable(GL_AUTO_NORMAL);
-  // glEnable(GL_CULL_FACE);
+  glEnable(GL_LIGHTING);
 }
 
 
@@ -80,9 +96,8 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
+  glScalef(.5,.5,.5);
 
-    glScalef(.5,.5,.5);
-    
     construction(facettes_x);
     
 	glPopMatrix();

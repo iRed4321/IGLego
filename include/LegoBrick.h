@@ -18,6 +18,13 @@ enum Shift{
 	HalfRight
 };
 
+enum UsedConnection{
+	Free,
+	UsedLeft,
+	UsedRight,
+	Both
+};
+
 class Brick;
 struct Link;
 class Connector;
@@ -43,7 +50,7 @@ public:
 	Pos3D pos;
 	Dir3D dir;
 	ConnType type;
-	bool inUse;
+	UsedConnection inUse;
 	bool input;
 };
 
@@ -156,10 +163,6 @@ Brick brick6327162();
 Brick brick6055519();
 Brick brick6282158();
 
-Brick brick6321305();
-Brick brick4211807();
-Brick brick6282140();
-Brick brick4206482();
 Brick brick6275844();
 Brick brick6271165();
 Brick brick6276052();
@@ -167,5 +170,10 @@ Brick brick6271810();
 Brick brick6271164();
 Brick brick6271163();
 Brick brick4619323();
+
+//jooooooooolasticocotierdemoitié
+Brick brick6282140();
+Brick brick4211807();
+Brick brick6321305();
 
 #endif

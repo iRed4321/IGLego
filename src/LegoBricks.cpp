@@ -821,7 +821,7 @@ void pinLongWithoutFrictionRidgesLengthwise_6321305(){
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0,0.95,0);
+			glTranslatef(0,0.45,0);
 			glScalef(1,0.1,1);
 			cylinder(0.2);
 		glPopMatrix();
@@ -885,7 +885,6 @@ void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
 				cylinder(0.2);
 			glPopMatrix();
 		glPopMatrix();
-		
 	glPopMatrix();
 }
 

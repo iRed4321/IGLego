@@ -6,13 +6,6 @@
 //need to correct makefile so this works
 void mySolidDisc(int ns);
 
-/* Modelisation geometrique d'un cube :         */
-/*  - de côte ct                                */
-/*  - centre sur l'origine du repere            */
-/*  - avec chaque face facettisee               */
-/*    en n x n facettes carrees elementaires    */
-void mySolidCube(int n);
-
 /* Modelisation geometrique d'un parallèlépipède rectangle      */
 /* parallele a l'axe des x et des z :           */
 /*  - de longueur length                        */

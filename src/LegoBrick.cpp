@@ -50,7 +50,7 @@ Connector::Connector(
 		Dir3D dir,
 		ConnType type,
         bool input
-	) : pos(pos), dir(dir),type(type),inUse(false), input(input) {}
+	) : pos(pos), dir(dir),type(type),inUse(UsedConnection::Free), input(input) {}
 
 Connector::Connector(const Connector& other) {
     pos = other.pos;
@@ -204,8 +204,9 @@ void Brick::connect(struct Link lk){
     if(!res)
         return;
     
-    this->operator[](lk.myPin).inUse = true;
-    lk.br[lk.otherPin].inUse = true;
+    // th
+    // this->operator[](lk.myPin).inUse = true;
+    // lk.br[lk.otherPin].inUse = true;
 
     this->connexionList.push_back(lk);
     //std::cout<<"Connected !\n";
@@ -285,6 +286,7 @@ void Brick::display(){
         }
         lk.br.getCurrentMatrix();
         lk.br.display();
+
     }
 }
 
