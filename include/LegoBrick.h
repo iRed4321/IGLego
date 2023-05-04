@@ -16,6 +16,13 @@ enum Shift{
 	HalfRight
 };
 
+enum UsedConnection{
+	Free,
+	UsedLeft,
+	UsedRight,
+	Both
+};
+
 class Brick;
 struct Link;
 class Connector;
@@ -41,7 +48,7 @@ public:
 	Pos3D pos;
 	Dir3D dir;
 	ConnType type;
-	bool inUse;
+	UsedConnection inUse;
 	bool input;
 };
 
