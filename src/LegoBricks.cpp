@@ -934,6 +934,22 @@ void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
 			glScalef(0.8,1,0.8);
 			cylinder(0.2);
 		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,0.75,0);
+			glScalef(1,0.5,1);
+			cylinder(0.2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,1.5,0);
+			glRotatef(90,0,0,1);
+			glPushMatrix();
+				glScalef(1.4,1.4,1.4);
+				cylinder(0.3);
+			glPopMatrix();
+			glPushMatrix();
+				cylinder(0.2);
+			glPopMatrix();
+		glPopMatrix();
 		
 	glPopMatrix();
 }
