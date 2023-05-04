@@ -511,8 +511,13 @@ void liftarm1x5Thick_4249021(){
 }
 
 LiftArm liftArm4249021() {
-	LiftArm arm = LiftArm(THICK, 5);
-	return arm;
+	Model m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEnd};
+	return LiftArm(THICK, m);
 }
 
 void liftarm1x5Thick_4142135(){

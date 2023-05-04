@@ -235,6 +235,7 @@ void Brick::display(){
         Dir3D axis = dir^myConn.dir;
         float angle = compute_angle(dir,myConn.dir)*180/M_PI;
         glRotatef(angle,axis.x,axis.y,axis.z);
+        
 
         glRotatef(lk.angle,0,1,0);
 
@@ -245,10 +246,18 @@ void Brick::display(){
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
+        Dir3D shift;
+
+        shift.x = myConn.dir.x == 0 ? 0 : 0.25;
+        shift.y = myConn.dir.y == 0 ? 0 : 0.25;
+        shift.z = myConn.dir.z == 0 ? 0 : 0.25;
+
+        printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
+
         if (lk.shift == Shift::HalfLeft) {
-            glTranslatef(0,-0.25,0);
+            glTranslatef(-shift.x,-shift.y,-shift.z);
         } else if (lk.shift == Shift::HalfRight) {
-            glTranslatef(0,0.25,0);
+            glTranslatef(shift.x,shift.y,shift.z);
         }
 
         lk.br.display();
@@ -786,16 +795,16 @@ Brick brick6271156(){
 //********************************************************************************
 
 void construction(float angle){
-    /*
+    
     Brick brick1 = brick6330960();
     Brick brick2 = brick4666999();
-    Brick brick3 = brick4163533();
-    Brick brick4 = brick6159763();
+    // Brick brick3 = brick4163533();
+    // Brick brick4 = brick6159763();
     
-    brick1.connect(0,0,brick2,0);
-    brick2.connect(1,1,brick3,90);
-    brick3.connect(0,1,brick4,0);
-    */
+    brick1.connect(0,0,brick2,0, HalfRight);
+    // brick2.connect(1,1,brick3,90);
+    // brick3.connect(0,1,brick4,0);
+    
     /*
     for(size_t i = 0; i< brick1.getConnectorList().size(); ++i){
         brick1[i].showonscreen();
@@ -804,15 +813,18 @@ void construction(float angle){
 
     //NOTATION brick<numeroEtape>_<indexEtape>
 
-    Brick brick1_0 = brick4249021();
-    Brick brick1_1 = brick6299413();
-    Brick brick1_2 = brick6299413();
+    // Brick brick1_0 = brick4249021();
 
-    brick1_0.connect(1,0,brick1_1,0);
-    brick1_0.connect(3,0,brick1_2,0);
+    // Brick brick1_1 = brick6299413();
+    // Brick brick1_2 = brick6299413();
+
+
+    // brick1_0.connect(1,0,brick1_1,0);
+    // brick1_0.connect(3,0,brick1_2,0);
     
-    
-    brick1_0.display();
+    // brick1_0.printCharacteristics();
+
+    brick1.display();
 }
 
 /*
