@@ -155,6 +155,15 @@ Brick::Brick(void (*brickFunc)()) : color(vert),brickFunc(brickFunc){
     nextId = 0;
 }
 
+void Brick::getCurrentMatrix(){
+    glGetFloatv(GL_MODELVIEW_MATRIX, this->currentMatrix); // retrieve the current modelview matrix and save it to currentMatrix
+}
+
+void Brick::setCurrentMatrix(){
+    glLoadIdentity();
+    glMultMatrixf(this->currentMatrix);
+}
+
 std::vector<Connector> Brick::getConnectorList(){
     return this->connectorList;
 }
@@ -167,8 +176,6 @@ std::size_t Brick::addConnector(Connector& conn) {
 Connector& Brick::operator[](std::size_t index) {
     return connectorList[index];
 }
-
-
 
 void Brick::connect(struct Link lk){
     Connector myConn(this->operator[](lk.myPin));
@@ -231,10 +238,11 @@ void Brick::display(){
 	brickFunc();
     size_t nblinks = connexionList.size();
 
+    getCurrentMatrix();
     Pos3D zero(0,0,0);
-    
-    for(size_t i = 0; i<nblinks; ++i){
 
+    for(size_t i = 0; i<nblinks; ++i){
+        setCurrentMatrix();
         Link lk = connexionList[i];
         Connector myConn(this->operator[](lk.myPin));
         Connector otherConn(lk.br[lk.otherPin]);
@@ -248,6 +256,9 @@ void Brick::display(){
         
 
         glRotatef(lk.angle,0,1,0);
+        if(lk.otherSide){
+            glRotatef(180,1,0,0);
+        }
 
         axis = vertic^otherConn.dir;
         angle = compute_angle(vertic,otherConn.dir)*180/M_PI;
@@ -266,14 +277,16 @@ void Brick::display(){
         shift.y = otherConn.dir.y == 0 ? 0 : 0.25;
         shift.z = otherConn.dir.z == 0 ? 0 : 0.25;
 
+        //printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
 
         if (lk.shift == Shift::HalfLeft) {
             glTranslatef(-shift.x,-shift.y,-shift.z);
         } else if (lk.shift == Shift::HalfRight) {
             glTranslatef(shift.x,shift.y,shift.z);
         }
-
+        lk.br.getCurrentMatrix();
         lk.br.display();
+
     }
 }
 
@@ -799,6 +812,70 @@ Brick brick6271156(){
     br.addConnector(conn);
     conn = ConnectorIn(Pos3D(8.12,4.12,0), Dir3D(0,0,1), CROSS);
     br.addConnector(conn);
+
+    return br;
+}
+
+Brick brick6282140(){
+    Brick br(pinWithFrictionRidgesLengthwiseAndPinHole_6282140,noir);
+    
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    pos.update(0,1.5,0);
+    dir.update(1,0,0);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+    
+    return br;
+}
+
+Brick brick4211807(){
+    Brick br(pinWithoutFrictionRidgesLengthwise_4211807,gris);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0.5,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    pos.update(0,-0.5,0);
+    dir.update(0,-1,0);
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    return br;
+}
+
+Brick brick6321305(){
+    Brick br(pinLongWithoutFrictionRidgesLengthwise_6321305,beige);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,-1,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CIRCLE;
+    pos.update(0,0,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CIRCLE;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn3(pos,dir,type);
+    br.addConnector(conn3);
 
     return br;
 }
