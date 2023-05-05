@@ -57,6 +57,8 @@ void axlePinWithFrictionRidgesLengthwise_4206482();
 void gear12ToothDoubleBevel_4177431();
 //done
 void gearWormScrew_6185471();
+// done
+void technicLever3x3m90deg__6271810();
 
 // leo : 
         //done
@@ -152,17 +154,15 @@ void bush_6275844();
 void bush1By2Smooth_6271165();
 //done
 void drivingRingConnector_6276052();
+//not done
+void tire304x14OffsetTreadBandAroundCenterOfTread_4619323();
 //--------------------------
 
-// done
-void technicLever3x3m90deg__6271810();
+/* WHAT ARE THOSE ?*/
 //not done
 void tread_6271164();
 //not done
 void treadWithCenterPinHole_6271163();
 //not done
-void tire304x14OffsetTreadBandAroundCenterOfTread_4619323();
-
-
 
 #endif
