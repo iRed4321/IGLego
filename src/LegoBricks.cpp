@@ -757,19 +757,16 @@ void cylinderBordersSide(){
 void pinConnectorPerpendicular3LWith4Pins_6282158(){
 	glPushMatrix();
 		glPushMatrix();
-			glScalef(0.8,1,0.8);
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
 			glRotatef(90,1,0,0);
 			glTranslatef(-1.0,0,0);
 			glPushMatrix();
-				glScalef(0.8,1,0.8);
 				cylinder(0.2);
 			glPopMatrix();
 			glTranslatef(2.0,0,0);
 			glPushMatrix();
-				glScalef(0.8,1,0.8);
 				cylinder(0.2);
 			glPopMatrix();
 		glPopMatrix();

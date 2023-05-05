@@ -162,7 +162,7 @@ Brick brick6271164();
 Brick brick6271163();
 Brick brick4619323();
 
-//jooooooooolasticocotierdemoitié
+//jo done
 Brick brick6282140();
 Brick brick4211807();
 Brick brick6321305();
@@ -170,8 +170,7 @@ Brick brick6275844();
 Brick brick6271165();
 Brick brick6276052();
 
-//jo not done
-//et model also unfinished
+//jo done but model unfinished
 Brick brick6282158();
 
 #endif

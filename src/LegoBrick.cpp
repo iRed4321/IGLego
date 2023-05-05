@@ -1090,3 +1090,49 @@ Brick brick6276052(){
 
     return br;
 }
+
+Brick brick6282158(){
+    Brick br(pinConnectorPerpendicular3LWith4Pins_6282158,gris);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    pos.update(1,0,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    pos.update(-1,0,0);
+    dir.update(0,0,1);
+
+    ConnectorIn conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+    pos.update(-1,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn4(pos,dir,type);
+    br.addConnector(conn4);
+
+    pos.update(-1,-1,0);
+
+    ConnectorOut conn5(pos,dir,type);
+    br.addConnector(conn5);
+
+    pos.update(1,1,0);
+
+    ConnectorOut conn6(pos,dir,type);
+    br.addConnector(conn6);
+
+    pos.update(1,-1,0);
+
+    ConnectorOut conn7(pos,dir,type);
+    br.addConnector(conn7);
+
+    return br;
+}

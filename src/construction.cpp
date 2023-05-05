@@ -41,12 +41,10 @@ void construction(float angle){
 }
 
 void testPieceEnCours(){
-    Brick brick1_0 = brick4249021();
-    Brick brick1_1 = brick4206482();
-    Brick brick1_2 = brick6276052();
+    Brick brick1_0 = brick6282158();
+    Brick brick1_1 = brick4249021();
 
-    brick1_0.connect(0,1,brick1_1,0);
-    brick1_1.connect(0,1,brick1_2,0);
+    brick1_0.connect(6,0,brick1_1,0);
 
     brick1_0.display();
 }
