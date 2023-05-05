@@ -884,3 +884,67 @@ Brick brick6055519(){
     
     return br;
 }
+
+Brick brick6282140(){
+    Brick br(pinWithFrictionRidgesLengthwiseAndPinHole_6282140,noir);
+    
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    pos.update(0,1.5,0);
+    dir.update(1,0,0);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+    
+    return br;
+}
+
+Brick brick4211807(){
+    Brick br(pinWithoutFrictionRidgesLengthwise_4211807,gris);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0.5,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    pos.update(0,-0.5,0);
+    dir.update(0,-1,0);
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    return br;
+}
+
+Brick brick6321305(){
+    Brick br(pinLongWithoutFrictionRidgesLengthwise_6321305,beige);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,-1,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorOut conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    type = CIRCLE;
+    pos.update(0,0,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    type = CIRCLE;
+    pos.update(0,1,0);
+    dir.update(0,1,0);
+
+    ConnectorOut conn3(pos,dir,type);
+    br.addConnector(conn3);
+
+    return br;
+}

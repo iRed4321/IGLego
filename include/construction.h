@@ -7,5 +7,6 @@
 //builds the construction at the current position on the scene
 void construction(float angle);
 
+void testPieceEnCours();
 
 #endif
