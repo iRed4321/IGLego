@@ -1045,3 +1045,48 @@ Brick brick6321305(){
 
     return br;
 }
+
+Brick brick6275844(){
+    Brick br(bush_6275844,gris);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    return br;
+}
+
+Brick brick6271165(){
+    Brick br(bush1By2Smooth_6271165,gris);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    return br;
+}
+
+Brick brick6276052(){
+    Brick br(drivingRingConnector_6276052,gris);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-0.5,0);
+    Dir3D dir(0,1,0);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
+
+    return br;
+}

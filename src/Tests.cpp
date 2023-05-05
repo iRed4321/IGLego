@@ -100,6 +100,7 @@ static void scene(void) {
 
     //construction(facettes_x);
     testDemiConnexions();
+    //testPieceEnCours();
 	glPopMatrix();
 }
 
