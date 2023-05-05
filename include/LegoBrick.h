@@ -161,11 +161,7 @@ Brick brick4552347();
 Brick brick6173003();
 Brick brick6327162();
 Brick brick6055519();
-Brick brick6282158();
 
-Brick brick6275844();
-Brick brick6271165();
-Brick brick6276052();
 Brick brick6271810();
 Brick brick6271164();
 Brick brick6271163();
@@ -175,5 +171,12 @@ Brick brick4619323();
 Brick brick6282140();
 Brick brick4211807();
 Brick brick6321305();
+
+//jo not done
+Brick brick6275844();
+Brick brick6271165();
+Brick brick6276052();
+//et model also unfinished
+Brick brick6282158();
 
 #endif
