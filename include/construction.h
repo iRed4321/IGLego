@@ -9,4 +9,6 @@ void construction(float angle);
 
 void testPieceEnCours();
 
+void testDemiConnexions();
+
 #endif

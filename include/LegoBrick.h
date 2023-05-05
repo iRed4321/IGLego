@@ -12,17 +12,11 @@ enum ConnType{
 	CIRCLE,CROSS
 };
 
-enum Shift{
-	FullSize,
-	HalfLeft,
-	HalfRight
-};
-
 enum UsedConnection{
-	Free,
-	UsedLeft,
-	UsedRight,
-	Both
+	FREE,
+	USED_LEFT,
+	USED_RIGHT,
+	BOTH_USED
 };
 
 class Brick;
@@ -42,7 +36,7 @@ public:
 	);
 	Connector(const Connector& other);
 	
-	virtual bool checkConnexion(Connector other);
+	virtual bool checkConnexion(Connector other, Link lk);
 	
 	void showonscreen();
 	void printCharacteristics();
@@ -63,8 +57,8 @@ public:
 	);
 	ConnectorIn(const Connector& other);
 
-	bool checkConnexion(ConnectorIn conn);
-	bool checkConnexion(ConnectorOut conn);
+	bool checkConnexion(ConnectorIn conn, Link lk);
+	bool checkConnexion(ConnectorOut conn, Link lk);
 };
 
 class ConnectorOut : public Connector {
@@ -76,8 +70,8 @@ public:
 	);
 	ConnectorOut(const Connector& other);
 
-	bool checkConnexion(ConnectorIn conn);
-	bool checkConnexion(ConnectorOut conn);
+	bool checkConnexion(ConnectorIn conn, Link lk);
+	bool checkConnexion(ConnectorOut conn, Link lk);
 };
 
 class Brick {
@@ -90,9 +84,9 @@ public:
 	Connector& operator[](std::size_t index);
 	void connect(struct Link conn);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide);
-	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide, Shift shift);
+	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide, UsedConnection firstShift, UsedConnection secondShift);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle);
-	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, Shift shift);
+	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, UsedConnection firstShift, UsedConnection secondShift);
 	void display();
 	void printCharacteristics();
 	void addConnectorsList(LiftArm& arm);
@@ -115,7 +109,8 @@ struct Link{
 	Brick &br;
 	float angle;
 	bool otherSide;
-	Shift shift;
+	UsedConnection firstBrickUse;
+	UsedConnection secondBrickUse;
 };
 
 

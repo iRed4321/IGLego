@@ -96,10 +96,10 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
-  glScalef(.5,.5,.5);
+    glScalef(.5,.5,.5);
 
-    construction(facettes_x);
-    
+    //construction(facettes_x);
+    testDemiConnexions();
 	glPopMatrix();
 }
 

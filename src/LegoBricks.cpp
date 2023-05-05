@@ -539,7 +539,7 @@ LiftArm liftArm6364749() {
 	return arm;
 }
 
-void liftarm1x4Thin_6327548(){
+void liftarm1x4Thin_6327548(){	
 	LiftArm arm = liftArm6327548();
 	arm.draw();
 }

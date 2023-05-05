@@ -50,7 +50,7 @@ Connector::Connector(
 		Dir3D dir,
 		ConnType type,
         bool input
-	) : pos(pos), dir(dir),type(type),inUse(UsedConnection::Free), input(input) {}
+	) : pos(pos), dir(dir),type(type),inUse(UsedConnection::FREE), input(input) {}
 
 Connector::Connector(const Connector& other) {
     pos = other.pos;
@@ -60,9 +60,45 @@ Connector::Connector(const Connector& other) {
     input = other.input;
 }
 
-bool Connector::checkConnexion(Connector other){
-    std::cout<<"Cannot check connexion with unspecified Connector\n";
-    return false;
+bool Connector::checkConnexion(Connector other, Link lk){
+    if(this->inUse==UsedConnection::BOTH_USED){
+        std::cout<<"cannot connect (first brick already connected)\n";
+        return false;
+    }
+    if(
+        (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::USED_LEFT) ||
+        (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::BOTH_USED)
+    ){
+        std::cout<<"cannot connect (first brick already connected)\n";
+        return false;
+    }
+    if(
+        (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::USED_RIGHT) ||
+        (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::BOTH_USED)
+    ){
+        std::cout<<"cannot connect (first brick already connected)\n";
+        return false;
+    }
+
+    if(other.inUse==UsedConnection::BOTH_USED){
+        std::cout<<"cannot connect (second brick already connected)\n";
+        return false;
+    }
+    if(
+        (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::USED_LEFT) ||
+        (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::BOTH_USED)
+    ){
+        std::cout<<"cannot connect (second brick already connected)\n";
+        return false;
+    }
+    if(
+        (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::USED_RIGHT) ||
+        (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::BOTH_USED)
+    ){
+        std::cout<<"cannot connect (second brick already connected)\n";
+        return false;
+    }
+    return true;
 }
 
 void Connector::showonscreen(){
@@ -100,16 +136,16 @@ ConnectorIn::ConnectorIn(
 
 ConnectorIn::ConnectorIn(const Connector& other) : Connector(other) {}
 
-bool ConnectorIn::checkConnexion(ConnectorIn other){
+bool ConnectorIn::checkConnexion(ConnectorIn other, Link lk){
     std::cout<<"cannot connect (Connectors in/in)\n";
     return false;
 }
 
-bool ConnectorIn::checkConnexion(ConnectorOut other){
-    if(this->inUse || other.inUse){
-        std::cout<<"cannot connect (already connected)\n";
+bool ConnectorIn::checkConnexion(ConnectorOut other, Link lk){
+    if(!Connector::checkConnexion(other,lk)){
         return false;
     }
+    
     if(this->type==CROSS && other.type==CIRCLE){
         std::cout<<"cannot connect (Circles don't fit in crosses)\n";
         return false;
@@ -117,16 +153,16 @@ bool ConnectorIn::checkConnexion(ConnectorOut other){
     return true;
 }
 
-bool ConnectorOut::checkConnexion(ConnectorOut other){
+bool ConnectorOut::checkConnexion(ConnectorOut other,Link lk){
     std::cout<<"cannot connect (Connectors out/out)\n";
     return false;
 }
 
-bool ConnectorOut::checkConnexion(ConnectorIn other){
-    if(this->inUse || other.inUse){
-        std::cout<<"cannot connect (already connected)\n";
+bool ConnectorOut::checkConnexion(ConnectorIn other, Link lk){
+    if(!Connector::checkConnexion(other,lk)){
         return false;
     }
+
     if(this->type==CIRCLE && other.type==CROSS){
         std::cout<<"cannot connect (Circles don't fit in crosses)\n";
         return false;
@@ -186,54 +222,114 @@ void Brick::connect(struct Link lk){
         ConnectorIn conn1(myConn);
         if (otherConn.input) {
             ConnectorIn conn2(otherConn);
-            res = conn1.checkConnexion(conn2);
+            res = conn1.checkConnexion(conn2, lk);
         } else {
             ConnectorOut conn2(otherConn);
-            res = conn1.checkConnexion(conn2);
+            res = conn1.checkConnexion(conn2, lk);
         }
     } else {
         ConnectorOut conn1(myConn);
         if (otherConn.input) {
             ConnectorIn conn2(otherConn);
-            res = conn1.checkConnexion(conn2);
+            res = conn1.checkConnexion(conn2, lk);
         } else {
             ConnectorOut conn2(otherConn);
-            res = conn1.checkConnexion(conn2);
+            res = conn1.checkConnexion(conn2, lk);
         }
     }
     if(!res)
         return;
     
-    // th
-    // this->operator[](lk.myPin).inUse = true;
-    // lk.br[lk.otherPin].inUse = true;
+    if(this->operator[](lk.myPin).inUse==UsedConnection::FREE){
+        this->operator[](lk.myPin).inUse = lk.firstBrickUse;
+    }else{
+        this->operator[](lk.myPin).inUse = UsedConnection::BOTH_USED;
+    }
+     
+    if(lk.br[lk.otherPin].inUse==UsedConnection::FREE){
+        lk.br[lk.otherPin].inUse = lk.secondBrickUse;
+    }else{
+        lk.br[lk.otherPin].inUse = UsedConnection::BOTH_USED;
+    }
+    
 
     this->connexionList.push_back(lk);
     //std::cout<<"Connected !\n";
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide){
-    struct Link lk = {myPin,otherPin,br,angle,otherSide,Shift::FullSize};
+    struct Link lk = 
+    {
+        myPin,otherPin,
+        br,
+        angle,
+        otherSide,
+        UsedConnection::BOTH_USED,
+        UsedConnection::BOTH_USED
+    };
     this->connect(lk);
 }
 
-void Brick::connect(int myPin, int otherPin, Brick& br,float angle,bool otherSide, Shift shift){
-    struct Link lk = {myPin,otherPin,br,angle,otherSide,shift};
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide, UsedConnection firstShift, UsedConnection secondShift){
+    struct Link lk = 
+    {
+        myPin,
+        otherPin,
+        br,
+        angle,
+        otherSide,
+        firstShift,
+        secondShift
+    };
     this->connect(lk);
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
-    struct Link lk = {myPin,otherPin,br,angle,false,Shift::FullSize};
+    struct Link lk = 
+    {
+        myPin,
+        otherPin,
+        br,
+        angle,
+        false,
+        UsedConnection::BOTH_USED,
+        UsedConnection::BOTH_USED
+    };
     this->connect(lk);
 }
 
-void Brick::connect(int myPin, int otherPin, Brick& br,float angle, Shift shift){
-    struct Link lk = {myPin,otherPin,br,angle,false,shift};
+void Brick::connect(int myPin, int otherPin, Brick& br,float angle, UsedConnection firstShift, UsedConnection secondShift){
+    struct Link lk = 
+    {
+        myPin,
+        otherPin,
+        br,
+        angle,
+        false,
+        firstShift,
+        secondShift
+    };
     this->connect(lk);
+}
+
+void BrickUseShift(UsedConnection shift){
+    switch(shift){
+            case UsedConnection::BOTH_USED :
+                //do nothing, the block is well placed
+                break;
+            case UsedConnection::USED_LEFT :
+                glTranslatef(0,0.25,0);
+                break;
+            case UsedConnection::USED_RIGHT :
+                glTranslatef(0,-0.25,0);
+                break;
+            default :
+                std::cout<<"Unusable shift value\n";
+        }
 }
 
 void Brick::display(){
-
+    
     glMaterialfv(GL_FRONT,GL_DIFFUSE,this->color);
 	brickFunc();
     size_t nblinks = connexionList.size();
@@ -242,52 +338,53 @@ void Brick::display(){
     Pos3D zero(0,0,0);
 
     for(size_t i = 0; i<nblinks; ++i){
+        //replace ourself at the position of the origin of the current brick
         setCurrentMatrix();
+
+        //retrieve the values of the connections to use
         Link lk = connexionList[i];
         Connector myConn(this->operator[](lk.myPin));
         Connector otherConn(lk.br[lk.otherPin]);
         
+        //move to the position of the first connector
         glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
 
+        //rotate to align ourself with the connector
         Dir3D vertic(0,1,0);
         Dir3D axis = vertic^myConn.dir;
         float angle = compute_angle(vertic,myConn.dir)*180/M_PI;
         glRotatef(angle,axis.x,axis.y,axis.z);
         
+        //shift following the way the first connector is used
+        BrickUseShift(lk.firstBrickUse);
 
+        //make a U turn if the connection is on the otherside
         glRotatef(lk.angle,0,1,0);
         if(lk.otherSide){
             glRotatef(180,1,0,0);
         }
 
+        //shift following the way the second connector is used
+        BrickUseShift(lk.secondBrickUse);
+
+
+        //rotate to align the second brick to the connection
         axis = vertic^otherConn.dir;
         angle = compute_angle(vertic,otherConn.dir)*180/M_PI;
         glRotatef(-angle,axis.x,axis.y,axis.z);
         
+        //move backward to put the second brick relatively to the first brick 
         Pos3D nextPos = zero - otherConn.pos;
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
-        printf("myConn.dir : %f %f %f\n",myConn.dir.x,myConn.dir.y,myConn.dir.z);
-        printf("otherConn.dir : %f %f %f\n",otherConn.dir.x,otherConn.dir.y,otherConn.dir.z);
-
-
-        Dir3D shift;
-
-        shift.x = otherConn.dir.x == 0 ? 0 : 0.25;
-        shift.y = otherConn.dir.y == 0 ? 0 : 0.25;
-        shift.z = otherConn.dir.z == 0 ? 0 : 0.25;
-
-        //printf("shift : %f %f %f\n",shift.x,shift.y,shift.z);
-
-        if (lk.shift == Shift::HalfLeft) {
-            glTranslatef(-shift.x,-shift.y,-shift.z);
-        } else if (lk.shift == Shift::HalfRight) {
-            glTranslatef(shift.x,shift.y,shift.z);
-        }
+        //saving the current position into the brick
         lk.br.getCurrentMatrix();
+        
+        //displaying the brick we just placed
         lk.br.display();
-
     }
+    //going back to the position of the current piece
+    setCurrentMatrix();
 }
 
 void Brick::addConnectorsList(LiftArm &arm){
