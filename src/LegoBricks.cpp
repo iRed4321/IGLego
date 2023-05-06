@@ -942,6 +942,45 @@ void drivingRingConnector_6276052(){
 	glPopMatrix();
 }
 
+void tire304x14OffsetTreadBandAroundCenterOfTread_4619323(){
+	//black
+	//including 6260609
+	glPushMatrix();
+		glPushMatrix();
+			glScalef(1.9,1.9,1.0);
+			glRotatef(90,1,0,0);
+			cylinder(0.58);
+		glPopMatrix();
+		glPushMatrix();
+			glRotatef(90,1,0,0);
+			glPushMatrix();
+				glTranslatef(0,0.25,0);
+				for(int i = 0 ; i < 360 ; i+= 24){
+					glPushMatrix();
+						glRotatef(i,0,1,0);
+						glTranslatef(0.7,0,0.7);
+						glRotatef(45,0,1,0);
+						glScalef(0.2,0.5,0.1);
+						cube();
+					glPopMatrix();
+				}
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0,-0.25,0);
+				for(int i = 12 ; i < 372 ; i+= 24){
+					glPushMatrix();
+						glRotatef(i,0,1,0);
+						glTranslatef(0.7,0,0.7);
+						glRotatef(45,0,1,0);
+						glScalef(0.2,0.5,0.1);
+						cube();
+					glPopMatrix();
+				}
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+}
+
 void axlePin3LWithFrictionRidgesLengthwise_6209519(){
 	//changer la couleur (rouge)
 	glPushMatrix();

@@ -1136,3 +1136,16 @@ Brick brick6282158(){
 
     return br;
 }
+
+Brick brick4619323(){
+    Brick br(tire304x14OffsetTreadBandAroundCenterOfTread_4619323,noir);
+
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,0,1);
+
+    ConnectorIn conn1(pos,dir,type);
+    br.addConnector(conn1); 
+
+    return br;
+}
