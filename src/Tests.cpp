@@ -34,8 +34,7 @@ static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, G
 //parameters for the view of the camera
 // static float frustumView[] = {10,10,10,10,-10,-30};
 
-unsigned int t1 = 0;
-
+unsigned int legoTexture;
 
 static int mousePos [2] = { 0,0 };
 static int mouseDiff[2] = { 0,0 };
@@ -160,6 +159,7 @@ static void init(void) {
   glEnable(GL_NORMALIZE);
   glEnable(GL_AUTO_NORMAL);
   glEnable(GL_LIGHTING);
+  legoTexture = initTexture("lego.png");
 }
 
 static void light(int i) {
@@ -171,12 +171,14 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
-    glScalef(.3,.3,.3);
+    glScalef(.7,.7,.7);
+
+    textured_plate4x8_4509897(legoTexture);
 
     //construction(facettes_x);
     //testDemiConnexions();
     //testPieceEnCours();
-    testPieceEnCoursNathan(facettes_x);
+    // testPieceEnCoursNathan(facettes_x);
 	glPopMatrix();
 }
 
