@@ -88,25 +88,32 @@ public:
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, UsedConnection firstShift, UsedConnection secondShift);
 	void display();
+	void keyRingWith(Brick newRoot);
 	void printCharacteristics();
 	void addConnectorsList(LiftArm& arm);
 	std::vector<Connector> getConnectorList();
-
+	std::string name;
+	
 private:
+	
 	float *color; //float color[4];
 	void (*brickFunc)();
 	GLfloat currentMatrix[16];
 	std::size_t nextId;
     std::vector<Connector> connectorList;
 	std::vector<struct Link> connexionList;
+
+	std::vector<struct Link> pathTo(Brick br);
+	std::vector<struct Link> pathTo(Brick br,std::vector<struct Link> current);
 };
 
-
+void printLinkList(std::vector<struct Link> list);
 
 struct Link{
-	int myPin;
+	Brick &fromBr;
+	int fromPin;
 	int otherPin;
-	Brick &br;
+	Brick &otherBr;
 	float angle;
 	bool otherSide;
 	UsedConnection firstBrickUse;

@@ -171,14 +171,14 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
-    glScalef(.7,.7,.7);
+    glScalef(.2,.2,.2);
 
-    textured_plate4x8_4509897(legoTexture);
+    //textured_plate4x8_4509897(legoTexture);
 
-    //construction(facettes_x);
+    construction(facettes_x);
     //testDemiConnexions();
     //testPieceEnCours();
-    // testPieceEnCoursNathan(facettes_x);
+    //testPieceEnCoursNathan(facettes_x);
 	glPopMatrix();
 }
 

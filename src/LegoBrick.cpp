@@ -214,8 +214,8 @@ Connector& Brick::operator[](std::size_t index) {
 }
 
 void Brick::connect(struct Link lk){
-    Connector myConn(this->operator[](lk.myPin));
-    Connector otherConn(lk.br[lk.otherPin]);
+    Connector myConn(this->operator[](lk.fromPin));
+    Connector otherConn(lk.otherBr[lk.otherPin]);
     bool res;
     
     if (myConn.input) {
@@ -240,16 +240,16 @@ void Brick::connect(struct Link lk){
     if(!res)
         return;
     
-    if(this->operator[](lk.myPin).inUse==UsedConnection::FREE){
-        this->operator[](lk.myPin).inUse = lk.firstBrickUse;
+    if(this->operator[](lk.fromPin).inUse==UsedConnection::FREE){
+        this->operator[](lk.fromPin).inUse = lk.firstBrickUse;
     }else{
-        this->operator[](lk.myPin).inUse = UsedConnection::BOTH_USED;
+        this->operator[](lk.fromPin).inUse = UsedConnection::BOTH_USED;
     }
      
-    if(lk.br[lk.otherPin].inUse==UsedConnection::FREE){
-        lk.br[lk.otherPin].inUse = lk.secondBrickUse;
+    if(lk.otherBr[lk.otherPin].inUse==UsedConnection::FREE){
+        lk.otherBr[lk.otherPin].inUse = lk.secondBrickUse;
     }else{
-        lk.br[lk.otherPin].inUse = UsedConnection::BOTH_USED;
+        lk.otherBr[lk.otherPin].inUse = UsedConnection::BOTH_USED;
     }
     
 
@@ -257,10 +257,44 @@ void Brick::connect(struct Link lk){
     //std::cout<<"Connected !\n";
 }
 
+std::vector<struct Link> Brick::pathTo(Brick br){
+    std::vector<struct Link> emptyConnexionList;
+    if(this==&br){
+        std::cout<<"I am already what you are looking for !"<<std::endl;
+        return emptyConnexionList;
+    }
+    return pathTo(br,emptyConnexionList);
+}
+
+std::vector<struct Link> Brick::pathTo(Brick br,std::vector<struct Link> list){
+    if(this==&br){
+        return list;
+    }
+    for(size_t i =0; i<nextId;++i){
+        list.push_back(connexionList[i]);
+        connexionList[i].otherBr.pathTo(br, list);
+        if(&(list.back().otherBr)==&br){
+            return list;
+        }
+        list.pop_back();
+    }
+    return list;
+}
+
+void printLinkList(std::vector<struct Link> list){
+    for(size_t i = 0; i < list.size(); ++i){
+        std::cout<<"Element " <<i <<std::endl;
+        std::cout<<"\t" <<i <<std::endl;
+    }
+}
+
+
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide){
     struct Link lk = 
     {
-        myPin,otherPin,
+        *this,
+        myPin,
+        otherPin,
         br,
         angle,
         otherSide,
@@ -273,6 +307,7 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSi
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide, UsedConnection firstShift, UsedConnection secondShift){
     struct Link lk = 
     {
+        *this,
         myPin,
         otherPin,
         br,
@@ -287,6 +322,7 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSi
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
     struct Link lk = 
     {
+        *this,
         myPin,
         otherPin,
         br,
@@ -301,6 +337,7 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, UsedConnection firstShift, UsedConnection secondShift){
     struct Link lk = 
     {
+        *this,
         myPin,
         otherPin,
         br,
@@ -343,8 +380,8 @@ void Brick::display(){
 
         //retrieve the values of the connections to use
         Link lk = connexionList[i];
-        Connector myConn(this->operator[](lk.myPin));
-        Connector otherConn(lk.br[lk.otherPin]);
+        Connector myConn(this->operator[](lk.fromPin));
+        Connector otherConn(lk.otherBr[lk.otherPin]);
         
         //move to the position of the first connector
         glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
@@ -378,14 +415,72 @@ void Brick::display(){
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
         //saving the current position into the brick
-        lk.br.getCurrentMatrix();
+        lk.otherBr.getCurrentMatrix();
         
         //displaying the brick we just placed
-        lk.br.display();
+        lk.otherBr.display();
     }
     //going back to the position of the current piece
     setCurrentMatrix();
 }
+/*
+void Brick::setRoot(){
+    glMaterialfv(GL_FRONT,GL_DIFFUSE,this->color);
+	brickFunc();
+    size_t nblinks = connexionList.size();
+
+    getCurrentMatrix();
+    Pos3D zero(0,0,0);
+
+    for(size_t i = 0; i<nblinks; ++i){
+        //replace ourself at the position of the origin of the current brick
+        setCurrentMatrix();
+
+        //retrieve the values of the connections to use
+        Link lk = connexionList[i];
+        Connector myConn(this->operator[](lk.fromPin));
+        Connector otherConn(lk.otherBr[lk.otherPin]);
+        
+        //move to the position of the first connector
+        glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
+
+        //rotate to align ourself with the connector
+        Dir3D vertic(0,1,0);
+        Dir3D axis = vertic^myConn.dir;
+        float angle = compute_angle(vertic,myConn.dir)*180/M_PI;
+        glRotatef(angle,axis.x,axis.y,axis.z);
+        
+        //shift following the way the first connector is used
+        BrickUseShift(lk.firstBrickUse);
+
+        //make a U turn if the connection is on the otherside
+        glRotatef(lk.angle,0,1,0);
+        if(lk.otherSide){
+            glRotatef(180,1,0,0);
+        }
+
+        //shift following the way the second connector is used
+        BrickUseShift(lk.secondBrickUse);
+
+
+        //rotate to align the second brick to the connection
+        axis = vertic^otherConn.dir;
+        angle = compute_angle(vertic,otherConn.dir)*180/M_PI;
+        glRotatef(-angle,axis.x,axis.y,axis.z);
+        
+        //move backward to put the second brick relatively to the first brick 
+        Pos3D nextPos = zero - otherConn.pos;
+        glTranslatef(nextPos.x,nextPos.y,nextPos.z);
+
+        //saving the current position into the brick
+        lk.otherBr.getCurrentMatrix();
+        
+        //displaying the brick we just placed
+        lk.otherBr.display();
+    }
+    //going back to the position of the current piece
+    setCurrentMatrix();
+}*/
 
 void Brick::addConnectorsList(LiftArm &arm){
     nextId = 0;
@@ -466,6 +561,7 @@ void Brick::printCharacteristics(){
 
 Brick brick6279875(){
     Brick br(batonnetNoir_6279875,noir);
+    br.name = "batonnet noir";
     ConnType type = CIRCLE;
     Pos3D pos(0,-0.5,0);
     Dir3D dir(0,1,0);
@@ -484,7 +580,7 @@ Brick brick6279875(){
 
 Brick brick370826(){
     Brick br(axle12_370826, noir);
-
+    br.name = "grand baton noir";
     float posy = -5.5;
 
     ConnType type = CROSS;
@@ -503,6 +599,7 @@ Brick brick370826(){
 
 Brick brick4211815(){
     Brick br(axle3_4211815, gris);
+    br.name = "batonnet gris";
 
     float posy = -1;
 
@@ -522,6 +619,8 @@ Brick brick4211815(){
 
 Brick brick6332573(){
     Brick br(axleAndPinConnector1_6332573,blanc);
+    br.name = "cylindre et croix creux blanc";
+
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
@@ -541,6 +640,8 @@ Brick brick6332573(){
 
 Brick brick6012451(){
     Brick br(gear8ToothType2_6012451, noir);
+    br.name = "roue crantée 8 dents";
+
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
@@ -552,6 +653,8 @@ Brick brick6012451(){
 
 Brick brick4163533(){
     Brick br(liftarmThin1x2AxleHoles_4163533,blanc);
+    br.name = "truc plat blanc 2 trous en croix";
+
 
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -572,6 +675,7 @@ Brick brick4163533(){
 
 Brick brick6330960(){
     Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960,blanc);
+    br.name = "deux cylindre et croix en trous perpendic blancs";
     
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -599,6 +703,7 @@ Brick brick6330960(){
 
 Brick brick4509897(){
     Brick br(plate4x8_4509897,beige);
+    br.name = "grande plaque";
     
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
@@ -618,6 +723,7 @@ Brick brick4509897(){
 
 Brick brick6276951(){
     Brick br(axleAndPinConnectorPerpendicular3LWithCenterPinHole_6276951,noir);
+    br.name = "deux trous croix au bords et cylindre perpendic au centre noir";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
@@ -645,7 +751,8 @@ Brick brick6276951(){
 
 Brick brick6261373(){
     Brick br(axleAndPinConnectorPerpendicular_6261373,rouge); 
-
+    br.name = "trous cylindre et croix perpendic rouge";
+    
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
@@ -666,6 +773,7 @@ Brick brick6261373(){
 
 Brick brick4512360(){
     Brick br(axleConnectorSmoothWithXHoleOrientation_4512360,gris);
+    br.name = "connecteur a 2 batons croix alignés";
 
     ConnType type = CROSS;
     Pos3D pos(0,-0.5,0);
@@ -686,6 +794,7 @@ Brick brick4512360(){
 
 Brick brick6089119(){
     Brick br(axlePin3LWithFrictionRidgesLengthwiseAnd2LAxle_6089119,noir); 
+    br.name = "baton croix noir et embout circulaire";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
@@ -713,6 +822,7 @@ Brick brick6089119(){
 
 Brick brick6209519(){
     Brick br(axlePin3LWithFrictionRidgesLengthwise_6209519,rouge); 
+    br.name = "baton circulaire rouge et embout croix";
     
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -740,6 +850,7 @@ Brick brick6209519(){
 
 Brick brick4206482(){
     Brick br(axlePinWithFrictionRidgesLengthwise_4206482,bleufonce); 
+    br.name = "bleu baton croix";
 
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -758,7 +869,9 @@ Brick brick4206482(){
     return br;
 }
 Brick brick4177431(){
-    Brick br(gear12ToothDoubleBevel_4177431,noir); 
+    Brick br(gear12ToothDoubleBevel_4177431,noir);
+    br.name = "roue crantee 12 dents";
+
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
@@ -771,6 +884,7 @@ Brick brick4177431(){
 
 Brick brick4666999(){
     Brick br(axle4WithCenterStop_4666999, beige);
+    br.name = "baton beige chelou";
 
     ConnType type = CROSS;
     Pos3D pos(0,-1.5,0);
@@ -805,6 +919,7 @@ Brick brick4666999(){
 
 Brick brick6185471(){
     Brick br(gearWormScrew_6185471);
+    br.name = "piece trop stylee";
 
     ConnType type = CROSS;
     Pos3D pos(0,-0.5,0);
@@ -825,6 +940,8 @@ Brick brick6185471(){
 
 Brick brick6159763(){
     Brick br(axle5WithStop_6159763, noir);
+    br.name = "baton noir avec stop";
+
     
     ConnType type = CROSS;
     Pos3D pos(0,-2,0);
@@ -866,6 +983,7 @@ Brick brick6159763(){
 
 Brick brick6299413(){
     Brick br(pinLongWithFrictionRidgesLengthwise_6299413,bleufonce);
+    br.name = "long connecteur bleu fonce circulaire";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,-1,0);
@@ -893,6 +1011,8 @@ Brick brick6299413(){
 
 Brick brick4177444(){
     Brick br(liftarm1x2Thick_4177444, noir);
+    br.name = "deux cylindres noirs";
+
     LiftArm arm = liftArm4177444();
     br.addConnectorsList(arm);
     return br;
@@ -900,6 +1020,8 @@ Brick brick4177444(){
 
 Brick brick6344864(){
     Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864, gris);
+    br.name = "trous cylindre et croix a cote thick";
+
     LiftArm arm = liftArm6344864();
     br.addConnectorsList(arm);
     return br;
@@ -907,6 +1029,8 @@ Brick brick6344864(){
 
 Brick brick6331723(){
     Brick br(liftarm1x3Thin_6331723, noir);
+    br.name = "fin noir croix au bouts noir 3";
+
     LiftArm arm = liftArm6331723();
     br.addConnectorsList(arm);
     return br;
@@ -914,6 +1038,9 @@ Brick brick6331723(){
 
 Brick brick6327548(){
     Brick br(liftarm1x4Thin_6327548, noir);
+    br.name = "fin noir croix au bouts noir 4";
+
+
     LiftArm arm = liftArm6327548();
     br.addConnectorsList(arm);
     return br;
@@ -921,6 +1048,8 @@ Brick brick6327548(){
 
 Brick brick6364749(){
     Brick br(liftarm1x4Thin_6364749, bleuclair);
+    br.name = "fin noir croix au bouts bleuclair 4";
+
     LiftArm arm = liftArm6364749();
     br.addConnectorsList(arm);
     return br;
@@ -928,6 +1057,8 @@ Brick brick6364749(){
 
 Brick brick4142135(){
     Brick br(liftarm1x5Thick_4142135,noir);
+    br.name = "epais cylindres noir 5";
+
     LiftArm arm = liftArm4142135();
     br.addConnectorsList(arm);
     return br;
@@ -935,6 +1066,8 @@ Brick brick4142135(){
 
 Brick brick4249021(){
     Brick br(liftarm1x5Thick_4249021, blanc);
+    br.name = "epais cylindres blanc";
+
     LiftArm arm = liftArm4249021();
     br.addConnectorsList(arm);
     return br;
@@ -942,6 +1075,8 @@ Brick brick4249021(){
 
 Brick brick6345239(){
     Brick br(liftarm1x6Thin_6345239, blanc);
+    br.name = "fin blanc croix au bouts 6";
+
     LiftArm arm = liftArm6345239();
     br.addConnectorsList(arm);
     return br;
@@ -949,6 +1084,8 @@ Brick brick6345239(){
 
 Brick brick4495935(){
     Brick br(liftarm1x7Thick_4495935, noir);
+    br.name = "baton cylindres noir 7";
+
     LiftArm arm = liftArm4495935();
     br.addConnectorsList(arm);
     return br;
@@ -956,6 +1093,8 @@ Brick brick4495935(){
 
 Brick brick6261643(){
     Brick br(liftarm1x13Thick_6261643, bleuclair);
+    br.name = "GROS BATON EPAIS BLEU CLAIR 13 COMME L'ENFER";
+
     LiftArm arm = liftArm6261643();
     br.addConnectorsList(arm);
     return br;
@@ -963,6 +1102,8 @@ Brick brick6261643(){
 
 Brick brick6271825(){
     Brick br(liftarm2x4LShapeThick_6271825, noir);
+    br.name = "machin epais noir 2x4";
+
     LiftArm arm = liftArm6271825();
     br.addConnectorsList(arm);
     return br;
@@ -970,6 +1111,8 @@ Brick brick6271825(){
 
 Brick brick6271810(){
     Brick br(liftarm3x3LShapeThin_6271810, noir);
+    br.name = "truc en L 3x3 fin noir";
+
     LiftArm arm = liftArm6271810();
     br.addConnectorsList(arm);
     return br;
@@ -977,6 +1120,8 @@ Brick brick6271810(){
 
 Brick brick4552347(){
     Brick br(liftarm3x3TShapeThick_4552347, noir);
+    br.name = "T 3x3 epais noir";
+
     LiftArm arm = liftArm4552347();
     br.addConnectorsList(arm);
     return br;
@@ -984,6 +1129,8 @@ Brick brick4552347(){
 
 Brick brick6173003(){
     Brick br(liftarm3x5LShapeThick_6173003,bleuclair);
+    br.name = "truc en L 3x5 epais bleu clair";
+
     LiftArm arm = liftArm6173003();
     br.addConnectorsList(arm);
     return br;
@@ -991,6 +1138,8 @@ Brick brick6173003(){
 
 Brick brick6271156(){
     Brick br(liftarm1x115DoubleBentThick_6271156,gris);
+    br.name = "double amel bent lol thick";
+
 
 	Model m = Model();
 
@@ -1017,6 +1166,8 @@ Brick brick6271156(){
 
 Brick brick6055519(){
     Brick br(liftarm3X5PerpendicularHShapeThick_6055519,gris);
+    br.name = "truc en H 3x5 gris";
+
     
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
@@ -1105,6 +1256,7 @@ Brick brick6282140(){
 
 Brick brick4211807(){
     Brick br(pinWithoutFrictionRidgesLengthwise_4211807,gris);
+    br.name = "pin gris j'en sais pas plus";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,0.5,0);
@@ -1123,6 +1275,7 @@ Brick brick4211807(){
 
 Brick brick6321305(){
     Brick br(pinLongWithoutFrictionRidgesLengthwise_6321305,beige);
+    br.name = "pin long beige qui glisse";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,-1,0);
@@ -1150,6 +1303,8 @@ Brick brick6321305(){
 
 Brick brick6275844(){
     Brick br(bush_6275844,gris);
+    br.name = "bush ? ah ! entretoise";
+
 
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -1163,6 +1318,8 @@ Brick brick6275844(){
 
 Brick brick6271165(){
     Brick br(bush1By2Smooth_6271165,gris);
+    br.name = "DEMI entretoise";
+    
 
     ConnType type = CROSS;
     Pos3D pos(0,0,0);
@@ -1175,7 +1332,9 @@ Brick brick6271165(){
 }
 
 Brick brick6276052(){
-    Brick br(drivingRingConnector_6276052,gris);
+    Brick br(drivingRingConnector_6276052,blanc);
+    br.name = "gros connecteur a batons blanc";
+
 
     ConnType type = CROSS;
     Pos3D pos(0,-0.5,0);
@@ -1195,7 +1354,8 @@ Brick brick6276052(){
 
 Brick brick6282158(){
     Brick br(pinConnectorPerpendicular3LWith4Pins_6282158,gris);
-
+    br.name = "pinConnectorPerpendicular3LWith4Pins_6282158";
+    
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
@@ -1241,6 +1401,7 @@ Brick brick6282158(){
 
 Brick brick4619323(){
     Brick br(tire304x14OffsetTreadBandAroundCenterOfTread_4619323,noir);
+    br.name = "PNEUUUUUU";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
