@@ -34,7 +34,42 @@ void construction(float angle){
     Brick brick2_0 = brick6055519();
 
     brick1_1.connect(1,0,brick2_0,0);
+
+    //ETAPE 3
+    Brick brick3_0 = brick4206482();
+    Brick brick3_1 = brick6282140();
     
+    brick2_0.connect(8,1,brick3_0,0);
+    brick2_0.connect(7,0,brick3_1,0);
+
+    //ETAPE 4
+    Brick brick4_0 = brick6282158();
+    Brick brick4_1 = brick6282158();
+
+    brick1_0.connect(0,3,brick4_0,90,true);
+    brick1_0.connect(4,3,brick4_1,270);
+
+    //ETAPE 5
+    Brick brick5_0 = brick6321305();
+    Brick brick5_1 = brick6321305();
+
+    brick4_0.connect(2,2,brick5_0,0,true);
+    brick4_1.connect(2,2,brick5_1,0);
+
+    //ETAPE 6
+    Brick brick6_0 = brick4249021();
+    Brick brick6_1 = brick6299413();
+
+    brick4_0.connect(6,0,brick6_0,90);
+    //à voir, peut-être pas bon la 3.1 (6282140) niveau dimensions
+    brick3_1.connect(1,1,brick6_1,0);
+
+    //ETAPE 7
+    Brick brick7_0 = brick4177444();
+    Brick brick7_1 = brick4177444();
+
+    brick1_1.connect(2,1,brick7_0,0);
+    brick1_2.connect(2,0,brick7_1,0);
 
     //AFFICHAGE
     brick1_0.display();

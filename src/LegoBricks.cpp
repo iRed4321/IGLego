@@ -159,6 +159,32 @@ void plate4x8_4509897(){
 	glPopMatrix();
 }
 
+void textured_plate4x8_4509897(int texture){
+
+	glPushMatrix();
+	glScalef(4,0.5,8);
+	cube();
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(1,0.5,1);
+	glTranslatef(-1.5,1,-3.5);
+	for(int i = 0; i<4; ++i){
+		for(int j = 0;j<8; ++j ){
+			glPushMatrix();
+			glTranslatef(i,0,j);
+			glScalef(0.9,1,0.9);
+			cylinder(0.2);
+			glTranslatef(0,0.5001,0); 
+			glRotatef(180,1,0,0);
+			mySolidDisc(40, texture);
+			glPopMatrix();
+		}
+	}
+	
+	glPopMatrix();
+}
+
 void axle2Notched_4142865(){
 	glPushMatrix();
 	glScalef(0.8,2,0.8);

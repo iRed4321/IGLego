@@ -26,6 +26,26 @@ void mySolidDisc(int ns){
   glEnd();
 }
 
+void mySolidDisc(int ns, int textureID){
+
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, textureID);
+
+  glNormal3f(0,-1,0);
+  glBegin(GL_POLYGON);
+  float angle = 0;
+  float increment = -2*M_PI/ns;
+  for(int i = 0; i<ns; ++i){
+    glTexCoord2f(0.5*cos(angle) + 0.5, 0.5*sin(angle) + 0.5);
+    glVertex3f(0.5*cos(angle),0,0.5*sin(angle));
+    angle+=increment;
+  }
+  glEnd();
+
+  glBindTexture(GL_TEXTURE_2D, 0);
+  glDisable(GL_TEXTURE_2D);
+}
+
 void mySolidCylindre(int ns,int nl) {
   mySolidCylindre(ns,nl,360.0f);
 }

@@ -5,6 +5,7 @@
 
 //need to correct makefile so this works
 void mySolidDisc(int ns);
+void mySolidDisc(int ns, int textureID);
 
 /* Modelisation geometrique d'un parallèlépipède rectangle      */
 /* parallele a l'axe des x et des z :           */

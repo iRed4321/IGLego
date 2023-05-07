@@ -15,6 +15,8 @@ void gear8ToothType2_6012451();
 void liftarmThin1x2AxleHoles_4163533();
 //kinda done 
 void plate4x8_4509897();
+void textured_plate4x8_4509897(int texture);
+
 // done 
 void axle2Notched_4142865();
 //done 

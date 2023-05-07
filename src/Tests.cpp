@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "../PNG/ChargePngFile.h" 
 #include "construction.h"
 
 //makes the use of 3D arrays clearer
@@ -33,6 +34,7 @@ static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, G
 //parameters for the view of the camera
 // static float frustumView[] = {10,10,10,10,-10,-30};
 
+unsigned int legoTexture;
 
 static int mousePos [2] = { 0,0 };
 static int mouseDiff[2] = { 0,0 };
@@ -63,6 +65,78 @@ static bool animation = false;
 static int facettes_x = 1;
 static int facettes_y = 1;
 
+
+static unsigned char *image(int nc, int nl)
+{
+  unsigned char *img = (unsigned char *)calloc(3 * nc * nl, sizeof(unsigned char));
+  if (!img)
+    return NULL;
+  unsigned char *p = img;
+  for (int l = 0; l < nl; l++)
+    for (int c = 0; c < nc; c++)
+    {
+      if (l % 2 == 0)
+      {
+        if (c % 2 == 0)
+        {
+          p[0] = 0x00;
+          p[1] = 0x00;
+          p[2] = 0x00;
+        }
+        else
+        {
+          p[0] = 0xFF;
+          p[1] = 0x00;
+          p[2] = 0x00;
+        }
+      }
+      else
+      {
+        if (c % 2 == 0)
+        {
+          p[0] = 0x00;
+          p[1] = 0xFF;
+          p[2] = 0x00;
+        }
+        else
+        {
+          p[0] = 0x00;
+          p[1] = 0x00;
+          p[2] = 0xFF;
+        }
+      }
+      p += 3;
+    }
+  return img;
+}
+
+static int initTexture(char* filename) {
+  unsigned int textureID = 0;
+  glPixelStorei(GL_UNPACK_ALIGNMENT,1); 
+  glGenTextures(1,&textureID);
+  glBindTexture(GL_TEXTURE_2D,textureID);
+  { int rx = 16;
+    int ry = 16;
+    unsigned char *img1 = chargeImagePng(filename,&rx,&ry);
+    if (img1) {
+      glTexImage2D(GL_TEXTURE_2D,0,3,rx,ry,0,GL_RGB,GL_UNSIGNED_BYTE,img1);
+      free(img1);
+      printf("Texture chargee %d\n",textureID);
+    }else {
+      glDeleteTextures(1,&textureID);
+      textureID = 0;
+      printf("Texture non chargee\n");
+    }
+  }
+
+  glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT); 
+  glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST); 
+  glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST); 
+
+  return textureID;
+}
+
 /* Fonction d'initialisation des parametres     */
 /* OpenGL ne changeant pas au cours de la vie   */
 /* du programme                                 */
@@ -76,6 +150,7 @@ static void init(void) {
   glLightfv(GL_LIGHT0,GL_DIFFUSE,blanc);
   glLightfv(GL_LIGHT1,GL_DIFFUSE,jaune);
   glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
+  glEnable(GL_TEXTURE_2D);
   glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
   glEnable(GL_LIGHT2);
@@ -84,8 +159,8 @@ static void init(void) {
   glEnable(GL_NORMALIZE);
   glEnable(GL_AUTO_NORMAL);
   glEnable(GL_LIGHTING);
+  legoTexture = initTexture("lego.png");
 }
-
 
 static void light(int i) {
     lightsActivation[i] = ~lightsActivation[i];
@@ -96,12 +171,14 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
-    glScalef(.3,.3,.3);
+    glScalef(.7,.7,.7);
+
+    textured_plate4x8_4509897(legoTexture);
 
     //construction(facettes_x);
     //testDemiConnexions();
     //testPieceEnCours();
-    testPieceEnCoursNathan(facettes_x);
+    // testPieceEnCoursNathan(facettes_x);
 	glPopMatrix();
 }
 
