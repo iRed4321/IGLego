@@ -92,21 +92,28 @@ public:
 	void printCharacteristics();
 	void addConnectorsList(LiftArm& arm);
 	std::vector<Connector> getConnectorList();
+	std::vector<struct Link>& getConnexionList();
+	bool operator==(Brick br);
 	std::string name;
-	
+
+	std::vector<struct Link> pathTo(Brick br);
+	static void reset_class_id();
+
 private:
 	
 	float *color; //float color[4];
 	void (*brickFunc)();
 	GLfloat currentMatrix[16];
-	std::size_t nextId;
+	std::size_t nextConnectorId;
+	int id;
     std::vector<Connector> connectorList;
 	std::vector<struct Link> connexionList;
-
-	std::vector<struct Link> pathTo(Brick br);
-	std::vector<struct Link> pathTo(Brick br,std::vector<struct Link> current);
+	std::vector<struct Link> pathTo(Brick br,std::vector<struct Link> &current);
+	static int class_id;
 };
 
+void reverseLink(struct Link lk);
+void reverseLinks(std::vector<struct Link> list);
 void printLinkList(std::vector<struct Link> list);
 
 struct Link{

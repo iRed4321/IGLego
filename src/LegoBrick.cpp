@@ -184,11 +184,17 @@ void Connector::printCharacteristics(){
 }
 
 Brick::Brick(void (*brickFunc)(), float* color) : color(color),brickFunc(brickFunc){
-    nextId = 0;
+    nextConnectorId = 0;
+    this->id = Brick::class_id++;
 }
 
 Brick::Brick(void (*brickFunc)()) : color(vert),brickFunc(brickFunc){
-    nextId = 0;
+    nextConnectorId = 0;
+    this->id = Brick::class_id++;
+}
+
+bool Brick::operator==(Brick br){
+    return id==br.id;
 }
 
 void Brick::getCurrentMatrix(){
@@ -206,7 +212,7 @@ std::vector<Connector> Brick::getConnectorList(){
 
 std::size_t Brick::addConnector(Connector& conn) {
     connectorList.push_back(conn);
-    return nextId++;
+    return nextConnectorId++;
 }
 
 Connector& Brick::operator[](std::size_t index) {
@@ -259,21 +265,22 @@ void Brick::connect(struct Link lk){
 
 std::vector<struct Link> Brick::pathTo(Brick br){
     std::vector<struct Link> emptyConnexionList;
-    if(this==&br){
+
+    if(*this==br){
         std::cout<<"I am already what you are looking for !"<<std::endl;
         return emptyConnexionList;
     }
-    return pathTo(br,emptyConnexionList);
+    std::vector<struct Link> path = this->pathTo(br,emptyConnexionList);
+    printLinkList(path);
+    return path;
 }
 
-std::vector<struct Link> Brick::pathTo(Brick br,std::vector<struct Link> list){
-    if(this==&br){
-        return list;
-    }
-    for(size_t i =0; i<nextId;++i){
+std::vector<struct Link> Brick::pathTo(Brick br,std::vector<struct Link> &list){
+    
+    for(size_t i =0; i<connexionList.size();++i){
         list.push_back(connexionList[i]);
-        connexionList[i].otherBr.pathTo(br, list);
-        if(&(list.back().otherBr)==&br){
+        list = connexionList[i].otherBr.pathTo(br, list);
+        if(list.back().otherBr==br){
             return list;
         }
         list.pop_back();
@@ -281,13 +288,47 @@ std::vector<struct Link> Brick::pathTo(Brick br,std::vector<struct Link> list){
     return list;
 }
 
+void Brick::reset_class_id(){
+    Brick::class_id=0;
+}
+
 void printLinkList(std::vector<struct Link> list){
     for(size_t i = 0; i < list.size(); ++i){
         std::cout<<"Element " <<i <<std::endl;
-        std::cout<<"\t" <<i <<std::endl;
+        std::cout<<"\tfromBr : " <<list[i].fromBr.name <<std::endl;
+        std::cout<<"\totherBr : " <<list[i].otherBr.name <<std::endl<<std::endl;
     }
 }
 
+std::vector<struct Link>& Brick::getConnexionList(){
+    return connexionList;
+}
+
+
+void reverseLink(struct Link lk){
+    Brick fromBr = lk.fromBr;
+    Brick otherBr = lk.otherBr;
+
+    /*
+    Cette fonction était censée supprimer 
+    un Link de la connexionList de la brique from
+    pour ajouter la connexion symetrique à la connexionList
+    de la otherBrick.
+
+    J'ai pas réussi à la coder. 
+
+    L'objectif finale était de pouvoir renverser 
+    un arbre de brique pour pouvoir rendre n'importe
+    quelle brique comme étant la racine de l'arbre
+    (pour les connecter plus facilement)
+    */
+
+    //otherBr.getConnexionList().push_back(lk);
+}
+
+void reverseLinks(std::vector<struct Link> list){
+
+}
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide){
     struct Link lk = 
@@ -483,9 +524,9 @@ void Brick::setRoot(){
 }*/
 
 void Brick::addConnectorsList(LiftArm &arm){
-    nextId = 0;
+    nextConnectorId = 0;
     for(auto [pos, part] : arm.model){
-        nextId++;
+        nextConnectorId++;
         Pos3D pos1 = Pos3D(pos.x,pos.z,pos.y);
 
         Dir3D dir = Dir3D(0,0,1);
@@ -526,7 +567,7 @@ void Brick::addConnectorsList(LiftArm &arm){
 
             default:
                 std::cout<<"error : part not found\n";
-                nextId--;
+                nextConnectorId--;
                 break;
         }
     }
@@ -534,7 +575,7 @@ void Brick::addConnectorsList(LiftArm &arm){
 
 void Brick::printCharacteristics(){
     std::cout<<"--------Connectors--------"<<std::endl;
-    for (size_t i = 0; i<nextId;++i){
+    for (size_t i = 0; i<nextConnectorId;++i){
         std::cout<<"connector n°" <<i <<" :" <<std::endl;
         Connector c = this->operator[](i);
         std::cout<<"\tx : "<<c.pos.x<<std::endl;
