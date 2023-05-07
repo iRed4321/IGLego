@@ -6,16 +6,8 @@
 
 #include "ObjetsGeometriques.h"
 
-// Unused
-// 6279875 Black
-// 6299413 Blue
-// 4206482 Blue
-// 6209519 Red
-// 4142865 Red
-// 4211807 Gray
-// 6275844 Gray
-// 6271165 Gray
-// 6177114 White
+//ptdr il manquait cette pièce
+void batonnetNoir_6279875();
 
 //done
 void gear8ToothType2_6012451();

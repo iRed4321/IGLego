@@ -61,3 +61,96 @@ void testDemiConnexions(){
     petiteBarre.display();
 
 }
+
+void testPieceEnCoursNathan(float angle){
+
+    //Etape 8
+
+    Brick brick8_0 = brick6321305(); //batonnet beige qui tourne
+    Brick brick8_1 = brick4206482(); //petit machin bleu
+    Brick brick8_2 = brick6279875(); //petit machin noir
+    Brick brick8_3 = brick6279875(); //petit machin noir
+    Brick brick8_4 = brick6271156(); //gros baton tordu
+    Brick brick8_5 = brick6332573(); //truc blanc qui va bouger
+
+    brick8_4.connect(6,0,brick8_2,0);
+    brick8_4.connect(8,0,brick8_3,0,true);
+    brick8_4.connect(0,0,brick8_1,0,true);
+    brick8_4.connect(7,2,brick8_0,0,true);
+    brick8_0.connect(1,0,brick8_5,180+angle);
+
+
+    //Etape 9
+
+    Brick brick9_0 = brick6159763(); // baton noir
+    Brick brick9_1 = brick6261373(); //machin rouge
+
+    brick9_0.connect(0,0,brick9_1,0);
+
+    //Etape 10
+
+    Brick brick10_0 = brick6185471(); //gearWormScrew
+    Brick brick10_1 = brick6261373(); //machin rouge
+
+    brick9_0.connect(1,0,brick10_0,0);
+    brick9_0.connect(3,0,brick10_1,0);
+
+    //Etape 11
+
+    Brick brick11_0 = brick6276052(); //connecteur de barres blanc
+
+    brick9_0.connect(4,0,brick11_0,0);
+
+    //Etape 12
+
+    
+    Brick brick12_0 = brick6089119(); //barre noire
+
+    brick10_1.connect(1,1,brick12_0,0,true);
+
+
+    //Etape 13
+
+    brick12_0.connect(0,5,brick8_4,-90);
+
+    
+
+    //Etape 14
+    Brick brick14_0 = brick6159763(); // baton noir avec stop
+    brick9_1.connect(1,1,brick14_0,0,true);
+
+
+    //Etape 15
+    Brick brick15_0 = brick4666999(); // baton beige avec stop
+    Brick brick15_1 = brick4177431(); // petite roue crantée
+    brick15_0.connect(1,0,brick15_1,0);
+    brick8_4.connect(3,0,brick15_0,0);
+
+
+    //Etape 16
+    Brick brick16_0 = brick370826(); // grand baton noir
+    Brick brick16_1 = brick6332573(); // petit truc blanc qui tourne
+    brick16_0.connect(0,1,brick16_1,0); 
+
+    //Etape 17
+    brick8_5.connect(1,11,brick16_0,0,true);
+
+    //Etape 18
+    Brick brick18_0 = brick6271156(); //gros baton tordu
+    Brick brick18_1 = brick6209519(); //Connecteur rouge
+    Brick brick18_2 = brick6279875(); //petit machin noir
+    Brick brick18_3 = brick6279875(); //petit machin noir
+    Brick brick18_4 = brick4211815(); //batonnet gris
+
+    brick18_0.connect(9,0,brick18_4,0);
+    brick18_0.connect(8,0,brick18_2,0);
+    brick18_0.connect(6,0,brick18_3,0,true);
+    brick18_0.connect(0,0,brick18_1,0);
+
+    //Etape 19
+    brick12_0.connect(2,5,brick18_0,0);
+
+    //Affichage !
+    brick9_0.display();
+    
+}

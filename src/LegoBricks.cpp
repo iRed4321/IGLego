@@ -97,6 +97,10 @@ void gear8ToothType2_6012451(){
 	glPopMatrix();
 }
 
+void batonnetNoir_6279875(){
+	pinWithoutFrictionRidgesLengthwise_4211807();
+}
+
 
 void liftarmThin1x2AxleHoles_4163533(){
 	glPushMatrix();
@@ -196,7 +200,8 @@ void axle5WithStop_6159763(){
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(0,-2.5,0);
-		mySolidDisc(20);
+		glScalef(1,0.02,1);
+		cylinder(1);
 	glPopMatrix();
 }
 

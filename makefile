@@ -27,7 +27,7 @@ build/objetsgeometriques.o : $(SRC_DIR)/ObjetsGeometriques.cpp $(INC_DIR)/Objets
 build/legobricks.o : $(SRC_DIR)/LegoBricks.cpp $(INC_DIR)/LegoBricks.h $(INC_DIR)/ObjetsGeometriques.h
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
-build/tests.o : $(SRC_DIR)/Tests.cpp $(INC_DIR)/LegoBricks.h
+build/tests.o : $(SRC_DIR)/Tests.cpp $(INC_DIR)/*.h
 	$(COMPILER) $< -c -o $@ $(INC_FLAGS) $(OTHER_FLAGS)
 
 project : $(OBJS_FILES)

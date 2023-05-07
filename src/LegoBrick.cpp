@@ -18,7 +18,7 @@ static float rouge[4] = { 1.0F,0.0F,0.0F,0.5F };
 static float vert[4] = { 0.0F,1.0F,0.0F,0.5F };
 static float bleu[4] = { 0.0F,0.0F,1.0F,0.5F };
 static float blanc[4] = { 0.9F,0.9F,0.9F,0.5F };
-static float beige[4] = { 0.4F,3.0F,3.0F,0.5F };
+static float beige[4] = { 0.8F,0.6F,0.4F,0.5F };
 static float noir[4] = { 0.1F,0.1F,0.1F,0.5F };
 static float gris[4] = { 0.5F,0.5F,0.5F,0.5F };
 static float bleuclair[4] = { 3.0F,3.0F,1.0F,0.5F };
@@ -464,6 +464,81 @@ void Brick::printCharacteristics(){
 //________________________________________Wrapping the lego pieces__________________
 //**********************************************************************************
 
+Brick brick6279875(){
+    Brick br(batonnetNoir_6279875,noir);
+    ConnType type = CIRCLE;
+    Pos3D pos(0,-0.5,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorOut firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    return br;
+}
+
+Brick brick370826(){
+    Brick br(axle12_370826, noir);
+
+    float posy = -5.5;
+
+    ConnType type = CROSS;
+    Pos3D pos(0,posy,0);
+    Dir3D dir(0,1,0);
+
+    for(int i = 0; i<12;++i){
+        pos.update(0,posy+i,0);
+        
+        ConnectorOut conn(pos,dir,type);
+        br.addConnector(conn);
+    }
+
+    return br;
+}
+
+Brick brick4211815(){
+    Brick br(axle3_4211815, gris);
+
+    float posy = -1;
+
+    ConnType type = CROSS;
+    Pos3D pos(0,posy,0);
+    Dir3D dir(0,1,0);
+
+    for(int i = 0; i<3;++i){
+        pos.update(0,posy+i,0);
+        
+        ConnectorOut conn(pos,dir,type);
+        br.addConnector(conn);
+    }
+
+    return br;
+}
+
+Brick brick6332573(){
+    Brick br(axleAndPinConnector1_6332573,blanc);
+    ConnType type = CIRCLE;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(1,0,0);
+    dir.update(1,0,0);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    return br;
+}
+
 Brick brick6012451(){
     Brick br(gear8ToothType2_6012451, noir);
     ConnType type = CROSS;
@@ -717,6 +792,26 @@ Brick brick4666999(){
     
     ConnectorOut thirdConn(pos,dir,type);
     br.addConnector(thirdConn);
+
+    return br;
+}
+
+Brick brick6185471(){
+    Brick br(gearWormScrew_6185471);
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-0.5,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);    
 
     return br;
 }
