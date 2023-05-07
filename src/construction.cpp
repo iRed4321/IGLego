@@ -122,9 +122,9 @@ void testPieceEnCoursNathan(float angle){
 
     //Etape 15
     Brick brick15_0 = brick4666999(); // baton beige avec stop
-    Brick brick15_1 = brick4177431(); // petite roue crantée
+    Brick brick15_1 = brick6012451(); // petite roue crantée
     brick15_0.connect(1,0,brick15_1,0);
-    brick8_4.connect(3,0,brick15_0,0);
+    brick8_4.connect(3,3,brick15_0,0);
 
 
     //Etape 16
@@ -148,7 +148,9 @@ void testPieceEnCoursNathan(float angle){
     brick18_0.connect(0,0,brick18_1,0);
 
     //Etape 19
-    brick12_0.connect(2,5,brick18_0,0);
+    brick12_0.connect(2,5,brick18_0,-90);
+
+    //Etape 20
 
     //Affichage !
     brick9_0.display();

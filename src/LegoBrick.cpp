@@ -793,6 +793,13 @@ Brick brick4666999(){
     ConnectorOut thirdConn(pos,dir,type);
     br.addConnector(thirdConn);
 
+    type = CIRCLE;
+    pos.update(0,-0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut fourthConn(pos,dir,type);
+    br.addConnector(fourthConn);
+
     return br;
 }
 
