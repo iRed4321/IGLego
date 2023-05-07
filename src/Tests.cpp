@@ -171,11 +171,12 @@ static void light(int i) {
 static void scene(void) {
 
 	glPushMatrix();
-    glScalef(.5,.5,.5);
+    glScalef(.3,.3,.3);
 
-    construction(facettes_x);
-    // testDemiConnexions();
+    //construction(facettes_x);
+    //testDemiConnexions();
     //testPieceEnCours();
+    testPieceEnCoursNathan(facettes_x);
 	glPopMatrix();
 }
 

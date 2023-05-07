@@ -115,6 +115,7 @@ struct Link{
 
 
 // Nathan s'occupe de ces pièces
+Brick brick6279875();
 Brick brick6012451(); //ok
 Brick brick4163533(); //ok
 Brick brick4509897(); //ok

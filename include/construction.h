@@ -11,4 +11,6 @@ void testPieceEnCours();
 
 void testDemiConnexions();
 
+void testPieceEnCoursNathan(float angle);
+
 #endif
