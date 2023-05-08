@@ -373,6 +373,32 @@ void construction(float angle){
 
     brick8_2.connect(1,5,brick36_0,90,true, USED_RIGHT,BOTH_USED);
 
+    //etape 37
+
+    Brick brick37_0 = brick6345239(); //thin blanche 6
+    Brick brick37_1 = brick6345239(); //thin blanche 6
+    Brick brick37_2 = brick4211807(); // petit conn gris
+
+    brick37_2.connect(1,0,brick37_1,0,USED_RIGHT,BOTH_USED);
+    brick37_2.connect(1,0,brick37_0,0,USED_LEFT,BOTH_USED);
+
+    //etape 38
+
+    Brick brick38_0 = brick4211807(); // petit conn gris
+    brick37_1.connect(5,0,brick38_0,0,USED_LEFT,BOTH_USED);
+
+    //etape 39
+
+    Brick brick39_0 = brick6271810(); // 3x3 L
+    Brick brick39_1 = brick6271810(); // 3x3 L
+
+    brick38_0.connect(1,1,brick39_1,120,BOTH_USED,USED_LEFT);
+    brick38_0.connect(1,1,brick39_0,120,BOTH_USED,USED_RIGHT);
+
+    //etape 40
+
+    brick35_0.connect(3,0,brick37_2,-55,true,BOTH_USED,BOTH_USED);
+
     //AFFICHAGE
 
     brick1_0.display();
