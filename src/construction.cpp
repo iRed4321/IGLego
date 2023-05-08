@@ -197,7 +197,7 @@ void construction(float angle){
 
     brick21_0.setRoot(brick21_1);
     
-    brick14_0.connect(3,2,brick21_1,180,true,USED_RIGHT,BOTH_USED);
+    brick19_2.connect(5,2,brick21_1,90,true,USED_RIGHT,BOTH_USED);
 
     //etape 22
     
@@ -213,6 +213,74 @@ void construction(float angle){
 
     brick21_0.connect(0,5,brick22_2,0,USED_RIGHT,BOTH_USED);
     */
+
+
+    //Etape 23
+    
+    Brick brick23_0 = brick4211815(); //batonnet
+    Brick brick23_1 = brick4211815(); //batonnet
+    Brick brick23_2 = brick4211815(); //batonnet
+    Brick brick23_3 = brick6275844(); // entretoise
+
+    Brick brick23_4 = brick6327548(); //fin noir 4
+    Brick brick23_5 = brick6271810(); //fin noir perpendic
+
+    brick23_5.connect(2,0,brick23_0,180,BOTH_USED, USED_RIGHT);
+    brick23_0.connect(0,0,brick23_4,0,USED_LEFT, BOTH_USED);
+    brick23_4.connect(3,2,brick23_1,0,BOTH_USED, USED_RIGHT);
+    brick23_5.connect(0,2,brick23_2,0,true,BOTH_USED, USED_LEFT);
+    brick23_0.connect(1,0,brick23_3,0);
+
+    //brick23_5.display();
+
+    brick14_0.connect(3,4,brick23_5,180,true);
+    
+    //Etape 24
+
+    Brick petitrouge = brick6261373();
+
+    brick14_0.connect(4,0,petitrouge,-90,USED_RIGHT,BOTH_USED);
+
+
+    //etape 25
+
+    Brick batongris3 = brick4211815(); 
+    Brick batonConnector1 = brick4512360();
+    Brick batonConnector2 = brick4512360();
+    Brick batonnetrouge = brick4142865();
+
+    batongris3.connect(2,0,batonConnector1,0);
+    batonConnector1.connect(1,0,batonnetrouge,0);
+    batonnetrouge.connect(1,0,batonConnector2,0);
+
+    petitrouge.connect(1,1,batongris3,-53,true);
+    
+
+    //etape 26
+    Brick trucmarron = brick6344864();
+
+    brick23_2.connect(1,0,trucmarron,180);
+    //manque une pièce parece que attente du schmilblick chelou
+
+
+    //etape27
+    Brick blackwithcylinder = brick6276951();
+    Brick blackthin3arm = brick6331723();
+
+    brick23_1.connect(2,0,blackthin3arm,-90,USED_LEFT,BOTH_USED);
+    brick23_1.connect(1,1,blackwithcylinder,90);
+
+
+    //etape 28
+
+    Brick machinblanc = brick6265135();
+    Brick barrenoire7 = brick4495935();
+    Brick petitconngris = brick4211807();
+
+    machinblanc.connect(1,0,petitconngris,0);
+    petitconngris.connect(1,0,barrenoire7,-93);
+    batongris3.connect(0,0,machinblanc,0);
+    std::cout<<angle<<std::endl;
 
     //AFFICHAGE
 

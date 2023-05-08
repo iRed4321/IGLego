@@ -62,40 +62,40 @@ Connector::Connector(const Connector& other) {
 
 bool Connector::checkConnexion(Connector other, Link lk){
     if(this->inUse==UsedConnection::BOTH_USED){
-        std::cout<<"cannot connect (first brick already connected)\n";
+        std::cout<<"cannot connect (first brick already connected (both))\n";
         return false;
     }
     if(
         (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::USED_LEFT) ||
         (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::BOTH_USED)
     ){
-        std::cout<<"cannot connect (first brick already connected)\n";
+        std::cout<<"cannot connect (first brick already connected(left))\n";
         return false;
     }
     if(
         (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::USED_RIGHT) ||
         (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::BOTH_USED)
     ){
-        std::cout<<"cannot connect (first brick already connected)\n";
+        std::cout<<"cannot connect (first brick already connected (right))\n";
         return false;
     }
 
     if(other.inUse==UsedConnection::BOTH_USED){
-        std::cout<<"cannot connect (second brick already connected)\n";
+        std::cout<<"cannot connect (second brick already connected(both))\n";
         return false;
     }
     if(
         (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::USED_LEFT) ||
         (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::BOTH_USED)
     ){
-        std::cout<<"cannot connect (second brick already connected)\n";
+        std::cout<<"cannot connect (second brick already connected(left))\n";
         return false;
     }
     if(
         (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::USED_RIGHT) ||
         (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::BOTH_USED)
     ){
-        std::cout<<"cannot connect (second brick already connected)\n";
+        std::cout<<"cannot connect (second brick already connected(right))\n";
         return false;
     }
     return true;
@@ -804,6 +804,27 @@ Brick brick4163533(){
     return br;
 }
 
+Brick brick4142865(){
+    Brick br(axle2Notched_4142865);
+    br.name = "batonnet rouge tout nul";
+
+    ConnType type = CROSS;
+    Pos3D pos(0,-0.5,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorOut firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CROSS;
+    pos.update(0,0.5,0);
+    dir.update(0,1,0);
+    
+    ConnectorOut secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    return br;
+}
+
 Brick brick6330960(){
     Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960,blanc);
     br.name = "deux cylindre et croix en trous perpendic blancs";
@@ -1399,7 +1420,7 @@ Brick brick4211807(){
 
     pos.update(0,-0.5,0);
     dir.update(0,-1,0);
-    ConnectorIn conn2(pos,dir,type);
+    ConnectorOut conn2(pos,dir,type);
     br.addConnector(conn2);
 
     return br;
