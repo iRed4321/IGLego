@@ -1314,11 +1314,11 @@ Brick brick6271156(){
 	LiftArm arm = LiftArm(THICK, m);
     br.addConnectorsList(arm);
 
-    ConnectorIn conn = ConnectorIn(Pos3D(8.12,2.12,0), Dir3D(0,0,1), CIRCLE);
+    ConnectorIn conn = ConnectorIn(Pos3D(8,2,0), Dir3D(0,0,1), CIRCLE);
     br.addConnector(conn);
-    conn = ConnectorIn(Pos3D(8.12,3.12,0), Dir3D(0,0,1), CIRCLE);
+    conn = ConnectorIn(Pos3D(8,3,0), Dir3D(0,0,1), CIRCLE);
     br.addConnector(conn);
-    conn = ConnectorIn(Pos3D(8.12,4.12,0), Dir3D(0,0,-1), CROSS);
+    conn = ConnectorIn(Pos3D(8,4,0), Dir3D(0,0,-1), CROSS);
     br.addConnector(conn);
 
     return br;

@@ -682,7 +682,7 @@ void liftarm1x115DoubleBentThick_6271156(){
 	LiftArm arm = LiftArm(THICK, m);
 	arm.draw();
 
-	glTranslatef(6,0,0);
+	glTranslatef(5.8,0,0);
 	glRotatef(45,0,0,1);
 
 	m = Model();

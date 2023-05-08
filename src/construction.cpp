@@ -285,7 +285,7 @@ void construction(float angle){
     machinblanc.connect(1,0,petitconngris,0);
     petitconngris.connect(1,0,barrenoire7,93);
     batongris3.connect(0,0,machinblanc,0);
-    // std::cout<<angle<<std::endl;
+    std::cout<<angle<<std::endl;
 
 
     //etape 29
@@ -357,6 +357,21 @@ void construction(float angle){
 
     brick34_0.connect(6,2,brick34_1,0,true,BOTH_USED,BOTH_USED);
     brick18_3.connect(1,5,brick34_0,-90,USED_RIGHT,BOTH_USED);
+
+
+    //etape 35
+
+    Brick brick35_0 = brick6261643(); //Longue barre bleue
+    brick18_4.connect(1,0,brick35_0,180+angle,BOTH_USED,BOTH_USED);
+
+    //etape 36
+
+    Brick brick36_0 = brick6173003(); // L bleu
+    Brick brick36_1 = brick6321305(); // jaune
+
+    brick36_0.connect(6,2,brick36_1,0,BOTH_USED,BOTH_USED);
+
+    brick8_2.connect(1,5,brick36_0,90,true, USED_RIGHT,BOTH_USED);
 
     //AFFICHAGE
 
