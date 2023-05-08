@@ -312,6 +312,14 @@ void construction(float angle){
     brick22_0.connect(2,6,brick31_0,0,USED_LEFT,BOTH_USED);
     brick23_0.connect(2,0,brick31_1,0,USED_LEFT,BOTH_USED);
 
+    //etape 32
+
+    Brick brick32_0 = brick4177431(); //truc rond chelou
+    Brick brick32_1 = brick4211815(); //baton
+
+    brick32_1.connect(0,0,brick32_0,0,BOTH_USED,BOTH_USED);
+    blackwithcylinder.connect(0,1,brick32_1,0,BOTH_USED,BOTH_USED);
+
     //AFFICHAGE
 
     brick1_0.display();
