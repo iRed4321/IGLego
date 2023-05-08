@@ -209,11 +209,11 @@ void construction(float angle){
     Brick brick22_2 = brick6327162(); //truc chelou
 
     brick22_2.connect(0,0,brick22_1,0,USED_LEFT, BOTH_USED);
-    brick22_2.connect(2,0,brick22_2,0,USED_LEFT, BOTH_USED);
+    brick22_2.connect(2,0,brick22_0,0,USED_LEFT, BOTH_USED);
 
-    brick21_0.connect(0,5,brick22_2,0,USED_RIGHT,BOTH_USED);
+    brick21_0.connect(2,5,brick22_2,0,USED_RIGHT,BOTH_USED);
+
     */
-
 
     //Etape 23
     
@@ -281,6 +281,13 @@ void construction(float angle){
     petitconngris.connect(1,0,barrenoire7,-93);
     batongris3.connect(0,0,machinblanc,0);
     std::cout<<angle<<std::endl;
+
+    //etape 29
+
+    Brick croixrondcroix1 = brick6331723();
+    Brick croixrondcroix2 = brick6331723();
+
+    
 
     //AFFICHAGE
 

@@ -1398,7 +1398,7 @@ Brick brick6282140(){
     ConnectorOut conn1(pos,dir,type);
     br.addConnector(conn1); 
 
-    pos.update(0,1.5,0);
+    pos.update(0,1,0);
     dir.update(1,0,0);
 
     ConnectorIn conn2(pos,dir,type);
@@ -1563,5 +1563,12 @@ Brick brick4619323(){
     ConnectorIn conn1(pos,dir,type);
     br.addConnector(conn1); 
 
+    return br;
+}
+
+Brick brick6327162(){
+    Brick br(liftarm3x5LShapeWithQuarterEllipseThin_6327162,noir);
+    LiftArm arm = liftArm6327162();
+    br.addConnectorsList(arm);
     return br;
 }
