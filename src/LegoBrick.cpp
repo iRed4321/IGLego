@@ -414,7 +414,7 @@ void reverseLink(struct Link lk){
         lk.otherPin,
         lk.fromPin,
         Brick::getBrick(lk.fromBr).getId(),
-        lk.angle,
+        -lk.angle,
         lk.otherSide,
         lk.secondBrickUse,
         lk.firstBrickUse
@@ -1008,7 +1008,7 @@ Brick brick4666999(){
 }
 
 Brick brick6185471(){
-    Brick br(gearWormScrew_6185471);
+    Brick br(gearWormScrew_6185471,beige);
     br.name = "piece trop stylee";
 
     ConnType type = CROSS;

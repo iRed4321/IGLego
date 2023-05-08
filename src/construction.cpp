@@ -76,38 +76,6 @@ void construction(float angle){
     brick1_1.connect(2,1,brick7_0,0);
     brick1_2.connect(2,0,brick7_1,0);
 
-    //AFFICHAGE
-
-    brick1_0.setRoot(brick6_1);
-
-    brick6_1.display();
-
-}
-
-void testPieceEnCours(){
-    Brick brick1_0 = brick4619323();
-    Brick brick1_1 = brick6321305();
-
-    brick1_0.connect(0,2,brick1_1,0,true);
-
-    brick1_0.display();
-}
-
-void testDemiConnexions(){
-    Brick petiteBarre = brick4666999();
-    //lol les entretoises sont pas codées donc on aura autre chose à la place
-    Brick entretoise0 = brick6012451();
-    Brick entretoise1 = brick6012451();
-
-    petiteBarre.connect(2,0,entretoise0,0, USED_LEFT,USED_LEFT);
-    petiteBarre.connect(2,0,entretoise1,0, USED_RIGHT,USED_RIGHT);
-
-    petiteBarre.display();
-
-}
-
-void testPieceEnCoursNathan(float angle){
-
     //Etape 8
 
     Brick brick8_0 = brick6321305(); //batonnet beige qui tourne
@@ -194,9 +162,45 @@ void testPieceEnCoursNathan(float angle){
     //Etape 19
     brick12_0.connect(2,5,brick18_0,-90);
 
+    //Connexion de la partie que j'ai codé avec celle que jocelyn a codé
+
+    brick9_0.setRoot(brick8_4);
+    brick6_1.connect(0,1,brick8_4,90);
+    
     //Etape 20
 
-    //Affichage !
-    brick9_0.display();
+    
+
+    //AFFICHAGE
+
+    brick1_0.display();
+
+}
+
+void testPieceEnCours(){
+    Brick brick1_0 = brick4619323();
+    Brick brick1_1 = brick6321305();
+
+    brick1_0.connect(0,2,brick1_1,0,true);
+
+    brick1_0.display();
+}
+
+void testDemiConnexions(){
+    Brick petiteBarre = brick4666999();
+    //lol les entretoises sont pas codées donc on aura autre chose à la place
+    Brick entretoise0 = brick6012451();
+    Brick entretoise1 = brick6012451();
+
+    petiteBarre.connect(2,0,entretoise0,0, USED_LEFT,USED_LEFT);
+    petiteBarre.connect(2,0,entretoise1,0, USED_RIGHT,USED_RIGHT);
+
+    petiteBarre.display();
+
+}
+
+void testPieceEnCoursNathan(float angle){
+
+    
     
 }
