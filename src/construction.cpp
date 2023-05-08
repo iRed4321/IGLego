@@ -320,6 +320,36 @@ void construction(float angle){
     brick32_1.connect(0,0,brick32_0,0,BOTH_USED,BOTH_USED);
     blackwithcylinder.connect(0,1,brick32_1,0,BOTH_USED,BOTH_USED);
 
+    //etape 33
+
+    //truc bleu fonce
+    Brick brick33_0 = brick4206482();
+
+    //truc noir court
+    Brick brick33_1 = brick6279875();
+    Brick brick33_2 = brick6279875();
+
+    //bleu clair
+    Brick brick33_3 = brick6364749();
+    Brick brick33_4 = brick6364749();
+
+    //blanc mini
+    // Brick brick33_5 = brick6177114();
+
+    // blanc long
+    Brick brick33_6 = brick6330960();
+
+    brick33_3.connect(0,0,brick33_0,0,USED_RIGHT,BOTH_USED);
+    
+    brick33_1.connect(0,1,brick33_4,0,USED_RIGHT,BOTH_USED);
+    brick33_1.connect(0,1,brick33_3,0,USED_LEFT,BOTH_USED);
+
+    brick33_6.connect(1,1,brick33_2,180,USED_LEFT,USED_RIGHT);
+    brick33_6.connect(2,1,brick33_1,180,USED_LEFT,USED_RIGHT);
+
+
+    brick19_2.connect(7,0,brick33_6,180,USED_RIGHT,BOTH_USED);
+
     //AFFICHAGE
 
     brick1_0.display();
