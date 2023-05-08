@@ -77,13 +77,11 @@ void construction(float angle){
     brick1_2.connect(2,0,brick7_1,0);
 
     //AFFICHAGE
-    brick1_0.display();
 
+    brick1_0.setRoot(brick6_1);
 
-    std::vector<struct Link> vec = brick1_0.pathTo(brick6_1);
+    brick6_1.display();
 
-    reverseLink(vec[0]);
-    
 }
 
 void testPieceEnCours(){

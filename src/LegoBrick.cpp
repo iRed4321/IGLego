@@ -228,6 +228,7 @@ Connector& Brick::operator[](std::size_t index) {
 
 void Brick::connect(struct Link lk){
     Connector myConn(this->operator[](lk.fromPin));
+    
     Brick temp = Brick::getBrick(lk.otherBr);
     Connector otherConn(temp[lk.otherPin]);
     bool res;
@@ -268,6 +269,7 @@ void Brick::connect(struct Link lk){
 
     this->connexionList.push_back(lk);
     //std::cout<<"Connected !\n";
+    
 }
 
 std::vector<struct Link> Brick::pathTo(Brick br){
@@ -278,7 +280,6 @@ std::vector<struct Link> Brick::pathTo(Brick br){
         return emptyConnexionList;
     }
     std::vector<struct Link> path = this->pathTo(br,emptyConnexionList);
-    printLinkList(path);
     return path;
 }
 
@@ -299,16 +300,81 @@ void Brick::reset_class_id(){
     Brick::class_id=0;
 }
 
+
+void printLink(struct Link lk){
+    std::cout<<"\tfromBr : " <<Brick::getBrick(lk.fromBr).name << lk.fromBr <<std::endl;
+    std::cout<<"\totherBr : " <<Brick::getBrick(lk.otherBr).name <<lk.otherBr <<std::endl<<std::endl;
+    std::cout<<"\tfromPin : " <<lk.fromPin <<std::endl;
+    std::cout<<"\totherPin : " <<lk.otherPin <<std::endl<<std::endl;
+}
 void printLinkList(std::vector<struct Link> list){
     for(size_t i = 0; i < list.size(); ++i){
         std::cout<<"Element " <<i <<std::endl;
-        std::cout<<"\tfromBr : " <<Brick::getBrick(list[i].fromBr).name <<std::endl;
-        std::cout<<"\totherBr : " <<Brick::getBrick(list[i].otherBr).name <<std::endl<<std::endl;
+        printLink(list[i]);
     }
 }
 
 std::vector<struct Link>& Brick::getConnexionList(){
     return connexionList;
+}
+
+void Brick::disconnect(struct Link lk){
+    
+
+    // REMOVING CONNEXION FROM THE FROM-BRICK
+    bool flag = false;
+    for (size_t i = 0; i< connexionList.size(); ++i){
+        if(Brick::getBrick(connexionList[i].otherBr) == *brickList[lk.otherBr] && i < connexionList.size()-1){
+            flag = true;
+            struct Link lkk = connexionList[i];
+            assign(&(connexionList[i]),&(connexionList[i+1]));
+            assign(&(connexionList[i+1]),&lkk);
+        }
+    }
+    if(flag){
+        connexionList.pop_back();
+
+        //retrait du point de connexion sur le connecteur from
+        if(lk.firstBrickUse==BOTH_USED){
+            this->operator[](lk.fromPin).inUse = FREE;
+        }
+        if(lk.firstBrickUse==USED_LEFT && this->operator[](lk.fromPin).inUse==USED_LEFT){
+            this->operator[](lk.fromPin).inUse = FREE;
+        }
+        if(lk.firstBrickUse==USED_LEFT && this->operator[](lk.fromPin).inUse==BOTH_USED){
+            this->operator[](lk.fromPin).inUse = USED_RIGHT;
+        }
+        if(lk.firstBrickUse==USED_RIGHT && this->operator[](lk.fromPin).inUse==USED_RIGHT){
+            this->operator[](lk.fromPin).inUse = FREE;
+        }
+        if(lk.firstBrickUse==USED_RIGHT && this->operator[](lk.fromPin).inUse==BOTH_USED){
+            this->operator[](lk.fromPin).inUse = USED_LEFT;
+        }
+
+        //retrait du point de connexion sur le connecteur other
+        if(lk.secondBrickUse==BOTH_USED){
+            Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = FREE;
+            return;
+        }
+        if(lk.secondBrickUse==USED_LEFT && Brick::getBrick(lk.otherBr)[lk.otherPin].inUse==USED_LEFT){
+            Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = FREE;
+            return;
+        }
+        if(lk.secondBrickUse==USED_LEFT && Brick::getBrick(lk.otherBr)[lk.otherPin].inUse==BOTH_USED){
+            Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = USED_RIGHT;
+            return;
+        }
+
+        if(lk.secondBrickUse==USED_RIGHT && Brick::getBrick(lk.otherBr)[lk.otherPin].inUse==USED_RIGHT){
+            Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = FREE;
+            return;
+        }
+        if(lk.secondBrickUse==USED_RIGHT && Brick::getBrick(lk.otherBr)[lk.otherPin].inUse==BOTH_USED){
+            Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = USED_LEFT;
+            return;
+        }
+            
+    }
 }
 
 Brick Brick::operator=(Brick& br){
@@ -320,6 +386,10 @@ Brick Brick::operator=(Brick& br){
     this->connectorList = br.connectorList;
     this->connexionList = br.connexionList; 
     return *this;
+}
+
+int Brick::getId(){
+    return id;
 }
 
 void assign(struct Link *lk, struct Link *lkk){
@@ -334,49 +404,32 @@ void assign(struct Link *lk, struct Link *lkk){
 }
 
 void reverseLink(struct Link lk){
-    Brick fromBr = Brick::getBrick(lk.fromBr);
-    Brick otherBr = Brick::getBrick(lk.otherBr);
 
-
-    std::vector<struct Link> vec = fromBr.getConnexionList();
-
-    std::cout<<" AVANT :\n";
-    for (size_t i = 0; i<vec.size();++i){
-        std::cout<<Brick::getBrick(vec[i].otherBr).name<<std::endl;
-    }
+    // REMOVING CONNEXION FROM THE FROM-BRICK
+    Brick::getBrick(lk.fromBr).disconnect(lk);
     
-    for (size_t i = 0; i< vec.size(); ++i){
-        if(Brick::getBrick(vec[i].otherBr) == otherBr && i < vec.size()-1){
-            struct Link lkk = vec[i];
-            assign(&vec[i],&vec[i+1]);
-            assign(&vec[i+1],&lkk);
-        }
-    }
-    vec.pop_back();
-    std::cout<<"\n\n APRES :\n";
-    for (size_t i = 0; i<vec.size();++i){
-        std::cout<<Brick::getBrick(vec[i].otherBr).name<<std::endl;
-    }
+    Link lkk = 
+    {
+        Brick::getBrick(lk.otherBr).getId(),
+        lk.otherPin,
+        lk.fromPin,
+        Brick::getBrick(lk.fromBr).getId(),
+        lk.angle,
+        lk.otherSide,
+        lk.secondBrickUse,
+        lk.firstBrickUse
+    };
 
-    /*
-    Cette fonction était censée supprimer 
-    un Link de la connexionList de la brique from
-    pour ajouter la connexion symetrique à la connexionList
-    de la otherBrick.
+    ////// ADDING REVERSED CONNEXION TO THE OTHER BRICK
+    //Brick::getBrick(lk.otherBr).printCharacteristics();
+    Brick::getBrick(lk.otherBr).connect(lkk);
 
-    J'ai pas réussi à la coder. 
-
-    L'objectif finale était de pouvoir renverser 
-    un arbre de brique pour pouvoir rendre n'importe
-    quelle brique comme étant la racine de l'arbre
-    (pour les connecter plus facilement)
-    */
-
-    //otherBr.getConnexionList().push_back(lk);
 }
 
 void reverseLinks(std::vector<struct Link> list){
-
+    for(auto& elem : list){
+        reverseLink(elem);
+    }
 }
 
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide){
@@ -513,64 +566,11 @@ void Brick::display(){
     //going back to the position of the current piece
     setCurrentMatrix();
 }
-/*
-void Brick::setRoot(){
-    glMaterialfv(GL_FRONT,GL_DIFFUSE,this->color);
-	brickFunc();
-    size_t nblinks = connexionList.size();
 
-    getCurrentMatrix();
-    Pos3D zero(0,0,0);
-
-    for(size_t i = 0; i<nblinks; ++i){
-        //replace ourself at the position of the origin of the current brick
-        setCurrentMatrix();
-
-        //retrieve the values of the connections to use
-        Link lk = connexionList[i];
-        Connector myConn(this->operator[](lk.fromPin));
-        Connector otherConn(lk.otherBr[lk.otherPin]);
-        
-        //move to the position of the first connector
-        glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
-
-        //rotate to align ourself with the connector
-        Dir3D vertic(0,1,0);
-        Dir3D axis = vertic^myConn.dir;
-        float angle = compute_angle(vertic,myConn.dir)*180/M_PI;
-        glRotatef(angle,axis.x,axis.y,axis.z);
-        
-        //shift following the way the first connector is used
-        BrickUseShift(lk.firstBrickUse);
-
-        //make a U turn if the connection is on the otherside
-        glRotatef(lk.angle,0,1,0);
-        if(lk.otherSide){
-            glRotatef(180,1,0,0);
-        }
-
-        //shift following the way the second connector is used
-        BrickUseShift(lk.secondBrickUse);
-
-
-        //rotate to align the second brick to the connection
-        axis = vertic^otherConn.dir;
-        angle = compute_angle(vertic,otherConn.dir)*180/M_PI;
-        glRotatef(-angle,axis.x,axis.y,axis.z);
-        
-        //move backward to put the second brick relatively to the first brick 
-        Pos3D nextPos = zero - otherConn.pos;
-        glTranslatef(nextPos.x,nextPos.y,nextPos.z);
-
-        //saving the current position into the brick
-        lk.otherBr.getCurrentMatrix();
-        
-        //displaying the brick we just placed
-        lk.otherBr.display();
-    }
-    //going back to the position of the current piece
-    setCurrentMatrix();
-}*/
+void Brick::setRoot(Brick& br){
+    std::vector<struct Link> vec = pathTo(br);
+    reverseLinks(vec);
+}
 
 void Brick::addConnectorsList(LiftArm &arm){
     nextConnectorId = 0;
@@ -1327,6 +1327,7 @@ Brick brick6055519(){
 
 Brick brick6282140(){
     Brick br(pinWithFrictionRidgesLengthwiseAndPinHole_6282140,noir);
+    br.name = "Bitoniau noir";
     
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);

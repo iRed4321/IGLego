@@ -98,6 +98,9 @@ public:
 	std::vector<struct Link>& getConnexionList();
 	bool operator==(Brick br);
 	std::string name;
+	int getId();
+	void disconnect(struct Link lk);
+	void setRoot(Brick& br);
 
 	std::vector<struct Link> pathTo(Brick br);
 	static void reset_class_id();
@@ -121,6 +124,7 @@ void assign(struct Link *lk, struct Link *lkk);
 void reverseLink(struct Link lk);
 void reverseLinks(std::vector<struct Link> list);
 void printLinkList(std::vector<struct Link> list);
+void printLink(struct Link lk);
 
 struct Link{
 	int fromBr;
