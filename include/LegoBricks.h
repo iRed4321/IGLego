@@ -61,7 +61,7 @@ void technicLever3x3m90deg__6271810();
 
         //done
         void liftarm1x2ThickWithPinHoleAndAxleHole_6265135();
-        // LiftArm liftArm6265135();
+        LiftArm liftArm6265135();
 
         //done
         void liftarm1x2ThickWithPinHoleAndAxleHole_6344864();

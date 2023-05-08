@@ -416,8 +416,9 @@ void reverseLink(struct Link lk){
         Brick::getBrick(lk.fromBr).getId(),
         -lk.angle,
         lk.otherSide,
-        lk.secondBrickUse,
-        lk.firstBrickUse
+        lk.secondBrickUse == BOTH_USED ? lk.secondBrickUse : (lk.secondBrickUse == USED_LEFT ? USED_RIGHT : USED_LEFT),
+        lk.firstBrickUse == BOTH_USED ? lk.firstBrickUse : (lk.firstBrickUse == USED_LEFT ? USED_RIGHT : USED_LEFT),
+        
     };
 
     ////// ADDING REVERSED CONNEXION TO THE OTHER BRICK
@@ -668,6 +669,25 @@ Brick brick6279875(){
     return br;
 }
 
+Brick brick370726(){
+    Brick br(axle8_370726, noir);
+    br.name = "moyen baton noir";
+    float posy = -3.5;
+
+    ConnType type = CROSS;
+    Pos3D pos(0,posy,0);
+    Dir3D dir(0,1,0);
+
+    for(int i = 0; i<8;++i){
+        pos.update(0,posy+i,0);
+        
+        ConnectorOut conn(pos,dir,type);
+        br.addConnector(conn);
+    }
+
+    return br;
+}
+
 Brick brick370826(){
     Brick br(axle12_370826, noir);
     br.name = "grand baton noir";
@@ -709,7 +729,7 @@ Brick brick4211815(){
 
 Brick brick6332573(){
     Brick br(axleAndPinConnector1_6332573,blanc);
-    br.name = "cylindre et croix creux blanc";
+    br.name = "cylindre et croix creux blanc perpendic";
 
     ConnType type = CIRCLE;
     Pos3D pos(0,0,0);
@@ -721,6 +741,27 @@ Brick brick6332573(){
     type = CROSS;
     pos.update(1,0,0);
     dir.update(1,0,0);
+    
+    ConnectorIn secondConn(pos,dir,type);
+    br.addConnector(secondConn);
+
+    return br;
+}
+
+Brick brick6265135(){
+    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6265135,blanc);
+    br.name = "cylindre et croix creux blanc meme sens";
+
+    ConnType type = CROSS;
+    Pos3D pos(0,0,0);
+    Dir3D dir(0,1,0);
+    
+    ConnectorIn firstConn(pos,dir,type);
+    br.addConnector(firstConn);
+
+    type = CIRCLE;
+    pos.update(1,0,0);
+    dir.update(0,1,0);
     
     ConnectorIn secondConn(pos,dir,type);
     br.addConnector(secondConn);

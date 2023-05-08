@@ -610,14 +610,29 @@ LiftArm liftArm6344864(){
 	return arm;
 }
 
-// void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
-// 	LiftArm arm = liftarm6265135();
-// 	arm.draw();
-// }
 
-// LiftArm liftarm6265135(){
-// 	return liftArm6344864();
-// }
+
+void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
+	glPushMatrix();
+		
+		cylinder(0.2);
+		glPushMatrix();
+		glScalef(0.8,1,0.8);
+		thickCross();
+		glPopMatrix();
+		glTranslatef(1,0,0);
+		cylinder(0.2);
+		glTranslatef(-0.5,0,0.5);
+		glPushMatrix();
+			glScalef(1,1,0.1);
+			cube();
+		glPopMatrix();
+		glTranslatef(0,0,-1);
+		glScalef(1,1,0.1);
+		cube();
+	glPopMatrix();
+}
+
 
 void liftarm1x2Thick_4177444(){
 	LiftArm arm = liftArm4177444();

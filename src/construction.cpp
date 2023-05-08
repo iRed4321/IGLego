@@ -159,17 +159,60 @@ void construction(float angle){
     brick18_0.connect(6,0,brick18_3,0,true);
     brick18_0.connect(0,0,brick18_1,0);
 
-    //Etape 19
+    
     brick12_0.connect(2,5,brick18_0,-90);
 
     //Connexion de la partie que j'ai codé avec celle que jocelyn a codé
 
     brick9_0.setRoot(brick8_4);
     brick6_1.connect(0,1,brick8_4,90);
-    
+
+    //Etape 19
+
+    Brick brick19_0 = brick6265135(); //petit connecteur blanc
+    Brick brick19_1 = brick6330960(); //moyen connecteur blanc
+    Brick brick19_2 = brick370726(); //barre de 8
+    Brick brick19_3 = brick6275844(); // entretoise
+
+    brick19_2.connect(0,0,brick19_1,180);
+    brick19_2.connect(1,0,brick19_0,90);
+    brick19_2.connect(2,0,brick19_3,0);
+
+    brick2_0.connect(5,3,brick19_2,0);
+
     //Etape 20
 
+    Brick brick20_0 = brick6275844(); // entretoise
+    brick19_2.connect(4,0,brick20_0,0);
+
+
+    //Etape 21
+
+    Brick brick21_0 = brick4211815(); //batonnet
+    Brick brick21_1 = brick6331723(); //fin gris
+    Brick brick21_2 = brick6331723(); //fin gris
+
+    brick21_0.connect(0,0,brick21_1,0,USED_LEFT,BOTH_USED);
+    brick21_0.connect(1,0,brick21_2,0,USED_RIGHT,BOTH_USED);
+
+    brick21_0.setRoot(brick21_1);
     
+    brick14_0.connect(3,2,brick21_1,180,true,USED_RIGHT,BOTH_USED);
+
+    //etape 22
+    
+    /* PAS POSSIBLE POUR LE MOMENT
+    
+    
+    Brick brick22_0 = brick4211815(); //baton
+    Brick brick22_1 = brick4211815(); //baton
+    Brick brick22_2 = brick6327162(); //truc chelou
+
+    brick22_2.connect(0,0,brick22_1,0,USED_LEFT, BOTH_USED);
+    brick22_2.connect(2,0,brick22_2,0,USED_LEFT, BOTH_USED);
+
+    brick21_0.connect(0,5,brick22_2,0,USED_RIGHT,BOTH_USED);
+    */
 
     //AFFICHAGE
 

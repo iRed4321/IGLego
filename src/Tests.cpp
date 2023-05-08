@@ -176,9 +176,7 @@ static void scene(void) {
     //textured_plate4x8_4509897(legoTexture);
 
     construction(facettes_x);
-    //testDemiConnexions();
     //testPieceEnCours();
-    //testPieceEnCoursNathan(facettes_x);
 	glPopMatrix();
 }
 
