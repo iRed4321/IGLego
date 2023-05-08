@@ -87,7 +87,7 @@ void construction(float angle){
     Brick brick8_4 = brick6271156(); //gros baton tordu
     Brick brick8_5 = brick6332573(); //truc blanc qui va bouger
 
-    brick8_4.connect(6,0,brick8_2,0);
+    brick8_4.connect(6,0,brick8_2,0,true);
     brick8_4.connect(8,0,brick8_3,0,true);
     brick8_4.connect(0,0,brick8_1,0,true);
     brick8_4.connect(7,2,brick8_0,0,true);
@@ -158,7 +158,7 @@ void construction(float angle){
 
     brick18_0.connect(9,0,brick18_4,0);
     brick18_0.connect(8,0,brick18_2,0);
-    brick18_0.connect(6,0,brick18_3,0,true);
+    brick18_0.connect(6,0,brick18_3,0);
     brick18_0.connect(0,0,brick18_1,0);
 
     
@@ -349,6 +349,14 @@ void construction(float angle){
 
 
     brick19_2.connect(7,0,brick33_6,180,USED_RIGHT,BOTH_USED);
+
+    //etape 34
+
+    Brick brick34_0 = brick6173003(); // L bleu
+    Brick brick34_1 = brick6321305(); // jaune
+
+    brick34_0.connect(6,2,brick34_1,0,true,BOTH_USED,BOTH_USED);
+    brick18_3.connect(1,5,brick34_0,-90,USED_RIGHT,BOTH_USED);
 
     //AFFICHAGE
 
