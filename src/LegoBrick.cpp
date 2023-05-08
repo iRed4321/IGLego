@@ -23,7 +23,7 @@ static float noir[4] = { 0.1F,0.1F,0.1F,0.5F };
 static float gris[4] = { 0.5F,0.5F,0.5F,0.5F };
 static float bleuclair[4] = { 3.0F,3.0F,1.0F,0.5F };
 static float bleufonce[4] = { 0.0F,0.0F,5.0F,0.5F };
-
+static float marron[4] = { 155.0F/255.0F, 138.0F/255.0F, 112.0F/255.0F,0.5F };
 
 //useful functions
 
@@ -1177,7 +1177,7 @@ Brick brick4177444(){
 }
 
 Brick brick6344864(){
-    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864, gris);
+    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6344864, marron);
     br.name = "trous cylindre et croix a cote thick";
 
     LiftArm arm = liftArm6344864();
