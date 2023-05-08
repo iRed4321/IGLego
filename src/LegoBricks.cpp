@@ -456,7 +456,7 @@ LiftArm liftArm6173003() {
 LiftArm liftArm6327162() {
 	Model m = Model();
 
-	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngleWithCross};
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEndWithCross};
 	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
 	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
 	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
@@ -729,13 +729,15 @@ void liftarm3X5PerpendicularHShapeThick_6055519(){
 
 void liftarm3x5LShapeWithQuarterEllipseThin_6327162(){
 	LiftArm arm = liftArm6327162();
-	arm.draw();
+	glPushMatrix();
+		arm.draw();
 
-	glTranslatef(4,0,0);
-	glRotatef(150, 0,0,1);
-	glScalef(1,0.5,1);
+		glTranslatef(4,0,0);
+		glRotatef(150, 0,0,1);
+		glScalef(1,0.5,1);
 
-	arm.draw2();
+		arm.draw(1);
+	glPopMatrix();
 }
 
 void cylinderBordersFace(){

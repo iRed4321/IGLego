@@ -917,18 +917,17 @@ void cube(){
 
 LiftArm::LiftArm(Thickness thickness, Model model){
 	this->thickness = thickness;
-	this->model = model;
+	this->models = {model};
 }
 
 LiftArm::LiftArm(Thickness thickness, Model m1, Model m2){
   this->thickness = thickness;
-  this->model = m1;
-  this->model2 = m2;
+  this->models = {m1, m2};
 }
 
 LiftArm::LiftArm(Thickness thickness, uint nbHoles){
 	this->thickness = thickness;
-	this->model = Model();
+	Model model = Model();
 	for (uint i = 0; i < nbHoles; ++i){
 		if (i == 0){
 			model[Pos3d{i,0,0}] = LegoPart{Front, ArmEnd};
@@ -938,27 +937,14 @@ LiftArm::LiftArm(Thickness thickness, uint nbHoles){
 			model[Pos3d{i,0,0}] = LegoPart{Front, Arm};
 		}
 	}
+  this->models = {model};
 }
 
 void LiftArm::draw(){
-	glPushMatrix();
-
-	if (thickness == THIN){
-		glScalef(1,1,0.5);
-	}
-	glRotatef(90,-1,0,0);
-
-	for (auto &[pos, part] : model){
-		glPushMatrix();
-		glTranslatef(pos.x, pos.y, pos.z);
-		part.draw();
-		glPopMatrix();
-	}
-
-	glPopMatrix();
+  draw(0);
 }
 
-void LiftArm::draw2(){
+void LiftArm::draw(uint part){
 	glPushMatrix();
 
 	if (thickness == THIN){
@@ -966,7 +952,7 @@ void LiftArm::draw2(){
 	}
 	glRotatef(90,-1,0,0);
 
-	for (auto &[pos, part] : model2){
+	for (auto &[pos, part] : models[part]){
 		glPushMatrix();
 		glTranslatef(pos.x, pos.y, pos.z);
 		part.draw();

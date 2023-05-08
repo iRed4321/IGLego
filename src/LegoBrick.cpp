@@ -61,43 +61,43 @@ Connector::Connector(const Connector& other) {
 }
 
 bool Connector::checkConnexion(Connector other, Link lk){
-    if(this->inUse==UsedConnection::BOTH_USED){
-        std::cout<<"cannot connect (first brick already connected (both))\n";
-        return false;
-    }
-    if(
-        (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::USED_LEFT) ||
-        (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::BOTH_USED)
-    ){
-        std::cout<<"cannot connect (first brick already connected(left))\n";
-        return false;
-    }
-    if(
-        (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::USED_RIGHT) ||
-        (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::BOTH_USED)
-    ){
-        std::cout<<"cannot connect (first brick already connected (right))\n";
-        return false;
-    }
+    // if(this->inUse==UsedConnection::BOTH_USED){
+    //     std::cout<<"cannot connect (first brick already connected (both))\n";
+    //     return false;
+    // }
+    // if(
+    //     (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::USED_LEFT) ||
+    //     (this->inUse==UsedConnection::USED_LEFT && lk.firstBrickUse==UsedConnection::BOTH_USED)
+    // ){
+    //     std::cout<<"cannot connect (first brick already connected(left))\n";
+    //     return false;
+    // }
+    // if(
+    //     (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::USED_RIGHT) ||
+    //     (this->inUse==UsedConnection::USED_RIGHT && lk.firstBrickUse==UsedConnection::BOTH_USED)
+    // ){
+    //     std::cout<<"cannot connect (first brick already connected (right))\n";
+    //     return false;
+    // }
 
-    if(other.inUse==UsedConnection::BOTH_USED){
-        std::cout<<"cannot connect (second brick already connected(both))\n";
-        return false;
-    }
-    if(
-        (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::USED_LEFT) ||
-        (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::BOTH_USED)
-    ){
-        std::cout<<"cannot connect (second brick already connected(left))\n";
-        return false;
-    }
-    if(
-        (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::USED_RIGHT) ||
-        (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::BOTH_USED)
-    ){
-        std::cout<<"cannot connect (second brick already connected(right))\n";
-        return false;
-    }
+    // if(other.inUse==UsedConnection::BOTH_USED){
+    //     std::cout<<"cannot connect (second brick already connected(both))\n";
+    //     return false;
+    // }
+    // if(
+    //     (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::USED_LEFT) ||
+    //     (other.inUse==UsedConnection::USED_LEFT && lk.secondBrickUse==UsedConnection::BOTH_USED)
+    // ){
+    //     std::cout<<"cannot connect (second brick already connected(left))\n";
+    //     return false;
+    // }
+    // if(
+    //     (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::USED_RIGHT) ||
+    //     (other.inUse==UsedConnection::USED_RIGHT && lk.secondBrickUse==UsedConnection::BOTH_USED)
+    // ){
+    //     std::cout<<"cannot connect (second brick already connected(right))\n";
+    //     return false;
+    // }
     return true;
 }
 
@@ -575,52 +575,58 @@ void Brick::setRoot(Brick& br){
 
 void Brick::addConnectorsList(LiftArm &arm){
     nextConnectorId = 0;
-    for(auto [pos, part] : arm.model){
-        nextConnectorId++;
-        Pos3D pos1 = Pos3D(pos.x,pos.z,pos.y);
 
-        Dir3D dir = Dir3D(0,0,1);
+    for (auto model : arm.models){
+        for(auto [pos, part] : model){
+            nextConnectorId++;
+            Pos3D pos1 = Pos3D(pos.x,pos.z,pos.y);
 
-        switch (part.orientation){
+            Dir3D dir = Dir3D(0,0,1);
 
-            case Front:
-            case Right:
-                dir = Dir3D(0,0,1);
-                break;
+            // switch (part.orientation){
 
-            case Back:
-            case Left:
-                dir = Dir3D(0,0,-1);
-                break;
+            //     case Front:
+            //     case Right:
+            //     case Top:
+            //         dir = Dir3D(0,0,1);
+            //         break;
 
-            default:
-                break;
-        }
+            //     case Back:
+            //     case Left:
+            //     case Bottom:
+            //         dir = Dir3D(0,0,-1);
+            //         break;
 
-        switch (part.kind){
-            case ArmWithCross:
-            case ArmAngleWithCross:
-            case ArmEndWithCross:
-            {
-                ConnectorIn conn1(pos1,dir,CROSS);
-                connectorList.push_back(conn1);
-                break;
+            //     default:
+            //         break;
+            // }
+
+            switch (part.kind){
+                case ArmWithCross:
+                case ArmAngleWithCross:
+                case ArmEndWithCross:
+                {
+                    ConnectorIn conn1(pos1,dir,CROSS);
+                    connectorList.push_back(conn1);
+                    break;
+                }
+
+                case ArmEnd:
+                case ArmAngle:
+                case Arm:{
+                    ConnectorIn conn1(pos1,dir,CIRCLE);
+                    connectorList.push_back(conn1);
+                    break;
+                }
+
+                default:
+                    std::cout<<"error : part not found\n";
+                    nextConnectorId--;
+                    break;
             }
-
-            case ArmEnd:
-            case ArmAngle:
-            case Arm:{
-                ConnectorIn conn1(pos1,dir,CIRCLE);
-                connectorList.push_back(conn1);
-                break;
-            }
-
-            default:
-                std::cout<<"error : part not found\n";
-                nextConnectorId--;
-                break;
         }
     }
+
 }
 
 void Brick::printCharacteristics(){
@@ -1310,7 +1316,7 @@ Brick brick6271156(){
     br.addConnector(conn);
     conn = ConnectorIn(Pos3D(8.12,3.12,0), Dir3D(0,0,1), CIRCLE);
     br.addConnector(conn);
-    conn = ConnectorIn(Pos3D(8.12,4.12,0), Dir3D(0,0,1), CROSS);
+    conn = ConnectorIn(Pos3D(8.12,4.12,0), Dir3D(0,0,-1), CROSS);
     br.addConnector(conn);
 
     return br;

@@ -38,7 +38,7 @@ unsigned int legoTexture;
 
 static int mousePos [2] = { 0,0 };
 static int mouseDiff[2] = { 0,0 };
-static float angle[3] = {0,0,0};
+static float angle[3] = {90,90,125};
 
 static int wTx = 1000;              // horizontal resolution of the window 
 static int wTy = 1000;              // vertical resolution of the window
@@ -213,6 +213,7 @@ static void display(void) {
   glTranslatef(0.0F,0.0F,zoom);
   glRotatef(angle[X],1.0F,0.0F,0.0F);
   glRotatef(angle[Y],0.0F,1.0F,0.0F);
+  glRotatef(angle[2],0.0F,0.0F,1.0F);
   scene();
   glPopMatrix();
   

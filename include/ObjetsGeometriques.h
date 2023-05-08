@@ -2,6 +2,7 @@
 #define __OBJETS_GEOMETRIQUES__
 
 #include <map>
+#include <vector>
 
 //need to correct makefile so this works
 void mySolidDisc(int ns);
@@ -127,16 +128,17 @@ struct Pos3dComparator{
 
 typedef std::map<Pos3d,LegoPart, Pos3dComparator> Model;
 
-struct LiftArm{
+class LiftArm{
+
+    public:
+    std::vector<Model> models;
     Thickness thickness;
-    Model model;
-    Model model2;
 
 	LiftArm(Thickness thickness, Model model);
     LiftArm(Thickness thickness, Model model, Model model2);
 	LiftArm(Thickness thickness, uint nbHoles);
     void draw();
-    void draw2();
+    void draw(uint partLiftArm);
 };
 
 #endif
