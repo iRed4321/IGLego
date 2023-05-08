@@ -920,6 +920,12 @@ LiftArm::LiftArm(Thickness thickness, Model model){
 	this->model = model;
 }
 
+LiftArm::LiftArm(Thickness thickness, Model m1, Model m2){
+  this->thickness = thickness;
+  this->model = m1;
+  this->model2 = m2;
+}
+
 LiftArm::LiftArm(Thickness thickness, uint nbHoles){
 	this->thickness = thickness;
 	this->model = Model();
@@ -943,6 +949,24 @@ void LiftArm::draw(){
 	glRotatef(90,-1,0,0);
 
 	for (auto &[pos, part] : model){
+		glPushMatrix();
+		glTranslatef(pos.x, pos.y, pos.z);
+		part.draw();
+		glPopMatrix();
+	}
+
+	glPopMatrix();
+}
+
+void LiftArm::draw2(){
+	glPushMatrix();
+
+	if (thickness == THIN){
+		glScalef(1,1,0.5);
+	}
+	glRotatef(90,-1,0,0);
+
+	for (auto &[pos, part] : model2){
 		glPushMatrix();
 		glTranslatef(pos.x, pos.y, pos.z);
 		part.draw();

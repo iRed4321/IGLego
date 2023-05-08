@@ -174,8 +174,8 @@ static void scene(void) {
     glScalef(.2,.2,.2);
 
     //textured_plate4x8_4509897(legoTexture);
-
-    construction(facettes_x);
+    liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+    // construction(facettes_x);
     //testPieceEnCours();
 	glPopMatrix();
 }

@@ -804,6 +804,11 @@ Brick brick4163533(){
     return br;
 }
 
+Brick brick6327162(){
+
+    
+}
+
 Brick brick6330960(){
     Brick br(axleAndPinConnectorPerpendicular3LWith2PinHoles_6330960,blanc);
     br.name = "deux cylindre et croix en trous perpendic blancs";

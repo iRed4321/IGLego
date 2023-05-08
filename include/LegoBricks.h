@@ -121,7 +121,7 @@ void technicLever3x3m90deg__6271810();
 
         //kinda done
         void liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-        // LiftArm liftArm6327162();
+        LiftArm liftArm6327162();
 
         //done
         void liftarm3X5PerpendicularHShapeThick_6055519();
