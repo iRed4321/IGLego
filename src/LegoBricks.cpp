@@ -453,6 +453,28 @@ LiftArm liftArm6173003() {
 	return LiftArm(THICK, m);
 }
 
+LiftArm liftArm6327162() {
+	Model m = Model();
+
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngleWithCross};
+	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
+	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEndWithCross};
+
+	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
+	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEndWithCross};
+
+	Model m2 = Model();
+	m2[Pos3d{0,0,0}] = LegoPart{Front, ArmEmpty};
+	m2[Pos3d{1,0,0}] = LegoPart{Front, ArmEmpty};
+	m2[Pos3d{2,0,0}] = LegoPart{Front, ArmEmpty};
+	m2[Pos3d{3,0,0}] = LegoPart{Front, ArmEmpty};
+	m2[Pos3d{4,0,0}] = LegoPart{Back, ArmEmpty};
+
+	return LiftArm(THIN, m, m2);
+}
+
 void liftarm3x3TShapeThick_4552347(){
 	LiftArm arm = liftArm4552347();
 	arm.draw();
@@ -706,33 +728,14 @@ void liftarm3X5PerpendicularHShapeThick_6055519(){
 }
 
 void liftarm3x5LShapeWithQuarterEllipseThin_6327162(){
-	Model m = Model();
-
-	m[Pos3d{0,0,0}] = LegoPart{Front, ArmAngleWithCross};
-	m[Pos3d{1,0,0}] = LegoPart{Front, Arm};
-	m[Pos3d{2,0,0}] = LegoPart{Front, Arm};
-	m[Pos3d{3,0,0}] = LegoPart{Front, Arm};
-	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEndWithCross};
-
-	m[Pos3d{0,0,1}] = LegoPart{Left, Arm};
-	m[Pos3d{0,0,2}] = LegoPart{Right, ArmEndWithCross};
-
-	LiftArm arm = LiftArm(THIN, m);
+	LiftArm arm = liftArm6327162();
 	arm.draw();
 
 	glTranslatef(4,0,0);
-	glRotatef(205, 0,0,1);
+	glRotatef(150, 0,0,1);
 	glScalef(1,0.5,1);
 
-	m = Model();
-	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEmpty};
-	m[Pos3d{1,0,0}] = LegoPart{Front, ArmEmpty};
-	m[Pos3d{2,0,0}] = LegoPart{Front, ArmEmpty};
-	m[Pos3d{3,0,0}] = LegoPart{Front, ArmEmpty};
-	m[Pos3d{4,0,0}] = LegoPart{Back, ArmEmpty};
-
-	arm = LiftArm(THIN, m);
-	arm.draw();
+	arm.draw2();
 }
 
 void cylinderBordersFace(){
@@ -913,17 +916,8 @@ void pinWithFrictionRidgesLengthwiseAndPinHole_6282140(){
 			cylinder(0.2);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0,0.75,0);
-			glScalef(1,0.5,1);
-			cylinder(0.2);
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0,1.5,0);
+			glTranslatef(0,1,0);
 			glRotatef(90,0,0,1);
-			glPushMatrix();
-				glScalef(1.4,1.4,1.4);
-				cylinder(0.3);
-			glPopMatrix();
 			glPushMatrix();
 				cylinder(0.2);
 			glPopMatrix();

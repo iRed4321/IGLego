@@ -130,10 +130,13 @@ typedef std::map<Pos3d,LegoPart, Pos3dComparator> Model;
 struct LiftArm{
     Thickness thickness;
     Model model;
+    Model model2;
 
 	LiftArm(Thickness thickness, Model model);
+    LiftArm(Thickness thickness, Model model, Model model2);
 	LiftArm(Thickness thickness, uint nbHoles);
     void draw();
+    void draw2();
 };
 
 #endif
