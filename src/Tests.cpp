@@ -50,6 +50,8 @@ static float rotationX = 1;
 static float rotationY = 1;
 static float rotationZ = 1;
 
+static float zoom = -5.0F;
+
 static GLenum currentView = GL_FILL;
 
 static const float noir[] = { 0.0F,0.0F,0.0F,1.0F };
@@ -174,9 +176,12 @@ static void scene(void) {
     glScalef(.2,.2,.2);
 
     //textured_plate4x8_4509897(legoTexture);
-    liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-    // construction(facettes_x);
+    //pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
+    //liftarm3x5LShapeWithQuarterEllipseThin_6327162();
+    construction(facettes_x);
+    //testDemiConnexions();
     //testPieceEnCours();
+    //testPieceEnCoursNathan(facettes_x);
 	glPopMatrix();
 }
 
@@ -205,6 +210,7 @@ static void display(void) {
   glPolygonMode(GL_FRONT_AND_BACK, currentView);
   
   glPushMatrix();
+  glTranslatef(0.0F,0.0F,zoom);
   glRotatef(angle[X],1.0F,0.0F,0.0F);
   glRotatef(angle[Y],0.0F,1.0F,0.0F);
   scene();
@@ -226,7 +232,8 @@ static void reshape(int wx,int wy) {
   glViewport(0,0,wx,wy); 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(-3.0,3.0,-3.0,3.0,-3.0,3.0);
+  //glOrtho(-3.0,3.0,-3.0,3.0,0.0,10.0);
+  gluPerspective(60.0, (float)wx/(float)wy, 0.1, 100.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 }
@@ -240,9 +247,9 @@ static void idle(void) {
 }
 
 static void idleAnim(void){
-  glRotatef(rotationX, 1, 0, 0);
+  glTranslatef(0, 0, zoom);
   glRotatef(rotationY, 0, 1, 0);
-  glRotatef(rotationZ, 0, 0, 1);
+  glTranslatef(0, 0, -zoom);
   glutPostRedisplay();
 }
 
@@ -266,6 +273,16 @@ static void keyboard(unsigned char key,int x,int y) {
       } else{
         glutIdleFunc(idle);
       }
+      glutPostRedisplay();
+      break;
+
+    case '+':
+      zoom += 0.5F;
+      glutPostRedisplay();
+      break;
+
+    case '-':
+      zoom -= 0.5F;
       glutPostRedisplay();
       break;
 
