@@ -81,7 +81,10 @@ public:
     std::size_t addConnector(Connector& conn);
 	void getCurrentMatrix();
 	void setCurrentMatrix();
+	
 	Connector& operator[](std::size_t index);
+	Brick operator=(Brick& br);
+
 	void connect(struct Link conn);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide);
 	void connect(int myPin, int otherPin, Brick& otherBrick,float angle, bool otherSide, UsedConnection firstShift, UsedConnection secondShift);
@@ -98,6 +101,7 @@ public:
 
 	std::vector<struct Link> pathTo(Brick br);
 	static void reset_class_id();
+	static Brick& getBrick(int id);
 
 private:
 	
@@ -110,17 +114,19 @@ private:
 	std::vector<struct Link> connexionList;
 	std::vector<struct Link> pathTo(Brick br,std::vector<struct Link> &current);
 	static int class_id;
+	static std::vector<Brick*> brickList; 
 };
 
+void assign(struct Link *lk, struct Link *lkk);
 void reverseLink(struct Link lk);
 void reverseLinks(std::vector<struct Link> list);
 void printLinkList(std::vector<struct Link> list);
 
 struct Link{
-	Brick &fromBr;
+	int fromBr;
 	int fromPin;
 	int otherPin;
-	Brick &otherBr;
+	int otherBr;
 	float angle;
 	bool otherSide;
 	UsedConnection firstBrickUse;

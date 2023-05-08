@@ -185,13 +185,20 @@ void Connector::printCharacteristics(){
 
 Brick::Brick(void (*brickFunc)(), float* color) : color(color),brickFunc(brickFunc){
     nextConnectorId = 0;
+    Brick::brickList.push_back(this);
     this->id = Brick::class_id++;
 }
 
 Brick::Brick(void (*brickFunc)()) : color(vert),brickFunc(brickFunc){
     nextConnectorId = 0;
+    Brick::brickList.push_back(this);
     this->id = Brick::class_id++;
 }
+
+Brick& Brick::getBrick(int id){
+    return *brickList[id];
+}
+
 
 bool Brick::operator==(Brick br){
     return id==br.id;
@@ -221,9 +228,9 @@ Connector& Brick::operator[](std::size_t index) {
 
 void Brick::connect(struct Link lk){
     Connector myConn(this->operator[](lk.fromPin));
-    Connector otherConn(lk.otherBr[lk.otherPin]);
+    Brick temp = Brick::getBrick(lk.otherBr);
+    Connector otherConn(temp[lk.otherPin]);
     bool res;
-    
     if (myConn.input) {
         ConnectorIn conn1(myConn);
         if (otherConn.input) {
@@ -252,10 +259,10 @@ void Brick::connect(struct Link lk){
         this->operator[](lk.fromPin).inUse = UsedConnection::BOTH_USED;
     }
      
-    if(lk.otherBr[lk.otherPin].inUse==UsedConnection::FREE){
-        lk.otherBr[lk.otherPin].inUse = lk.secondBrickUse;
+    if(Brick::getBrick(lk.otherBr)[lk.otherPin].inUse==UsedConnection::FREE){
+        Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = lk.secondBrickUse;
     }else{
-        lk.otherBr[lk.otherPin].inUse = UsedConnection::BOTH_USED;
+        Brick::getBrick(lk.otherBr)[lk.otherPin].inUse = UsedConnection::BOTH_USED;
     }
     
 
@@ -279,8 +286,8 @@ std::vector<struct Link> Brick::pathTo(Brick br,std::vector<struct Link> &list){
     
     for(size_t i =0; i<connexionList.size();++i){
         list.push_back(connexionList[i]);
-        list = connexionList[i].otherBr.pathTo(br, list);
-        if(list.back().otherBr==br){
+        list = Brick::getBrick(connexionList[i].otherBr).pathTo(br, list);
+        if(Brick::getBrick(list.back().otherBr)==br){
             return list;
         }
         list.pop_back();
@@ -295,8 +302,8 @@ void Brick::reset_class_id(){
 void printLinkList(std::vector<struct Link> list){
     for(size_t i = 0; i < list.size(); ++i){
         std::cout<<"Element " <<i <<std::endl;
-        std::cout<<"\tfromBr : " <<list[i].fromBr.name <<std::endl;
-        std::cout<<"\totherBr : " <<list[i].otherBr.name <<std::endl<<std::endl;
+        std::cout<<"\tfromBr : " <<Brick::getBrick(list[i].fromBr).name <<std::endl;
+        std::cout<<"\totherBr : " <<Brick::getBrick(list[i].otherBr).name <<std::endl<<std::endl;
     }
 }
 
@@ -304,10 +311,52 @@ std::vector<struct Link>& Brick::getConnexionList(){
     return connexionList;
 }
 
+Brick Brick::operator=(Brick& br){
+    this->brickFunc = br.brickFunc;
+    this->color = br.color;
+    this->name = br.name;
+    this->nextConnectorId = br.nextConnectorId;
+    this->id = br.id;
+    this->connectorList = br.connectorList;
+    this->connexionList = br.connexionList; 
+    return *this;
+}
+
+void assign(struct Link *lk, struct Link *lkk){
+    lk->fromBr = lkk->fromBr;
+	lk->fromPin = lkk->fromPin;
+	lk->otherPin = lkk->otherPin;
+	lk->otherBr = lkk->otherBr;
+	lk->angle=lkk->angle;
+	lk->otherSide = lkk->otherSide;
+	lk->firstBrickUse = lkk->firstBrickUse;
+	lk->secondBrickUse = lkk->secondBrickUse;
+}
 
 void reverseLink(struct Link lk){
-    Brick fromBr = lk.fromBr;
-    Brick otherBr = lk.otherBr;
+    Brick fromBr = Brick::getBrick(lk.fromBr);
+    Brick otherBr = Brick::getBrick(lk.otherBr);
+
+
+    std::vector<struct Link> vec = fromBr.getConnexionList();
+
+    std::cout<<" AVANT :\n";
+    for (size_t i = 0; i<vec.size();++i){
+        std::cout<<Brick::getBrick(vec[i].otherBr).name<<std::endl;
+    }
+    
+    for (size_t i = 0; i< vec.size(); ++i){
+        if(Brick::getBrick(vec[i].otherBr) == otherBr && i < vec.size()-1){
+            struct Link lkk = vec[i];
+            assign(&vec[i],&vec[i+1]);
+            assign(&vec[i+1],&lkk);
+        }
+    }
+    vec.pop_back();
+    std::cout<<"\n\n APRES :\n";
+    for (size_t i = 0; i<vec.size();++i){
+        std::cout<<Brick::getBrick(vec[i].otherBr).name<<std::endl;
+    }
 
     /*
     Cette fonction était censée supprimer 
@@ -333,10 +382,10 @@ void reverseLinks(std::vector<struct Link> list){
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide){
     struct Link lk = 
     {
-        *this,
+        this->id,
         myPin,
         otherPin,
-        br,
+        br.id,
         angle,
         otherSide,
         UsedConnection::BOTH_USED,
@@ -348,10 +397,10 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSi
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSide, UsedConnection firstShift, UsedConnection secondShift){
     struct Link lk = 
     {
-        *this,
+        this->id,
         myPin,
         otherPin,
-        br,
+        br.id,
         angle,
         otherSide,
         firstShift,
@@ -363,10 +412,10 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle, bool otherSi
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
     struct Link lk = 
     {
-        *this,
+        this->id,
         myPin,
         otherPin,
-        br,
+        br.id,
         angle,
         false,
         UsedConnection::BOTH_USED,
@@ -378,10 +427,10 @@ void Brick::connect(int myPin, int otherPin, Brick& br,float angle){
 void Brick::connect(int myPin, int otherPin, Brick& br,float angle, UsedConnection firstShift, UsedConnection secondShift){
     struct Link lk = 
     {
-        *this,
+        this->id,
         myPin,
         otherPin,
-        br,
+        br.id,
         angle,
         false,
         firstShift,
@@ -422,7 +471,7 @@ void Brick::display(){
         //retrieve the values of the connections to use
         Link lk = connexionList[i];
         Connector myConn(this->operator[](lk.fromPin));
-        Connector otherConn(lk.otherBr[lk.otherPin]);
+        Connector otherConn(Brick::getBrick(lk.otherBr)[lk.otherPin]);
         
         //move to the position of the first connector
         glTranslatef(myConn.pos.x, myConn.pos.y, myConn.pos.z);
@@ -456,10 +505,10 @@ void Brick::display(){
         glTranslatef(nextPos.x,nextPos.y,nextPos.z);
 
         //saving the current position into the brick
-        lk.otherBr.getCurrentMatrix();
+        Brick::getBrick(lk.otherBr).getCurrentMatrix();
         
         //displaying the brick we just placed
-        lk.otherBr.display();
+        Brick::getBrick(lk.otherBr).display();
     }
     //going back to the position of the current piece
     setCurrentMatrix();

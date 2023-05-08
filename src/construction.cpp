@@ -14,6 +14,7 @@
 #include "construction.h"
 
 int Brick::class_id=0;
+std::vector<Brick*> Brick::brickList;
 
 //********************************************************************************
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
@@ -24,12 +25,13 @@ void construction(float angle){
     Brick::reset_class_id();
     // NOTATION : 
     //  brick<numeroEtape>_<indexEtape>
-
+    
     //ETAPE 1
     Brick brick1_0 = brick4249021();
+    
     Brick brick1_1 = brick6299413();
     Brick brick1_2 = brick6299413();
-
+    
     brick1_0.connect(1,0,brick1_1,0);
     brick1_0.connect(3,0,brick1_2,0);
     
@@ -81,6 +83,7 @@ void construction(float angle){
     std::vector<struct Link> vec = brick1_0.pathTo(brick6_1);
 
     reverseLink(vec[0]);
+    
 }
 
 void testPieceEnCours(){
