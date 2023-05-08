@@ -296,7 +296,21 @@ void construction(float angle){
     brick21_0.connect(1,0,croixrondcroix2,0,USED_LEFT,BOTH_USED);
     brick21_0.connect(2,0,croixrondcroix1,0,USED_RIGHT,BOTH_USED);
 
-    
+    //etape 30
+
+    Brick brick30_0 = brick6331723(); // +o+
+    Brick brick30_1 = brick6271810(); // 3x3 L
+
+    brick22_0.connect(2,0,brick30_0,-90,USED_RIGHT,BOTH_USED);
+    brick22_1.connect(2,1,brick30_1,-90,true, USED_RIGHT,BOTH_USED);
+
+    //etape 31
+
+    Brick brick31_0 = brick6327162(); //truc chelou
+    Brick brick31_1 = brick6327548(); //fin noir 4
+
+    brick22_0.connect(2,6,brick31_0,0,USED_LEFT,BOTH_USED);
+    brick23_0.connect(2,0,brick31_1,0,USED_LEFT,BOTH_USED);
 
     //AFFICHAGE
 
