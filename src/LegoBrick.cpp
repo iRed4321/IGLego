@@ -1581,11 +1581,16 @@ Brick brick4619323(){
     br.name = "PNEUUUUUU";
 
     ConnType type = CIRCLE;
-    Pos3D pos(0,0,0);
+    Pos3D pos(0,0,-0.5);
     Dir3D dir(0,0,1);
 
     ConnectorIn conn1(pos,dir,type);
     br.addConnector(conn1); 
+
+    pos.update(0,0,0.5);
+
+    ConnectorIn conn2(pos,dir,type);
+    br.addConnector(conn2);
 
     return br;
 }
