@@ -446,9 +446,64 @@ void construction(float angle){
     brick47_1.connect(0,0,brick47_0,75,BOTH_USED,BOTH_USED);
     brick47_0.connect(2,2,brick47_2,BOTH_USED,BOTH_USED);
 
+    //etape 48, 49, 50, 51
+
+    Brick brick48_0 = brick4142135(); //5 ronds noirs
+    Brick brick48_1 = brick6279875(); //conn noir mini
+    Brick brick48_2 = brick6279875(); //conn noir mini
+
+    Brick brick49_0 = brick6271825(); //L noir 4x1
+
+    Brick brick50_0 = brick4211815(); //batonnet croix gris
+    Brick brick50_1 = brick6299413(); //batonnet rond bleu fonce
+    Brick brick50_2 = brick6299413(); //batonnet rond bleu fonce
+
+    Brick brick51_0 = brick4552347(); //T noir
+    Brick brick51_1 = brick6299413(); //batonnet rond bleu fonce
+
+
+    brick51_1.connect(1,2,brick51_0,BOTH_USED,BOTH_USED);
+    
+    brick51_0.connect(0,1,brick50_1,BOTH_USED,BOTH_USED);
+    brick51_0.connect(1,1,brick50_2,BOTH_USED,BOTH_USED);
+    brick50_1.connect(2,1,brick49_0,true,BOTH_USED,BOTH_USED);
+    brick49_0.connect(0,0,brick50_0,true,BOTH_USED,BOTH_USED);
+
+    brick49_0.connect(3,0,brick48_1,0,BOTH_USED,BOTH_USED);
+    brick49_0.connect(4,0,brick48_2,0,BOTH_USED,BOTH_USED);
+
+    brick48_1.connect(1,0,brick48_0,90,BOTH_USED,BOTH_USED);
+
+    //etape 52
+
+    Brick brick52_0 = brick6271825(); //L noir 4x1
+
+    brick50_1.connect(0,1,brick52_0,0,BOTH_USED,BOTH_USED);
+
+    // etape 53
+
+    Brick brick53_0 = brick4142135(); //5 ronds noirs
+    Brick brick53_1 = brick6279875(); //conn noir mini
+    Brick brick53_2 = brick6279875(); //conn noir mini
+
+    brick52_0.connect(4,1,brick53_1,0,BOTH_USED,BOTH_USED);
+    brick52_0.connect(3,1,brick53_2,0,BOTH_USED,BOTH_USED);
+
+    brick53_2.connect(0,0,brick53_0,90,BOTH_USED,BOTH_USED);
+
+    // etape 54
+
+    brick47_0.connect(4,2,brick51_1,30,true,BOTH_USED,BOTH_USED);
+
+    // etape 55
+
+    Brick brick55_0 = brick4249021(); //5 ronds blanc
+    
+    brick51_1.connect(0,4,brick55_0,30,BOTH_USED,BOTH_USED);
 
     //AFFICHAGE
 
+    // brick51_1.display();
     brick1_0.display();
 
 }

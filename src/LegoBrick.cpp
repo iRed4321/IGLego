@@ -615,6 +615,7 @@ void Brick::addConnectorsList(LiftArm &arm){
 
                 case ArmEnd:
                 case ArmAngle:
+                case ArmTAngle:
                 case Arm:{
                     ConnectorIn conn1(pos1,dir,CIRCLE);
                     connectorList.push_back(conn1);
