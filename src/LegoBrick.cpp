@@ -868,15 +868,23 @@ Brick brick4509897(){
     Pos3D pos(0,0,0);
     Dir3D dir(0,1,0);
     
-    ConnectorIn firstConn(pos,dir,type);
-    br.addConnector(firstConn);
+    // ConnectorIn firstConn(pos,dir,type);
+    // br.addConnector(firstConn);
+
+    // type = CIRCLE;
+    // pos.update(1,0,0);
+    // dir.update(1,0,0);
+
+    // ConnectorIn conn2(pos,dir,type);
+    // br.addConnector(conn2); 
 
     type = CIRCLE;
-    pos.update(1,0,0);
-    dir.update(1,0,0);
+    pos.update(-1.5,-0.7,2);
+    dir.update(0,0,1);
 
-    ConnectorIn conn2(pos,dir,type);
-    br.addConnector(conn2); 
+    ConnectorOut conn3(pos,dir,type);
+    br.addConnector(conn3);
+
     return br;
 }
 
