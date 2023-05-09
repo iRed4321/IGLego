@@ -982,11 +982,11 @@ void tire304x14OffsetTreadBandAroundCenterOfTread_4619323(){
 			glRotatef(90,1,0,0);
 			cylinder(0.2);
 		glPopMatrix();
-		glScalef(1.5,1.5,1);
+		glScalef(1.8,1.8,2);
 		glPushMatrix();
 			glScalef(1.9,1.9,1.0);
 			glRotatef(90,1,0,0);
-			cylinder(0.65);
+			cylinder(0.7);
 		glPopMatrix();
 		glPushMatrix();
 			glRotatef(90,1,0,0);
