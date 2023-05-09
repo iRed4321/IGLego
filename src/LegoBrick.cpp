@@ -813,7 +813,7 @@ Brick brick4163533(){
 }
 
 Brick brick4142865(){
-    Brick br(axle2Notched_4142865);
+    Brick br(axle2Notched_4142865, rouge);
     br.name = "batonnet rouge tout nul";
 
     ConnType type = CROSS;

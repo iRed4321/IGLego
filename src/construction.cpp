@@ -399,6 +399,45 @@ void construction(float angle){
 
     brick35_0.connect(3,0,brick37_2,-55,true,BOTH_USED,BOTH_USED);
 
+    //etape 41
+
+    Brick brick41_0 = brick4177431(); //roue cheloue
+    Brick brick41_1 = brick4142865(); //mini baton rouge
+
+    brick41_1.connect(0,0,brick41_0,0,BOTH_USED,BOTH_USED);
+
+    brick11_0.connect(1, 1, brick41_1, 0, true,BOTH_USED,BOTH_USED);
+
+    //etape 42
+
+    Brick brick42_0 = brick4206482(); // truc bleu
+
+    //etape 43
+
+    Brick brick43_0 = brick6364749(); // +oo+ bleu clair
+    Brick brick43_1 = brick6364749(); // +oo+ bleu clair
+
+    brick43_0.connect(0,0,brick42_0,0,USED_LEFT,BOTH_USED);
+    brick42_0.connect(0,0,brick43_1,0,BOTH_USED,USED_LEFT);
+
+    //etape 44
+
+    Brick brick44_0 = brick6299413(); //3x1 cylindre bleu fonce
+    Brick brick44_1 = brick6299413(); //3x1 cylindre bleu fonce
+
+    brick44_0.connect(1,1,brick43_0,0,true,BOTH_USED,USED_RIGHT);
+    brick43_0.connect(2,1,brick44_1,0,true,USED_LEFT,BOTH_USED);
+
+    //etape 45
+
+    // Brick brick45_0 = brick6343987(); //aileron blanc
+
+    // etape 46
+
+    brick19_1.connect(2,0,brick44_0,180,true,BOTH_USED,BOTH_USED);
+
+
+
     //AFFICHAGE
 
     brick1_0.display();
