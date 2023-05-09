@@ -436,6 +436,15 @@ void construction(float angle){
 
     brick19_1.connect(2,0,brick44_0,180,true,BOTH_USED,BOTH_USED);
 
+    //etape 47
+
+    Brick brick47_0 = brick4249021(); //5 ronds blanc
+    Brick brick47_1 = brick6321305(); //cylindre jaune
+    Brick brick47_2 = brick6321305(); //cylindre jaune
+
+    brick35_0.connect(12,1,brick47_1,BOTH_USED,BOTH_USED);
+    brick47_1.connect(0,0,brick47_0,75,BOTH_USED,BOTH_USED);
+    brick47_0.connect(2,2,brick47_2,BOTH_USED,BOTH_USED);
 
 
     //AFFICHAGE
