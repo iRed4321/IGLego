@@ -528,9 +528,28 @@ void construction(float angle){
 
     brick50_0.connect(1,0,brick56_4,150,BOTH_USED,BOTH_USED);
 
+    // etape 57
+
+    Brick brick57_0 = brick4206482(); //2x1 bleu fonce
+    Brick brick57_1 = brick4206482(); //2x1 bleu fonce
+
+    Brick brick57_2 = brick6271165(); //fin gris
+    Brick brick57_3 = brick6271165(); //fin gris
+
+    Brick brick57_4 = brick6331723(); // +o+ noir fin
+    Brick brick57_5 = brick6331723(); // +o+ noir fin
+
+    brick57_0.connect(0,0,brick57_4,0,USED_LEFT,BOTH_USED);
+    brick57_0.connect(0,0,brick57_2,0,USED_RIGHT,BOTH_USED);
+
+    brick57_1.connect(0,0,brick57_5,0,USED_LEFT,BOTH_USED);
+    brick57_1.connect(0,0,brick57_3,0,USED_RIGHT,BOTH_USED);
+
+    brick55_0.connect(1,1,brick57_0,130,BOTH_USED,BOTH_USED);
+    brick47_0.connect(1,1,brick57_1,230,BOTH_USED,BOTH_USED);
+
     //AFFICHAGE
 
-    // brick51_1.display();
     brick1_0.display();
 
 }
