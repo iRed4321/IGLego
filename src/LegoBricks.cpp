@@ -490,6 +490,13 @@ LiftArm liftArm4552347() {
 	return LiftArm(THICK, m);
 }
 
+LiftArm liftArm6265135() {
+	Model m = Model();
+	m[Pos3d{0,0,0}] = LegoPart{Front, ArmEnd};
+	m[Pos3d{1,0,0}] = LegoPart{Back, ArmEndWithCross};
+	return LiftArm(THICK, m);
+}
+
 void liftarm3x3LShapeThin_6271810(){
 	LiftArm arm = liftArm6271810();
 	arm.draw();
@@ -635,26 +642,9 @@ LiftArm liftArm6344864(){
 
 
 void liftarm1x2ThickWithPinHoleAndAxleHole_6265135(){
-	glPushMatrix();
-		
-		cylinder(0.2);
-		glPushMatrix();
-		glScalef(0.8,1,0.8);
-		thickCross();
-		glPopMatrix();
-		glTranslatef(1,0,0);
-		cylinder(0.2);
-		glTranslatef(-0.5,0,0.5);
-		glPushMatrix();
-			glScalef(1,1,0.1);
-			cube();
-		glPopMatrix();
-		glTranslatef(0,0,-1);
-		glScalef(1,1,0.1);
-		cube();
-	glPopMatrix();
+	LiftArm arm = liftArm6265135();
+	arm.draw();
 }
-
 
 void liftarm1x2Thick_4177444(){
 	LiftArm arm = liftArm4177444();

@@ -55,6 +55,7 @@ void gearWormScrew_6185471();
 void technicLever3x3m90deg__6271810();
 
 // leo : 
+        LiftArm liftArm4177444();
         //done
         void liftarm1x2Thick_4177444();
         LiftArm liftArm4177444();

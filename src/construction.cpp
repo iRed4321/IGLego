@@ -467,7 +467,7 @@ void construction(float angle){
     brick51_0.connect(0,1,brick50_1,BOTH_USED,BOTH_USED);
     brick51_0.connect(1,1,brick50_2,BOTH_USED,BOTH_USED);
     brick50_1.connect(2,1,brick49_0,true,BOTH_USED,BOTH_USED);
-    brick49_0.connect(0,0,brick50_0,true,BOTH_USED,BOTH_USED);
+    brick49_0.connect(0,0,brick50_0,BOTH_USED,BOTH_USED);
 
     brick49_0.connect(3,0,brick48_1,0,BOTH_USED,BOTH_USED);
     brick49_0.connect(4,0,brick48_2,0,BOTH_USED,BOTH_USED);
@@ -498,8 +498,35 @@ void construction(float angle){
     // etape 55
 
     Brick brick55_0 = brick4249021(); //5 ronds blanc
-    
     brick51_1.connect(0,4,brick55_0,30,BOTH_USED,BOTH_USED);
+
+    // etape 56
+
+    Brick brick56_0 = brick6275844(); //mini gris
+    Brick brick56_1 = brick6275844(); //mini gris
+
+    Brick brick56_2 = brick4163533(); //2x1 blanc fin
+    Brick brick56_3 = brick4163533(); //2x1 blanc fin
+
+    Brick brick56_4 = brick6265135(); //2x1 blanc gros
+    Brick brick56_5 = brick6265135(); //2x1 blanc gros
+
+    Brick brick56_6 = brick4142865(); //baton 2 rouge
+    Brick brick56_7 = brick4142865(); //baton 2 rouge
+    Brick brick56_8 = brick370526(); //baton noir
+
+    brick56_4.connect(1,0,brick56_6,0,USED_RIGHT,USED_RIGHT);
+    brick56_6.connect(1,0,brick56_2,0,BOTH_USED,USED_LEFT);
+    brick56_2.connect(1,0,brick56_7,0,true,BOTH_USED,USED_LEFT);
+    brick56_7.connect(0,0,brick56_5,0,true,USED_LEFT,USED_RIGHT);
+    brick56_7.connect(1,0,brick56_3,180,BOTH_USED,USED_LEFT);
+
+    brick56_5.connect(1,1,brick56_8,0,true,USED_LEFT,USED_RIGHT);
+
+    brick56_8.connect(0,0,brick56_0,0,true,USED_LEFT,USED_RIGHT);
+    brick56_8.connect(2,0,brick56_0,0,true,USED_LEFT,USED_RIGHT);
+
+    brick50_0.connect(1,0,brick56_4,150,BOTH_USED,BOTH_USED);
 
     //AFFICHAGE
 

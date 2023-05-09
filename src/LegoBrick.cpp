@@ -678,6 +678,25 @@ Brick brick6279875(){
     return br;
 }
 
+Brick brick370526(){
+    Brick br(axle4_370526, noir);
+    br.name = "petit baton noir";
+    float posy = -1.5;
+
+    ConnType type = CROSS;
+    Pos3D pos(0,posy,0);
+    Dir3D dir(0,1,0);
+
+    for(int i = 0; i<4;++i){
+        pos.update(0,posy+i,0);
+        
+        ConnectorOut conn(pos,dir,type);
+        br.addConnector(conn);
+    }
+
+    return br;
+}
+
 Brick brick370726(){
     Brick br(axle8_370726, noir);
     br.name = "moyen baton noir";
@@ -750,27 +769,6 @@ Brick brick6332573(){
     type = CROSS;
     pos.update(1,0,0);
     dir.update(1,0,0);
-    
-    ConnectorIn secondConn(pos,dir,type);
-    br.addConnector(secondConn);
-
-    return br;
-}
-
-Brick brick6265135(){
-    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6265135,blanc);
-    br.name = "cylindre et croix creux blanc meme sens";
-
-    ConnType type = CROSS;
-    Pos3D pos(0,0,0);
-    Dir3D dir(0,1,0);
-    
-    ConnectorIn firstConn(pos,dir,type);
-    br.addConnector(firstConn);
-
-    type = CIRCLE;
-    pos.update(1,0,0);
-    dir.update(0,1,0);
     
     ConnectorIn secondConn(pos,dir,type);
     br.addConnector(secondConn);
@@ -1275,6 +1273,15 @@ Brick brick6271810(){
     br.name = "truc en L 3x3 fin noir";
 
     LiftArm arm = liftArm6271810();
+    br.addConnectorsList(arm);
+    return br;
+}
+
+Brick brick6265135(){
+    Brick br(liftarm1x2ThickWithPinHoleAndAxleHole_6265135,blanc);
+    br.name = "cylindre et croix creux blanc meme sens";
+
+    LiftArm arm = liftArm6265135();
     br.addConnectorsList(arm);
     return br;
 }
