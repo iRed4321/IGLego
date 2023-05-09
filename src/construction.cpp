@@ -548,9 +548,37 @@ void construction(float angle){
     brick55_0.connect(1,1,brick57_0,130,BOTH_USED,BOTH_USED);
     brick47_0.connect(1,1,brick57_1,230,BOTH_USED,BOTH_USED);
 
+    // etape 58
+
+    Brick brick58_0 = brick4619323(); // pneu noir
+    Brick brick58_1 = brick4619323(); // pneu noir
+    Brick brick58_2 = brick4619323(); // pneu noir
+    Brick brick58_3 = brick4619323(); // pneu noir
+
+    brick34_1.connect(0,0,brick58_1,0,BOTH_USED,BOTH_USED);
+    brick36_1.connect(0,0,brick58_0,0,BOTH_USED,BOTH_USED);
+
+    brick5_0.connect(0,0,brick58_2,0,BOTH_USED,BOTH_USED);
+    brick5_1.connect(0,0,brick58_3,0,BOTH_USED,BOTH_USED);
+
+
+    //etape 59
+
+    Brick brick59_0 = brick4509897(); //grosse plaque
+
+    brick48_0.connect(2,0,brick59_0,true,BOTH_USED,BOTH_USED);
+
+
+    // Brick brick59_1 = brick4234365(); //plot jaune
+
+
+    
+
     //AFFICHAGE
 
     brick1_0.display();
+
+
 
 }
 
