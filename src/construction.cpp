@@ -20,7 +20,7 @@ std::vector<Brick*> Brick::brickList;
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
-void construction(float angle){
+void construction(float angle1){
 
     Brick::reset_class_id();
     // NOTATION : 
@@ -91,7 +91,7 @@ void construction(float angle){
     brick8_4.connect(8,0,brick8_3,0,true);
     brick8_4.connect(0,0,brick8_1,0,true);
     brick8_4.connect(7,2,brick8_0,0,true);
-    brick8_0.connect(1,0,brick8_5,180+angle);
+    brick8_0.connect(1,0,brick8_5,180+angle1); // ANGLE ALPHA
 
 
     //Etape 9
@@ -285,7 +285,6 @@ void construction(float angle){
     machinblanc.connect(1,0,petitconngris,0);
     petitconngris.connect(1,0,barrenoire7,93);
     batongris3.connect(0,0,machinblanc,0);
-    std::cout<<angle<<std::endl;
 
     //etape 29
 
@@ -361,7 +360,7 @@ void construction(float angle){
     //etape 35
 
     Brick brick35_0 = brick6261643(); //Longue barre bleue
-    brick18_4.connect(1,0,brick35_0,180+angle,BOTH_USED,BOTH_USED);
+    brick18_4.connect(1,0,brick35_0,180+angle1,BOTH_USED,BOTH_USED);  //ANGLE ALPHA
 
     //etape 36
 
@@ -384,7 +383,7 @@ void construction(float angle){
     //etape 38
 
     Brick brick38_0 = brick4211807(); // petit conn gris
-    brick37_1.connect(5,0,brick38_0,0,USED_LEFT,BOTH_USED);
+    brick37_1.connect(5,0,brick38_0,20-angle1*0.9,true,USED_LEFT,BOTH_USED); // ANGLE GAMMA
 
     //etape 39
 
@@ -396,7 +395,7 @@ void construction(float angle){
 
     //etape 40
 
-    brick35_0.connect(3,0,brick37_2,-55-angle,true,BOTH_USED,BOTH_USED);
+    brick35_0.connect(3,0,brick37_2,140-angle1*1.15,true,BOTH_USED,BOTH_USED);  // ANGLE BETA
 
     //etape 41
 

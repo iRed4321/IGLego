@@ -64,8 +64,8 @@ static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
 static bool animation = false;
 
-static int facettes_x = 1;
-static int facettes_y = 1;
+static float angle1 = 0;
+static float angle2 = 1;
 
 
 static unsigned char *image(int nc, int nl)
@@ -178,10 +178,10 @@ static void scene(void) {
     //textured_plate4x8_4509897(legoTexture);
     //pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
     //liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-    construction(facettes_x);
+    construction(angle1);
     //testDemiConnexions();
     //testPieceEnCours();
-    //testPieceEnCoursNathan(facettes_x);
+    //testPieceEnCoursNathan(angle1);
 	glPopMatrix();
 }
 
@@ -301,22 +301,22 @@ static void special(int specialKey,int x,int y) {
   switch (specialKey)
   {
     case GLUT_KEY_UP:
-      facettes_x += 1;
+      angle1 += 1;
       glutPostRedisplay();
       break;
 
     case GLUT_KEY_DOWN:
-      facettes_x -= 1;
+      angle1 -= 1;
       glutPostRedisplay();
       break;
 
     case GLUT_KEY_LEFT:
-      facettes_y -= 1;
+      angle2 -= 1;
       glutPostRedisplay();
       break;
 
     case GLUT_KEY_RIGHT:
-      facettes_y += 1;
+      angle2 += 1;
       glutPostRedisplay();
       break;
     case GLUT_KEY_F10:
