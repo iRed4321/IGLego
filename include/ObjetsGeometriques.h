@@ -105,9 +105,9 @@ struct LegoPart{
 };
 
 struct Pos3d{
-    uint x;
-    uint y;
-    uint z;
+    unsigned int x;
+    unsigned int y;
+    unsigned int z;
 };
 
 struct Pos3dComparator{
@@ -115,7 +115,8 @@ struct Pos3dComparator{
    {
          if (lhs.x < rhs.x){
               return true;
-         } else if (lhs.x == rhs.x){
+         }
+         if (lhs.x == rhs.x){
               if (lhs.y < rhs.y){
                 return true;
               } else if (lhs.y == rhs.y){
@@ -138,7 +139,7 @@ class LiftArm{
     LiftArm(Thickness thickness, Model model, Model model2);
 	LiftArm(Thickness thickness, uint nbHoles);
     void draw();
-    void draw(uint partLiftArm);
+    void draw(unsigned int partLiftArm);
 };
 
 #endif

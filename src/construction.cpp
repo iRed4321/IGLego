@@ -203,7 +203,7 @@ void construction(float angle){
 
     //etape 22
 
-    
+    /////////////////////////////////////////////////////////////////////////// Première occurence de "error : part not found"
     
     Brick brick22_0 = brick4211815(); //baton
     Brick brick22_1 = brick4211815(); //baton
@@ -214,7 +214,7 @@ void construction(float angle){
 
     brick21_0.connect(0,2,brick22_2,180,false, USED_RIGHT,BOTH_USED);
 
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Etape 23
     
@@ -266,13 +266,13 @@ void construction(float angle){
     brick22_1.connect(1,0,trucmarron2,90);
 
 
-
     //etape27
     Brick blackwithcylinder = brick6276951();
     Brick blackthin3arm = brick6331723();
 
     brick23_1.connect(2,0,blackthin3arm,-90,USED_RIGHT,BOTH_USED);
     brick23_1.connect(1,1,blackwithcylinder,90);
+
 
 
 
@@ -286,7 +286,6 @@ void construction(float angle){
     petitconngris.connect(1,0,barrenoire7,93);
     batongris3.connect(0,0,machinblanc,0);
     std::cout<<angle<<std::endl;
-
 
     //etape 29
 
@@ -572,7 +571,6 @@ void construction(float angle){
     // Brick brick59_1 = brick4234365(); //plot jaune
 
 
-    
 
     //AFFICHAGE
 
@@ -602,10 +600,4 @@ void testDemiConnexions(){
 
     petiteBarre.display();
 
-}
-
-void testPieceEnCoursNathan(float angle){
-
-    
-    
 }

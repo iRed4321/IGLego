@@ -925,10 +925,10 @@ LiftArm::LiftArm(Thickness thickness, Model m1, Model m2){
   this->models = {m1, m2};
 }
 
-LiftArm::LiftArm(Thickness thickness, uint nbHoles){
+LiftArm::LiftArm(Thickness thickness, unsigned int nbHoles){
 	this->thickness = thickness;
 	Model model = Model();
-	for (uint i = 0; i < nbHoles; ++i){
+	for (unsigned int i = 0; i < nbHoles; ++i){
 		if (i == 0){
 			model[Pos3d{i,0,0}] = LegoPart{Front, ArmEnd};
 		} else if (i == nbHoles - 1){
@@ -944,7 +944,7 @@ void LiftArm::draw(){
   draw(0);
 }
 
-void LiftArm::draw(uint part){
+void LiftArm::draw(unsigned int part){
 	glPushMatrix();
 
 	if (thickness == THIN){
