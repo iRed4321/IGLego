@@ -14,6 +14,7 @@
 #include "LegoBricks.h"
 #include "ObjetsGeometriques.h"
 
+extern int textureLego;
 
 void technicLever3x3m90deg__6271810(){
 	glPushMatrix();
@@ -133,33 +134,33 @@ void liftarmThin1x2AxleHoles_4163533(){
 
 
 
-void plate4x8_4509897(){
+// void plate4x8_4509897(){
 
-	glPushMatrix();
-	glScalef(4,0.5,8);
-	cube();
-	glPopMatrix();
+// 	glPushMatrix();
+// 	glScalef(4,0.5,8);
+// 	cube();
+// 	glPopMatrix();
 
-	glPushMatrix();
-	glScalef(1,0.5,1);
-	glTranslatef(-1.5,1,-3.5);
-	for(int i = 0; i<4; ++i){
-		for(int j = 0;j<8; ++j ){
-			glPushMatrix();
-			glTranslatef(i,0,j);
-			glScalef(0.9,1,0.9);
-			cylinder(0.2);
-			glTranslatef(0,0.5,0); 
-			glRotatef(180,1,0,0);
-			mySolidDisc(40);
-			glPopMatrix();
-		}
-	}
+// 	glPushMatrix();
+// 	glScalef(1,0.5,1);
+// 	glTranslatef(-1.5,1,-3.5);
+// 	for(int i = 0; i<4; ++i){
+// 		for(int j = 0;j<8; ++j ){
+// 			glPushMatrix();
+// 			glTranslatef(i,0,j);
+// 			glScalef(0.9,1,0.9);
+// 			cylinder(0.2);
+// 			glTranslatef(0,0.5,0); 
+// 			glRotatef(180,1,0,0);
+// 			mySolidDisc(40);
+// 			glPopMatrix();
+// 		}
+// 	}
 	
-	glPopMatrix();
-}
+// 	glPopMatrix();
+// }
 
-void textured_plate4x8_4509897(int texture){
+void plate4x8_4509897(){
 
 	glPushMatrix();
 	glScalef(4,0.5,8);
@@ -177,7 +178,7 @@ void textured_plate4x8_4509897(int texture){
 			cylinder(0.2);
 			glTranslatef(0,0.5001,0); 
 			glRotatef(180,1,0,0);
-			mySolidDisc(40, texture);
+			mySolidDisc(40, textureLego);
 			glPopMatrix();
 		}
 	}

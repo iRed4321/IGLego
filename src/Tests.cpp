@@ -34,7 +34,7 @@ static int lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, G
 //parameters for the view of the camera
 // static float frustumView[] = {10,10,10,10,-10,-30};
 
-unsigned int legoTexture;
+unsigned int textureLego;
 
 static int mousePos [2] = { 0,0 };
 static int mouseDiff[2] = { 0,0 };
@@ -161,7 +161,7 @@ static void init(void) {
   glEnable(GL_NORMALIZE);
   glEnable(GL_AUTO_NORMAL);
   glEnable(GL_LIGHTING);
-  legoTexture = initTexture("lego.png");
+  textureLego = initTexture("lego.png");
 }
 
 static void light(int i) {
