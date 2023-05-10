@@ -50,6 +50,9 @@ static float rotationX = 1;
 static float rotationY = 1;
 static float rotationZ = 1;
 
+/*used for delta-time in anim*/
+static int old_t;
+
 static float zoom = -5.0F;
 
 static GLenum currentView = GL_FILL;
@@ -66,6 +69,7 @@ static bool animation = false;
 
 static float angle1 = 7;
 static float angle2 = 0;
+static float angle_wheel = 0;
 
 
 static unsigned char *image(int nc, int nl)
@@ -162,6 +166,7 @@ static void init(void) {
   glEnable(GL_AUTO_NORMAL);
   glEnable(GL_LIGHTING);
   textureLego = initTexture("lego.png");
+  old_t = glutGet(GLUT_ELAPSED_TIME);
 }
 
 static void light(int i) {
@@ -178,7 +183,7 @@ static void scene(void) {
     //textured_plate4x8_4509897(legoTexture);
     //pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
     //liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-    construction(angle1, angle2);
+    construction(angle1, angle2, angle_wheel);
     //testDemiConnexions();
     //testPieceEnCours();
     //testPieceEnCoursNathan(angle1);
@@ -248,11 +253,24 @@ static void idle(void) {
 }
 
 static void idleAnim(void){
+  int t;
+  float dt;
+  t = glutGet(GLUT_ELAPSED_TIME);
+  dt = (t - old_t) / 1000.0;
+  angle_wheel += 60 * dt;
+  old_t = t;
+  glutPostRedisplay();
+}
+
+/* rotate the model */
+/*
+static void idleAnim(void){
   glTranslatef(0, 0, zoom);
   glRotatef(rotationY, 0, 1, 0);
   glTranslatef(0, 0, -zoom);
   glutPostRedisplay();
 }
+*/
 
 /* Fonction executee lors de l'appui            */
 /* d'une touche alphanumerique du clavier       */

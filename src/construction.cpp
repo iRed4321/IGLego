@@ -20,7 +20,7 @@ std::vector<Brick*> Brick::brickList;
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
-void construction(float angle1, float angle2){
+void construction(float angle1, float angle2, float angle_wheel){
 
     Brick::reset_class_id();
     // NOTATION : 
@@ -554,11 +554,11 @@ void construction(float angle1, float angle2){
     Brick brick58_2 = brick4619323(); // pneu noir
     Brick brick58_3 = brick4619323(); // pneu noir
 
-    brick34_1.connect(0,0,brick58_1,0,BOTH_USED,BOTH_USED);
-    brick36_1.connect(0,0,brick58_0,0,BOTH_USED,BOTH_USED);
+    brick34_1.connect(0,0,brick58_1,-angle_wheel,BOTH_USED,BOTH_USED);
+    brick36_1.connect(0,0,brick58_0,angle_wheel,BOTH_USED,BOTH_USED);
 
-    brick5_0.connect(0,0,brick58_2,0,BOTH_USED,BOTH_USED);
-    brick5_1.connect(0,0,brick58_3,0,BOTH_USED,BOTH_USED);
+    brick5_0.connect(0,0,brick58_2,angle_wheel,BOTH_USED,BOTH_USED);
+    brick5_1.connect(0,0,brick58_3,-angle_wheel,BOTH_USED,BOTH_USED);
 
 
     //etape 59

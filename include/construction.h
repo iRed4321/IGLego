@@ -5,7 +5,7 @@
 #include "LegoBrick.h"
 
 //builds the construction at the current position on the scene
-void construction(float angle, float angle2);
+void construction(float angle, float angle2, float angle_wheel);
 
 void testPieceEnCours();
 
