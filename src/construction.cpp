@@ -442,7 +442,7 @@ void construction(float angle1, float angle2){
 
     brick35_0.connect(12,1,brick47_1,10-angle1,true,BOTH_USED,BOTH_USED); // ANGLE bout du bras
     brick47_1.connect(0,0,brick47_0,75,BOTH_USED,BOTH_USED);
-    brick47_0.connect(2,2,brick47_2,BOTH_USED,BOTH_USED);
+    brick47_0.connect(2,2,brick47_2,0,true, BOTH_USED,BOTH_USED);
 
     //etape 48, 49, 50, 51
 
@@ -460,12 +460,13 @@ void construction(float angle1, float angle2){
     Brick brick51_1 = brick6299413(); //batonnet rond bleu fonce
 
 
-    brick51_1.connect(1,2,brick51_0,BOTH_USED,BOTH_USED);
+    brick51_1.connect(1,2,brick51_0, 0, true, BOTH_USED,BOTH_USED);
     
-    brick51_0.connect(0,1,brick50_1,BOTH_USED,BOTH_USED);
-    brick51_0.connect(1,1,brick50_2,BOTH_USED,BOTH_USED);
+    brick51_0.connect(0,1,brick50_1,0, true, BOTH_USED,BOTH_USED);
+    brick51_0.connect(1,1,brick50_2,0, true, BOTH_USED,BOTH_USED);
     brick50_1.connect(2,1,brick49_0,true,BOTH_USED,BOTH_USED);
-    brick49_0.connect(0,0,brick50_0,BOTH_USED,BOTH_USED);
+    brick49_0.connect(0,0,brick50_0,0,true,BOTH_USED,BOTH_USED);
+
 
     brick49_0.connect(3,0,brick48_1,0,BOTH_USED,BOTH_USED);
     brick49_0.connect(4,0,brick48_2,0,BOTH_USED,BOTH_USED);
