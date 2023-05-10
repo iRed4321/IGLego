@@ -585,24 +585,6 @@ void Brick::addConnectorsList(LiftArm &arm){
 
             Dir3D dir = Dir3D(0,0,1);
 
-            // switch (part.orientation){
-
-            //     case Front:
-            //     case Right:
-            //     case Top:
-            //         dir = Dir3D(0,0,1);
-            //         break;
-
-            //     case Back:
-            //     case Left:
-            //     case Bottom:
-            //         dir = Dir3D(0,0,-1);
-            //         break;
-
-            //     default:
-            //         break;
-            // }
-
             switch (part.kind){
                 case ArmWithCross:
                 case ArmAngleWithCross:
@@ -623,7 +605,6 @@ void Brick::addConnectorsList(LiftArm &arm){
                 }
 
                 default:
-                    std::cout<<"error : part not found\n";
                     nextConnectorId--;
                     break;
             }

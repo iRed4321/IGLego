@@ -203,7 +203,7 @@ void construction(float angle){
 
     //etape 22
 
-    /////////////////////////////////////////////////////////////////////////// Première occurence de "error : part not found"
+    // /////////////////////////////////////////////////////////////////////////// Première occurence de "error : part not found"
     
     Brick brick22_0 = brick4211815(); //baton
     Brick brick22_1 = brick4211815(); //baton
@@ -257,7 +257,7 @@ void construction(float angle){
     
 
 
-    // //etape 26
+    //etape 26
     Brick trucmarron = brick6344864();
     Brick trucmarron2 = brick6344864();
 
@@ -282,10 +282,10 @@ void construction(float angle){
     Brick barrenoire7 = brick4495935();
     Brick petitconngris = brick4211807();
 
-    machinblanc.connect(1,0,petitconngris,0);
+    // machinblanc.connect(1,0,petitconngris,0);
     petitconngris.connect(1,0,barrenoire7,93);
     batongris3.connect(0,0,machinblanc,0);
-    std::cout<<angle<<std::endl;
+    // std::cout<<angle<<std::endl;
 
     //etape 29
 
@@ -303,7 +303,7 @@ void construction(float angle){
     brick22_0.connect(2,0,brick30_0,-90,USED_RIGHT,BOTH_USED);
     brick22_1.connect(2,1,brick30_1,-90,true, USED_RIGHT,BOTH_USED);
 
-    //etape 31
+    // etape 31
 
     Brick brick31_0 = brick6327162(); //truc chelou
     Brick brick31_1 = brick6327548(); //fin noir 4
