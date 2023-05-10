@@ -22,6 +22,9 @@ std::vector<Brick*> Brick::brickList;
 
 void construction(float angle1, float angle2){
 
+    std::cout<<"angle bras : " << angle1 <<std::endl;
+    std::cout<<"angle axe roues : " << angle2 <<std::endl;
+
     Brick::reset_class_id();
     // NOTATION : 
     //  brick<numeroEtape>_<indexEtape>
