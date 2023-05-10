@@ -276,7 +276,7 @@ void construction(float angle){
 
 
 
-    // // //etape 28
+    // //etape 28
 
     Brick machinblanc = brick6265135();
     Brick barrenoire7 = brick4495935();
