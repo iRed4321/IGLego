@@ -64,8 +64,8 @@ static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
 static bool animation = false;
 
-static float angle1 = 0;
-static float angle2 = 1;
+static float angle1 = 7;
+static float angle2 = 0;
 
 
 static unsigned char *image(int nc, int nl)
@@ -178,7 +178,7 @@ static void scene(void) {
     //textured_plate4x8_4509897(legoTexture);
     //pinWithFrictionRidgesLengthwiseAndPinHole_6282140();
     //liftarm3x5LShapeWithQuarterEllipseThin_6327162();
-    construction(angle1);
+    construction(angle1, angle2);
     //testDemiConnexions();
     //testPieceEnCours();
     //testPieceEnCoursNathan(angle1);
@@ -296,27 +296,51 @@ static void keyboard(unsigned char key,int x,int y) {
 /*   - touches de fonction                      */
 
 static void special(int specialKey,int x,int y) {
-  printf("S  %4d %4d %4d\n",specialKey,x,y);
+  //printf("S  %4d %4d %4d\n",specialKey,x,y);
 
   switch (specialKey)
   {
     case GLUT_KEY_UP:
       angle1 += 1;
+      if (angle1<7){
+        angle1 = 7;
+      }
+      if (angle1>60){
+        angle1 = 60;
+      }
       glutPostRedisplay();
       break;
 
     case GLUT_KEY_DOWN:
       angle1 -= 1;
+      if (angle1<5){
+        angle1 = 5;
+      }
+      if (angle1>60){
+        angle1 = 60;
+      }
       glutPostRedisplay();
       break;
 
     case GLUT_KEY_LEFT:
       angle2 -= 1;
+      if (angle2>20){
+        angle2 = 20;
+      }
+      if (angle2<-20){
+        angle2 = -20;
+      }
       glutPostRedisplay();
       break;
 
     case GLUT_KEY_RIGHT:
       angle2 += 1;
+      if (angle2>20){
+        angle2 = 20;
+      }
+      if (angle2<-20){
+        angle2 = -20;
+      }
       glutPostRedisplay();
       break;
     case GLUT_KEY_F10:

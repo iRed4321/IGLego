@@ -20,7 +20,7 @@ std::vector<Brick*> Brick::brickList;
 // -------------------------------------------- BUILDING THE LEGO THING WOOWOWOWOW
 //********************************************************************************
 
-void construction(float angle1){
+void construction(float angle1, float angle2){
 
     Brick::reset_class_id();
     // NOTATION : 
@@ -51,8 +51,8 @@ void construction(float angle1){
     Brick brick4_0 = brick6282158();
     Brick brick4_1 = brick6282158();
 
-    brick1_0.connect(0,3,brick4_0,90,true);
-    brick1_0.connect(4,3,brick4_1,90,true);
+    brick1_0.connect(0,3,brick4_0,90+angle2,true);
+    brick1_0.connect(4,3,brick4_1,90+angle2,true);
 
 
     //ETAPE 5
@@ -67,7 +67,7 @@ void construction(float angle1){
     Brick brick6_0 = brick4249021();
     Brick brick6_1 = brick6299413();
 
-    brick4_0.connect(6,0,brick6_0,90);
+    brick4_0.connect(6,0,brick6_0,90+angle2);
     //à voir, peut-être pas bon la 3.1 (6282140) niveau dimensions
     brick3_1.connect(1,1,brick6_1,0);
 
@@ -91,7 +91,7 @@ void construction(float angle1){
     brick8_4.connect(8,0,brick8_3,0,true);
     brick8_4.connect(0,0,brick8_1,0,true);
     brick8_4.connect(7,2,brick8_0,0,true);
-    brick8_0.connect(1,0,brick8_5,180+angle1); // ANGLE ALPHA
+    brick8_0.connect(1,0,brick8_5,180+angle1*0.98); // ANGLE ALPHA * (1-epsilon)
 
 
     //Etape 9
@@ -106,7 +106,7 @@ void construction(float angle1){
     Brick brick10_0 = brick6185471(); //gearWormScrew
     Brick brick10_1 = brick6261373(); //machin rouge
 
-    brick9_0.connect(1,0,brick10_0,0);
+    brick9_0.connect(1,0,brick10_0,angle1*3);
     brick9_0.connect(3,0,brick10_1,0);
 
     //Etape 11
@@ -138,7 +138,7 @@ void construction(float angle1){
     Brick brick15_0 = brick4666999(); // baton beige avec stop
     Brick brick15_1 = brick6012451(); // petite roue crantée
     brick15_0.connect(1,0,brick15_1,0);
-    brick8_4.connect(3,3,brick15_0,0);
+    brick8_4.connect(3,3,brick15_0,-angle1);
 
 
     //Etape 16
@@ -253,7 +253,7 @@ void construction(float angle1){
     batonConnector1.connect(1,0,batonnetrouge,0);
     batonnetrouge.connect(1,0,batonConnector2,0);
 
-    petitrouge.connect(1,1,batongris3,-53,true);
+    petitrouge.connect(1,1,batongris3,-53+angle2,true);
     
 
 
@@ -316,7 +316,7 @@ void construction(float angle1){
     Brick brick32_1 = brick4211815(); //baton
 
     brick32_1.connect(0,0,brick32_0,0,BOTH_USED,BOTH_USED);
-    blackwithcylinder.connect(0,1,brick32_1,0,BOTH_USED,BOTH_USED);
+    blackwithcylinder.connect(0,1,brick32_1,angle2,BOTH_USED,BOTH_USED);
 
     //etape 33
 
@@ -383,7 +383,7 @@ void construction(float angle1){
     //etape 38
 
     Brick brick38_0 = brick4211807(); // petit conn gris
-    brick37_1.connect(5,0,brick38_0,20-angle1*0.9,true,USED_LEFT,BOTH_USED); // ANGLE GAMMA
+    brick37_1.connect(5,0,brick38_0,24-angle1*1.2,true,USED_LEFT,BOTH_USED); // ANGLE GAMMA
 
     //etape 39
 
@@ -395,7 +395,7 @@ void construction(float angle1){
 
     //etape 40
 
-    brick35_0.connect(3,0,brick37_2,140-angle1*1.15,true,BOTH_USED,BOTH_USED);  // ANGLE BETA
+    brick35_0.connect(3,0,brick37_2,140-angle1*1.2,true,BOTH_USED,BOTH_USED);  // ANGLE BETA
 
     //etape 41
 
@@ -404,7 +404,7 @@ void construction(float angle1){
 
     brick41_1.connect(0,0,brick41_0,0,BOTH_USED,BOTH_USED);
 
-    brick11_0.connect(1, 1, brick41_1, 0, true,BOTH_USED,BOTH_USED);
+    brick11_0.connect(1, 1, brick41_1, angle1*3, true,BOTH_USED,BOTH_USED);
 
     //etape 42
 
@@ -440,7 +440,7 @@ void construction(float angle1){
     Brick brick47_1 = brick6321305(); //cylindre jaune
     Brick brick47_2 = brick6321305(); //cylindre jaune
 
-    brick35_0.connect(12,1,brick47_1,BOTH_USED,BOTH_USED);
+    brick35_0.connect(12,1,brick47_1,10-angle1,true,BOTH_USED,BOTH_USED); // ANGLE bout du bras
     brick47_1.connect(0,0,brick47_0,75,BOTH_USED,BOTH_USED);
     brick47_0.connect(2,2,brick47_2,BOTH_USED,BOTH_USED);
 

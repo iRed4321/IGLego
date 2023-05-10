@@ -5,12 +5,12 @@
 #include "LegoBrick.h"
 
 //builds the construction at the current position on the scene
-void construction(float angle);
+void construction(float angle, float angle2);
 
 void testPieceEnCours();
 
 void testDemiConnexions();
 
-void testPieceEnCoursNathan(float angle);
+void testPieceEnCoursNathan(float angle1);
 
 #endif
