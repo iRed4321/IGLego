@@ -396,7 +396,7 @@ void construction(float angle){
 
     //etape 40
 
-    brick35_0.connect(3,0,brick37_2,-55,true,BOTH_USED,BOTH_USED);
+    brick35_0.connect(3,0,brick37_2,-55-angle,true,BOTH_USED,BOTH_USED);
 
     //etape 41
 
