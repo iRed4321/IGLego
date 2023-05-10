@@ -22,9 +22,6 @@ std::vector<Brick*> Brick::brickList;
 
 void construction(float angle1, float angle2){
 
-    std::cout<<"angle bras : " << angle1 <<std::endl;
-    std::cout<<"angle axe roues : " << angle2 <<std::endl;
-
     Brick::reset_class_id();
     // NOTATION : 
     //  brick<numeroEtape>_<indexEtape>
@@ -386,7 +383,7 @@ void construction(float angle1, float angle2){
     //etape 38
 
     Brick brick38_0 = brick4211807(); // petit conn gris
-    brick37_1.connect(5,0,brick38_0,24-angle1*1.2,true,USED_LEFT,BOTH_USED); // ANGLE GAMMA
+    brick37_1.connect(5,0,brick38_0,24-angle1*1.2,USED_LEFT,BOTH_USED); // ANGLE GAMMA
 
     //etape 39
 
@@ -398,7 +395,7 @@ void construction(float angle1, float angle2){
 
     //etape 40
 
-    brick35_0.connect(3,0,brick37_2,140-angle1*1.2,true,BOTH_USED,BOTH_USED);  // ANGLE BETA
+    brick35_0.connect(3,0,brick37_2,140-angle1*1.2+180,true,BOTH_USED,BOTH_USED);  // ANGLE BETA
 
     //etape 41
 
